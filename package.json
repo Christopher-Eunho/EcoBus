@@ -4,7 +4,7 @@
   "description": "CST COMP 2800 5-week projects course",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/fijiman24/COMP-2800/issues"
   },
-  "homepage": "https://github.com/fijiman24/COMP-2800#readme"
+  "homepage": "https://github.com/fijiman24/COMP-2800#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1"
+  }
 }
