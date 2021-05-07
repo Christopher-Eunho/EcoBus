@@ -1,4 +1,4 @@
-import { authService, firebaseInstance } from "firebase_EB";
+import { authService, firebaseInstance } from "firebase_eb";
 import React, { useState } from "react";
 import firebase from "firebase/app";
 

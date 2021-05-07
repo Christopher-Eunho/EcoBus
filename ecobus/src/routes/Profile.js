@@ -1,4 +1,4 @@
-import { authService } from "firebase_EB";
+import { authService } from "firebase_eb";
 import React from "react";
 import { useHistory } from "react-router";
 

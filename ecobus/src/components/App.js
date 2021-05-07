@@ -1,6 +1,6 @@
 import AppRouter from "components/Router";
 import React, {useEffect, useState} from "react"
-import {authService} from "firebase_EB";
+import {authService} from "firebase_eb";
 
 
 
