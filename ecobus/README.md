@@ -32,12 +32,37 @@ WireFrames:
 
 ```
  Top level of project folder: 
-├── 
-└── 
+├── public => 
+├── src => 
+├── .env => 
+├── jsconfig.json =>
+├── jsconfig.json =>
+├── package-lock.json =>
+├── package.json => 
+└── README.md => contains information about other files in the project directory (You are here!)
 
 
 It has the following subfolders and files:
-├──
+├── public
+    ├── favicon-32x32.png
+    ├── index.html
+    ├── logo192.png
+    ├── logo512.png
+    ├── manifest.json
+    └── robots.txt
+├── src
+    ├── components
+        ├── App.js
+        ├── Navigation.js
+        └── Router.js
+    ├── routes
+        ├── Auth.js
+        ├── Home.js
+        └── Profile.js
+    ├── firebase_eb.js
+    ├── index.js
+    ├── logo.svg
+    └── reportWebVitals.js
 └── 
 ```
 
