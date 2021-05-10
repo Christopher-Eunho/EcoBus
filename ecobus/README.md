@@ -44,25 +44,25 @@ WireFrames:
 
 It has the following subfolders and files:
 ├── public
-    ├── favicon-32x32.png
-    ├── index.html
-    ├── logo192.png
-    ├── logo512.png
-    ├── manifest.json
-    └── robots.txt
+|   ├── favicon-32x32.png
+|   ├── index.html
+|   ├── logo192.png
+|   ├── logo512.png
+|   ├── manifest.json
+|   └── robots.txt
 ├── src
-    ├── components
-        ├── App.js
-        ├── Navigation.js
-        └── Router.js
-    ├── routes
-        ├── Auth.js
-        ├── Home.js
-        └── Profile.js
-    ├── firebase_eb.js
-    ├── index.js
-    ├── logo.svg
-    └── reportWebVitals.js
+|   ├── components
+|       ├── App.js
+|       ├── Navigation.js
+|       └── Router.js
+|   ├── routes
+|       ├── Auth.js
+|       ├── Home.js
+|       └── Profile.js
+|   ├── firebase_eb.js
+|   ├── index.js
+|   ├── logo.svg
+|   └── reportWebVitals.js
 └── 
 ```
 
