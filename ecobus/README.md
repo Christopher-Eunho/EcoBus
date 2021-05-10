@@ -52,13 +52,13 @@ It has the following subfolders and files:
 |   └── robots.txt
 ├── src
 |   ├── components
-|       ├── App.js
-|       ├── Navigation.js
-|       └── Router.js
+|   |   ├── App.js
+|   |   ├── Navigation.js
+|   |   └── Router.js
 |   ├── routes
-|       ├── Auth.js
-|       ├── Home.js
-|       └── Profile.js
+|   |   ├── Auth.js
+|   |   ├── Home.js
+|   |   └── Profile.js
 |   ├── firebase_eb.js
 |   ├── index.js
 |   ├── logo.svg
