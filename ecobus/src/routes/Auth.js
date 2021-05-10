@@ -19,6 +19,26 @@ const Auth = () => {
         }
     };
 
+    const onSocialClick = async (event) => {
+        const {
+            target : { name },
+        } = event;
+
+        let provider;
+        try{
+            if(name === "google"){
+                provider = new firebaseInstance.auth.GoogleAuthProvider();
+            }
+
+            const date = await authService.signInWithPopup(provider);
+        } catch(error) {
+            console.log(error);
+        }
+        
+        
+        
+    }
+
 
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -44,7 +64,8 @@ const Auth = () => {
 
 
     return(
-        <div>
+    <div>
+        <h2>Weclome to EcoBus</h2> 
         <form onSubmit={onSubmit}>
             <input 
                 name="email" 
@@ -64,11 +85,17 @@ const Auth = () => {
             />
             <input 
                 type="submit" 
-                value={newAccount ? "Create Account" : "Sign In"} />
+                value={newAccount ? "Sign Up" : "Sign In"} />
         </form>
-        <button onClick={toggleAcount}>
-            {newAccount ? "Sign In" : "Create Account"}
-        </button>
+        <div>
+            <button onClick={toggleAcount}>
+                    {newAccount ? "Sign In" : "Sign Up"}
+            </button>    
+            <button onClick={onSocialClick} name="google" >Continue with Google</button>
+        </div>
+        <div>
+            <small>Please sign in with your email or sign up if you are new to us</small>
+        </div>
         <span>{error} </span>
         
 
