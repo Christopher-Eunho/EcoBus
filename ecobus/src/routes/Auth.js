@@ -1,6 +1,8 @@
 import { authService, firebaseInstance } from "firebase_eb";
 import React, { useState } from "react";
 import firebase from "firebase/app";
+import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
+import Form from 'react-bootstrap/Form';
 
 const Auth = () => {
     const [email, setEmail] = useState("");
@@ -65,32 +67,38 @@ const Auth = () => {
 
     return(
     <div>
-        <h2>Weclome to EcoBus</h2> 
-        <form onSubmit={onSubmit}>
-            <input 
+        <h2>Welcome to EcoBus</h2> 
+        <Form onSubmit={onSubmit}>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control 
                 name="email" 
                 type="email" 
-                placeholder="Email" 
+                placeholder="Enter email" 
                 value={email} 
                 onChange={onChange} 
                 required
-            />
-            <input 
+                />
+                <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control                 
                 name="password" 
                 type="password" 
                 placeholder="Password" 
                 value={password} 
                 onChange={onChange} 
-                required
-            />
-            <input 
-                type="submit" 
-                value={newAccount ? "Sign Up" : "Sign In"} />
-        </form>
+                required />
+            </Form.Group>
+
+            <Button type="submit">Sign In</Button>
+        </Form>
         <div>
-            <button onClick={toggleAcount}>
-                    {newAccount ? "Sign In" : "Sign Up"}
-            </button>    
+            <Button variant="secondary" type="submit" onClick={toggleAcount}>Sign Up</Button>    
             <button onClick={onSocialClick} name="google" >Continue with Google</button>
         </div>
         <div>

@@ -1,7 +1,7 @@
 import AppRouter from "components/Router";
 import React, {useEffect, useState} from "react"
 import {authService} from "firebase_eb";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
