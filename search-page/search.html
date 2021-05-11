@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0">
+    <title>EcoBus</title>
+    <link rel="stylesheet" href="styles/search.css">
+</head>
+
+<body>
+    
+    <section id=search-container>
+        <p>Where do you want to go?</p>
+        <form id="route-search-form" onsubmit="return false">
+            <input id="route-origin" type="text" placeholder="Origin" required="required">
+            <input id="route-destination" type="text" placeholder="Destination" required="required">
+            <button type="submit">
+                <img src="images/magnifying-glass.png">
+            </button>
+        </form>
+    </section>
+    
+    <main id="map"></main>
+    
+    <navbar>
+
+        <button id="navigate-user-profile">
+            <img src="images/user-profile.png">
+        </button>
+
+        <button id="navigate-about-us">
+            <img src="images/navbar-logo.png">
+        </button>
+
+        <button id="navigate-search-page">
+            <img src="images/magnifying-glass.png">
+        </button>
+
+    </navbar>
+    
+    <script src="scripts/search.js"></script>
+    <!-- <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZe2cBc8NJ5sUeToVP8Oq_Smyx5XR-gFU&callback=initMap">
+    </script> -->
+
+</body>
+
+</html>
