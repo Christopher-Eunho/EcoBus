@@ -1,41 +1,70 @@
-import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
- 
-const AnyReactComponent = ({ text }) => <div>{text}</div>; // mark
+import React, {useEffect, useState} from 'react'
+import { GoogleMap,
+         useJsApiLoader,
+         Marker,
+         InfoWindow,
+         useLoadScript } from '@react-google-maps/api';
 
-const handleApiLoaded = (map, maps) => {
-    // use map and maps objects
-  };
+const libraries = ["places"];
 
-class GoogleMap extends Component {
-  static defaultProps = {
-    center: {
-      lat: 49.24,
-      lng: -123.12
-    },
-    zoom: 11
-  };
- 
-  render() {
-    return (
-      // Important! Always set the container height explicitly
-      <div className="googleMap" style={{ height: '100vh', width: '30%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyBZe2cBc8NJ5sUeToVP8Oq_Smyx5XR-gFU",
-                            region: "CAN" }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-          onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-        >
-          <AnyReactComponent
-            lat={49.24}
-            lng={-123.12}
-            text="My Marker"
-          /> 
-        </GoogleMapReact>
-      </div>
-    );
-  }
+const mapContainerStyle = {
+    width: '30vw',
+    height: '100vh'
+};
+
+const options = {
+    disableDefaultUI: true,
+    zoomControl: true,
+
 }
- 
-export default GoogleMap;
+
+function GMap() {
+
+    const [currentLat, setCurrentLat] = useState(49.28);
+    const [currentLng, setCurrentLng] = useState(-123.12);
+
+
+    useEffect(()=>{
+        if("geolocation" in navigator){
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log(position);
+                setCurrentLat(position.coords.latitude);
+                setCurrentLng(position.coords.longitude);
+              });
+        } else {
+            console.log("Not Available");
+        }
+    },[])
+
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: process.env.GOOGLE_MAP_API_KEY,
+        libraries
+      });
+
+    if (loadError) return "error";
+    if (!isLoaded) return "Loading";
+
+    return(
+        <>
+            <div>
+                <GoogleMap 
+                mapContainerStyle={mapContainerStyle} 
+                zoom={8} 
+                center={{lat: currentLat,
+                         lng: currentLng}}
+                options={options}
+                onClick={(event) => {console.log(event)}}
+                >
+                    <Marker position={{lat: currentLat,
+                         lng: currentLng}} />
+                    
+                </GoogleMap>
+
+            </div>
+        </>
+
+    );
+    };
+
+    
+export default GMap

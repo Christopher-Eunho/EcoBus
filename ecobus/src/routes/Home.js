@@ -1,4 +1,5 @@
-import GoogleMap from "components/GoogleMap";
+import GMap from "components/GoogleMap";
+
 import React from "react";
 
 const Home = () => {
@@ -7,7 +8,7 @@ const Home = () => {
 
     return(
         <> 
-        <GoogleMap />
+        <GMap />
         
         </>
     );
