@@ -1,5 +1,16 @@
+import GoogleMap from "components/GoogleMap";
 import React from "react";
 
-const Home = () => <span>Home</span>;
+const Home = () => {
+
+
+
+    return(
+        <> 
+        <GoogleMap />
+        
+        </>
+    );
+}
 
 export default Home;
