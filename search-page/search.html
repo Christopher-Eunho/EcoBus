@@ -12,7 +12,7 @@
 <body>
     <main id="map"></main>
 
-    <section id=search-container>
+    <section class="search-process-container" id="search-container">
         <p>Where do you want to go?</p>
         
         <form id="route-search-form" onsubmit="return false">    
@@ -26,12 +26,12 @@
         </form>
     </section>
 
-    <section id="method-selection">
-        <button id="method-selection-back-button">
+    <section class="search-process-container" id="method-selection-container">
+        <button class="back-button" id="method-selection-back-button">
             <img src="images/back-button.png">
         </button>
 
-        <div id="transit-data">
+        <div id="transit-route-information">
             <button id="method-selection-transit-option-button">Transit Route</button>
             <ul>
                 <li>Travel time: <span id="transit-travel-time">0000</span></li>
@@ -40,7 +40,7 @@
             </ul>
         </div>
 
-        <div id="driving-data">
+        <div id="driving-route-information">
             <button id="method-selection-driving-option-button">Driving Route</button>
             <ul>
                 <li>Travel time: <span id="driving-travel-time">0000</span></li>
@@ -48,6 +48,49 @@
                 <li>Emissions produced: <span id="driving-emissions-produced">0000</span></li>
             </ul>
         </div>
+    </section>
+
+    <section class="search-process-container" id="transit-option-details-container">
+        <button class="back-button" id="transit-option-back-button">
+            <img src="images/back-button.png">
+        </button>
+        
+        <div class="option-details"> 
+            <p>Transit Route</p>
+            <ul>
+                <li>Some data</li>
+                <li>Some data</li>
+                <li>Some data</li>
+            </ul>
+            <button class="save-journey-button">SAVE THIS JOURNEY</button>
+        </div>
+    </section>
+
+    <section class="search-process-container" id="driving-option-details-container">
+        <button class="back-button" id="driving-option-back-button">
+            <img src="images/back-button.png">
+        </button>
+        <div class="option-details">
+            <p>Driving Route</p>
+            <ul>
+                <li>Some data</li>
+                <li>Some data</li>
+                <li>Some data</li>
+            </ul>
+            <button class="save-journey-button">SAVE THIS JOURNEY</button>
+        </div>
+        </section>
+
+    <section class="search-process-container journey-saved-container" id="transit-option-journey-saved-container">
+        <p>Your journey has been saved!</p>
+        <p>You saved <span>0000</span> kilograms of C02 by taking public transporation!</p>
+        <p>Thank you for being eco-friendly.</p>
+    </section>
+
+    <section class="search-process-container journey-saved-container" id="driving-option-journey-saved-container">
+        <p>Your journey has been saved!</p>
+        <p>You could have saved <span>0000</span> kilograms of C02 by taking public transporation.</p>
+        <p>Consider taking public transporation on your next journey!</p>
     </section>
 
     <navbar>

@@ -29,15 +29,15 @@ routeSearchForm.addEventListener("submit", function (event) {
     let searchFormContainer = document.getElementById("search-container");
     searchFormContainer.style["display"] = "none";
 
-    let methodSelectionContainer = document.getElementById("method-selection");    
+    let methodSelectionContainer = document.getElementById("method-selection-container");    
     methodSelectionContainer.style["display"] = "flex";
     methodSelectionContainer.style["flexDirection"] = "column";
     methodSelectionContainer.style["justifyContent"] = "space-around";
 });
 
-// Method selection back button
+// Go back to search form from method selection
 methodSelectionBackButton.addEventListener("click", function (event) {
-    let methodSelectionContainer = document.getElementById("method-selection");
+    let methodSelectionContainer = document.getElementById("method-selection-container");
     methodSelectionContainer.style["display"] = "none";
     
     let searchFormContainer = document.getElementById("search-container");
