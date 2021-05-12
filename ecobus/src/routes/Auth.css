@@ -1,0 +1,28 @@
+div{
+    margin:auto;
+}
+
+h2 {
+    margin: 5%;
+    text-align: center;
+
+}
+
+img {
+    margin: 5% 2% 0;
+    max-width: 20%;
+}
+
+.authButtons {
+    display: flex;
+    margin: 5%;
+    justify-content: space-between;
+}
+
+#resetPassword > a{
+    text-align:center;
+}
+
+form {
+    margin:5%
+}
