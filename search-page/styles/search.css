@@ -132,7 +132,6 @@ navbar button:nth-child(2) img {
     width: 100%;
     height: 25vh;
     border-radius: 3px;
-    bottom: 0;
     display: none;
 }
 
@@ -166,7 +165,6 @@ navbar button:nth-child(2) img {
     font-size: 0.7rem;
     list-style-type: none;
 }
-
 
 #driving-route-information {
     display: flex;
@@ -217,11 +215,11 @@ navbar button:nth-child(2) img {
     margin-top: 30px;
 }
 
-#transit-option-journey-saved-container {
+#transit-journey-saved-container {
     display: none;
 }
 
 /* Saved driving route */
-#driving-option-journey-saved-container {
+#driving-journey-saved-container {
     display: none;
 }
