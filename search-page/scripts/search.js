@@ -1,3 +1,9 @@
+let routeSearchForm = document.getElementById("route-search-form");
+let navigateUserProfile = document.getElementById("navigate-user-profile");
+let navigateAboutUs = document.getElementById("navigate-about-us");
+let navigateSearchPage = document.getElementById("navigate-search-page");
+let methodSelectionBackButton = document.getElementById("method-selection-back-button");
+
 function initMap() {
     var options = {
         zoom: 10.9,
@@ -8,6 +14,7 @@ function initMap() {
 
 };
 
+// Alert values passed to origin and destination form fields
 function alertRouteOriginDestination() {
     let routeOrigin = document.getElementById("route-origin").value;
     let routeDestination = document.getElementById("route-destination").value;
@@ -15,25 +22,39 @@ function alertRouteOriginDestination() {
     alert("Origin: " + routeOrigin + " Desination: " + routeDestination);
 };
 
-let routeSearchForm = document.getElementById("route-search-form");
+// Alert values passed to form, then hide form and show route options
 routeSearchForm.addEventListener("submit", function (event) {
     alertRouteOriginDestination();
     
-    let formContainer = document.getElementById("search-container");
-    formContainer.style["display"] = "none";
+    let searchFormContainer = document.getElementById("search-container");
+    searchFormContainer.style["display"] = "none";
+
+    let methodSelectionContainer = document.getElementById("method-selection");    
+    methodSelectionContainer.style["display"] = "flex";
+    methodSelectionContainer.style["flexDirection"] = "column";
+    methodSelectionContainer.style["justifyContent"] = "space-around";
 });
 
-let navigateUserProfile = document.getElementById("navigate-user-profile");
+// Method selection back button
+methodSelectionBackButton.addEventListener("click", function (event) {
+    let methodSelectionContainer = document.getElementById("method-selection");
+    methodSelectionContainer.style["display"] = "none";
+    
+    let searchFormContainer = document.getElementById("search-container");
+    searchFormContainer.style["display"] = "block";
+});
+
+// Alert user in place of navigating to User Profile
 navigateUserProfile.addEventListener("click", function (event){
     alert("Take me to the User Profile!");
 });
 
-let navigateAboutUs = document.getElementById("navigate-about-us");
+// Alert user in place of navigating to About Us
 navigateAboutUs.addEventListener("click", function (event){
     alert("Take me to the About Us page!");
 });
 
-let navigateSearchPage = document.getElementById("navigate-search-page");
+// Alert user in place of navigating to Search Page
 navigateSearchPage.addEventListener("click", function (event){
     alert("Take me to the Search page!");
     location.reload();

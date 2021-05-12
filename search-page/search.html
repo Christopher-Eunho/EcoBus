@@ -10,22 +10,47 @@
 </head>
 
 <body>
-    
+    <main id="map"></main>
+
     <section id=search-container>
         <p>Where do you want to go?</p>
-        <form id="route-search-form" onsubmit="return false">
+        
+        <form id="route-search-form" onsubmit="return false">    
             <input id="route-origin" type="text" placeholder="Origin" required="required">
+        
             <input id="route-destination" type="text" placeholder="Destination" required="required">
+        
             <button type="submit">
                 <img src="images/magnifying-glass.png">
             </button>
         </form>
     </section>
-    
-    <main id="map"></main>
-    
-    <navbar>
 
+    <section id="method-selection">
+        <button id="method-selection-back-button">
+            <img src="images/back-button.png">
+        </button>
+
+        <div id="transit-data">
+            <button id="method-selection-transit-option-button">Transit Route</button>
+            <ul>
+                <li>Travel time: <span id="transit-travel-time">0000</span></li>
+                <li>Distance: <span id="transit-travel-distance">0000</span></li>
+                <li>Emissions saved: <span id="transit-emissions-saved">0000</span></li>
+            </ul>
+        </div>
+
+        <div id="driving-data">
+            <button id="method-selection-driving-option-button">Driving Route</button>
+            <ul>
+                <li>Travel time: <span id="driving-travel-time">0000</span></li>
+                <li>Distance: <span id="driving-travel-distance">0000</span></li>
+                <li>Emissions produced: <span id="driving-emissions-produced">0000</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <navbar>
         <button id="navigate-user-profile">
             <img src="images/user-profile.png">
         </button>
@@ -37,7 +62,6 @@
         <button id="navigate-search-page">
             <img src="images/magnifying-glass.png">
         </button>
-
     </navbar>
     
     <script src="scripts/search.js"></script>
