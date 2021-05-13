@@ -4,6 +4,7 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import "./styles/search.css";
 
+import './styles/index.css';
 ReactDOM.render(
   <React.StrictMode>
     <App />

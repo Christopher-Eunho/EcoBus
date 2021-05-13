@@ -1,4 +1,4 @@
-import Map from '../components/Map'
+import GMap from '../components/GoogleMap'
 import Searchbar from '../components/Searchbar'
 import Navbar from '../components/Navbar'
 import MethodSelection from '../components/MethodSelection'
@@ -10,7 +10,7 @@ import SavedDrivingRoute from '../components/SavedDrivingRoute'
 function Search() {
   return (
     <div className="container">
-      <Map />
+      <GMap />
       <Searchbar />
       <MethodSelection />
       <TransitRouteDetails />
