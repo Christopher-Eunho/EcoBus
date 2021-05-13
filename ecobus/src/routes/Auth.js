@@ -1,6 +1,11 @@
 import { authService, firebaseInstance } from "firebase_eb";
 import React, { useState } from "react";
 import firebase from "firebase/app";
+import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
+import Form from 'react-bootstrap/Form';
+import GoogleButton from 'react-google-button'; // https://www.npmjs.com/package/react-google-button
+import '../styles/Auth.css'
+import logo from '../images/logo.png'
 
 const Auth = () => {
     const [email, setEmail] = useState("");
@@ -10,7 +15,7 @@ const Auth = () => {
 
     const onChange = (event) => {
         const {
-            target : { name, value }
+            target: { name, value }
         } = event;
         if (name === "email") {
             setEmail(value);
@@ -18,6 +23,19 @@ const Auth = () => {
             setPassword(value);
         }
     };
+
+    const onSocialClick = async (event) => {
+        let provider;
+        try {
+            if (event === "google") {
+                provider = new firebaseInstance.auth.GoogleAuthProvider();
+            }
+
+            const date = await authService.signInWithPopup(provider);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
     const onSubmit = async (event) => {
@@ -31,9 +49,9 @@ const Auth = () => {
                     password
                 );
             } else {
-            data = await authService.signInWithEmailAndPassword(email, password);
-        }
-        console.log(data);
+                data = await authService.signInWithEmailAndPassword(email, password);
+            }
+            console.log(data);
         } catch (error) {
             setError(error.message);
         }
@@ -43,38 +61,48 @@ const Auth = () => {
     const toggleAcount = () => setNewAccount((prev) => !prev);
 
 
-    return(
+    return (
         <div>
-        <form onSubmit={onSubmit}>
-            <input 
-                name="email" 
-                type="email" 
-                placeholder="Email" 
-                value={email} 
-                onChange={onChange} 
-                required
-            />
-            <input 
-                name="password" 
-                type="password" 
-                placeholder="Password" 
-                value={password} 
-                onChange={onChange} 
-                required
-            />
-            <input 
-                type="submit" 
-                value={newAccount ? "Create Account" : "Sign In"} />
-        </form>
-        <button onClick={toggleAcount}>
-            {newAccount ? "Sign In" : "Create Account"}
-        </button>
-        <span>{error} </span>
-        
+            <a href="."><img src={logo} alt="Logo"></img></a>
+            <hr/>
+            <h2>Welcome to EcoBus</h2>
+            <Form onSubmit={onSubmit}>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                        name="email"
+                        type="email"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={onChange}
+                        required
+                    />
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                </Form.Text>
+                </Form.Group>
 
-    </div>       
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={onChange}
+                        required />
+                </Form.Group>
+                <span className="authButtons">
+                    <Button variant="secondary" onClick={toggleAcount}>Sign Up</Button> {/*signup / signin buttons need to be fixed */}
+                    <Button type="submit">Sign In</Button>
+                </span>
+            </Form>
+            <GoogleButton onClick={() => onSocialClick("google")} />
+
+            <span>{error} </span>
+        </div>
     );
-    
+
 };
 
 export default Auth;
