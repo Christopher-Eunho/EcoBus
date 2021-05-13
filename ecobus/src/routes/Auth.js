@@ -4,8 +4,8 @@ import firebase from "firebase/app";
 import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
 import Form from 'react-bootstrap/Form';
 import GoogleButton from 'react-google-button'; // https://www.npmjs.com/package/react-google-button
-import './Auth.css'
-import logo from './logo.png'
+import '../styles/Auth.css'
+import logo from '../images/logo.png'
 
 const Auth = () => {
     const [email, setEmail] = useState("");
@@ -92,11 +92,8 @@ const Auth = () => {
                         onChange={onChange}
                         required />
                 </Form.Group>
-                <span id="resetPassword">
-                    <a href=".">Forgot your password?</a>
-                </span>
                 <span className="authButtons">
-                    <Button variant="secondary" onClick={toggleAcount}>Sign Up</Button>
+                    <Button variant="secondary" onClick={toggleAcount}>Sign Up</Button> {/*signup / signin buttons need to be fixed */}
                     <Button type="submit">Sign In</Button>
                 </span>
             </Form>
