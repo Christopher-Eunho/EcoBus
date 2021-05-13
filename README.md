@@ -32,17 +32,25 @@ WireFrames:
 
 ```
  Top level of project folder: 
+├── .firebase =>
 ├── public => 
 ├── src => 
 ├── .env => 
-├── jsconfig.json =>
+├── .firebaserc
+├── .gitignore
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
 ├── jsconfig.json =>
 ├── package-lock.json =>
 ├── package.json => 
-└── README.md => contains information about other files in the project directory (You are here!)
+├── README.md => contains information about other files in the project directory (You are here!)
+└── storage.rules
 
 
 It has the following subfolders and files:
+├── .firebase
+|   └── hosting.YnVpbGQ.cache
 ├── public
 |   ├── favicon-32x32.png
 |   ├── index.html
@@ -53,12 +61,33 @@ It has the following subfolders and files:
 ├── src
 |   ├── components
 |   |   ├── App.js
+|   |   ├── DrivingRouteDetails.js
+|   |   ├── Map.js
+|   |   ├── MethodSelection.js
+|   |   ├── Navbar.js
 |   |   ├── Navigation.js
-|   |   └── Router.js
+|   |   ├── Router.js
+|   |   ├── SavedDrivingRoute.js
+|   |   ├── SavedTransitRoute.js
+|   |   ├── Searchbar.js
+|   |   └── TransitRouteDetails.js
+|   ├── images
+|   |   ├── back-button.png
+|   |   ├── Ecobus About Us banner.png
+|   |   ├── logo.png
+|   |   ├── magnifying-glass.png
+|   |   ├── navbar-logo.png
+|   |   └── user-profile.png
 |   ├── routes
+|   |   ├── Abous_Us.js
 |   |   ├── Auth.js
 |   |   ├── Home.js
-|   |   └── Profile.js
+|   |   ├── Profile.js
+|   |   └── Search.js
+|   ├── styles
+|   |   ├── about_us.css
+|   |   ├── Auth.css
+|   |   └── search.css
 |   ├── firebase_eb.js
 |   ├── index.js
 |   ├── logo.svg
