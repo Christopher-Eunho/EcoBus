@@ -1,0 +1,225 @@
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* For the search bar */
+.search-process-container {
+  background-color: rgba(248, 254, 212, 0.7);
+  width: 100%;
+  height: 25vh;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#search-container p {
+  margin-left: 2%;
+}
+
+form input:nth-child(1) {
+  background-color: rgb(245, 148, 57, 0.7);
+  width: 90%;
+  height: 50px;
+  margin-left: 2%;
+  margin-top: -10px;
+  padding-left: 5%;
+  border: none;
+  border-radius: 3px;
+}
+
+form input:nth-child(2) {
+  background-color: rgb(88, 164, 206, 0.7);
+  width: 90%;
+  height: 50px;
+  margin-left: 2%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding-left: 5%;
+  border: none;
+  border-radius: 3px;
+}
+
+form button {
+  background-color: #E5E5E5;
+  height: 42px;
+  width: 42px;
+  border: none;
+  border-radius: 15px;
+  float: right;
+  margin-right: 3%;
+  margin-bottom: 1%;
+}
+
+form button img {
+  margin-left: -5px;
+}
+
+/* For the map */
+#map {
+  border: 1px solid black;
+  height: 60vh;
+  width: 100%;
+  background-color: bl;
+}
+
+/* For the navbar */
+navbar {
+  border: 1px solid black;
+  background-color: rgba(228, 245, 255, 1);
+  width: 100%;
+  height: 15vh;
+  bottom: 0;
+  float: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+navbar button {
+  margin: auto 0;
+}
+
+navbar button:nth-child(1) {
+  height: 42px;
+  width: 42px;
+  border-radius: 15px;
+  border: none;
+  background-color: rgb(0, 0, 0, 0);
+  margin-left: 4%;
+  float: left;
+}
+
+navbar button:nth-child(1) img {
+  margin-left: -5px;
+}
+
+navbar button:nth-child(3) {
+  height: 42px;
+  width: 42px;
+  border-radius: 15px;
+  border: none;
+  background-color: rgb(0, 0, 0, 0);
+  margin-right: 4%;
+  float: right;
+}
+
+navbar button:nth-child(3) img {
+  margin-left: -5px;
+}
+
+navbar button:nth-child(2) {
+  height: 60px;
+  width: 170px;
+  border-radius: 15px;
+  border: none;
+  background-color: rgb(0, 0, 0, 0);
+  margin-right: 10px;
+}
+
+navbar button:nth-child(2) img {
+  margin-left: -5px;
+  margin-top: 0px;
+}
+
+/* For method selection box */
+#method-selection-container {
+  background-color: rgba(248, 254, 212, 0.7);
+  border: 1px solid black;
+  width: 100%;
+  height: 25vh;
+  border-radius: 3px;
+  display: none;
+}
+
+.back-button {
+  background-color: rgb(0, 0, 0, 0);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+#method-selection button img {
+  margin-left: -15px;
+}
+
+#transit-route-information {
+  display: flex;
+  width: 100%;
+}
+
+#method-selection-transit-option-button {
+  margin-left: 20px;
+  background-color: rgba(154, 251, 30, 1);
+  border: none;
+  border-radius: 10px;
+}
+
+#transit-route-information ul {
+  font-size: 0.7rem;
+  list-style-type: none;
+}
+
+#driving-route-information {
+  display: flex;
+}
+
+#method-selection-driving-option-button {
+  margin-left: 20px;
+  background-color: rgba(241, 72, 36, 1);
+  border: none;
+  border-radius: 10px;
+}
+
+#driving-route-information ul {
+  font-size: 0.7rem;
+  list-style-type: none;
+}
+
+/* For transit route details box */
+.save-journey-button {
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  background-color: rgba(154, 251, 30, 1);
+
+}
+
+.option-details {
+  margin-left: 40px;
+}
+
+#transit-option-details-container {
+  display: none;
+}
+
+/* For driving route details box */
+#driving-option-details-container {
+  display: none;
+}
+
+/* Saved transit route */
+.journey-saved-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-saved-container p:nth-child(1) {
+  margin-top: 30px;
+}
+
+#transit-journey-saved-container {
+  display: none;
+}
+
+/* Saved driving route */
+#driving-journey-saved-container {
+  display: none;
+}

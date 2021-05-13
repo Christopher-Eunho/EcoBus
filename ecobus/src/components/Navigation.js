@@ -1,5 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom"
+import Navbar from 'react-bootstrap/Navbar';
+import { Nav } from "react-bootstrap";
 
 const Navigation = () => (
     <nav>
@@ -9,6 +11,12 @@ const Navigation = () => (
             </li>
             <li>
                 <Link to="/profile">My Profile</Link>
+            </li>
+            <li>
+                <Link to="/about_us">About Us</Link>
+            </li>
+            <li>
+                <Link to="/search">Search</Link>
             </li>
         </ul>
     </nav>
