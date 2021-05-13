@@ -1,19 +1,15 @@
 import React from "react";
 import {Link} from "react-router-dom"
+import Navbar from 'react-bootstrap/Navbar';
+import { Nav } from "react-bootstrap";
 
 const Navigation = () => (
     <nav>
-        <ul>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-            <li>
-                <Link to="/profile">My Profile</Link>
-            </li>
-            <li>
-                <Link to="/about_us">About Us</Link>
-            </li>
-        </ul>
+        <Navbar>
+            <Nav.Link href="/#/about_us">About Us</Nav.Link>
+            <Navbar.Brand href="/#/">Home</Navbar.Brand>
+            <Nav.Link href="/#/profile">My Profile</Nav.Link>
+        </Navbar>
     </nav>
     );
 
