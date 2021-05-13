@@ -19,6 +19,9 @@ const AppRouter = ({isLoggedIn}) => {
                         <Route exact path="/profile">
                             <Profile />
                         </Route>
+                        <Route exact path="/search">
+                            <Search />
+                        </Route>
                     </>
                 ) : (
                     <Route exact path="/">
