@@ -5,7 +5,7 @@ import Home from "routes/Home";
 import Navigation from "components/Navigation";
 import Profile from "routes/Profile";
 import About_Us from "routes/About_Us";
-
+import Search from "routes/Search";
 
 const AppRouter = ({isLoggedIn}) => {
     return (
@@ -22,6 +22,9 @@ const AppRouter = ({isLoggedIn}) => {
                         </Route>
                         <Route exact path="/about_us">
                             <About_Us />
+                        </Route>
+                        <Route exact path="/search">
+                            <Search />
                         </Route>
                     </>
                 ) : (

@@ -1,7 +1,7 @@
 import { authService, firebaseInstance } from "firebase_eb";
 import React, { useState } from "react";
 import firebase from "firebase/app";
-import 'About_Us.css';
+import './styles/about_us.css';
 
 const About_Us = () => <main>
     <aside class="aboutus">
