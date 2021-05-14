@@ -10,7 +10,9 @@ import '../styles/search.css'
 
 function Search() {
   return (
-    <div id="main-viewport">
+    <div className="main-viewport">
+      
+      <Searchbar />
       <GMap />
       <MethodSelection />
       <TransitRouteDetails />

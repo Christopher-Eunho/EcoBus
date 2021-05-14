@@ -10,7 +10,7 @@ import logo from '../images/logo.png'
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true);
+    const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
 
     const onChange = (event) => {
@@ -58,7 +58,7 @@ const Auth = () => {
     };
 
 
-    const toggleAcount = () => setNewAccount((prev) => !prev);
+    const toggleAccount = () => setNewAccount((prev) => !prev);
 
 
     return (
@@ -69,9 +69,11 @@ const Auth = () => {
             
             <hr/>
             
-            <h2 className="welcome-message">Welcome to EcoBus</h2>
+            <h2 className="welcome-message">Welcome to EcoBus {newAccount? "(sign up)" : "(sign in)"} </h2>
+            <small className="welcome-message" onClick={toggleAccount}> I want to {newAccount? "sign in" : "sign up"} </small>  
             
             <Form onSubmit={onSubmit} className="login-form">
+                  
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
