@@ -97,13 +97,14 @@ const Auth = () => {
                         onChange={onChange}
                         required />
                 </Form.Group>
-                
-                <span className="authButtons">
-                    <Button variant="secondary" onClick={toggleAcount}>Sign Up</Button>
-                    <Button type="submit">Sign In</Button>
-                </span>
-            
+                <Button type="submit"> 
+                    {newAccount ? "Create Account" : "Sign In"} 
+                </Button>
             </Form>
+            
+            <Button variant="secondary" onClick={toggleAcount}>
+                {newAccount ? "Sign In" : "Create Account"}
+            </Button>
             
             <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
