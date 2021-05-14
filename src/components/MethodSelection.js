@@ -14,7 +14,9 @@ const MethodSelection = () => {
         methodSelectionContainer.style["display"] = "none";
         
         let transitOptionDetails = document.getElementById("transit-option-details-container");
-        transitOptionDetails.style["display"] = "block"; 
+        transitOptionDetails.style["display"] = "flex";
+        transitOptionDetails.style["flexDirection"] = "column";
+        transitOptionDetails.style["justifyContent"] = "space-around";
     }
 
     const showDrivingRoute = () => {
@@ -22,7 +24,9 @@ const MethodSelection = () => {
         methodSelectionContainer.style["display"] = "none";
         
         let drivingOptionDetails = document.getElementById("driving-option-details-container");
-        drivingOptionDetails.style["display"] = "block";
+        drivingOptionDetails.style["display"] = "flex";
+        drivingOptionDetails.style["flexDirection"] = "column";
+        drivingOptionDetails.style["justifyContent"] = "space-around";
     }
     
     return (

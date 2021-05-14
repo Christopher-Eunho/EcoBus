@@ -44,7 +44,7 @@ export function DestSearch({ panTo, setDestination }) {
                 }
             }}
             >
-                <ComboboxInput value={value}
+                <ComboboxInput id="route-destination" value={value}
                     onChange={(e) => {
                         setValue(e.target.value);
                     }}

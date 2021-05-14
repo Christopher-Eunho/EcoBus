@@ -10,12 +10,12 @@ import { GoogleMap,
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OrginSearch';
 import { DestSearch } from './DestSearch';
-
+import Search from '../images/magnifying-glass.png'
 
 const libraries = ["places"];
 
 const mapContainerStyle = {
-    width: '50vw',
+    width: '100vw',
     height: '80vh'
 };
 
@@ -50,12 +50,18 @@ function GMap() {
     },[]);
 
     const searchClick = () => {
-        if (destination !== '' && origin !== ''){
+        if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
             setOriginInUse(origin);
         }
-        
-        
+
+        let searchFormContainer = document.getElementById("search-container");
+        searchFormContainer.style["display"] = "none";
+
+        let methodSelectionContainer = document.getElementById("method-selection-container");
+        methodSelectionContainer.style["display"] = "flex";
+        methodSelectionContainer.style["flexDirection"] = "column";
+        methodSelectionContainer.style["justifyContent"] = "space-around";
     } 
 
     const directionsCallback = (response) => {
@@ -95,11 +101,6 @@ function GMap() {
     return(
         <>
             <div>
-                <div>
-                    <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
-                    <DestSearch panTo={panTo} setDestination    ={setDestination}/>
-                    <button onClick={searchClick}>Find Route</button>
-                </div>
                 <GoogleMap 
                 mapContainerStyle={mapContainerStyle} 
                 zoom={13} 
@@ -146,7 +147,13 @@ function GMap() {
                          lng: currentLng}} />
                     
                 </GoogleMap>
-
+                <section className="search-process-container" id="search-container">
+                    <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
+                    <DestSearch panTo={panTo} setDestination    ={setDestination}/>
+                    <button id="submit-search-button" onClick={searchClick}>
+                        <img src={Search} alt="Search Button"/>
+                    </button>
+                </section>
             </div>
         </>
 

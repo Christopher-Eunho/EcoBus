@@ -48,7 +48,7 @@ export function OrginSearch({ panTo, setOrigin }) {
         <div className="orginSearch">
             <Combobox onSelect={orginOnSelect}
             >
-                <ComboboxInput value={value}
+                <ComboboxInput id="route-origin" value={value}
                     onChange={(e) => {setValue(e.target.value);}}
                     disabled={!ready}
                     placeholder="Origin" />
