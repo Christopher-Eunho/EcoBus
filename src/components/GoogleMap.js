@@ -1,9 +1,10 @@
 import React, {useEffect, useState, useRef, useCallback} from 'react'
+import {latVancouver, lngVancouver, searchRadius} from "../constants"
 import { GoogleMap,
-         useJsApiLoader,
          Marker,
-         InfoWindow,
-         useLoadScript } from '@react-google-maps/api';
+         useLoadScript,
+         DirectionsService,
+         DirectionsRenderer } from '@react-google-maps/api';
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -23,8 +24,8 @@ import "@reach/combobox/styles.css";
 const libraries = ["places"];
 
 const mapContainerStyle = {
-    width: '100vw',
-    height: '100vh'
+    width: '50vw',
+    height: '80vh'
 };
 
 const options = {
@@ -32,14 +33,13 @@ const options = {
     zoomControl: true,
 }
 
-const latVancouver = 49.28;
-const lngVancouver = -123.12;
-const searchRadius = 10000; // meters
-
 function GMap() {
 
     const [currentLat, setCurrentLat] = useState(latVancouver);
     const [currentLng, setCurrentLng] = useState(lngVancouver);
+    const [origin, setOrigin] = useState("");
+    const [destination, setDestination] = useState("");
+    const [response, setResponse] = useState("");
 
     // Update current location
     useEffect(()=>{

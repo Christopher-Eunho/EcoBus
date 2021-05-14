@@ -10,8 +10,8 @@ import SavedDrivingRoute from '../components/SavedDrivingRoute'
 function Search() {
   return (
     <div className="container">
-      <GMap />
       <Searchbar />
+      <GMap />
       <MethodSelection />
       <TransitRouteDetails />
       <DrivingRouteDetails />
