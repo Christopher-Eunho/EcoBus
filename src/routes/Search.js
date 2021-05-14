@@ -13,6 +13,7 @@ function Search() {
     <div className="main-viewport">
       <GMap />
       <Searchbar />
+      <GMap />
       <MethodSelection />
       <TransitRouteDetails />
       <DrivingRouteDetails />
