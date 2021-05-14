@@ -4,7 +4,7 @@ import firebase from "firebase/app";
 import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
 import Form from 'react-bootstrap/Form';
 import GoogleButton from 'react-google-button'; // https://www.npmjs.com/package/react-google-button
-import '../styles/Auth.css'
+import '../styles/auth.css'
 import logo from '../images/logo.png'
 
 const Auth = () => {
@@ -100,14 +100,11 @@ const Auth = () => {
                         required />
                 </Form.Group>
                 <Button type="submit"> 
-                    {newAccount ? "Create Account" : "Sign In"} 
+                    {newAccount ? "sign in" : "sign up"} 
                 </Button>
             </Form>
             
-            <Button variant="secondary" onClick={toggleAcount}>
-                {newAccount ? "Sign In" : "Create Account"}
-            </Button>
-            
+
             <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
             <span>{error} </span>
