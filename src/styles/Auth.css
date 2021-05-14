@@ -5,7 +5,6 @@
 .welcome-message {
     margin: 5%;
     text-align: center;
-
 }
 
 .logo {
@@ -21,4 +20,20 @@
 
 .login-form {
     margin:5%
+}
+
+.authentication-button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+#sign-in-up-button {
+    align-self: center;
+    width: 200px;
+    height: 40px;
+}
+
+#change-to-sign-in-up {
+    width: 200px;
+    height: 40px;
 }

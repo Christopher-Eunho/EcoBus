@@ -111,7 +111,7 @@ const Profile = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <span id="nameForm">
                         <h4 id="profileHeader">Name:</h4>
-                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue="Austin" {...register("name")} />
+                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue="Kevin Doe" {...register("name")} />
                         <img src={Edit} id="editbutton" alt="Edit" />
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>

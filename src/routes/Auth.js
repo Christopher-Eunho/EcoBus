@@ -69,8 +69,7 @@ const Auth = () => {
             
             <hr/>
             
-            <h2 className="welcome-message">Welcome to EcoBus {newAccount? "(sign up)" : "(sign in)"} </h2>
-            <small className="welcome-message" onClick={toggleAccount}> I want to {newAccount? "sign in" : "sign up"} </small>  
+            <h2 className="welcome-message">Welcome! <br />Please {newAccount? "Sign Up for" : "Sign In to"} EcoBus.</h2>  
             
             <Form onSubmit={onSubmit} className="login-form">
                   
@@ -99,9 +98,16 @@ const Auth = () => {
                         onChange={onChange}
                         required />
                 </Form.Group>
-                <Button type="submit"> 
-                    {newAccount ? "sign in" : "sign up"} 
-                </Button>
+                
+                <div className="authentication-button-container">
+                    <Button type="submit" id="sign-in-up-button"> 
+                        {newAccount ? "Sign Up" : "Sign In"} 
+                    </Button>
+                    
+                    <Button variant="danger" className="welcome-message" id="change-to-sign-in-up" onClick={toggleAccount}> 
+                        I want to {newAccount? "sign in!" : "sign up!"} 
+                    </Button>
+                </div>
             </Form>
             
             <GoogleButton className="center" onClick={() => onSocialClick("google")} />
