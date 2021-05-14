@@ -2,8 +2,8 @@ body {
     background-color: rgb(230, 245, 255);
 }
 main {
+    width: 100%;
     background-color: rgb(255, 255, 240);
-    margin: 10px;
     border-style: solid;
     border-width: 1px;
     border-color: grey;

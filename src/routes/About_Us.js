@@ -28,7 +28,8 @@ const About_Us = () => <main>
         <h3>Caleb Verma</h3>
         <img src='https://via.placeholder.com/150'></img>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            Caleb is an aspiring software developer. He graduated from UBC in 2020 with a major in Philosophy and, that very same year, decided to apply to BCIT's CST program on a whim.
+            He is fascinated by the seemingly limitless potential of programming; whether it's to create video games or robots that can explore Mars, programming offers a way to solve any problem.   
         </p>
     </section>
     <section>
