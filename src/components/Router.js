@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "routes/Auth";
-
+import Navbar from "./Navbar";
 import Navigation from "components/Navigation";
 import Profile from "routes/Profile";
 import About_Us from "routes/About_Us";
@@ -30,7 +30,7 @@ const AppRouter = ({isLoggedIn}) => {
                     </Route>
                 )}
             </Switch>
-            {isLoggedIn && <Navigation />}
+            {isLoggedIn && <Navbar />}
         </Router>
     );
 
