@@ -11,8 +11,6 @@ import '../styles/search.css'
 function Search() {
   return (
     <div className="main-viewport">
-      
-      <Searchbar />
       <GMap />
       <MethodSelection />
       <TransitRouteDetails />

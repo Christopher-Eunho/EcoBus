@@ -104,7 +104,6 @@ const Auth = () => {
                 </Button>
             </Form>
             
-
             <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
             <span>{error} </span>
