@@ -4,7 +4,7 @@ import firebase from "firebase/app";
 import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
 import Form from 'react-bootstrap/Form';
 import GoogleButton from 'react-google-button'; // https://www.npmjs.com/package/react-google-button
-import '../styles/Auth.css'
+import '../styles/auth.css'
 import logo from '../images/logo.png'
 
 const Auth = () => {
@@ -62,11 +62,11 @@ const Auth = () => {
 
 
     return (
-        <div>
-            <a href="."><img src={logo} alt="Logo"></img></a>
+        <div className="center">
+            <a href="."><img src={logo} className="logo" alt="Logo"></img></a>
             <hr/>
-            <h2>Welcome to EcoBus</h2>
-            <Form onSubmit={onSubmit}>
+            <h2 className="welcome-message">Welcome to EcoBus</h2>
+            <Form onSubmit={onSubmit} className="login-form">
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -97,7 +97,7 @@ const Auth = () => {
                     <Button type="submit">Sign In</Button>
                 </span>
             </Form>
-            <GoogleButton onClick={() => onSocialClick("google")} />
+            <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
             <span>{error} </span>
         </div>

@@ -1,15 +1,16 @@
 import GMap from '../components/GoogleMap'
 import Searchbar from '../components/Searchbar'
-import Navbar from '../components/Navbar'
+import Nav from '../components/Nav'
 import MethodSelection from '../components/MethodSelection'
 import TransitRouteDetails from '../components/TransitRouteDetails'
 import DrivingRouteDetails from '../components/DrivingRouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import SavedDrivingRoute from '../components/SavedDrivingRoute'
+import '../styles/search.css'
 
 function Search() {
   return (
-    <div className="container">
+    <div className="main-viewport">
       <GMap />
       <Searchbar />
       <MethodSelection />
@@ -17,7 +18,6 @@ function Search() {
       <DrivingRouteDetails />
       <SavedTransitRoute />
       <SavedDrivingRoute />
-      <Navbar />
     </div>
   );
 }

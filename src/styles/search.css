@@ -1,15 +1,15 @@
-*{
+* {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
+.main-viewport {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 /* For the search bar */
-.search-process-container {
+#search-container {
   background-color: rgba(248, 254, 212, 0.7);
   width: 100%;
   height: 25vh;
@@ -18,12 +18,13 @@ body {
 }
 
 #search-container p {
-  margin-left: 2%;
+  margin-left: 3%;
+  margin-top: 15px;
 }
 
-form input:nth-child(1) {
+#route-origin {
   background-color: rgb(245, 148, 57, 0.7);
-  width: 90%;
+  width: 95%;
   height: 50px;
   margin-left: 2%;
   margin-top: -10px;
@@ -32,9 +33,9 @@ form input:nth-child(1) {
   border-radius: 3px;
 }
 
-form input:nth-child(2) {
+#route-destination {
   background-color: rgb(88, 164, 206, 0.7);
-  width: 90%;
+  width: 95%;
   height: 50px;
   margin-left: 2%;
   margin-top: 10px;
@@ -44,7 +45,7 @@ form input:nth-child(2) {
   border-radius: 3px;
 }
 
-form button {
+#submit-search-button {
   background-color: #E5E5E5;
   height: 42px;
   width: 42px;
@@ -55,7 +56,7 @@ form button {
   margin-bottom: 1%;
 }
 
-form button img {
+#submit-search-button img {
   margin-left: -5px;
 }
 
@@ -67,8 +68,8 @@ form button img {
   background-color: bl;
 }
 
-/* For the navbar */
-navbar {
+/* For the .navbar */
+.navbar {
   border: 1px solid black;
   background-color: rgba(228, 245, 255, 1);
   width: 100%;
@@ -79,11 +80,11 @@ navbar {
   justify-content: space-between;
 }
 
-navbar button {
+.navbar a {
   margin: auto 0;
 }
 
-navbar button:nth-child(1) {
+.navbar a:nth-child(1) button {
   height: 42px;
   width: 42px;
   border-radius: 15px;
@@ -93,11 +94,11 @@ navbar button:nth-child(1) {
   float: left;
 }
 
-navbar button:nth-child(1) img {
+.navbar a:nth-child(1) button img {
   margin-left: -5px;
 }
 
-navbar button:nth-child(3) {
+.navbar a:nth-child(3) button {
   height: 42px;
   width: 42px;
   border-radius: 15px;
@@ -107,11 +108,11 @@ navbar button:nth-child(3) {
   float: right;
 }
 
-navbar button:nth-child(3) img {
+.navbar a:nth-child(3) button img {
   margin-left: -5px;
 }
 
-navbar button:nth-child(2) {
+.navbar a:nth-child(2) button {
   height: 60px;
   width: 170px;
   border-radius: 15px;
@@ -120,7 +121,7 @@ navbar button:nth-child(2) {
   margin-right: 10px;
 }
 
-navbar button:nth-child(2) img {
+.navbar a:nth-child(2) button img {
   margin-left: -5px;
   margin-top: 0px;
 }

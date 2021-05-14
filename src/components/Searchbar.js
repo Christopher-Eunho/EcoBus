@@ -15,7 +15,7 @@ const Searchbar = () => {
     }
     
     return (
-        <section className="search-process-container" id="search-container">
+        <section id="search-container">
         
             <p>Where do you want to go?</p>
             
@@ -25,7 +25,7 @@ const Searchbar = () => {
             
                 <input id="route-destination" type="text" placeholder="Destination" required="required" />
             
-                <button type="submit">
+                <button type="submit" id="submit-search-button">
                     <img src={Search} alt="Search" />
                 </button>
         

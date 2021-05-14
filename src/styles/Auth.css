@@ -1,14 +1,14 @@
-div{
+.center {
     margin:auto;
 }
 
-h2 {
+.welcome-message {
     margin: 5%;
     text-align: center;
 
 }
 
-img {
+.logo {
     margin: 5% 2% 0;
     max-width: 20%;
 }
@@ -19,10 +19,6 @@ img {
     justify-content: space-between;
 }
 
-#resetPassword > a{
-    text-align:center;
-}
-
-form {
+.login-form {
     margin:5%
 }

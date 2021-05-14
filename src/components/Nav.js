@@ -4,28 +4,28 @@ import SearchPage from '../images/magnifying-glass.png'
 import React from "react"
 import {Link} from "react-router-dom"
 
-const Navbar = () => {
+const Nav = () => {
     return (
-    <navbar>
+    <nav className="navbar">
         <Link to="/profile">
-            <button id="navigate-user-profile">
+            <button className="navbar-button">
                 <img src={UserProfile} alt="User Profile" />
             </button>
         </Link>
         
         <Link to="/about_us">
-            <button id="navigate-about-us">
+            <button className="navbar-button">
                 <img src={Logo} alt="Logo" />
             </button>
         </Link>
 
         <Link to="/">
-            <button id="navigate-search-page">
+            <button className="navbar-button">
                 <img src={SearchPage} alt="Search Page"/>
             </button>
         </Link>
-    </navbar>
+    </nav>
     )
 }
 
-export default Navbar
+export default Nav
