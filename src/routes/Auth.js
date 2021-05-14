@@ -63,9 +63,14 @@ const Auth = () => {
 
     return (
         <div className="center">
-            <a href="."><img src={logo} className="logo" alt="Logo"></img></a>
+            <a href=".">
+                <img src={logo} className="logo" alt="Logo"/>
+            </a>
+            
             <hr/>
+            
             <h2 className="welcome-message">Welcome to EcoBus</h2>
+            
             <Form onSubmit={onSubmit} className="login-form">
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -79,7 +84,7 @@ const Auth = () => {
                     />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
-                </Form.Text>
+                    </Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -92,11 +97,14 @@ const Auth = () => {
                         onChange={onChange}
                         required />
                 </Form.Group>
+                
                 <span className="authButtons">
-                    <Button variant="secondary" onClick={toggleAcount}>Sign Up</Button> {/*signup / signin buttons need to be fixed */}
+                    <Button variant="secondary" onClick={toggleAcount}>Sign Up</Button>
                     <Button type="submit">Sign In</Button>
                 </span>
+            
             </Form>
+            
             <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
             <span>{error} </span>
