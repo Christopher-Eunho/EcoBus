@@ -1,2 +1,5 @@
 Carbon emission algorithm:
 	L/100km * 2.33 / 100 = g CO2e/km
+	^
+	|
+	Multiply by kilometers
