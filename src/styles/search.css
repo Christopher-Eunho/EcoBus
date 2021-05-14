@@ -52,6 +52,9 @@
   width: 42px;
   border: none;
   border-radius: 15px;
+  margin-bottom: 1%;
+  margin-right: 3%;
+  align-self: flex-end;
 }
 
 #submit-search-button img {
