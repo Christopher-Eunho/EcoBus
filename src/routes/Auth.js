@@ -104,7 +104,7 @@ const Auth = () => {
                 </Button>
             </Form>
             
-            <Button variant="secondary" onClick={toggleAcount}>
+            <Button variant="secondary" onClick={toggleAccount}>
                 {newAccount ? "Sign In" : "Create Account"}
             </Button>
             
