@@ -1,30 +1,22 @@
 import React, {useEffect, useState, useRef, useCallback} from 'react'
+import {latVancouver, lngVancouver} from "../constants"
 import { GoogleMap,
-         useJsApiLoader,
          Marker,
-         InfoWindow,
-         useLoadScript } from '@react-google-maps/api';
+         useLoadScript,
+         DirectionsService,
+         DirectionsRenderer } from '@react-google-maps/api';
 
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
 
 import "@reach/combobox/styles.css";
+import { OrginSearch } from './OrginSearch';
+import { DestSearch } from './DestSearch';
 
 
 const libraries = ["places"];
 
 const mapContainerStyle = {
-    width: '100vw',
-    height: '100vh'
+    width: '50vw',
+    height: '80vh'
 };
 
 const options = {
@@ -32,27 +24,51 @@ const options = {
     zoomControl: true,
 }
 
-const latVancouver = 49.28;
-const lngVancouver = -123.12;
-const searchRadius = 10000; // meters
+
+
 
 function GMap() {
 
     const [currentLat, setCurrentLat] = useState(latVancouver);
     const [currentLng, setCurrentLng] = useState(lngVancouver);
+    const [origin, setOrigin] = useState({});
+    const [destination, setDestination] = useState({});
+    const [response, setResponse] = useState("");
+    const [destinationInUse, setDestinationInUse ] = useState({});
+    const [originInUse, setOriginInUse] = useState({});
 
     // Update current location
     useEffect(()=>{
         if("geolocation" in navigator){
             navigator.geolocation.getCurrentPosition(function(position) {
-                console.log(position);
                 setCurrentLat(position.coords.latitude);
                 setCurrentLng(position.coords.longitude);
               });
         } else {
             console.log("GeoLocation Not Available");
         }
-    },[])
+    },[]);
+
+    const searchClick = () => {
+        if (destination !== '' && origin !== ''){
+            setDestinationInUse(destination);
+            setOriginInUse(origin);
+        }
+        
+        
+    } 
+
+    const directionsCallback = (response) => {
+        if (response !== null) {
+            console.log(response.routes[0].legs[0]);
+          if (response.status === 'OK') {
+            setResponse(response);
+          } else {
+            console.log('response: ', response)
+          }
+        }
+      }
+    
 
     const mapRef = useRef(); // this allows us to retain state w/o re-rendering
     const onMapLoad = useCallback((map) => {
@@ -71,14 +87,19 @@ function GMap() {
 
     },[]);
 
+    
+
     if (loadError) return "error";
     if (!isLoaded) return "Loading";
 
     return(
         <>
             <div>
-                <Search panTo={panTo} />                
-
+                <div>
+                    <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
+                    <DestSearch panTo={panTo} setDestination    ={setDestination}/>
+                    <button onClick={searchClick}>Find Route</button>
+                </div>
                 <GoogleMap 
                 mapContainerStyle={mapContainerStyle} 
                 zoom={13} 
@@ -88,6 +109,39 @@ function GMap() {
                 onClick={(event) => {console.log(event)}}
                 onLoad={onMapLoad}
                 >
+                    <DirectionsService
+                        // required
+                        options={{ 
+                            destination: destinationInUse,
+                            origin: originInUse,
+                            travelMode: "TRANSIT"
+                        }}
+                        // required
+                        callback={directionsCallback}
+                        // optional
+                        onLoad={directionsService => {
+                            console.log('DirectionsService onLoad directionsService: ', directionsService)
+                        }}
+                        // optional
+                        onUnmount={directionsService => {
+                            console.log('DirectionsService onUnmount directionsService: ', directionsService)
+                        }}
+                    />
+
+                    <DirectionsRenderer
+                          // required
+                        options={{ 
+                            directions: response
+                        }}
+                        // optional
+                        onLoad={directionsRenderer => {
+                            console.log('DirectionsRenderer onLoad directionsRenderer: ', directionsRenderer)
+                        }}
+                        // optional
+                        onUnmount={directionsRenderer => {
+                            console.log('DirectionsRenderer onUnmount directionsRenderer: ', directionsRenderer)
+                        }}
+                    />
                     <Marker position={{lat: currentLat,
                          lng: currentLng}} />
                     
@@ -99,53 +153,4 @@ function GMap() {
     );
     };
 
-    //https://www.npmjs.com/package/use-places-autocomplete        
-    function Search( {panTo} ) {
-        const {
-          ready,
-          value,
-          suggestions: { status, data },
-          setValue,
-          clearSuggestions,
-        } = usePlacesAutocomplete({
-          requestOptions: {
-            location: { lat: () => latVancouver, lng: () => lngVancouver },
-            radius: searchRadius,
-          },
-        });
-
-
-        return (
-            <div className="search">
-                <Combobox onSelect={async (address) => {
-                            setValue(address, false);
-                            clearSuggestions();
-
-                            try {
-                                const results = await getGeocode( {address});
-                                const { lat, lng } = await getLatLng(results[0]);
-                                panTo({ lat, lng });
-                            } catch (error) {
-                                console.log("error");
-                            }        
-                            }}
-                    >
-                <ComboboxInput value={value} 
-                    onChange={(e) => {
-                    setValue(e.target.value);
-                    }}
-                    disabled={!ready}
-                    placeholder="Enter Location" 
-                />
-                <ComboboxPopover>
-                    <ComboboxList>
-                        {status === "OK" && data.map(({ id, description}) => (
-                            <ComboboxOption key={id} value={description} />
-                        ))}
-                    </ComboboxList>
-                </ComboboxPopover>
-                </Combobox>
-            </div>
-        )
-    }
 export default GMap
