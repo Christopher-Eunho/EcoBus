@@ -14,14 +14,14 @@ const AppRouter = ({isLoggedIn}) => {
             <Switch>
                 {isLoggedIn ? (
                     <>
+                        <Route exact path="/">
+                            <Search />
+                        </Route>
                         <Route exact path="/profile">
                             <Profile />
                         </Route>
                         <Route exact path="/about_us">
                             <About_Us />
-                        </Route>
-                        <Route exact path="/search">
-                            <Search />
                         </Route>
                     </>
                 ) : (

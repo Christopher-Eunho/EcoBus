@@ -7,16 +7,13 @@ const Navigation = () => (
     <nav>
         <ul>
             <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Search</Link>
             </li>
             <li>
                 <Link to="/profile">My Profile</Link>
             </li>
             <li>
                 <Link to="/about_us">About Us</Link>
-            </li>
-            <li>
-                <Link to="/search">Search</Link>
             </li>
         </ul>
     </nav>
