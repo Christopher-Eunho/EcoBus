@@ -1,4 +1,4 @@
-body{
+.profileBody{
     background-color: #FFFFCC;
     
 }
@@ -10,18 +10,13 @@ body{
 
 #logout{
     float:right;
-    margin-top:1em;
-    margin-right:1em;
-}
-
-ul {
-    list-style-type:none;
-    float:right;
-    display:flex;
+    margin-top:3%;
+    margin-right:2%;
 }
 
 #logo {
-    margin: 5% 2% 0;
+    margin-top: 5%;
+    margin-left:2%;
     max-width: 20%;
 }
 
@@ -29,23 +24,9 @@ ul {
     border-radius: 50%;
 }
 
-#userStats{
-    margin:5vw;
-    
-}
-
-#userStats > img{
-    max-width:1em;
-}
-
-#routeHistory{
-    margin:5vw;
-
-}
-
-#routeHistory >img {
-    max-width:1em;
-    
+#userHistory{
+    margin:5vw 5vw 0vw 5vw;
+    padding-bottom:19.5vw;
 }
 
 #avatar{
@@ -53,29 +34,11 @@ ul {
 }
 
 #avataredit{
-    margin-left:-10vw;
+    margin-left:0vw;
 }
 
 #editbutton{
     margin: 1vw;
-}
-
-#userStats {
-    background-color:#1E90FF;
-    border: none;
-    font-size: large;
-    font-weight: bold;
-    width:50%;
-    margin:auto;
-}
-
-#routeHistory{
-    background-color:#1E90FF;
-    border: none;
-    font-size: large;
-    font-weight: bold;
-    width:50%;
-    margin:auto;
 }
 
 #togglebutton{
@@ -84,3 +47,11 @@ ul {
     float:left;
 }
 
+.navbar{
+    position: absolute; 
+bottom: 0;
+}
+
+#saveEdits{
+    margin:1em;
+}
