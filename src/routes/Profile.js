@@ -1,4 +1,4 @@
-import { authService } from "firebase_eb";
+import { authService, storage } from "firebase_eb";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
@@ -7,7 +7,7 @@ import "../styles/profile.css";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
 import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const Profile = () => {
     const history = useHistory();
@@ -15,7 +15,7 @@ const Profile = () => {
     // const [toggle, setToggle] = useState(false);
     // const [name, changeName] = useState("");
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started
+    const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
 
     const totalTrips = 0;
     const totalDistance = 0;
@@ -31,6 +31,35 @@ const Profile = () => {
 
     //      await firebase.User.updateEmail(email)
     // }
+
+
+    /* 
+    Image upload start
+    I found this code on : https://dev.to/itnext/how-to-do-image-upload-with-firebase-in-react-cpj
+    @authors: Tallan Groberg, Samuel Karani
+    */
+    const [file, setFile] = useState(null);
+    const [url, setURL] = useState("");
+  
+    function handleChange(e) {
+      setFile(e.target.files[0]);
+    }
+  
+    function handleUpload(e) {
+      e.preventDefault();
+      const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+      uploadTask.on("state_changed", console.log, console.error, () => {
+        storage
+          .ref("images")
+          .child(file.name)
+          .getDownloadURL()
+          .then((url) => {
+            setFile(null);
+            setURL(url);
+          });
+      });
+    }
+
 
 
 
@@ -50,25 +79,58 @@ const Profile = () => {
 
             <div className="Profile">
                 <div id="avatar">
-                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Avatar" /> {/*query image later from database*/}
-                    <input type="image" id="avataredit" src={Edit} alt="AvatarEdit" />
+
+                {/* <img src={url} alt="Avatar" onerror="this.style.display='none'" />
+
+                <input type="image" id="avataredit" src={Edit} alt="AvatarEdit" onSubmit={handleUpload} /> */}
+
+
+                {/* <form onSubmit={handleUpload}>
+                <input type="file" onChange={handleChange} />
+                <button disabled={!file}>upload to firebase</button>
+                </form> */}
+
+                
+
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Avatar" /> 
+                <input type="image" id="avataredit" src={Edit} alt="AvatarEdit"></input>
+                
+                {/*query image later from database*/}
+                    
+                    
+                    
+                    
+
+
+                    
+
+
+
+
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue="Austin" {...register("name")}/>
-                    <img src={Edit} id="editbutton" alt="Edit"/>
-                    {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
-                    <input type="email" placeholder="Email" name="email" defaultValue={user["email"]} {...register("email")} />
-                    <img src={Edit} id="editbutton" alt="Edit"/>
-                    {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
-                    <br/>
-                    <input type="submit" id="saveEdits" value="Save Changes"/>
+                    <span id="nameForm">
+                        <h4 id="profileHeader">Name:</h4>
+                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue="Austin" {...register("name")} />
+                        <img src={Edit} id="editbutton" alt="Edit" />
+                        {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
+                    </span>
+
+                    <span id="emailForm">
+                        <h4 id="profileHeader">Email:</h4>
+                        <input type="email" placeholder="Email" name="email" defaultValue={user["email"]} {...register("email")} />
+                        <img src={Edit} id="editbutton" alt="Edit" />
+                        {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
+                    </span>
+                    <br />
+                    <Button variant="success" type="submit" id="saveEdits">Save Changes</Button>
                 </form>
 
                 <div id="userHistory">
                     <Accordion>
                         <Card>
-                            <Card.Header>
-                                <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                            <Card.Header id="toggleHeader">
+                                <Accordion.Toggle as={Button} variant="link" eventKey="0" id="toggleButton" >
                                     User Statistics
                                 </Accordion.Toggle>
                             </Card.Header>
@@ -82,8 +144,8 @@ const Profile = () => {
                         </Card>
 
                         <Card>
-                            <Card.Header>
-                                <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                            <Card.Header id="toggleHeader">
+                                <Accordion.Toggle as={Button} variant="link" eventKey="1" id="toggleButton">
                                     Route History
                                 </Accordion.Toggle>
                             </Card.Header>

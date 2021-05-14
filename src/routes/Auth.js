@@ -66,7 +66,7 @@ const Auth = () => {
             <a href="."><img src={logo} className="logo" alt="Logo"></img></a>
             <hr/>
             <h2 className="welcome-message">Welcome to EcoBus</h2>
-            <Form onSubmit={onSubmit} className="login-form">
+            <Form onSubmit={onSubmit} className="login-form"> {/* Taken from react bootstrap https://react-bootstrap.github.io/components/accordion/ */}
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
