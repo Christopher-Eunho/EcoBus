@@ -1,0 +1,86 @@
+body{
+    background-color: #FFFFCC;
+    
+}
+
+.Profile{
+    margin:auto;
+    text-align:center;
+}
+
+#logout{
+    float:right;
+    margin-top:1em;
+    margin-right:1em;
+}
+
+ul {
+    list-style-type:none;
+    float:right;
+    display:flex;
+}
+
+#logo {
+    margin: 5% 2% 0;
+    max-width: 20%;
+}
+
+#avatar > img{
+    border-radius: 50%;
+}
+
+#userStats{
+    margin:5vw;
+    
+}
+
+#userStats > img{
+    max-width:1em;
+}
+
+#routeHistory{
+    margin:5vw;
+
+}
+
+#routeHistory >img {
+    max-width:1em;
+    
+}
+
+#avatar{
+    margin: 5vw;
+}
+
+#avataredit{
+    margin-left:-10vw;
+}
+
+#editbutton{
+    margin: 1vw;
+}
+
+#userStats {
+    background-color:#1E90FF;
+    border: none;
+    font-size: large;
+    font-weight: bold;
+    width:50%;
+    margin:auto;
+}
+
+#routeHistory{
+    background-color:#1E90FF;
+    border: none;
+    font-size: large;
+    font-weight: bold;
+    width:50%;
+    margin:auto;
+}
+
+#togglebutton{
+    max-width:10%;
+    margin-left: 1em;
+    float:left;
+}
+
