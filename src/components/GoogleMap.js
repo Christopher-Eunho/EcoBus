@@ -67,6 +67,7 @@ function GMap() {
     const directionsCallback = (response) => {
         if (response !== null) {
             console.log(response.routes[0].legs[0]);
+            console.log(response.routes[0].legs[0]["distance"]["text"]);
           if (response.status === 'OK') {
             setResponse(response);
           } else {
