@@ -19,16 +19,20 @@ const TransitRouteDetails = () => {
 
     return (
         <section className="search-process-container" id="driving-option-details-container">
+            
             <button className="back-button" id="driving-option-back-button" onClick = {goBack}>
                 <img src={BackButton} alt="Back Button" />
             </button>
-            <div className="option-details">
+            
+            <div className="option-details">    
                 <p>Driving Route</p>
+                
                 <ul>
-                    <li>Some data</li>
-                    <li>Some data</li>
-                    <li>Some data</li>
+                    <li>Travel time: <span id="driving-travel-time">0000</span></li>
+                    <li>Distance: <span id="driving-travel-distance">0000</span></li>
+                    <li>Emissions produced: <span id="driving-emissions-produced">0000</span></li>
                 </ul>
+                
                 <button className="save-journey-button" id="save-driving-journey" onClick = {saveJourney}>SAVE THIS JOURNEY</button>
             </div>
         </section>

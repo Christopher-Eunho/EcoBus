@@ -10,7 +10,7 @@ import logo from '../images/logo.png'
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true);
+    const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
 
     const onChange = (event) => {
@@ -58,15 +58,22 @@ const Auth = () => {
     };
 
 
-    const toggleAcount = () => setNewAccount((prev) => !prev);
+    const toggleAccount = () => setNewAccount((prev) => !prev);
 
 
     return (
         <div className="center">
-            <a href="."><img src={logo} className="logo" alt="Logo"></img></a>
+            <a href=".">
+                <img src={logo} className="logo" alt="Logo"/>
+            </a>
+            
             <hr/>
-            <h2 className="welcome-message">Welcome to EcoBus</h2>
-            <Form onSubmit={onSubmit} className="login-form"> {/* Taken from react bootstrap https://react-bootstrap.github.io/components/accordion/ */}
+            
+            <h2 className="welcome-message">Welcome to EcoBus {newAccount? "(sign up)" : "(sign in)"} </h2>
+            <small className="welcome-message" onClick={toggleAccount}> I want to {newAccount? "sign in" : "sign up"} </small>  
+            
+            <Form onSubmit={onSubmit} className="login-form">
+                  
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -79,7 +86,7 @@ const Auth = () => {
                     />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
-                </Form.Text>
+                    </Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -92,11 +99,11 @@ const Auth = () => {
                         onChange={onChange}
                         required />
                 </Form.Group>
-                <span className="authButtons">
-                    <Button variant="secondary" onClick={toggleAcount}>Sign Up</Button> {/*signup / signin buttons need to be fixed */}
-                    <Button type="submit">Sign In</Button>
-                </span>
+                <Button type="submit"> 
+                    {newAccount ? "sign in" : "sign up"} 
+                </Button>
             </Form>
+            
             <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
             <span>{error} </span>

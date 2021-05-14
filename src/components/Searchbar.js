@@ -1,5 +1,5 @@
 import Search from '../images/magnifying-glass.png'
-
+import orginSearch from "./OrginSearch"
 const Searchbar = () => {
     
     const onSubmit = (event) => {
@@ -15,7 +15,7 @@ const Searchbar = () => {
     }
     
     return (
-        <section id="search-container">
+        <section className="search-process-container" id="search-container">
         
             <p>Where do you want to go?</p>
             

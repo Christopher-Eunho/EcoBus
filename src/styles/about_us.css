@@ -20,7 +20,7 @@ main aside {
     font-size: 7.5vw;
     font-weight: 1000;
     width: 100%;
-    height: calc((60vw/3.5));
+    height: calc((100vw/3.5));
     margin: 0px;
     padding-top: 10%;
     color: rgb(0, 126, 0);
@@ -32,8 +32,18 @@ main aside p {
 main section {
     min-height: 250px;
 }
+main section h {
+    font-size: xx-large;
+    font-weight: bolder;
+}
 main section img {
     float: left;
     height: 100%;
     margin-right: 10px;
+}
+main section a {
+    color:black;
+}
+.PhotoID {
+    width: 150px;
 }
