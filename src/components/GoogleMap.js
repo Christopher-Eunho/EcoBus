@@ -148,6 +148,7 @@ function GMap() {
                     
                 </GoogleMap>
                 <section className="search-process-container" id="search-container">
+                    <p>Where would you like to go?</p>
                     <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
                     <DestSearch panTo={panTo} setDestination    ={setDestination}/>
                     <button id="submit-search-button" onClick={searchClick}>
