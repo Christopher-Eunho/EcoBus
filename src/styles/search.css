@@ -90,7 +90,7 @@
   border-radius: 15px;
   border: none;
   background-color: rgb(0, 0, 0, 0);
-  margin-left: 4%;
+  margin-left: 3%;
   float: left;
 }
 
@@ -104,7 +104,7 @@
   border-radius: 15px;
   border: none;
   background-color: rgb(0, 0, 0, 0);
-  margin-right: 4%;
+  margin-right: 0%;
   float: right;
 }
 
@@ -252,4 +252,15 @@
 /* Saved driving route */
 #driving-journey-saved-container {
   display: none;
+}
+
+@media (max-width: 300px) {
+
+  .navbar a:nth-child(2) button img {
+    width:50vw;
+  }
+
+  .navbar a:nth-child(2) button {
+    width:50vw;
+  }
 }
