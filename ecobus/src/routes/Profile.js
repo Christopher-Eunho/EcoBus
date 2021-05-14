@@ -7,6 +7,9 @@ import "../styles/Profile.css";
 import Toggle from "../images/toggle.png";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
+import Button from 'react-bootstrap/Button';
+import Accordion from 'react-bootstrap/Accordion';
+
 
 const Profile = () => {
     const history = useHistory();
@@ -38,10 +41,8 @@ const Profile = () => {
     // const onEdit =  async (event) => {
 
     //      await firebase.User.updateEmail(email)
-
-
-
     // }
+
 
 
     const onChange = (event) => {
@@ -57,10 +58,14 @@ const Profile = () => {
 
     return (
         <>
-            <a href="."><input type="image" src={logo} id="logo" alt="logo" /></a>
-            <button onClick={onLogoutClick} id="logout">Log Out</button>
+            <div id="header">
+                <a href="."><input type="image" src={logo} id="logo" alt="logo" /></a>
+                <Button variant="primary">Hello</Button>
+                <Button variant="secondary">Hello</Button>
+                <Button variant="danger" onClick={onLogoutClick} id="logout">Log Out</Button>
+                <hr/>
+            </div>
 
-            <hr/>
             <div className="Profile">
                 <div id="avatar">
                     <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Avatar" /> {/*query image later from database*/}

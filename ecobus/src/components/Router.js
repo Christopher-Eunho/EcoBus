@@ -9,7 +9,7 @@ import Profile from "routes/Profile";
 const AppRouter = ({isLoggedIn}) => {
     return (
         <Router>
-            {isLoggedIn && <Navigation />}
+            {isLoggedIn}
             <Switch>
                 {isLoggedIn ? (
                     <>
