@@ -32,8 +32,6 @@ const options = {
 
 function GMap() {
 
-    const [currentLat, setCurrentLat] = useState(null);
-    const [currentLng, setCurrentLng] = useState(null);
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -41,7 +39,7 @@ function GMap() {
     const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
-    const [markers, setMarkers] = useState({current: null, orgin: null, destination: null});    
+    
 
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
