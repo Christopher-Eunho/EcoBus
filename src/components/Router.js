@@ -24,7 +24,7 @@ const AppRouter = ({isLoggedIn}) => {
                         </Route>
                     </>
                 ) : (
-                    <Route exact path="/">
+                    <Route path="/">
                         <Auth />
                     </Route>
                 )}
