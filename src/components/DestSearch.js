@@ -11,6 +11,7 @@ import {
     ComboboxList,
     ComboboxOption
 } from "@reach/combobox";
+// https://www.npmjs.com/package/@reach/combobox
 
 //https://www.npmjs.com/package/use-places-autocomplete        
 export function DestSearch({ panTo, setDestination }) {
