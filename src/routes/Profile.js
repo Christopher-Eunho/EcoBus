@@ -1,4 +1,4 @@
-import { authService, storage } from "firebase_eb";
+import { authService, db } from "firebase_eb";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
@@ -48,9 +48,9 @@ const Profile = () => {
   
     function handleUpload(e) {
       e.preventDefault();
-      const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+      const uploadTask = db.ref(`/images/${file.name}`).put(file);
       uploadTask.on("state_changed", console.log, console.error, () => {
-        storage
+        db
           .ref("images")
           .child(file.name)
           .getDownloadURL()
@@ -66,10 +66,8 @@ const Profile = () => {
     const saveChanges = () => {
         var user = firebase.auth().currentUser;
         var email, uid;
-        
-        console.log(user.email)
-        console.log(user.uid)
         var newEmail = document.getElementById("email-change");
+        
         if (user != null) {
           email = user.email;
           uid = user.uid;

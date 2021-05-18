@@ -1,14 +1,11 @@
 import React, {useEffect, useState, useRef, useCallback} from 'react'
-import {latVancouver, lngVancouver} from "../constants"
 import { GoogleMap,
          Marker,
          useLoadScript,
          DirectionsService,
          DirectionsRenderer } from '@react-google-maps/api';
-
-
 import "@reach/combobox/styles.css";
-import { OrginSearch } from './OrginSearch';
+import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
 import Search from '../images/magnifying-glass.png'
 
@@ -32,8 +29,6 @@ const options = {
 
 function GMap() {
 
-    const [currentLat, setCurrentLat] = useState(null);
-    const [currentLng, setCurrentLng] = useState(null);
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -41,11 +36,18 @@ function GMap() {
     const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
-    const [markers, setMarkers] = useState({current: null, orgin: null, destination: null});    
+    
 
     // Update current location
-    useEffect(()=>{
-        
+    useEffect(() => {
+        if("geolocation" in navigator){
+            navigator.geolocation.getCurrentPosition(function(position) {
+                setCurrentLat(position.coords.latitude);
+                setCurrentLng(position.coords.longitude);
+              });
+        } else {
+            console.log("GeoLocation Not Available");
+        }
     },[]);
 
     const searchClick = () => {
@@ -57,10 +59,10 @@ function GMap() {
         let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "none";
 
-        let methodSelectionContainer = document.getElementById("method-selection-container");
-        methodSelectionContainer.style["display"] = "flex";
-        methodSelectionContainer.style["flexDirection"] = "column";
-        methodSelectionContainer.style["justifyContent"] = "space-around";
+        let routeDetailsContainer = document.getElementById("route-details-container");
+        routeDetailsContainer.style["display"] = "flex";
+        routeDetailsContainer.style["flexDirection"] = "column";
+        routeDetailsContainer.style["justifyContent"] = "space-around";
     } 
 
     const transitCallback = (response) => {
