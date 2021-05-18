@@ -118,7 +118,7 @@ const Auth = () => {
                 <span id="error-message"> {error} </span>
             </Form>
 
-            <GoogleButton className="center" onClick={() => onSocialClick("google")} />]
+            <GoogleButton className="center" onClick={() => onSocialClick("google")} />
         </div>
     );
 };
