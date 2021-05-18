@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useRef, useCallback} from 'react'
-import {latVancouver, lngVancouver} from "../constants"
 import { GoogleMap,
          Marker,
          useLoadScript,
