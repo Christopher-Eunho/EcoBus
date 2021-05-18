@@ -65,11 +65,11 @@ const Profile = () => {
         var user = firebase.auth().currentUser;
         var email, uid;
         
+        var newEmail = document.getElementById("email-change");
         if (user != null) {
           email = user.email;
           uid = user.uid;
-          
-          user.updateEmail("user@example.com").then(function() {
+          user.updateEmail(newEmail.value).then(function() {
             // Update successful.
           }).catch(function(error) {
             console.log(error);
@@ -133,7 +133,7 @@ const Profile = () => {
 
                     <span id="emailForm">
                         <h4 id="profileHeader">Email:</h4>
-                        <input type="email" placeholder="Email" name="email" defaultValue={user["email"]} {...register("email")} />
+                        <input type="email" placeholder="Email" name="email" id="email-change" defaultValue={user["email"]} {...register("email")} />
                         <img src={Edit} id="editbutton" alt="Edit" />
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
