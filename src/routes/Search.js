@@ -1,5 +1,5 @@
 import GMap from '../components/GoogleMap'
-import RouteDetails from '../components/routeDetails'
+import RouteDetails from '../components/RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import '../styles/search.css'
 

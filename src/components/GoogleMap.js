@@ -5,10 +5,8 @@ import { GoogleMap,
          useLoadScript,
          DirectionsService,
          DirectionsRenderer } from '@react-google-maps/api';
-
-
 import "@reach/combobox/styles.css";
-import { OrginSearch } from './OrginSearch';
+import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
 import Search from '../images/magnifying-glass.png'
 
@@ -44,7 +42,6 @@ function GMap() {
     const [markers, setMarkers] = useState({current: null, orgin: null, destination: null});    
 
     // Update current location
-<<<<<<< HEAD
     useEffect(() => {
         if("geolocation" in navigator){
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -54,10 +51,6 @@ function GMap() {
         } else {
             console.log("GeoLocation Not Available");
         }
-=======
-    useEffect(()=>{
-        
->>>>>>> bbf0483b524a56c7eb1c338d82baf82af825054e
     },[]);
 
     const searchClick = () => {
