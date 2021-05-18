@@ -1,6 +1,4 @@
 import GMap from '../components/GoogleMap'
-import Searchbar from '../components/Searchbar'
-import Nav from '../components/Nav'
 import MethodSelection from '../components/MethodSelection'
 import TransitRouteDetails from '../components/TransitRouteDetails'
 import DrivingRouteDetails from '../components/DrivingRouteDetails'

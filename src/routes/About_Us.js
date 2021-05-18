@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import '../styles/about_us.css';
 import Caleb from 'images/Caleb.png'
 import Dylan from 'images/Dylan.png'
@@ -21,7 +20,7 @@ const About_Us = () => <main>
     </section>
     <section>
         <h2 id="Chris"><a href='https://github.com/Christopher-Eunho'>Eunho "Chris" Jung</a></h2>
-        <img class="PhotoID" src={Chris} alt="Picture of Chris"/>
+        <img class="PhotoID" src={Chris} alt="Chris"/>
         <p>
             An aspiring programmer and the Product Owner of EcoBus. While working in the semiconductor industry of South Korea as a mechanical engineer, he was fascinated by 
             how much the world was being transformed by technology  So, he decided to transform himself from a hardware engineer to a software engineer and is now studying 
@@ -31,7 +30,7 @@ const About_Us = () => <main>
     </section>
     <section>
         <h2 id="Caleb"><a href='https://github.com/fijiman24'>Caleb Verma</a></h2>
-        <img class="PhotoID" src={Caleb} alt="Picture of Caleb" />
+        <img class="PhotoID" src={Caleb} alt="Caleb" />
         <p>
             Caleb is an aspiring software developer. He graduated from UBC in 2020 with a major in Philosophy and, that very same year, decided to apply to BCIT's CST 
             program on a whim. He is fascinated by the seemingly limitless potential of programming; whether it's to create video games or robots that can explore Mars, 
@@ -40,7 +39,7 @@ const About_Us = () => <main>
     </section>
     <section>
         <h2 id="Austin"><a href='https://github.com/ahe8'>Austin He</a></h2>
-        <img class="PhotoID" src={Austin} alt="Picture of Austin"/>
+        <img class="PhotoID" src={Austin} alt="Austin"/>
         <p>
             Austin is a a recent graduate of Capilano University where he got his Bachelor of Business Administration degree with a concentration in Accounting.
             He joined the CST program to work on projects and learn how to automate tasks so he can enjoy the simple things in life. Austin is excited to see what 
@@ -49,7 +48,7 @@ const About_Us = () => <main>
     </section>
     <section>
         <h2 id="Dylan"><a href='https://github.com/CDGCodes'>Dylan Punter</a></h2>
-        <img class="PhotoID" src={Dylan} alt="Picture of Dylan"/>
+        <img class="PhotoID" src={Dylan} alt="Dylan"/>
         <p>
             Dylan is a student who recently graduated from high school. After taking a semester off to save money, he applied to CIT, before changing his mind, 
             and applying to CST the following term. He has always been interested in the world of computers, rebuilding his own countless times, and originally 

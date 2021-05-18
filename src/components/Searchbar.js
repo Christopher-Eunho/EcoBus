@@ -1,5 +1,4 @@
 import Search from '../images/magnifying-glass.png'
-import orginSearch from "./OrginSearch"
 const Searchbar = () => {
     
     const onSubmit = (event) => {
