@@ -60,11 +60,15 @@ const Profile = () => {
           });
       });
     }
+    /*Image upload end*/
+    
 
     const saveChanges = () => {
         var user = firebase.auth().currentUser;
         var email, uid;
         
+        console.log(user.email)
+        console.log(user.uid)
         var newEmail = document.getElementById("email-change");
         if (user != null) {
           email = user.email;
