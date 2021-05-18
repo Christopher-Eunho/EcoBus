@@ -20,7 +20,7 @@ const mapContainerStyle = {
 };
 
 
-//https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+//refer to https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
 const options = {
     disableDefaultUI: true,
     zoomControl: true,
@@ -44,8 +44,11 @@ function GMap() {
     useEffect(()=>{
         if("geolocation" in navigator){
             navigator.geolocation.getCurrentPosition(function(position) {
+                console.log(position.coords)
                 setCurrentLat(position.coords.latitude);
                 setCurrentLng(position.coords.longitude);
+                setOrigin({lat: currentLat, lng: currentLng});
+                console.log(origin);
               });
         } else {
             console.log("GeoLocation Not Available");
@@ -53,6 +56,8 @@ function GMap() {
     },[]);
 
     const searchClick = () => {
+        console.log (origin);
+        console.log(destination);
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
             setOriginInUse(origin);

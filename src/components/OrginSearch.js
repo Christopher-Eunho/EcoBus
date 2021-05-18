@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { latVancouver, lngVancouver, searchRadius } from "../constants";
 import usePlacesAutocomplete, {
     getGeocode,
@@ -20,13 +20,16 @@ export function OrginSearch({ panTo, setOrigin }) {
         suggestions: { status, data },
         setValue,
         clearSuggestions,
-    } = usePlacesAutocomplete({
-        requestOptions: {
+        } = usePlacesAutocomplete({
+            requestOptions: {
             location: { lat: () => latVancouver, lng: () => lngVancouver },
             radius: searchRadius,
-        },
-    });
+            },
+        });
 
+
+
+    
     const orginOnSelect = async (address) => {
             
             setValue(address, false);
@@ -42,6 +45,10 @@ export function OrginSearch({ panTo, setOrigin }) {
             }
         };
 
+
+    useEffect(() => {        
+        setValue("Current Location", false);
+    },[]);    
 
     return (
         <>
