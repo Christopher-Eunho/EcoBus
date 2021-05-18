@@ -39,17 +39,7 @@ function GMap() {
     const [originInUse, setOriginInUse] = useState({});
     
 
-    // Update current location
-    useEffect(() => {
-        if("geolocation" in navigator){
-            navigator.geolocation.getCurrentPosition(function(position) {
-                setCurrentLat(position.coords.latitude);
-                setCurrentLng(position.coords.longitude);
-              });
-        } else {
-            console.log("GeoLocation Not Available");
-        }
-    },[]);
+
 
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
