@@ -23,6 +23,10 @@ const RouteDetails = () => {
                     snap.docs.forEach(doc => {
                         if (doc.data().email === user.email) {
                             console.log(doc.data().email);
+                            console.log(doc.id);
+                            db.collection("users").doc(doc.id).collection("routes").add({
+                                distance: "107km"
+                            })
                         }
                     })
                 }).catch(function (error) {
