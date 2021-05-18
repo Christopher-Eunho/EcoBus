@@ -3,6 +3,7 @@ import Leaf from '../images/leaf.png'
 import 'firebase/firestore'
 import firebase from "firebase/app"
 import {authService} from "firebase_eb"
+import {db} from "firebase_eb"
 
 const RouteDetails = () => {
     const goBack = () => {
@@ -14,8 +15,6 @@ const RouteDetails = () => {
     }
 
     const saveJourney = () => {
-        var db = firebase.firestore();
-        user.uid
         if (authService.currentUser != null) {
             db.collection('users').get()
                 .then((snap) => {
