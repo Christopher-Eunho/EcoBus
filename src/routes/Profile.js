@@ -64,8 +64,8 @@ const Profile = () => {
     const saveChanges = () => {
         var user = firebase.auth().currentUser;
         var email, uid;
-        
         var newEmail = document.getElementById("email-change");
+        
         if (user != null) {
           email = user.email;
           uid = user.uid;
