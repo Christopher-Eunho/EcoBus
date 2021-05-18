@@ -1,9 +1,10 @@
-import { authService, firebaseInstance } from "firebase_eb";
-import React, { useState } from "react";
-import firebase from "firebase/app";
-import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
-import Form from 'react-bootstrap/Form';
-import GoogleButton from 'react-google-button'; // https://www.npmjs.com/package/react-google-button
+import { authService, firebaseInstance } from "firebase_eb"
+import 'firebase/firestore'
+import React, { useState } from "react"
+import firebase from "firebase/app"
+import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
+import Form from 'react-bootstrap/Form'
+import GoogleButton from 'react-google-button' // https://www.npmjs.com/package/react-google-button
 import '../styles/auth.css'
 import logo from '../images/logo.png'
 
@@ -31,12 +32,11 @@ const Auth = () => {
                 provider = new firebaseInstance.auth.GoogleAuthProvider();
             }
 
-            const date = await authService.signInWithPopup(provider);
+            const data = await authService.signInWithPopup(provider);
         } catch (error) {
             console.log(error);
         }
     }
-
 
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -48,6 +48,15 @@ const Auth = () => {
                     email,
                     password
                 );
+                
+                // Add user email to firestore start
+                // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
+                const db = firebase.firestore();
+                const userRef = db.collection("users").add({
+                    email: email
+                });
+                // Add user email to firestore end
+                
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
             }
@@ -57,9 +66,7 @@ const Auth = () => {
         }
     };
 
-
     const toggleAccount = () => setNewAccount((prev) => !prev);
-
 
     return (
         <div className="center">
@@ -69,8 +76,7 @@ const Auth = () => {
             
             <hr/>
             
-            <h2 className="welcome-message">Welcome to EcoBus {newAccount? "(sign up)" : "(sign in)"} </h2>
-            <small className="welcome-message" onClick={toggleAccount}> I want to {newAccount? "sign in" : "sign up"} </small>  
+            <h2 className="welcome-message">Welcome! <br />Please {newAccount? "Sign Up for" : "Sign In to"} EcoBus.</h2>  
             
             <Form onSubmit={onSubmit} className="login-form">
                   
@@ -99,17 +105,22 @@ const Auth = () => {
                         onChange={onChange}
                         required />
                 </Form.Group>
-                <Button type="submit"> 
-                    {newAccount ? "sign in" : "sign up"} 
-                </Button>
+                
+                <div className="authentication-button-container">
+                    <Button type="submit" id="sign-in-up-button"> 
+                        {newAccount ? "Sign Up" : "Sign In"} 
+                    </Button>
+                    
+                    <Button variant="danger" className="welcome-message" id="change-to-sign-in-up" onClick={toggleAccount}> 
+                        I want to {newAccount? "sign in!" : "sign up!"} 
+                    </Button>
+                </div>
+                <span id="error-message"> {error} </span>
             </Form>
-            
-            <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
-            <span>{error} </span>
+            <GoogleButton className="center" onClick={() => onSocialClick("google")} />]
         </div>
     );
-
 };
 
 export default Auth;

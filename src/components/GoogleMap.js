@@ -19,9 +19,12 @@ const mapContainerStyle = {
     height: '80vh'
 };
 
+
+//refer to https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
 const options = {
     disableDefaultUI: true,
     zoomControl: true,
+    gestureHandling: "greedy"
 }
 
 
@@ -29,24 +32,20 @@ const options = {
 
 function GMap() {
 
-    const [currentLat, setCurrentLat] = useState(latVancouver);
-    const [currentLng, setCurrentLng] = useState(lngVancouver);
+    const [currentLat, setCurrentLat] = useState(null);
+    const [currentLng, setCurrentLng] = useState(null);
+    const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
-    const [response, setResponse] = useState("");
+    const [transitResponse, setTransitResponse] = useState("");
+    const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
+    const [markers, setMarkers] = useState({current: null, orgin: null, destination: null});    
 
     // Update current location
     useEffect(()=>{
-        if("geolocation" in navigator){
-            navigator.geolocation.getCurrentPosition(function(position) {
-                setCurrentLat(position.coords.latitude);
-                setCurrentLng(position.coords.longitude);
-              });
-        } else {
-            console.log("GeoLocation Not Available");
-        }
+        
     },[]);
 
     const searchClick = () => {
@@ -64,12 +63,12 @@ function GMap() {
         methodSelectionContainer.style["justifyContent"] = "space-around";
     } 
 
-    const directionsCallback = (response) => {
+    const transitCallback = (response) => {
         if (response !== null) {
             console.log(response.routes[0].legs[0]);
             console.log(response.routes[0].legs[0]["distance"]["text"]);
           if (response.status === 'OK') {
-            setResponse(response);
+            setTransitResponse(response);
           } else {
             console.log('response: ', response)
           }
@@ -77,9 +76,29 @@ function GMap() {
       }
     
 
+    const driveCallback = (response) => {
+        if (response !== null) {
+            console.log(response.routes[0].legs[0]);
+            console.log("drive call back");
+          if (response.status === 'OK') {
+            setDriveResponse(response);
+          } else {
+            console.log('response: ', response)
+          }
+        }
+      }  
+
     const mapRef = useRef(); // this allows us to retain state w/o re-rendering
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
+        if("geolocation" in navigator){
+            navigator.geolocation.getCurrentPosition( async function(position) {
+                await setCurrentLocation({lat : position.coords.latitude, lng: position.coords.longitude})
+                await setOrigin({lat : position.coords.latitude, lng: position.coords.longitude});
+              });
+        } else {
+            console.log("GeoLocation Not Available");
+        }
     }, []); // 
 
     const { isLoaded, loadError } = useLoadScript({
@@ -105,8 +124,7 @@ function GMap() {
                 <GoogleMap 
                 mapContainerStyle={mapContainerStyle} 
                 zoom={13} 
-                center={{lat: currentLat,
-                         lng: currentLng}}
+                center={currentLocation}
                 options={options}
                 onClick={(event) => {console.log(event)}}
                 onLoad={onMapLoad}
@@ -119,7 +137,25 @@ function GMap() {
                             travelMode: "TRANSIT"
                         }}
                         // required
-                        callback={directionsCallback}
+                        callback={transitCallback}
+                        // optional
+                        onLoad={directionsService => {
+                            console.log('DirectionsService onLoad directionsService: ', directionsService)
+                        }}
+                        // optional
+                        onUnmount={directionsService => {
+                            console.log('DirectionsService onUnmount directionsService: ', directionsService)
+                        }}
+                    />
+                    <DirectionsService
+                        // required
+                        options={{ 
+                            destination: destinationInUse,
+                            origin: originInUse,
+                            travelMode: "DRIVING"
+                        }}
+                        // required
+                        callback={driveCallback}
                         // optional
                         onLoad={directionsService => {
                             console.log('DirectionsService onLoad directionsService: ', directionsService)
@@ -133,7 +169,10 @@ function GMap() {
                     <DirectionsRenderer
                           // required
                         options={{ 
-                            directions: response
+                            directions: transitResponse,
+                            markerOptions: {
+                                visible: false
+                            }
                         }}
                         // optional
                         onLoad={directionsRenderer => {
@@ -143,10 +182,43 @@ function GMap() {
                         onUnmount={directionsRenderer => {
                             console.log('DirectionsRenderer onUnmount directionsRenderer: ', directionsRenderer)
                         }}
+                    />   
+                    <Marker
+                        position={currentLocation}
+                        icon={{
+                        origin: new window.google.maps.Point(0, 0),
+                        anchor: new window.google.maps.Point(15, 15),
+                        scaledSize: new window.google.maps.Size(30, 30),
+                        }}
                     />
-                    <Marker position={{lat: currentLat,
-                         lng: currentLng}} />
-                    
+                    <Marker
+                        position={destination}
+                        icon={{
+                            path:
+                            "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                          fillColor: "rgb(88, 164, 206, 0.7)",
+                          fillOpacity: 1,
+                          strokeWeight: 0,
+                          rotation: 0,
+                          scale: 2,
+                          anchor: new window.google.maps.Point(15, 30),
+                        }}
+                    />
+                    {(
+                        (currentLocation.lat != origin.lat && currentLocation.lng != origin.lng) && <Marker
+                        position={origin}
+                        icon={{
+                            path:
+                            "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                          fillColor: "rgb(245, 148, 57, 0.7)",
+                          fillOpacity: 1,
+                          strokeWeight: 0,
+                          rotation: 0,
+                          scale: 2,
+                          anchor: new window.google.maps.Point(15, 30),
+                        }}
+                    />
+                    )}
                 </GoogleMap>
                 <section className="search-process-container" id="search-container">
                     <p>Where would you like to go?</p>

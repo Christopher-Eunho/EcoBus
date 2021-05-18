@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "firebase/auth";
+import 'firebase/firestore'
 import "../styles/profile.css";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
@@ -60,7 +61,21 @@ const Profile = () => {
       });
     }
 
-
+    const saveChanges = () => {
+        var user = firebase.auth().currentUser;
+        var email, uid;
+        
+        var newEmail = document.getElementById("email-change");
+        if (user != null) {
+          email = user.email;
+          uid = user.uid;
+          user.updateEmail(newEmail.value).then(function() {
+            // Update successful.
+          }).catch(function(error) {
+            console.log(error);
+          });
+        }
+    };
 
 
     const onSubmit = (data) => {
@@ -111,19 +126,19 @@ const Profile = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <span id="nameForm">
                         <h4 id="profileHeader">Name:</h4>
-                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue="Austin" {...register("name")} />
+                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue="Kevin Doe" {...register("name")} />
                         <img src={Edit} id="editbutton" alt="Edit" />
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
 
                     <span id="emailForm">
                         <h4 id="profileHeader">Email:</h4>
-                        <input type="email" placeholder="Email" name="email" defaultValue={user["email"]} {...register("email")} />
+                        <input type="email" placeholder="Email" name="email" id="email-change" defaultValue={user["email"]} {...register("email")} />
                         <img src={Edit} id="editbutton" alt="Edit" />
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
                     <br />
-                    <Button variant="success" type="submit" id="saveEdits">Save Changes</Button>
+                    <Button variant="success" type="submit" id="saveEdits" onClick={saveChanges}>Save Changes</Button>
                 </form>
 
                 <div id="userHistory">
