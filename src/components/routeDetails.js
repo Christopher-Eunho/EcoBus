@@ -17,12 +17,10 @@ const RouteDetails = () => {
         var user = firebase.auth().currentUser;
 
         if (user != null) {
-            console.log(user.email);
             db.collection('users').get()
                 .then((snap) => {
                     snap.docs.forEach(doc => {
                         if (doc.data().email === user.email) {
-                            console.log(doc.data().email);
                             console.log(doc.id);
                             db.collection("users").doc(doc.id).collection("routes").add({
                                 distance: "107km"
