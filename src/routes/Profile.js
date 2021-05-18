@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "firebase/auth";
 import 'firebase/firestore'
-import "../styles/profile.css";
+import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
 import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
