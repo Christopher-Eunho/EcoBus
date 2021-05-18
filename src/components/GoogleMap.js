@@ -37,7 +37,8 @@ function GMap() {
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
-    const [response, setResponse] = useState("");
+    const [transitResponse, setTransitResponse] = useState("");
+    const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
     const [markers, setMarkers] = useState({current: null, orgin: null, destination: null});    
@@ -48,8 +49,6 @@ function GMap() {
     },[]);
 
     const searchClick = () => {
-        console.log (origin);
-        console.log(destination);
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
             setOriginInUse(origin);
@@ -64,18 +63,30 @@ function GMap() {
         methodSelectionContainer.style["justifyContent"] = "space-around";
     } 
 
-    const directionsCallback = (response) => {
+    const transitCallback = (response) => {
         if (response !== null) {
             console.log(response.routes[0].legs[0]);
             console.log(response.routes[0].legs[0]["distance"]["text"]);
           if (response.status === 'OK') {
-            setResponse(response);
+            setTransitResponse(response);
           } else {
             console.log('response: ', response)
           }
         }
       }
     
+
+    const driveCallback = (response) => {
+        if (response !== null) {
+            console.log(response.routes[0].legs[0]);
+            console.log("drive call back");
+          if (response.status === 'OK') {
+            setDriveResponse(response);
+          } else {
+            console.log('response: ', response)
+          }
+        }
+      }  
 
     const mapRef = useRef(); // this allows us to retain state w/o re-rendering
     const onMapLoad = useCallback((map) => {
@@ -84,9 +95,6 @@ function GMap() {
             navigator.geolocation.getCurrentPosition( async function(position) {
                 await setCurrentLocation({lat : position.coords.latitude, lng: position.coords.longitude})
                 await setOrigin({lat : position.coords.latitude, lng: position.coords.longitude});
-                console.log(origin);
-                console.log(currentLat);
-                console.log(currentLng);
               });
         } else {
             console.log("GeoLocation Not Available");
@@ -129,7 +137,25 @@ function GMap() {
                             travelMode: "TRANSIT"
                         }}
                         // required
-                        callback={directionsCallback}
+                        callback={transitCallback}
+                        // optional
+                        onLoad={directionsService => {
+                            console.log('DirectionsService onLoad directionsService: ', directionsService)
+                        }}
+                        // optional
+                        onUnmount={directionsService => {
+                            console.log('DirectionsService onUnmount directionsService: ', directionsService)
+                        }}
+                    />
+                    <DirectionsService
+                        // required
+                        options={{ 
+                            destination: destinationInUse,
+                            origin: originInUse,
+                            travelMode: "DRIVING"
+                        }}
+                        // required
+                        callback={driveCallback}
                         // optional
                         onLoad={directionsService => {
                             console.log('DirectionsService onLoad directionsService: ', directionsService)
@@ -143,7 +169,7 @@ function GMap() {
                     <DirectionsRenderer
                           // required
                         options={{ 
-                            directions: response,
+                            directions: transitResponse,
                             markerOptions: {
                                 visible: false
                             }
