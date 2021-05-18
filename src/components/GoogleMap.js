@@ -19,9 +19,12 @@ const mapContainerStyle = {
     height: '80vh'
 };
 
+
+//https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
 const options = {
     disableDefaultUI: true,
     zoomControl: true,
+    gestureHandling: "greedy"
 }
 
 
