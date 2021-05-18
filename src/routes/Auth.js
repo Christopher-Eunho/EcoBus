@@ -51,8 +51,10 @@ const Auth = () => {
                 
                 // Add user email to firestore start
                 // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
+                var user = firebase.auth().currentUser;
+
                 const db = firebase.firestore();
-                const userRef = db.collection("users").add({
+                const userRef = db.collection("users").doc(user.uid).set({
                     email: email
                 });
                 // Add user email to firestore end
@@ -118,7 +120,7 @@ const Auth = () => {
                 <span id="error-message"> {error} </span>
             </Form>
 
-            <GoogleButton className="center" onClick={() => onSocialClick("google")} />]
+            <GoogleButton className="center" onClick={() => onSocialClick("google")} />
         </div>
     );
 };
