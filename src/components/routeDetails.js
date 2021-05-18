@@ -2,6 +2,8 @@ import BackButton from '../images/back-button.png'
 import Leaf from '../images/leaf.png'
 import 'firebase/firestore'
 import firebase from "firebase/app"
+import {authService} from "firebase_eb"
+import {db} from "firebase_eb"
 
 const RouteDetails = () => {
     const goBack = () => {
@@ -13,14 +15,11 @@ const RouteDetails = () => {
     }
 
     const saveJourney = () => {
-        var db = firebase.firestore();
-        var user = firebase.auth().currentUser;
-
-        if (user != null) {
+        if (authService.currentUser != null) {
             db.collection('users').get()
                 .then((snap) => {
                     snap.docs.forEach(doc => {
-                        if (doc.data().email === user.email) {
+                        if (doc.data().email === authService.currentUser.email) {
                             console.log(doc.id);
                             db.collection("users").doc(doc.id).collection("routes").add({
                                 distance: "107km"
@@ -67,8 +66,6 @@ const RouteDetails = () => {
                     </ul>
                 </div>
             </div>
-
-
 
             <button className="save-journey-button" onClick={saveJourney}>SAVE THIS JOURNEY</button>
         </section>

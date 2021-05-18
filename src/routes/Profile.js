@@ -60,6 +60,8 @@ const Profile = () => {
           });
       });
     }
+    /*Image upload end*/
+    
 
     const saveChanges = () => {
         var user = firebase.auth().currentUser;
