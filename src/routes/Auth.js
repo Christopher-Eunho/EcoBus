@@ -112,11 +112,13 @@ const Auth = () => {
                         I want to {newAccount? "sign in!" : "sign up!"} 
                     </Button>
                 </div>
+                <span id="error-message"> {error} </span>
             </Form>
-            
+
+
             <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
-            <span>{error} </span>
+
         </div>
     );
 
