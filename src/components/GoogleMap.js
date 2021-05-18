@@ -5,10 +5,8 @@ import { GoogleMap,
          useLoadScript,
          DirectionsService,
          DirectionsRenderer } from '@react-google-maps/api';
-
-
 import "@reach/combobox/styles.css";
-import { OrginSearch } from './OrginSearch';
+import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
 import Search from '../images/magnifying-glass.png'
 
@@ -40,6 +38,18 @@ function GMap() {
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
     
+
+    // Update current location
+    useEffect(() => {
+        if("geolocation" in navigator){
+            navigator.geolocation.getCurrentPosition(function(position) {
+                setCurrentLat(position.coords.latitude);
+                setCurrentLng(position.coords.longitude);
+              });
+        } else {
+            console.log("GeoLocation Not Available");
+        }
+    },[]);
 
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
