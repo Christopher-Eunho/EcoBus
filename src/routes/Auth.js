@@ -1,10 +1,10 @@
-import { authService, firebaseInstance } from "firebase_eb";
+import { authService, firebaseInstance } from "firebase_eb"
 import 'firebase/firestore'
-import React, { useState } from "react";
-import firebase from "firebase/app";
-import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
-import Form from 'react-bootstrap/Form';
-import GoogleButton from 'react-google-button'; // https://www.npmjs.com/package/react-google-button
+import React, { useState } from "react"
+import firebase from "firebase/app"
+import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
+import Form from 'react-bootstrap/Form'
+import GoogleButton from 'react-google-button' // https://www.npmjs.com/package/react-google-button
 import '../styles/auth.css'
 import logo from '../images/logo.png'
 
@@ -48,12 +48,15 @@ const Auth = () => {
                     email,
                     password
                 );
-
+                
+                // Add user email to firestore start
+                // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
                 const db = firebase.firestore();
                 const userRef = db.collection("users").add({
                     email: email
                 });
-
+                // Add user email to firestore end
+                
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
             }
@@ -115,13 +118,9 @@ const Auth = () => {
                 <span id="error-message"> {error} </span>
             </Form>
 
-
-            <GoogleButton className="center" onClick={() => onSocialClick("google")} />
-
-
+            <GoogleButton className="center" onClick={() => onSocialClick("google")} />]
         </div>
     );
-
 };
 
 export default Auth;
