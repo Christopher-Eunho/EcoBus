@@ -1,4 +1,5 @@
 import { authService, firebaseInstance } from "firebase_eb";
+import 'firebase/firestore'
 import React, { useState } from "react";
 import firebase from "firebase/app";
 import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
@@ -37,7 +38,6 @@ const Auth = () => {
         }
     }
 
-
     const onSubmit = async (event) => {
         event.preventDefault();
 
@@ -48,6 +48,12 @@ const Auth = () => {
                     email,
                     password
                 );
+
+                const db = firebase.firestore();
+                const userRef = db.collection("users").add({
+                    email: email
+                });
+
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
             }
@@ -57,9 +63,7 @@ const Auth = () => {
         }
     };
 
-
     const toggleAccount = () => setNewAccount((prev) => !prev);
-
 
     return (
         <div className="center">
