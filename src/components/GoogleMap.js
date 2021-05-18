@@ -38,7 +38,7 @@ function GMap() {
     const [originInUse, setOriginInUse] = useState({});
 
     // Update current location
-    useEffect(()=>{
+    useEffect(() => {
         if("geolocation" in navigator){
             navigator.geolocation.getCurrentPosition(function(position) {
                 setCurrentLat(position.coords.latitude);
@@ -58,10 +58,10 @@ function GMap() {
         let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "none";
 
-        let methodSelectionContainer = document.getElementById("method-selection-container");
-        methodSelectionContainer.style["display"] = "flex";
-        methodSelectionContainer.style["flexDirection"] = "column";
-        methodSelectionContainer.style["justifyContent"] = "space-around";
+        let routeDetailsContainer = document.getElementById("route-details-container");
+        routeDetailsContainer.style["display"] = "flex";
+        routeDetailsContainer.style["flexDirection"] = "column";
+        routeDetailsContainer.style["justifyContent"] = "space-around";
     } 
 
     const directionsCallback = (response) => {

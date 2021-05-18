@@ -1,20 +1,32 @@
 import GMap from '../components/GoogleMap'
-import MethodSelection from '../components/MethodSelection'
-import TransitRouteDetails from '../components/TransitRouteDetails'
-import DrivingRouteDetails from '../components/DrivingRouteDetails'
+import RouteDetails from '../components/routeDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
-import SavedDrivingRoute from '../components/SavedDrivingRoute'
 import '../styles/search.css'
 
 function Search() {
+
+  // const saveChanges = () => {
+  //   var user = firebase.auth().currentUser;
+  //   var email, uid;
+
+  //   var newEmail = document.getElementById("email-change");
+  //   if (user != null) {
+  //     email = user.email;
+  //     uid = user.uid;
+  //     user.updateEmail(newEmail.value).then(function () {
+  //       // Update successful.
+  //     }).catch(function (error) {
+  //       console.log(error);
+  //     });
+  //   }
+  // };
+
+
   return (
     <div className="main-viewport">
       <GMap />
-      <MethodSelection />
-      <TransitRouteDetails />
-      <DrivingRouteDetails />
+      <RouteDetails />
       <SavedTransitRoute />
-      <SavedDrivingRoute />
     </div>
   );
 }

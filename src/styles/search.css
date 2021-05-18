@@ -127,13 +127,9 @@
   margin-top: 0px;
 }
 
-/* For method selection box */
-#method-selection-container {
-  background-color: rgba(248, 254, 212, 0.7);
-  border: 1px solid black;
-  width: 100%;
+/* For route details box */
+#route-details-container {
   height: 25vh;
-  border-radius: 3px;
   display: none;
 }
 
@@ -147,95 +143,44 @@
   margin-left: 20px;
 }
 
-#method-selection button img {
+#route-details-container button img {
   margin-left: -15px;
 }
 
-#transit-route-information {
-  display: flex;
-  width: 100%;
-}
-
-#method-selection-transit-option-button {
-  margin-left: 20px;
-  background-color: rgba(154, 251, 30, 1);
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-}
-
 #transit-route-information ul {
-  font-size: 0.7rem;
   list-style-type: none;
   display: block;
-  margin: auto 0;
 }
 
-#driving-route-information {
-  display: flex;
-}
-
-#method-selection-driving-option-button {
-  margin-left: 20px;
-  background-color: rgba(241, 72, 36, 1);
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-#driving-route-information ul {
-  font-size: 0.7rem;
-  list-style-type: none;
-  display: block;
-  margin: auto 0;
-}
-
-/* For transit route details box */
 .save-journey-button {
   border: none;
   border-radius: 5px;
   margin: auto;
   padding: 8px;
   background-color: rgba(154, 251, 30, 1);
+  width: 60%;
+  margin-bottom: 10px;
 }
 
-.option-details {
-  margin-left: 40px;
+#emissions-saved-message-container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: row;
+  margin-left: 5%;
+  margin: auto;
 }
 
-#transit-option-details-container {
-  display: none;
+#emissions-saved-message {
+  margin-left: 2%;
+  width: 20%;
 }
 
-#transit-option-details-container ul {
-  display: flex;
-  flex-direction: column;
-  margin-left: -40px;
+#leaf-icon {
+  width: 74.46px;
+  height: 43.83px;
+  margin-top: 20px;
 }
 
-#transit-option-details-container ul li {
-  font-size: 0.8rem;
-}
-
-/* For driving route details box */
-#driving-option-details-container {
-  display: none;
-}
-
-#driving-option-details-container ul {
-  display: flex;
-  flex-direction: column;
-  margin-left: -40px;
-}
-
-#driving-option-details-container ul li {
-  font-size: 0.8rem;
-}
-
-/* Saved transit route */
+/* Saved transit route prompt */
 .journey-saved-container {
   text-align: center;
   display: flex;
@@ -247,11 +192,6 @@
 }
 
 #transit-journey-saved-container {
-  display: none;
-}
-
-/* Saved driving route */
-#driving-journey-saved-container {
   display: none;
 }
 

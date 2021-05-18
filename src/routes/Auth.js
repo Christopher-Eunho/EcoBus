@@ -53,7 +53,9 @@ const Auth = () => {
                 // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
                 const db = firebase.firestore();
                 const userRef = db.collection("users").add({
-                    email: email
+                    email: email,
+                    name: "User",
+                    avatarUrl: "https://randomuser.me/api/portraits/men/1.jpg"
                 });
                 // Add user email to firestore end
                 
