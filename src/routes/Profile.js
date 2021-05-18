@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "firebase/auth";
+import 'firebase/firestore'
 import "../styles/profile.css";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
@@ -60,7 +61,21 @@ const Profile = () => {
       });
     }
 
-
+    const saveChanges = () => {
+        var user = firebase.auth().currentUser;
+        var email, uid;
+        
+        if (user != null) {
+          email = user.email;
+          uid = user.uid;
+          
+          user.updateEmail("user@example.com").then(function() {
+            // Update successful.
+          }).catch(function(error) {
+            console.log(error);
+          });
+        }
+    };
 
 
     const onSubmit = (data) => {
@@ -123,7 +138,7 @@ const Profile = () => {
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
                     <br />
-                    <Button variant="success" type="submit" id="saveEdits">Save Changes</Button>
+                    <Button variant="success" type="submit" id="saveEdits" onClick={saveChanges}>Save Changes</Button>
                 </form>
 
                 <div id="userHistory">
