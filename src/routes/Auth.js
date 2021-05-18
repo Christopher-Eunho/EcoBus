@@ -32,7 +32,7 @@ const Auth = () => {
                 provider = new firebaseInstance.auth.GoogleAuthProvider();
             }
 
-            const date = await authService.signInWithPopup(provider);
+            const data = await authService.signInWithPopup(provider);
         } catch (error) {
             console.log(error);
         }
