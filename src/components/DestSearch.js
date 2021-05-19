@@ -14,7 +14,7 @@ import {
 // https://www.npmjs.com/package/@reach/combobox
 
 //https://www.npmjs.com/package/use-places-autocomplete        
-export function DestSearch({ panTo, setDestination }) {
+export function DestSearch({ panTo, setDestination, setDestinationName }) {
     const {
         ready,
         value,
@@ -39,7 +39,8 @@ export function DestSearch({ panTo, setDestination }) {
                     const results = await getGeocode({ address });
                     const { lat, lng } = await getLatLng(results[0]);
                     panTo({ lat, lng });
-                    setDestination({lat, lng, value});
+                    setDestination({lat, lng});
+                    setDestinationName(value);
                 } catch (error) {
                     console.log(error);
                 }

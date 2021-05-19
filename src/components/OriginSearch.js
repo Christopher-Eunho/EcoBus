@@ -13,7 +13,7 @@ import {
 } from "@reach/combobox";
 
 //https://www.npmjs.com/package/use-places-autocomplete        
-export function OrginSearch({ panTo, setOrigin }) {
+export function OrginSearch({ panTo, setOrigin, setOriginName }) {
     const {
         ready,
         value,
@@ -38,7 +38,8 @@ export function OrginSearch({ panTo, setOrigin }) {
             try {
                 const results = await getGeocode({ address });
                 const { lat, lng } = await getLatLng(results[0]);
-                setOrigin({lat, lng, value})
+                setOrigin({lat, lng});
+                setOriginName(value);
                 panTo({ lat, lng });
             } catch (error) {
                 console.log("error");

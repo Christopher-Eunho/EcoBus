@@ -33,6 +33,8 @@ function GMap() {
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
+    const [originName, setOriginName] = useState("");
+    const [destinationName, setDestinationName] = useState("");
     const [transitResponse, setTransitResponse] = useState("");
     const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
@@ -47,7 +49,7 @@ function GMap() {
             console.log(destination);
         }
 
-        if (destination.value.includes("BCIT")||origin.value.includes("BCIT")) {
+        if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
             let routeDetailsContainer = document.getElementById("route-details-container");
             routeDetailsContainer.className = "bcit-search-process-container";
 
@@ -228,8 +230,8 @@ function GMap() {
                 </GoogleMap>
                 <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
-                    <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
-                    <DestSearch panTo={panTo} setDestination={setDestination}/>
+                    <OrginSearch panTo={panTo} setOrigin={setOrigin} setOriginName={setOriginName}/>                
+                    <DestSearch panTo={panTo} setDestination={setDestination} setDestinationName={setDestinationName}/>
                     <button id="submit-search-button" onClick={searchClick}>
                         <img src={Search} alt="Search Button"/>
                     </button>
