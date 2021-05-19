@@ -28,6 +28,12 @@ const options = {
     gestureHandling: "greedy"
 }
 
+const routeDetailsContainer = document.getElementById("route-details-container");
+const navBar = document.getElementById("navbar");
+const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+const searchFormContainer = document.getElementById("search-container");
+
+
 function GMap() {
 
     const [currentLocation, setCurrentLocation] = useState({});
@@ -50,23 +56,10 @@ function GMap() {
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
-            let routeDetailsContainer = document.getElementById("route-details-container");
-            routeDetailsContainer.className = "bcit-search-process-container";
-
-            let navBar = document.getElementById("navbar");
-            navBar.className = "bcit-navbar";
-
-            let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-            transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+            showEasterEgg();
         }
-
-        let searchFormContainer = document.getElementById("search-container");
-        searchFormContainer.style["display"] = "none";
-
-        let routeDetailsContainer = document.getElementById("route-details-container");
-        routeDetailsContainer.style["display"] = "flex";
-        routeDetailsContainer.style["flexDirection"] = "column";
-        routeDetailsContainer.style["justifyContent"] = "space-around";
+        hideSearchForm();
+        showRouteDetail();
     } 
 
     const transitCallback = (response) => {
@@ -117,8 +110,23 @@ function GMap() {
     const panTo = useCallback(({lat, lng}) => {
         mapRef.current.panTo({lat, lng});
         mapRef.current.setZoom(14);
-
     },[]);
+
+    function hideSearchForm() {
+        searchFormContainer.style["display"] = "none";
+    }
+
+    function showRouteDetail() {
+        routeDetailsContainer.style["display"] = "flex";
+        routeDetailsContainer.style["flexDirection"] = "column";
+        routeDetailsContainer.style["justifyContent"] = "space-around";
+    }
+
+    function showEasterEgg() {
+        routeDetailsContainer.className = "bcit-search-process-container";
+        navBar.className = "bcit-navbar";
+        transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+    }
 
     
 
@@ -244,6 +252,8 @@ function GMap() {
     );
 
    
+
+    
     };
 
 export default GMap
