@@ -2,8 +2,6 @@ import { authService, db } from "firebase_eb";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
-import "firebase/auth";
-import 'firebase/firestore'
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
@@ -17,6 +15,21 @@ const Profile = () => {
     // const [name, changeName] = useState("");
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
+
+    const usersRef = db.collection('users'); // from COMP 1800
+    function avatarRef(){usersRef.get()
+                    .then(function (snap){
+                            snap.forEach(function(doc){
+                                console.log(doc.data().email);
+                            })
+                        });
+                    }
+    avatarRef();
+
+    console.log(usersRef);
+    console.log(avatarRef);
+    console.log("all good");
+
 
     const totalTrips = 0;
     const totalDistance = 0;
@@ -64,8 +77,8 @@ const Profile = () => {
     
 
     const saveChanges = () => {
-        var user = firebase.auth().currentUser;
         var email, uid;
+
         var newEmail = document.getElementById("email-change");
         
         if (user != null) {
@@ -128,7 +141,7 @@ const Profile = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <span id="nameForm">
                         <h4 id="profileHeader">Name:</h4>
-                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue="Kevin Doe" {...register("name")} />
+                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue={user.email.split("@")[0]} {...register("name")} />
                         <img src={Edit} id="editbutton" alt="Edit" />
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
