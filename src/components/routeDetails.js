@@ -5,7 +5,7 @@ import {authService} from "firebase_eb"
 import {db} from "firebase_eb"
 
 
-const RouteDetails = ({travelInfo}) => {
+const RouteDetails = ( {transitRouteDetails} ) => {
     const goBack = () => {
         let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "none";
@@ -15,8 +15,7 @@ const RouteDetails = ({travelInfo}) => {
     }
 
     const saveJourney = () => {
-        console.log(travelInfo);
-        console.log("works");
+        console.log(transitRouteDetails.departure_time.value);
         if (authService.currentUser != null) {
             db.collection('users').get()
                 .then((snap) => {
@@ -24,7 +23,11 @@ const RouteDetails = ({travelInfo}) => {
                         if (doc.data().email === authService.currentUser.email) {
                             console.log(doc.id);
                             db.collection("users").doc(doc.id).collection("routes").add({
-                                distance: "107km"
+                                date_of_trip: transitRouteDetails.departure_time.value,
+                                origin: transitRouteDetails.start_address,
+                                destination: transitRouteDetails.end_address,
+                                distance: transitRouteDetails.distance.text,
+                                duration: transitRouteDetails.duration.text,
                             })
                         }
                     })
@@ -58,13 +61,13 @@ const RouteDetails = ({travelInfo}) => {
 
             <div id="emissions-saved-message-container">
                 <img src={Leaf} alt="Leaf" id="leaf-icon" />
-                <h5 id="emissions-saved-message"><span id="emissions-saved-value">00000</span> KG of C02 saved</h5>
+                <h5 id="emissions-saved-message"><span id="emissions-saved-value"></span> KG of C02 saved</h5>
 
                 <div id="transit-route-information">
                     <ul>
-                        <li>Travel time: <span id="transit-travel-time">0000</span></li>
-                        <li>Distance: <span id="transit-travel-distance">0000</span></li>
-                        <li>Emissions saved: <span id="transit-emissions-saved">0000</span></li>
+                        <li>Distance: <span id="transit-travel-distance"></span></li>
+                        <li>Duration: <span id="transit-travel-time"></span></li>
+                        <li>Emissions saved: <span id="transit-emissions-saved"></span></li>
                     </ul>
                 </div>
             </div>
