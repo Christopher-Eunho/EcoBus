@@ -3,11 +3,13 @@ import { GoogleMap,
          Marker,
          useLoadScript,
          DirectionsService,
-         DirectionsRenderer } from '@react-google-maps/api';
+         DirectionsRenderer,
+         } from '@react-google-maps/api';
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
-import RouteDetails from './routeDetails'
+import CurrentButton from './CurrentButton'
+import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 
@@ -36,6 +38,7 @@ function GMap() {
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
     const [transitRouteDetails, setTransitRouteDetails] = useState({});
+    const [drivingRouteDetails, setDrivingRouteDetails] = useState({});
     
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
@@ -69,6 +72,7 @@ function GMap() {
     const transitCallback = (response) => {
         if (response !== null) {
             setTransitRouteDetails(response.routes[0].legs[0]);
+            console.log("Transit route set");
           if (response.status === 'OK') {
             setTransitResponse(response);
           } else {
@@ -80,8 +84,8 @@ function GMap() {
 
     const driveCallback = (response) => {
         if (response !== null) {
-            console.log(response.routes[0].legs[0]);
-            console.log("drive call back");
+            setDrivingRouteDetails(response.routes[0].legs[0]);
+            console.log("Driving route set");
           if (response.status === 'OK') {
             setDriveResponse(response);
           } else {
@@ -89,8 +93,10 @@ function GMap() {
           }
         }
       }
-      
-    const updateCurrentLocation = () => {
+        
+    const mapRef = useRef(); // this allows us to retain state w/o re-rendering
+    const onMapLoad = useCallback((map) => {
+        mapRef.current = map;
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(async function (position) {
                 await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
@@ -99,12 +105,7 @@ function GMap() {
         } else {
             console.log("GeoLocation Not Available");
         }
-    }  
-
-    const mapRef = useRef(); // this allows us to retain state w/o re-rendering
-    const onMapLoad = useCallback((map) => {
-        mapRef.current = map;
-        updateCurrentLocation();
+        
     }, []); // 
 
     const { isLoaded, loadError } = useLoadScript({
@@ -127,6 +128,7 @@ function GMap() {
     return(
         <>
             <div>
+                <CurrentButton panTo={panTo} setCurrentLocation={setCurrentLocation}/> 
                 <GoogleMap 
                 mapContainerStyle={mapContainerStyle} 
                 zoom={13} 
@@ -229,12 +231,12 @@ function GMap() {
                 <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
                     <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
-                    <DestSearch panTo={panTo} setDestination    ={setDestination}/>
+                    <DestSearch panTo={panTo} setDestination={setDestination}/>
                     <button id="submit-search-button" onClick={searchClick}>
                         <img src={Search} alt="Search Button"/>
                     </button>
                 </section>
-                <RouteDetails transitRouteDetails={transitRouteDetails} />
+                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
                 <SavedTransitRoute />
             </div>
         </>
