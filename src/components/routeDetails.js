@@ -5,8 +5,9 @@ import {authService} from "firebase_eb"
 import {db} from "firebase_eb"
 
 
-const RouteDetails = ( {transitRouteDetails} ) => {
+const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
     const goBack = () => {
+        console.log(drivingRouteDetails + "wow");
         let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "none";
 
@@ -65,8 +66,8 @@ const RouteDetails = ( {transitRouteDetails} ) => {
 
                 <div id="transit-route-information">
                     <ul>
-                        <li>Distance: {transitRouteDetails ? transitRouteDetails.distance.text : "N/A"} </li>
-                        <li>Duration: {transitRouteDetails ? transitRouteDetails.duration.text : "N/A"} </li>
+                        {/* <li>Distance: {transitRouteDetails ? transitRouteDetails.distance.text : "N/A"} </li>
+                        <li>Duration: {transitRouteDetails ? transitRouteDetails.duration.text : "N/A"} </li> */}
                         <li>Emissions saved: <span id="transit-emissions-saved"></span></li>
                     </ul>
                 </div>
