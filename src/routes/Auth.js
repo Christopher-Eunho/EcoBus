@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
 import Form from 'react-bootstrap/Form'
 import GoogleButton from 'react-google-button' // https://www.npmjs.com/package/react-google-button
-import '../styles/auth.css'
+import '../styles/Auth.css'
 import logo from '../images/logo.png'
 
 const Auth = () => {

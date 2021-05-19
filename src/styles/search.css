@@ -9,6 +9,32 @@
 }
 
 /* For the search bar */
+.bcit-search-process-container {
+  background-color: rgb(0, 60, 113);
+  width: 100%;
+  height: fit-content;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bcit-search-process-container li {
+  color: #E5E5E5;
+}
+
+.bcit-search-process-container h5 {
+  color: #E5E5E5;
+}
+
+.bcit-search-process-container p {
+  color: #E5E5E5;
+}
+
+.bcit-search-process-container .save-journey-button {
+  background-color: yellow;
+}
+
 .search-process-container {
   background-color: rgba(248, 254, 212, 0.7);
   width: 100%;
@@ -127,6 +153,64 @@
   margin-top: 0px;
 }
 
+/* For the BCIT navbar*/
+.bcit-navbar {
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 1);
+  width: 100%;
+  height: 15vh;
+  bottom: 0;
+  float: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bcit-navbar a {
+  margin: auto 0;
+}
+
+.bcit-navbar a:nth-child(1) button {
+  height: 42px;
+  width: 42px;
+  border-radius: 15px;
+  border: none;
+  background-color: rgb(0, 0, 0, 0);
+  margin-left: 3%;
+  float: left;
+}
+
+.bcit-navbar a:nth-child(1) button img {
+  margin-left: -5px;
+}
+
+.bcit-navbar a:nth-child(3) button {
+  height: 42px;
+  width: 42px;
+  border-radius: 15px;
+  border: none;
+  background-color: rgb(0, 0, 0, 0);
+  margin-right: 0%;
+  float: right;
+}
+
+.bcit-navbar a:nth-child(3) button img {
+  margin-left: -5px;
+}
+
+.bcit-navbar a:nth-child(2) button {
+  height: 60px;
+  width: 170px;
+  border-radius: 15px;
+  border: none;
+  background-color: rgb(0, 0, 0, 0);
+  margin-right: 10px;
+}
+
+.bcit-navbar a:nth-child(2) button img {
+  margin-left: -5px;
+  margin-top: 0px;
+}
+
 /* For route details box */
 #route-details-container {
   height: 25vh;
@@ -202,6 +286,14 @@
   }
 
   .navbar a:nth-child(2) button {
+    width:50vw;
+  }
+
+  .bcit-navbar a:nth-child(2) button img {
+    width:50vw;
+  }
+
+  .bcit-navbar a:nth-child(2) button {
     width:50vw;
   }
 }

@@ -38,7 +38,7 @@ export function OrginSearch({ panTo, setOrigin }) {
             try {
                 const results = await getGeocode({ address });
                 const { lat, lng } = await getLatLng(results[0]);
-                setOrigin({lat, lng})
+                setOrigin({lat, lng, value})
                 panTo({ lat, lng });
             } catch (error) {
                 console.log("error");

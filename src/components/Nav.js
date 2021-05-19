@@ -6,7 +6,7 @@ import {Link} from "react-router-dom"
 
 const Nav = () => {
     return (
-    <nav className="navbar">
+    <nav className="navbar" id="navbar">
         <Link to="/profile">
             <button className="navbar-button">
                 <img src={UserProfile} alt="User Profile" />

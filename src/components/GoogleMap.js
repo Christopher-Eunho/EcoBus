@@ -7,7 +7,7 @@ import { GoogleMap,
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
-import RouteDetails from '../components/RouteDetails'
+import RouteDetails from './routeDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 
@@ -35,11 +35,24 @@ function GMap() {
     const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
+    const [transitRouteDetails, setTransitRouteDetails] = useState({});
     
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
             setOriginInUse(origin);
+            console.log(destination);
+        }
+
+        if (destination.value.includes("BCIT")||origin.value.includes("BCIT")) {
+            let routeDetailsContainer = document.getElementById("route-details-container");
+            routeDetailsContainer.className = "bcit-search-process-container";
+
+            let navBar = document.getElementById("navbar");
+            navBar.className = "bcit-navbar";
+
+            let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+            transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
         }
 
         let searchFormContainer = document.getElementById("search-container");
@@ -53,8 +66,7 @@ function GMap() {
 
     const transitCallback = (response) => {
         if (response !== null) {
-            console.log(response.routes[0].legs[0]);
-            console.log(response.routes[0].legs[0]["distance"]["text"]);
+            setTransitRouteDetails(response.routes[0].legs[0]);
           if (response.status === 'OK') {
             setTransitResponse(response);
           } else {
@@ -74,19 +86,23 @@ function GMap() {
             console.log('response: ', response)
           }
         }
-      }  
+      }
+      
+    const updateCurrentLocation = () => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(async function (position) {
+                await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+                await setOrigin({ lat: position.coords.latitude, lng: position.coords.longitude });
+            });
+        } else {
+            console.log("GeoLocation Not Available");
+        }
+    }  
 
     const mapRef = useRef(); // this allows us to retain state w/o re-rendering
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
-        if("geolocation" in navigator){
-            navigator.geolocation.getCurrentPosition( async function(position) {
-                await setCurrentLocation({lat : position.coords.latitude, lng: position.coords.longitude})
-                await setOrigin({lat : position.coords.latitude, lng: position.coords.longitude});
-              });
-        } else {
-            console.log("GeoLocation Not Available");
-        }
+        updateCurrentLocation();
     }, []); // 
 
     const { isLoaded, loadError } = useLoadScript({
@@ -208,7 +224,7 @@ function GMap() {
                     />
                     )}
                 </GoogleMap>
-                <section className="search-process-container" id="search-container">
+                <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
                     <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
                     <DestSearch panTo={panTo} setDestination    ={setDestination}/>
@@ -216,12 +232,14 @@ function GMap() {
                         <img src={Search} alt="Search Button"/>
                     </button>
                 </section>
-                <RouteDetails />
+                <RouteDetails transitRouteDetails={transitRouteDetails} />
                 <SavedTransitRoute />
             </div>
         </>
 
     );
+
+   
     };
 
 export default GMap

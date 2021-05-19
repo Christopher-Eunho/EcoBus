@@ -39,7 +39,7 @@ export function DestSearch({ panTo, setDestination }) {
                     const results = await getGeocode({ address });
                     const { lat, lng } = await getLatLng(results[0]);
                     panTo({ lat, lng });
-                    setDestination({lat, lng});
+                    setDestination({lat, lng, value});
                 } catch (error) {
                     console.log(error);
                 }
