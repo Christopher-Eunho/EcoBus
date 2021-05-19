@@ -1,6 +1,5 @@
 .profileBody{
     background-color: #FFFFCC;
-    height: 85vh;
 }
 
 .Profile{
@@ -26,6 +25,7 @@
 
 #userHistory{
     margin:5vw 5vw 0vw 5vw;
+    padding-bottom: 20vh; /* change to sticky later */ 
 }
 
 #avatar{
@@ -33,7 +33,8 @@
 }
 
 #avataredit{
-    margin-bottom: -50px;
+    margin-right: -25px;
+    margin-bottom: -55px;
 }
 
 #togglebutton{
