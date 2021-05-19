@@ -33,8 +33,8 @@
 }
 
 #avataredit{
-    margin-right: -25px;
-    margin-bottom: -55px;
+    margin-left: -10px;
+    margin-bottom: -100px;
 }
 
 #togglebutton{
@@ -93,4 +93,8 @@
 
 #useravatar{
     max-width: 128px;
+}
+
+#uploadbutton{
+    display:none;
 }

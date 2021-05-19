@@ -45,12 +45,12 @@ const Profile = () => {
     I found this code on : https://dev.to/itnext/how-to-do-image-upload-with-firebase-in-react-cpj
     @authors: Tallan Groberg, Samuel Karani
     */
-    // const [file, setFile] = useState(null);
+    const [file, setFile] = useState(null);
     // const [url, setURL] = useState("");
 
-    // function handleChange(e) {
-    //     setFile(e.target.files[0]);
-    // }
+    function handleChange(e) {
+        setFile(e.target.files[0]);
+    }
 
     // function handleUpload(e) {
     //     e.preventDefault();
@@ -83,8 +83,9 @@ const Profile = () => {
 
     const saveChanges = () => {
 
-
+        
         var newEmail = document.getElementById("email-change");
+
 
         if (user != null) {
             var email, uid;
@@ -96,6 +97,9 @@ const Profile = () => {
                 console.log(error);
             });
         }
+        
+
+    
     };
 
 
@@ -146,10 +150,12 @@ const Profile = () => {
 
 
 
-                    <img src={userAvatar} id="useravatar" alt="Avatar" />
-                    <input type="image" id="avataredit" src={Edit} alt="AvatarEdit"></input>
+                <img src={userAvatar} id="useravatar" alt="Avatar" />
 
-                    {/*query image later from database*/}
+                <label for="uploadbutton">
+                    <input type="file" onClick={handleChange} id="uploadbutton"></input>
+                    <img id="avataredit" src={Edit} alt="AvatarEdit"/>
+                </label>
 
 
 
