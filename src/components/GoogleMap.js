@@ -44,16 +44,18 @@ function GMap() {
             console.log(destination);
         }
 
-        if (destination.value.includes("BCIT")||origin.value.includes("BCIT")) {
-            let routeDetailsContainer = document.getElementById("route-details-container");
-            routeDetailsContainer.className = "bcit-search-process-container";
-
-            let navBar = document.getElementById("navbar");
-            navBar.className = "bcit-navbar";
-
-            let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-            transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
-        }
+        if (destination.value&&origin.value) {
+            if (destination.value.includes("BCIT")||origin.value.includes("BCIT")) {
+                let routeDetailsContainer = document.getElementById("route-details-container");
+                routeDetailsContainer.className = "bcit-search-process-container";
+    
+                let navBar = document.getElementById("navbar");
+                navBar.className = "bcit-navbar";
+    
+                let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+                transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+            }
+        }        
 
         let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "none";
