@@ -74,19 +74,23 @@ function GMap() {
             console.log('response: ', response)
           }
         }
-      }  
+      }
+      
+    const updateCurrentLocation = () => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(async function (position) {
+                await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+                await setOrigin({ lat: position.coords.latitude, lng: position.coords.longitude });
+            });
+        } else {
+            console.log("GeoLocation Not Available");
+        }
+    }  
 
     const mapRef = useRef(); // this allows us to retain state w/o re-rendering
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
-        if("geolocation" in navigator){
-            navigator.geolocation.getCurrentPosition( async function(position) {
-                await setCurrentLocation({lat : position.coords.latitude, lng: position.coords.longitude})
-                await setOrigin({lat : position.coords.latitude, lng: position.coords.longitude});
-              });
-        } else {
-            console.log("GeoLocation Not Available");
-        }
+        updateCurrentLocation();
     }, []); // 
 
     const { isLoaded, loadError } = useLoadScript({
@@ -222,6 +226,8 @@ function GMap() {
         </>
 
     );
+
+   
     };
 
 export default GMap
