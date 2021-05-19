@@ -65,8 +65,8 @@ const RouteDetails = ( {transitRouteDetails} ) => {
 
                 <div id="transit-route-information">
                     <ul>
-                        <li>Distance: <span id="transit-travel-distance"></span></li>
-                        <li>Duration: <span id="transit-travel-time"></span></li>
+                        <li>Distance: {transitRouteDetails ? transitRouteDetails.distance.text : "N/A"} </li>
+                        <li>Duration: {transitRouteDetails ? transitRouteDetails.duration.text : "N/A"} </li>
                         <li>Emissions saved: <span id="transit-emissions-saved"></span></li>
                     </ul>
                 </div>

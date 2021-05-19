@@ -40,7 +40,7 @@ function GMap() {
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
-            setOriginInUse(origin); 
+            setOriginInUse(origin);
         }
 
         let searchFormContainer = document.getElementById("search-container");
@@ -211,7 +211,7 @@ function GMap() {
                 <section className="search-process-container" id="search-container">
                     <p>Where would you like to go?</p>
                     <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
-                    <DestSearch panTo={panTo} setDestination    ={setDestination}/>
+                    <DestSearch panTo={panTo} setDestination={setDestination}/>
                     <button id="submit-search-button" onClick={searchClick}>
                         <img src={Search} alt="Search Button"/>
                     </button>
