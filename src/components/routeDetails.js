@@ -5,7 +5,7 @@ import {authService} from "firebase_eb"
 import {db} from "firebase_eb"
 
 
-const RouteDetails = () => {
+const RouteDetails = ({travelInfo}) => {
     const goBack = () => {
         let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "none";
@@ -15,6 +15,8 @@ const RouteDetails = () => {
     }
 
     const saveJourney = () => {
+        console.log(travelInfo);
+        console.log("works");
         if (authService.currentUser != null) {
             db.collection('users').get()
                 .then((snap) => {

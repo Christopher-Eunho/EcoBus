@@ -7,7 +7,7 @@ import { GoogleMap,
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
-import RouteDetails from '../components/RouteDetails'
+import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 
@@ -35,6 +35,7 @@ function GMap() {
     const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
+    const [travelInfo, setTravelInfo] = useState({});
     
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
@@ -53,8 +54,7 @@ function GMap() {
 
     const transitCallback = (response) => {
         if (response !== null) {
-            console.log(response.routes[0].legs[0]);
-            console.log(response.routes[0].legs[0]["distance"]["text"]);
+            setTravelInfo(response.routes[0].legs[0]);
           if (response.status === 'OK') {
             setTransitResponse(response);
           } else {
@@ -216,7 +216,7 @@ function GMap() {
                         <img src={Search} alt="Search Button"/>
                     </button>
                 </section>
-                <RouteDetails />
+                <RouteDetails travelInfo={travelInfo} />
                 <SavedTransitRoute />
             </div>
         </>
