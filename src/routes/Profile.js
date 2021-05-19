@@ -17,6 +17,7 @@ const Profile = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
 
     const usersRef = db.collection('users').doc(authService.currentUser.uid); // from COMP 1800
+    
     usersRef.get().then((doc) => {
         if (doc.exists) {
             console.log("Document data:", doc.data().email);
@@ -79,15 +80,20 @@ const Profile = () => {
     
 
     const saveChanges = () => {
-        var email, uid;
-
         var newEmail = document.getElementById("email-change");
         
         if (user != null) {
-          email = user.email;
-          uid = user.uid;
-          user.updateEmail(newEmail.value).then(function() {
-            // Update successful.
+          // Update email in authentication
+          user.updateEmail(newEmail.value)
+          .then(function() {
+            // Update email in users collection
+            db.collection("users").doc(user.uid).set({
+                email: newEmail.value
+            }).then(function(){
+                // Email successfully updated
+            }).catch(function(error) {
+                console.log(error)
+            })
           }).catch(function(error) {
             console.log(error);
           });

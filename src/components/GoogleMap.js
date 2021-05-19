@@ -7,6 +7,8 @@ import { GoogleMap,
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
+import RouteDetails from '../components/RouteDetails'
+import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 
 const libraries = ["places"];
@@ -24,9 +26,6 @@ const options = {
     gestureHandling: "greedy"
 }
 
-
-
-
 function GMap() {
 
     const [currentLocation, setCurrentLocation] = useState({});
@@ -37,9 +36,6 @@ function GMap() {
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
     
-
-
-
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
@@ -220,6 +216,8 @@ function GMap() {
                         <img src={Search} alt="Search Button"/>
                     </button>
                 </section>
+                <RouteDetails />
+                <SavedTransitRoute />
             </div>
         </>
 

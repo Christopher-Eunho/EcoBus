@@ -1,6 +1,5 @@
 import { authService, firebaseInstance, db } from "firebase_eb"
 import React, { useState } from "react"
-import firebase from "firebase/app"
 import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
 import Form from 'react-bootstrap/Form'
 import GoogleButton from 'react-google-button' // https://www.npmjs.com/package/react-google-button
@@ -63,7 +62,7 @@ const Auth = () => {
                 
                 // Add user email to firestore start
                 // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
-                var user = firebase.auth().currentUser;
+                var user = authService.currentUser;
 
                 const userRef = db.collection("users").doc(user.uid).set({
                     name: user.email.split("@")[0], 
