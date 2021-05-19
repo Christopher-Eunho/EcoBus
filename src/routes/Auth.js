@@ -50,18 +50,10 @@ const Auth = () => {
                 
                 // Add user email to firestore start
                 // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
-<<<<<<< HEAD
-                const userRef = db.collection("users").add({
-                    email: email,
-                    name: "User",
-                    avatarUrl: "https://randomuser.me/api/portraits/men/1.jpg"
-=======
-                var user = firebase.auth().currentUser;
+                var user = authService.currentUser;
 
-                const db = firebase.firestore();
                 const userRef = db.collection("users").doc(user.uid).set({
                     email: email
->>>>>>> 03550095647ef9911f49c35d9164d6354ef4cca3
                 });
                 // Add user email to firestore end
                 

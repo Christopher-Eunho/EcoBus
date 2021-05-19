@@ -36,12 +36,6 @@ function GMap() {
     const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
-<<<<<<< HEAD
-=======
-    
-
-
->>>>>>> 03550095647ef9911f49c35d9164d6354ef4cca3
 
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
