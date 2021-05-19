@@ -3,11 +3,13 @@ import { GoogleMap,
          Marker,
          useLoadScript,
          DirectionsService,
-         DirectionsRenderer } from '@react-google-maps/api';
+         DirectionsRenderer,
+         } from '@react-google-maps/api';
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
-import RouteDetails from './routeDetails'
+import CurrentButton from './CurrentButton'
+import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 
@@ -89,8 +91,10 @@ function GMap() {
           }
         }
       }
-      
-    const updateCurrentLocation = () => {
+        
+    const mapRef = useRef(); // this allows us to retain state w/o re-rendering
+    const onMapLoad = useCallback((map) => {
+        mapRef.current = map;
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(async function (position) {
                 await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
@@ -99,12 +103,7 @@ function GMap() {
         } else {
             console.log("GeoLocation Not Available");
         }
-    }  
-
-    const mapRef = useRef(); // this allows us to retain state w/o re-rendering
-    const onMapLoad = useCallback((map) => {
-        mapRef.current = map;
-        updateCurrentLocation();
+        
     }, []); // 
 
     const { isLoaded, loadError } = useLoadScript({
@@ -127,6 +126,7 @@ function GMap() {
     return(
         <>
             <div>
+                <CurrentButton panTo={panTo} setCurrentLocation={setCurrentLocation}/> 
                 <GoogleMap 
                 mapContainerStyle={mapContainerStyle} 
                 zoom={13} 

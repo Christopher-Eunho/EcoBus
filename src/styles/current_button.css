@@ -1,0 +1,9 @@
+.currentButton {
+    position: absolute;
+    
+    top: 1rem;
+    left: 1rem;
+    background: none;
+    border: none;
+    z-index: 10;
+  }
