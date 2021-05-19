@@ -87,8 +87,15 @@ const Profile = () => {
         if (user != null) {
           email = user.email;
           uid = user.uid;
-          user.updateEmail(newEmail.value).then(function() {
-            // Update successful.
+          user.updateEmail(newEmail.value)
+          .then(function() {
+            db.collection("users").doc(user.uid).set({
+                email: newEmail.value
+            }).then(function(){
+                // Email successfully updated
+            }).catch(function(error) {
+                console.log(error)
+            })
           }).catch(function(error) {
             console.log(error);
           });
