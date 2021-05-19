@@ -218,7 +218,7 @@ function GMap() {
                         <img src={Search} alt="Search Button"/>
                     </button>
                 </section>
-                <RouteDetails transitRouteDetails={transitRouteDetails, drivingRouteDetails} />
+                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
                 <SavedTransitRoute />
             </div>
         </>

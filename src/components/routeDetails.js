@@ -6,8 +6,10 @@ import {db} from "firebase_eb"
 
 
 const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
+    
     const goBack = () => {
-        console.log(drivingRouteDetails + "wow");
+        console.log(transitRouteDetails)
+        console.log(drivingRouteDetails)
         let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "none";
 
@@ -62,13 +64,13 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
 
             <div id="emissions-saved-message-container">
                 <img src={Leaf} alt="Leaf" id="leaf-icon" />
-                <h5 id="emissions-saved-message"><span id="emissions-saved-value"></span> KG of C02 saved</h5>
+                {/* <h5 id="emissions-saved-message">{drivingRouteDetails ? (drivingRouteDetails.distance.value) * 0.521 : "N/A"} KG of C02 saved</h5> */}
 
                 <div id="transit-route-information">
                     <ul>
                         {/* <li>Distance: {transitRouteDetails ? transitRouteDetails.distance.text : "N/A"} </li>
-                        <li>Duration: {transitRouteDetails ? transitRouteDetails.duration.text : "N/A"} </li> */}
-                        <li>Emissions saved: <span id="transit-emissions-saved"></span></li>
+                        <li>Duration: {transitRouteDetails ? transitRouteDetails.duration.text : "N/A"} </li>
+                        <li>Emissions saved: {drivingRouteDetails ? (drivingRouteDetails.distance.value) * 0.521 : "N/A"}KG of C02</li> */}
                     </ul>
                 </div>
             </div>
