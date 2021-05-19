@@ -80,15 +80,13 @@ const Profile = () => {
     
 
     const saveChanges = () => {
-        var email, uid;
-
         var newEmail = document.getElementById("email-change");
         
         if (user != null) {
-          email = user.email;
-          uid = user.uid;
+          // Update email in authentication
           user.updateEmail(newEmail.value)
           .then(function() {
+            // Update email in users collection
             db.collection("users").doc(user.uid).set({
                 email: newEmail.value
             }).then(function(){
