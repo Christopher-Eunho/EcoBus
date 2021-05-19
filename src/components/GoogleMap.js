@@ -44,7 +44,7 @@ function GMap() {
             console.log(destination);
         }
 
-        if (destination.value.includes("BCIT")) {
+        if (destination.value.includes("BCIT")||origin.value.includes("BCIT")) {
             let routeDetailsContainer = document.getElementById("route-details-container");
             routeDetailsContainer.className = "bcit-search-process-container";
 
