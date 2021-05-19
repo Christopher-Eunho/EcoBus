@@ -27,6 +27,10 @@
   color: #E5E5E5;
 }
 
+.bcit-search-process-container p {
+  color: #E5E5E5;
+}
+
 .bcit-search-process-container .save-journey-button {
   background-color: yellow;
 }

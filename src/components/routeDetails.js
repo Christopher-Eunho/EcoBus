@@ -14,6 +14,9 @@ const RouteDetails = ( {transitRouteDetails} ) => {
         let navBar = document.getElementById("navbar");
         navBar.className = "navbar";
 
+        let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+        transitJourneySavedContainer.className = "search-process-container journey-saved-container";
+
         let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "flex";
     }
@@ -52,6 +55,15 @@ const RouteDetails = ( {transitRouteDetails} ) => {
 
             drivingJourneySavedContainer.style["display"] = "none";
             searchFormContainer.style["display"] = "flex";
+
+            let routeDetailsContainer = document.getElementById("route-details-container");
+            routeDetailsContainer.className = "search-process-container";
+
+            let navBar = document.getElementById("navbar");
+            navBar.className = "navbar";
+
+            let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+            transitJourneySavedContainer.className = "search-process-container journey-saved-container";
 
         }, 7000);
 
