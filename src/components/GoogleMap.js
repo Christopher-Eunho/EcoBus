@@ -7,7 +7,7 @@ import { GoogleMap,
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestSearch } from './DestSearch';
-import RouteDetails from './RouteDetails'
+import RouteDetails from './routeDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 
@@ -40,7 +40,12 @@ function GMap() {
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
-            setOriginInUse(origin); 
+            setOriginInUse(origin);
+            console.log(destination);
+        }
+
+        if (destination.value.includes("BCIT")) {
+            console.log("Hey, ma!")
         }
 
         let searchFormContainer = document.getElementById("search-container");
