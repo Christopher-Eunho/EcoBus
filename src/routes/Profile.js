@@ -16,18 +16,20 @@ const Profile = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
 
-    const usersRef = db.collection('users'); // from COMP 1800
-    function avatarRef(){usersRef.get()
-                    .then(function (snap){
-                            snap.forEach(function(doc){
-                                console.log(doc.data().email);
-                            })
-                        });
-                    }
-    avatarRef();
+    const usersRef = db.collection('users').doc(authService.currentUser.uid); // from COMP 1800
+    usersRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data().email);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+    
 
     console.log(usersRef);
-    console.log(avatarRef);
     console.log("all good");
 
 
