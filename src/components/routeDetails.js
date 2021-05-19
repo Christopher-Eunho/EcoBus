@@ -9,6 +9,7 @@ const RouteDetails = ( {transitRouteDetails} ) => {
     const goBack = () => {
         let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "none";
+        routeDetailsContainer.className = "search-process-container";
 
         let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "flex";
@@ -54,7 +55,7 @@ const RouteDetails = ( {transitRouteDetails} ) => {
     }
 
     return (
-        <section className="search-process-container" id="route-details-container">
+        <section className={"search-process-container"} id="route-details-container">
             <button className="back-button" onClick={goBack}>
                 <img src={BackButton} alt="Back Button" />
             </button>

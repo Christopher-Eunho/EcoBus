@@ -45,7 +45,8 @@ function GMap() {
         }
 
         if (destination.value.includes("BCIT")) {
-            console.log("Hey, ma!")
+            let routeDetailsContainer = document.getElementById("route-details-container");
+            routeDetailsContainer.className = "bcit-search-process-container";
         }
 
         let searchFormContainer = document.getElementById("search-container");
@@ -217,7 +218,7 @@ function GMap() {
                     />
                     )}
                 </GoogleMap>
-                <section className="search-process-container" id="search-container">
+                <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
                     <OrginSearch panTo={panTo} setOrigin={setOrigin}/>                
                     <DestSearch panTo={panTo} setDestination    ={setDestination}/>
