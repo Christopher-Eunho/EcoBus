@@ -11,6 +11,9 @@ const RouteDetails = ( {transitRouteDetails} ) => {
         routeDetailsContainer.style["display"] = "none";
         routeDetailsContainer.className = "search-process-container";
 
+        let navBar = document.getElementById("navbar");
+        navBar.className = "navbar";
+
         let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "flex";
     }
