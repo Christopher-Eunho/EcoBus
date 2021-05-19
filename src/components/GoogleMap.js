@@ -35,12 +35,12 @@ function GMap() {
     const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse ] = useState({});
     const [originInUse, setOriginInUse] = useState({});
-    const [travelInfo, setTravelInfo] = useState({});
+    const [transitRouteDetails, setTransitRouteDetails] = useState({});
     
     const searchClick = () => {
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
-            setOriginInUse(origin);
+            setOriginInUse(origin); 
         }
 
         let searchFormContainer = document.getElementById("search-container");
@@ -54,7 +54,7 @@ function GMap() {
 
     const transitCallback = (response) => {
         if (response !== null) {
-            setTravelInfo(response.routes[0].legs[0]);
+            setTransitRouteDetails(response.routes[0].legs[0]);
           if (response.status === 'OK') {
             setTransitResponse(response);
           } else {
@@ -216,7 +216,7 @@ function GMap() {
                         <img src={Search} alt="Search Button"/>
                     </button>
                 </section>
-                <RouteDetails travelInfo={travelInfo} />
+                <RouteDetails transitRouteDetails={transitRouteDetails} />
                 <SavedTransitRoute />
             </div>
         </>
