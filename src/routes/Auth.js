@@ -1,5 +1,4 @@
-import { authService, firebaseInstance } from "firebase_eb"
-import 'firebase/firestore'
+import { authService, firebaseInstance, db } from "firebase_eb"
 import React, { useState } from "react"
 import firebase from "firebase/app"
 import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
@@ -29,11 +28,24 @@ const Auth = () => {
         let provider;
         try {
             if (event === "google") {
-                provider = new firebaseInstance.auth.GoogleAuthProvider();
-            }
 
-            const data = await authService.signInWithPopup(provider);
-        } catch (error) {
+            provider = new firebaseInstance.auth.GoogleAuthProvider();
+            const data = await authService.signInWithPopup(provider); //login using Google
+        
+            var user = authService.currentUser;
+            const usersRef = db.collection('users').doc(user.uid); // queries into db
+            usersRef.get().then((doc) => { 
+            if (!doc.exists) { // check if user already exists in db
+            db.collection("users").doc(user.uid).set({
+                name: user.email.split("@")[0], 
+                email: user["email"],
+                avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=e8f85863-30e1-4637-ba49-51da3ce9bc57'
+            });
+            }
+        });
+
+        }} 
+        catch (error) {
             console.log(error);
         }
     }
@@ -53,9 +65,10 @@ const Auth = () => {
                 // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
                 var user = firebase.auth().currentUser;
 
-                const db = firebase.firestore();
                 const userRef = db.collection("users").doc(user.uid).set({
-                    email: email
+                    name: user.email.split("@")[0], 
+                    email: user["email"],
+                    avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=e8f85863-30e1-4637-ba49-51da3ce9bc57'
                 });
                 // Add user email to firestore end
                 
