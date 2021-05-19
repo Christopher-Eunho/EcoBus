@@ -17,6 +17,7 @@ const Profile = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
 
     const usersRef = db.collection('users').doc(authService.currentUser.uid); // from COMP 1800
+    
     usersRef.get().then((doc) => {
         if (doc.exists) {
             console.log("Document data:", doc.data().email);
