@@ -56,9 +56,6 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
             let routeDetailsContainer = document.getElementById("route-details-container");
             routeDetailsContainer.className = "search-process-container";
 
-            let navBar = document.getElementById("navbar");
-            navBar.className = "navbar";
-
             let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
             transitJourneySavedContainer.className = "search-process-container journey-saved-container";
 

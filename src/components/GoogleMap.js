@@ -29,8 +29,7 @@ const options = {
     gestureHandling: "greedy"
 }
 
-const navBar = document.getElementById("navbar");
-const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+
 
 
 function GMap() {
@@ -131,8 +130,8 @@ function GMap() {
 
     function showEasterEgg() {
         let routeDetailsContainer = document.getElementById("route-details-container");
+        let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
         routeDetailsContainer.className = "bcit-search-process-container";
-        navBar.className = "bcit-navbar";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
     }
 

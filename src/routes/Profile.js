@@ -216,7 +216,7 @@ const Profile = () => {
                             </Card.Header>
                             <Accordion.Collapse eventKey="1">
                                 <ListGroup variant="flush">
-                                    <Accordion id="route-history-card-container">
+                                    <Accordion>
                                         <Card>
                                             <Card.Header>
                                                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -232,7 +232,7 @@ const Profile = () => {
                                             </Accordion.Collapse>
                                         </Card>
 
-                                        {routeHistoryArray}
+                                        {/* {routeHistoryArray} */}
                                     </Accordion>
                                 </ListGroup>
                             </Accordion.Collapse>

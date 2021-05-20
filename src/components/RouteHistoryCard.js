@@ -5,16 +5,16 @@ const RouteHistoryCard = (props) => {
     return (
         <Card>
             <Card.Header>
-                <Accordion.Toggle as={Button} variant="link" id="route-history-accordion-toggle" eventkey={props.eventKey}>
+                <Accordion.Toggle as={Button} variant="link" eventkey={props.eventKey.toString()}>
                     Route {props.eventKey}
                 </Accordion.Toggle>
             </Card.Header>
-            <Accordion.Collapse id="route-history-accordion-collapse" eventkey={props.eventKey}>
+            <Accordion.Collapse eventkey={props.eventKey.toString()}>
                 <ListGroup variant="flush">
-                    <ListGroup.Item variant="secondary">{props.origin}</ListGroup.Item>
-                    <ListGroup.Item variant="secondary">{props.destination}</ListGroup.Item>
-                    <ListGroup.Item variant="secondary">{props.distance}</ListGroup.Item>
-                    <ListGroup.Item variant="secondary">{props.emissionsSaved}</ListGroup.Item>
+                    <ListGroup.Item variant="secondary">Starting location: {props.origin}</ListGroup.Item>
+                    <ListGroup.Item variant="secondary">Ending location: {props.destination}</ListGroup.Item>
+                    <ListGroup.Item variant="secondary">Total distance: {props.distance}</ListGroup.Item>
+                    <ListGroup.Item variant="secondary">Total emissions saved: {props.emissionsSaved}</ListGroup.Item>
                 </ListGroup>
             </Accordion.Collapse>
         </Card>
