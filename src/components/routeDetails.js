@@ -11,16 +11,17 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
     let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
     let searchFormContainer = document.getElementById("search-container");
     let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+    let taco1 = document.getElementById("taco1");
+    let taco2 = document.getElementById("taco2");
+    let taco3 = document.getElementById("taco3");
+    let taco4 = document.getElementById("taco4");
     
     const goBack = () => {
         console.log(transitRouteDetails)
         console.log(drivingRouteDetails)
         routeDetailsContainer.style["display"] = "none";
-        routeDetailsContainer.className = "search-process-container";
-
-        navBar.className = "navbar";
         
-        transitJourneySavedContainer.className = "search-process-container journey-saved-container";
+        resetValuesToDefault();
         
         searchFormContainer.style["display"] = "flex";
     }
@@ -58,14 +59,20 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
             drivingJourneySavedContainer.style["display"] = "none";
             searchFormContainer.style["display"] = "flex";
 
-            routeDetailsContainer.className = "search-process-container";
-
-            navBar.className = "navbar";
-
-            transitJourneySavedContainer.className = "search-process-container journey-saved-container";
+            resetValuesToDefault();
 
         }, 7000);
 
+    }
+
+    const resetValuesToDefault = () => {
+        routeDetailsContainer.className = "search-process-container";
+        navBar.className = "navbar";        
+        transitJourneySavedContainer.className = "search-process-container journey-saved-container";
+        taco1.className = "taco1";
+        taco2.className = "taco2";
+        taco3.className = "taco3";
+        taco4.className = "taco4";
     }
 
     return (

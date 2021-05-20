@@ -36,10 +36,10 @@ function GMap() {
     const navBar = document.getElementById("navigation-bar");
     const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
     const searchFormContainer = document.getElementById("search-container");
-    const taco1 = document.getElementById("Taco1");
-    const taco2 = document.getElementById("Taco2");
-    const taco3 = document.getElementById("Taco3");
-    const taco4 = document.getElementById("Taco4");
+    const taco1 = document.getElementById("taco1");
+    const taco2 = document.getElementById("taco2");
+    const taco3 = document.getElementById("taco3");
+    const taco4 = document.getElementById("taco4");
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -66,7 +66,10 @@ function GMap() {
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
-            showEasterEgg(routeDetailsContainer, navBar, transitJourneySavedContainer);
+            showEasterEgg();
+        }
+        if (destinationName.includes("Taco")||originName.includes("Taco")) {
+            showSecondEasterEgg();
         }
         hideSearchForm();
         showRouteDetail();
@@ -132,10 +135,17 @@ function GMap() {
         routeDetailsContainer.style["justifyContent"] = "space-around";
     }
 
-    function showEasterEgg(routeDetailsContainer, navBar, transitJourneySavedContainer) {
+    function showEasterEgg() {
         routeDetailsContainer.className = "bcit-search-process-container";
         navBar.className = "bcit-navigation-bar";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+    }
+
+    function showSecondEasterEgg() {
+        taco1.className = "falling-taco1";
+        taco2.className = "falling-taco2";
+        taco3.className = "falling-taco3";
+        taco4.className = "falling-taco4";
     }
 
     
