@@ -38,7 +38,11 @@ const Profile = () => {
     const [url, setURL] = useState("");
 
     function handleChange(e) {
+
         setFile(e.target.files[0]);
+        console.log(file);
+
+        
 
         // while (file!=null){
         // if (file["name"] ){
@@ -80,12 +84,16 @@ const Profile = () => {
 
     // const url = 'https://randomuser.me/api/portraits/men/1.jpg';
 
-    const saveChanges = () => {
+    const saveChanges = async (e) => {
+        e.preventDefault();
         var newName = document.getElementById("name-change").value;
         var newEmail = document.getElementById("email-change").value;
 
-        handleUpload();
+        console.log(file);
+        await handleUpload();
 
+        console.log(url);
+        console.log("all good");
         if (user !== null) {
             if (userName !== newName && newName.trim() !== "") {
                 db.collection("users").doc(user.uid).update({ name: newName });
