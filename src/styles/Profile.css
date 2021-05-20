@@ -81,9 +81,9 @@
     max-width: 128px;
 }
 
-/* #uploadbutton{
+#uploadbutton{
     display:none;
-} */
+}
 
 #messagebox{
     margin:auto;
