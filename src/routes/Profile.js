@@ -8,6 +8,7 @@ import logo from "../images/logo.png";
 import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { storage } from 'firebase/storage'
+import NavigationBar from '../components/NavigationBar'
 
 const Profile = () => {
     const history = useHistory();
@@ -129,12 +130,7 @@ const Profile = () => {
     return (
 
         <div className="profileBody">
-            <div id="header">
-                <a href="."><input type="image" src={logo} id="logo" alt="logo" /></a>
-                <Button variant="danger btn-sm" onClick={onLogoutClick} id="logout">Log Out</Button>
-                <hr />
-            </div>
-
+            <NavigationBar/>
             <div className="Profile">
                 <div id="avatar">
 
@@ -151,7 +147,6 @@ const Profile = () => {
 
 
                 <img src={userAvatar} id="useravatar" alt="Avatar" />
-
                 <label for="uploadbutton">
                     <input type="file" onClick={handleChange} id="uploadbutton"></input>
                     <img id="avataredit" src={Edit} alt="AvatarEdit"/>

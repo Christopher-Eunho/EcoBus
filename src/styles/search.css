@@ -36,7 +36,7 @@
 }
 
 .search-process-container {
-  background-color: rgba(248, 254, 212, 0.7);
+  background-color: rgb(248, 255, 208);
   width: 100%;
   height: fit-content;
   border: 1px solid black;

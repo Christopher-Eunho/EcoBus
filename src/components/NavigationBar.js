@@ -1,31 +1,41 @@
-import Logo from '../images/navbar-logo.png'
+import { authService } from "firebase_eb";
+import { useHistory } from "react-router";
 import React from "react"
 import { Link } from "react-router-dom"
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, Button } from 'react-bootstrap'
 import '../styles/navigation-bar.css'
 
 const NavigationBar = () => {
+    
+    const history = useHistory();
+    const onLogoutClick = () => {
+        authService.signOut();
+        history.push("/");
+    }
+    
     return (
         <>
             <Navbar id="navigation-bar">
-                <Nav>
+                {/* <input type="image" src={Logo} id="logo" alt="logo" /> */}
+                <div id="navigation-links">
                     <Nav.Link>
                         <Link to="/">
                             Search
-                        </Link>
+                            </Link>
                     </Nav.Link>
                     <Nav.Link>
                         <Link to="/profile">
                             Profile
-                        </Link>
+                            </Link>
                     </Nav.Link>
                     <Nav.Link>
                         <Link to="/about_us">
                             About Us
-                        </Link>
+                            </Link>
                     </Nav.Link>
-                </Nav>
-            </Navbar>
+                </div>
+                <Button variant="danger btn-sm" onClick={onLogoutClick} id="logout">Log Out</Button>
+        </Navbar>
         </>
     )
 }
