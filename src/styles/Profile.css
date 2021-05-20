@@ -51,38 +51,24 @@
     display:flex;
     justify-content: center;
     margin-top:1em;
-    align-self: center;
 }
 
 #emailForm{
     display:flex;
     justify-content: center;
     margin-top:1em;    
-    align-self: center;
 }
 
-#nameForm > img{
-    align-self: center;
-}
 
-#emailForm > img{
-    align-self: center;
-}
+
 
 #profileHeader{
     margin-right:2vw;
 }
 
-
-#editbutton{
-    margin: 1vw;
-}
-
-
 #toggleHeader{
     background-color: #1A8FDD;
 }
-
 
 
 #toggleButton{
@@ -112,4 +98,30 @@
     margin-top: 1em;
     display:none;
     max-width: 80%;
+}
+
+#name-change{
+    display:none;
+}
+
+#email-change{
+    display:none;
+}
+
+#nameBtn{
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+
+    align-self: center;
+    margin-left: 1vw;
+    margin-bottom:2vw;
+}
+
+#emailBtn{
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+
+    align-self: center;
+    margin-left: 1vw;
+    margin-bottom: 2vw;
 }

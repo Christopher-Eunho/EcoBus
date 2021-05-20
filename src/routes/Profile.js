@@ -115,6 +115,23 @@ const Profile = () => {
         errorbox.style["display"] = "block";
     }
 
+    function nameTextToForm(){
+        let nameText = document.getElementById("nametext");
+        nameText.style["display"] = "none";
+
+        let nameForm = document.getElementById("name-change");
+        nameForm.style["display"] = "block";
+    }
+    
+    function emailTextToForm(){
+        let emailText = document.getElementById("emailtext");
+        emailText.style["display"] = "none";
+
+        let emailForm = document.getElementById("email-change");
+        emailForm.style["display"] = "block";
+    }
+
+
     const usersRef = db.collection('users').doc(user.uid);
     usersRef.get().then((doc) => {
         if (doc.exists) {
@@ -168,24 +185,30 @@ const Profile = () => {
 
 
                 </div>
-                <form onSubmit={saveChanges}>
+                <form>
                     <span id="nameForm">
                         <h4 id="profileHeader">Name:</h4>
+                        <h4 id="nametext">{userName}</h4>
                         <input id="name-change" type="text" placeholder="Name" name="name" defaultValue={userName} />
-                        <img src={Edit} id="editbutton" alt="Edit" />
+                        <button id="nameBtn" type="button" onClick={nameTextToForm}>
+                            <img src={Edit}></img>
+                        </button>
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
 
                     <span id="emailForm">
                         <h4 id="profileHeader">Email:</h4>
+                        <h4 id="emailtext">{userEmail}</h4>
                         <input type="email" placeholder="Email" name="email" id="email-change" defaultValue={userEmail} />
-                        <img src={Edit} id="editbutton" alt="Edit" />
+                        <button id="emailBtn" type="button" onClick={emailTextToForm}>
+                            <img src={Edit}></img>
+                        </button>
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
                     <Alert id="messagebox" variant ="success">{message}</Alert>
                     <Alert id="errorbox" variant="danger">{error}</Alert>
                     <br />
-                    <Button variant="success" type="submit" id="saveEdits">Save Changes</Button>
+                    <Button variant="success" type="submit" id="saveEdits" onClick={saveChanges}>Save Changes</Button>
                 </form>
 
                 <div id="userHistory">
