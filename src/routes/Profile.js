@@ -6,13 +6,11 @@ import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
 import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
-import { storage } from 'firebase/storage'
+import { storage } from 'firebase/storage';
 
 const Profile = () => {
     const history = useHistory();
     const user = firebase.auth().currentUser;
-    // const [toggle, setToggle] = useState(false);
-    // const [name, changeName] = useState("");
     const [userAvatar, setUserAvatar] = useState("");
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
@@ -20,12 +18,7 @@ const Profile = () => {
     const [totalTrips, setTotalTrips] = useState(0);
     const [totalDistance, setDistance] = useState(0);
     const [totalEmissionSaved, setEmissions] = useState(0);
-
     const storage = firebase.storage()
-
-    // const totalTrips = 0;
-    // const totalDistance = 0;
-    // const totalEmissionSaved = 0;
 
     const onLogoutClick = () => {
         authService.signOut();
@@ -41,21 +34,7 @@ const Profile = () => {
     const [url, setURL] = useState("");
 
     function handleChange(e) {
-
         setFile(e.target.files[0]);
-        console.log(file);
-
-
-
-        // while (file!=null){
-        // if (file["name"] ){
-        // [console.log(file);
-
-        // }else{
-        //     setFile(null);
-        //     alert("This is not a valid type of file! (must be a picture)")
-        // }
-        //}
     }
 
     function handleUpload() {
@@ -72,20 +51,7 @@ const Profile = () => {
                 });
         });
     }
-
-    // return (
-    //     <div>
-    //     <form onSubmit={handleUpload}>
-    //         <input type="file" onChange={handleChange} />
-    //         <button disabled={!file}>upload to firebase</button>
-    //     </form>
-    //     <img src={url} alt="" />
-    //     </div>
-    // );
-
     /*Image upload end*/
-
-    // const url = 'https://randomuser.me/api/portraits/men/1.jpg';
 
     function getUserStats(){
         try{
