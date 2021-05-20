@@ -2,30 +2,36 @@ import UserProfile from '../images/user-profile.png'
 import Logo from '../images/navbar-logo.png'
 import SearchPage from '../images/magnifying-glass.png'
 import React from "react"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
-const Nav = () => {
+const NavigationBar = () => {
     return (
-    <nav className="navbar" id="navbar">
-        <Link to="/profile">
-            <button className="navbar-button">
-                <img src={UserProfile} alt="User Profile" />
-            </button>
-        </Link>
-        
-        <Link to="/about_us">
-            <button className="navbar-button">
-                <img src={Logo} alt="Logo" />
-            </button>
-        </Link>
-
-        <Link to="/">
-            <button className="navbar-button">
-                <img src={SearchPage} alt="Search Page"/>
-            </button>
-        </Link>
-    </nav>
+        <>
+            <Navbar bg="dark" variant="dark">
+                <Navbar.Brand href="#home">
+                    <img src={Logo} alt="Search Page" />
+                </Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Nav.Link>
+                        <Link to="/">
+                            Search
+                        </Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                        <Link to="/profile">
+                            Profile
+                        </Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                        <Link to="/about_us">
+                            About Us
+                        </Link>
+                    </Nav.Link>
+                </Nav>
+            </Navbar>
+        </>
     )
 }
 
-export default Nav
+export default NavigationBar
