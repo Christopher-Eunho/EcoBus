@@ -9,6 +9,7 @@ function Search() {
     <div className="main-viewport">
       <NavigationBar/>
       <GMap />
+      <Tco />
     </div>
   );
 }

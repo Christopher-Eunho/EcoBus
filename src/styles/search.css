@@ -3,6 +3,8 @@
 }
 
 .main-viewport {
+  overflow: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -205,48 +207,56 @@
 }
 
 /*Falling Tacos*/
-#taco-div {
-  overflow: hidden;
-}
 @keyframes falling{
   from {
-    top: -10vw;
+    top: -25vh;
     transform: rotate(0deg);
   }
   to {
-    top: 150vw;
+    top: 150vh;
     transform: rotate(720deg);
   }
 }
 
 .falling-taco1 {
-  position: relative;
-  width: 10vw;
+  z-index: 10;
+  position: absolute;
+  width: 20vh;
   animation-name: falling;
-  animation-duration: 10s;
+  animation-duration: 4s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 .falling-taco2 {
-  position: relative;
-  width: 10vw;
-  top: -10vw;
+  z-index: 10;
+  position: absolute;
+  width: 20vh;
+  top: -10vh;
+  left: 25vw;
   animation-name: falling;
-  animation-duration: 10s;
+  animation-duration: 5s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 .falling-taco3 {
-  position: relative;
-  width: 10vw;
+  z-index: 10;
+  position: absolute;
+  width: 20vh;
   top: -5vw;
+  left: 50vw;
   animation-name: falling;
-  animation-duration: 10s;
+  animation-duration: 6s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 .falling-taco4 {
-  position: relative;
-  width: 10vw;
+  z-index: 10;
+  position: absolute;
+  width: 20vh;
   top: -15vw;
+  left: 75vw;
   animation-name: falling;
-  animation-duration: 10s;
+  animation-duration: 3s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
