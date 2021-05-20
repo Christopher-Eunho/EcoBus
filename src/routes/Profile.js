@@ -17,12 +17,15 @@ const Profile = () => {
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [error, setError] = useState("");
+    const [totalTrips, setTotalTrips] = useState(0);
+    const [totalDistance, setDistance] = useState(0);
+    const [totalEmissionSaved, setEmissions] = useState(0);
 
     const storage = firebase.storage()
 
-    const totalTrips = 0;
-    const totalDistance = 0;
-    const totalEmissionSaved = 0;
+    // const totalTrips = 0;
+    // const totalDistance = 0;
+    // const totalEmissionSaved = 0;
 
     const onLogoutClick = () => {
         authService.signOut();
@@ -42,7 +45,7 @@ const Profile = () => {
         setFile(e.target.files[0]);
         console.log(file);
 
-        
+
 
         // while (file!=null){
         // if (file["name"] ){
@@ -83,6 +86,21 @@ const Profile = () => {
     /*Image upload end*/
 
     // const url = 'https://randomuser.me/api/portraits/men/1.jpg';
+
+    function getUserStats(){
+        try{
+        db.collection("users").doc(user.uid).collection("routes").get() // from BCITCOMP 1800 Projects 1, @author: Carly Orr
+            .then(function (snap) {
+                snap.forEach(function (doc) {
+                    var n = parseFloat(doc.data().distance.split(" ")[0]);
+                    setTotalTrips((prev) => prev+1)
+                    setDistance((prev) => prev+n) 
+                })
+            })
+        }catch(err){
+            console.log(err);
+        }
+    }
 
     const saveChanges = async (e) => {
         e.preventDefault();
@@ -188,14 +206,14 @@ const Profile = () => {
                     <Accordion>
                         <Card>
                             <Card.Header id="toggleHeader">
-                                <Accordion.Toggle as={Button} variant="link" eventKey="0" id="toggleButton" >
+                                <Accordion.Toggle as={Button} onClick={getUserStats} variant="link" eventKey="0" id="toggleButton" >
                                     User Statistics
                                 </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="0">
                                 <ListGroup variant="flush">
                                     <ListGroup.Item variant="secondary">Total Trips: {totalTrips}</ListGroup.Item>
-                                    <ListGroup.Item variant="secondary">Total Distance Travelled: {totalDistance}</ListGroup.Item>
+                                    <ListGroup.Item variant="secondary">Total Distance Travelled: {totalDistance} km</ListGroup.Item>
                                     <ListGroup.Item variant="secondary">Total Emissions Saved: {totalEmissionSaved}</ListGroup.Item>
                                 </ListGroup>
                             </Accordion.Collapse>
