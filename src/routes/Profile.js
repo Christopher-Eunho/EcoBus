@@ -1,12 +1,11 @@
 import { authService, db } from "firebase_eb";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
 import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
 import { storage } from 'firebase/storage'
 
 const Profile = () => {
@@ -14,15 +13,12 @@ const Profile = () => {
     const user = firebase.auth().currentUser;
     // const [toggle, setToggle] = useState(false);
     // const [name, changeName] = useState("");
-    const [userAvatar, setUserAvatar] = useState(""); 
-    const [userName, setUserName] = useState(""); 
-    const [userEmail, setUserEmail] = useState(""); 
-
+    const [userAvatar, setUserAvatar] = useState("");
+    const [userName, setUserName] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+    const [error, setError] = useState("");
 
     const storage = firebase.storage()
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
-
 
     const totalTrips = 0;
     const totalDistance = 0;
@@ -33,40 +29,42 @@ const Profile = () => {
         history.push("/");
     }
 
-
-    // const onEdit =  async (event) => {
-
-    //      await firebase.User.updateEmail(email)
-    // }
-
-
     /* 
     Image upload start
-    I found this code on : https://dev.to/itnext/how-to-do-image-upload-with-firebase-in-react-cpj
+    I found this code on : https://dev.to/samuelkarani/comment/14079
     @authors: Tallan Groberg, Samuel Karani
     */
     const [file, setFile] = useState(null);
-    // const [url, setURL] = useState("");
+    const [url, setURL] = useState("");
 
     function handleChange(e) {
         setFile(e.target.files[0]);
+
+        // while (file!=null){
+        // if (file["name"] ){
+        // [console.log(file);
+
+        // }else{
+        //     setFile(null);
+        //     alert("This is not a valid type of file! (must be a picture)")
+        // }
+        //}
     }
 
-    // function handleUpload(e) {
-    //     e.preventDefault();
-    //     const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-    //     uploadTask.on("state_changed", console.log, console.error, () => {
-    //     storage
-    //         .ref("images")
-    //         .child(file.name)
-    //         .getDownloadURL()
-    //         .then((url) => {
-    //         setFile(null);
-    //         setURL(url);
-    //         });
-
-    //     });
-    // }
+    function handleUpload() {
+        const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+        uploadTask.on("state_changed", console.log, console.error, () => {
+            storage
+                .ref("images")
+                .child(file.name)
+                .getDownloadURL()
+                .then((url) => {
+                    setFile(null);
+                    setURL(url);
+                    console.log(url)
+                });
+        });
+    }
 
     // return (
     //     <div>
@@ -80,37 +78,36 @@ const Profile = () => {
 
     /*Image upload end*/
 
+    // const url = 'https://randomuser.me/api/portraits/men/1.jpg';
 
     const saveChanges = () => {
+        var newName = document.getElementById("name-change").value;
+        var newEmail = document.getElementById("email-change").value;
 
-        
-        var newEmail = document.getElementById("email-change");
+        handleUpload();
 
-
-        if (user != null) {
-            var email, uid;
-            email = user.email;
-            uid = user.uid;
-            user.updateEmail(newEmail.value).then(function () {
-                // Update successful.
-            }).catch(function (error) {
-                console.log(error);
-            });
+        if (user !== null) {
+            if (userName !== newName && newName.trim() !== "") {
+                db.collection("users").doc(user.uid).update({ name: newName });
+            }
+            if (userEmail !== newEmail) {
+                try {
+                    user.updateEmail(newEmail); // update email in authentication
+                    // db.collection("users").doc(user.uid).update({ email: newEmail }); //update email in db
+                } catch (err) {
+                    setError(err.message);
+                }
+            }
+            if (url !== "") {
+                db.collection("users").doc(user.uid).update({ avatar: url });
+            }
         }
-        
-
-    
-    };
-
-
-    const onSubmit = (data) => {
-        console.log(data)
     };
 
     const usersRef = db.collection('users').doc(user.uid);
     usersRef.get().then((doc) => {
         if (doc.exists) {
-            
+
             setUserEmail(doc.data().email);
             setUserName(doc.data().name);
             setUserAvatar(doc.data().avatar);
@@ -124,7 +121,6 @@ const Profile = () => {
     });
 
 
-   
 
     return (
 
@@ -150,33 +146,34 @@ const Profile = () => {
 
 
 
-                <img src={userAvatar} id="useravatar" alt="Avatar" />
+                    <img src={userAvatar} id="useravatar" alt="Avatar" />
 
-                <label for="uploadbutton">
-                    <input type="file" onClick={handleChange} id="uploadbutton"></input>
-                    <img id="avataredit" src={Edit} alt="AvatarEdit"/>
-                </label>
+                    <label for="uploadbutton">
+                        <input type="file" accept="image/*" onChange={handleChange} id="uploadbutton"></input>
+                        <img id="avataredit" src={Edit} alt="AvatarEdit" />
+                    </label>
 
 
 
 
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={saveChanges}>
                     <span id="nameForm">
                         <h4 id="profileHeader">Name:</h4>
-                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue={userName} {...register("name")} />
+                        <input id="name-change" type="text" placeholder="Name" name="name" defaultValue={userName} />
                         <img src={Edit} id="editbutton" alt="Edit" />
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
 
                     <span id="emailForm">
                         <h4 id="profileHeader">Email:</h4>
-                        <input type="email" placeholder="Email" name="email" id="email-change" defaultValue={userEmail} {...register("email")} />
+                        <input type="email" placeholder="Email" name="email" id="email-change" defaultValue={userEmail} />
                         <img src={Edit} id="editbutton" alt="Edit" />
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
+                    <span>{error}</span>
                     <br />
-                    <Button variant="success" type="submit" id="saveEdits" onClick={saveChanges}>Save Changes</Button>
+                    <Button variant="success" type="submit" id="saveEdits">Save Changes</Button>
                 </form>
 
                 <div id="userHistory">
