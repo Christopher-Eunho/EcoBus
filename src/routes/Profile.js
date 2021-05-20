@@ -7,18 +7,22 @@ import Edit from "../images/editbutton.png";
 import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import NavigationBar from '../components/NavigationBar'
+import RouteHistoryCard from '../components/RouteHistoryCard'
 
 const Profile = () => {
+
+    const [routeHistoryArray, setRouteHistoryArray] = useState([]);
+
     const history = useHistory();
     const user = firebase.auth().currentUser;
     // const [toggle, setToggle] = useState(false);
     // const [name, changeName] = useState("");
-    const [userAvatar, setUserAvatar] = useState(""); 
-    const [userName, setUserName] = useState(""); 
-    const [userEmail, setUserEmail] = useState(""); 
+    const [userAvatar, setUserAvatar] = useState("");
+    const [userName, setUserName] = useState("");
+    const [userEmail, setUserEmail] = useState("");
 
 
-    const storage = firebase.storage()
+    // const storage = firebase.storage()
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
 
@@ -26,6 +30,7 @@ const Profile = () => {
     const totalTrips = 0;
     const totalDistance = 0;
     const totalEmissionSaved = 0;
+
 
     const onLogoutClick = () => {
         authService.signOut();
@@ -46,6 +51,7 @@ const Profile = () => {
     */
     const [file, setFile] = useState(null);
     // const [url, setURL] = useState("");
+
 
     function handleChange(e) {
         setFile(e.target.files[0]);
@@ -81,10 +87,7 @@ const Profile = () => {
 
 
     const saveChanges = () => {
-
-        
         var newEmail = document.getElementById("email-change");
-
 
         if (user != null) {
             var email, uid;
@@ -96,9 +99,6 @@ const Profile = () => {
                 console.log(error);
             });
         }
-        
-
-    
     };
 
 
@@ -106,10 +106,12 @@ const Profile = () => {
         console.log(data)
     };
 
+
     const usersRef = db.collection('users').doc(user.uid);
+
     usersRef.get().then((doc) => {
         if (doc.exists) {
-            
+
             setUserEmail(doc.data().email);
             setUserName(doc.data().name);
             setUserAvatar(doc.data().avatar);
@@ -122,13 +124,30 @@ const Profile = () => {
         console.log("Error getting document:", error);
     });
 
+    function addNewRouteHistoryCard() {
+        var routeCounter = 0;
 
-   
+        try {
+            usersRef.collection("routes").get() // from BCITCOMP 1800 Projects 1, @author: Carly Orr
+                .then(function (snap) {
+                    snap.forEach(function (doc) {
+                        let route = doc.data();
+                        console.log(route.origin);
+                        routeCounter++;
+                        routeHistoryArray.push(<RouteHistoryCard eventKey={routeCounter} origin={route.origin} destination={route.destination} distance={route.distance} />)
+                        console.log(routeCounter);
+                        console.log(routeHistoryArray)
+                    })
+                })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
 
         <div className="profileBody">
-            <NavigationBar/>
+            <NavigationBar />
             <div className="Profile">
                 <div id="avatar">
 
@@ -144,11 +163,11 @@ const Profile = () => {
 
 
 
-                <img src={userAvatar} id="useravatar" alt="Avatar" />
-                <label for="uploadbutton">
-                    <input type="file" onClick={handleChange} id="uploadbutton"></input>
-                    <img id="avataredit" src={Edit} alt="AvatarEdit"/>
-                </label>
+                    <img src={userAvatar} id="useravatar" alt="Avatar" />
+                    <label for="uploadbutton">
+                        <input type="file" onClick={handleChange} id="uploadbutton"></input>
+                        <img id="avataredit" src={Edit} alt="AvatarEdit" />
+                    </label>
 
 
 
@@ -197,7 +216,7 @@ const Profile = () => {
                             </Card.Header>
                             <Accordion.Collapse eventKey="1">
                                 <ListGroup variant="flush">
-                                    <Accordion>
+                                    <Accordion id="route-history-card-container">
                                         <Card>
                                             <Card.Header>
                                                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -213,27 +232,14 @@ const Profile = () => {
                                             </Accordion.Collapse>
                                         </Card>
 
-                                        <Card>
-                                            <Card.Header>
-                                                <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                    Route 2
-                                                </Accordion.Toggle>
-                                            </Card.Header>
-                                            <Accordion.Collapse eventKey="1">
-                                                <ListGroup variant="flush">
-                                                    <ListGroup.Item variant="secondary">Starting location: BCIT Downtown</ListGroup.Item>
-                                                    <ListGroup.Item variant="secondary">Ending location: BCIT Burnaby</ListGroup.Item>
-                                                    <ListGroup.Item variant="secondary">Total emissions saved: 6kg of CO2</ListGroup.Item>
-                                                </ListGroup>
-                                            </Accordion.Collapse>
-                                        </Card>
+                                        {routeHistoryArray}
                                     </Accordion>
                                 </ListGroup>
                             </Accordion.Collapse>
                         </Card>
                     </Accordion>
                 </div>
-
+                <button onClick={addNewRouteHistoryCard}>Update</button>
             </div>
         </div>
     );

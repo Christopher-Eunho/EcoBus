@@ -8,14 +8,9 @@ import {db} from "firebase_eb"
 const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
     
     const goBack = () => {
-        console.log(transitRouteDetails)
-        console.log(drivingRouteDetails)
         let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "none";
         routeDetailsContainer.className = "search-process-container";
-
-        let navBar = document.getElementById("navbar");
-        navBar.className = "navbar";
 
         let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
         transitJourneySavedContainer.className = "search-process-container journey-saved-container";
@@ -25,7 +20,6 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
     }
 
     const saveJourney = () => {
-        console.log(transitRouteDetails.departure_time.value);
         if (authService.currentUser != null) {
             db.collection('users').get()
                 .then((snap) => {

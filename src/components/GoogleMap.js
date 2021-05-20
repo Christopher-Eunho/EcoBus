@@ -29,10 +29,8 @@ const options = {
     gestureHandling: "greedy"
 }
 
-const routeDetailsContainer = document.getElementById("route-details-container");
 const navBar = document.getElementById("navbar");
 const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-const searchFormContainer = document.getElementById("search-container");
 
 
 function GMap() {
@@ -56,10 +54,10 @@ function GMap() {
             console.log(transitRouteDetails)
 
             // If no input passed, transitRouteDetails is [Object object]
-            document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
-            document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
-            document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
-            document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            // document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
+            // document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
+            // document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            // document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
@@ -120,16 +118,19 @@ function GMap() {
     },[]);
 
     function hideSearchForm() {
+        let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "none";
     }
 
     function showRouteDetail() {
+        let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "flex";
         routeDetailsContainer.style["flexDirection"] = "column";
         routeDetailsContainer.style["justifyContent"] = "space-around";
     }
 
     function showEasterEgg() {
+        let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.className = "bcit-search-process-container";
         navBar.className = "bcit-navbar";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
