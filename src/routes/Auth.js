@@ -1,4 +1,5 @@
 import { authService, firebaseInstance, db } from "firebase_eb"
+import 'firebase/firestore'
 import React, { useState } from "react"
 import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
 import Form from 'react-bootstrap/Form'
@@ -27,24 +28,11 @@ const Auth = () => {
         let provider;
         try {
             if (event === "google") {
-
-            provider = new firebaseInstance.auth.GoogleAuthProvider();
-            const data = await authService.signInWithPopup(provider); //login using Google
-        
-            var user = authService.currentUser;
-            const usersRef = db.collection('users').doc(user.uid); // queries into db
-            usersRef.get().then((doc) => { 
-            if (!doc.exists) { // check if user already exists in db
-            db.collection("users").doc(user.uid).set({
-                name: user.email.split("@")[0], 
-                email: user["email"],
-                avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=e8f85863-30e1-4637-ba49-51da3ce9bc57'
-            });
+                provider = new firebaseInstance.auth.GoogleAuthProvider();
             }
-        });
 
-        }} 
-        catch (error) {
+            const data = await authService.signInWithPopup(provider);
+        } catch (error) {
             console.log(error);
         }
     }
@@ -65,9 +53,7 @@ const Auth = () => {
                 var user = authService.currentUser;
 
                 const userRef = db.collection("users").doc(user.uid).set({
-                    name: user.email.split("@")[0], 
-                    email: user["email"],
-                    avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=e8f85863-30e1-4637-ba49-51da3ce9bc57'
+                    email: email
                 });
                 // Add user email to firestore end
                 
@@ -126,7 +112,7 @@ const Auth = () => {
                     </Button>
                     
                     <Button variant="danger" className="welcome-message" id="change-to-sign-in-up" onClick={toggleAccount}> 
-                        I want to {newAccount? "sign in!" : "sign up!"} 
+                        I want to {newAccount ? "sign in!" : "sign up!"} 
                     </Button>
                 </div>
                 <span id="error-message"> {error} </span>
