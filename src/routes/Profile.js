@@ -4,10 +4,8 @@ import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import logo from "../images/logo.png";
 import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { storage } from 'firebase/storage'
 import NavigationBar from '../components/NavigationBar'
 
 const Profile = () => {
@@ -204,7 +202,7 @@ const Profile = () => {
                                             <Card.Header>
                                                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
                                                     Route 1
-                                    </Accordion.Toggle>
+                                                </Accordion.Toggle>
                                             </Card.Header>
                                             <Accordion.Collapse eventKey="0">
                                                 <ListGroup variant="flush">
@@ -219,7 +217,7 @@ const Profile = () => {
                                             <Card.Header>
                                                 <Accordion.Toggle as={Button} variant="link" eventKey="1">
                                                     Route 2
-                                        </Accordion.Toggle>
+                                                </Accordion.Toggle>
                                             </Card.Header>
                                             <Accordion.Collapse eventKey="1">
                                                 <ListGroup variant="flush">

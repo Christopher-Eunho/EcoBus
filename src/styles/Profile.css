@@ -9,18 +9,6 @@
     text-align:center;
 }
 
-#logout{
-    float:right;
-    margin-top:3%;
-    margin-right:2%;
-}
-
-#logo {
-    margin-top: 5%;
-    margin-left:2%;
-    max-width: 20%;
-}
-
 #avatar > img{
     border-radius: 50%;
 }
