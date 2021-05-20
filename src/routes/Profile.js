@@ -5,7 +5,7 @@ import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
 import logo from "../images/logo.png";
-import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
+import { Alert, Accordion, Button, Card, ListGroup } from 'react-bootstrap';
 import { storage } from 'firebase/storage';
 
 const Profile = () => {
@@ -18,6 +18,7 @@ const Profile = () => {
     const [totalTrips, setTotalTrips] = useState(0);
     const [totalDistance, setDistance] = useState(0);
     const [totalEmissionSaved, setEmissions] = useState(0);
+    const [message, setMessage] = useState("");
     const storage = firebase.storage()
 
     const onLogoutClick = () => {
@@ -53,48 +54,66 @@ const Profile = () => {
     }
     /*Image upload end*/
 
-    function getUserStats(){
-        try{
-        db.collection("users").doc(user.uid).collection("routes").get() // from BCITCOMP 1800 Projects 1, @author: Carly Orr
-            .then(function (snap) {
-                snap.forEach(function (doc) {
-                    var n = parseFloat(doc.data().distance.split(" ")[0]);
-                    setTotalTrips((prev) => prev+1)
-                    setDistance((prev) => prev+n) 
+    function getUserStats() {
+        setTotalTrips(0);
+        setDistance(0);
+        setEmissions(0);
+        try {
+            db.collection("users").doc(user.uid).collection("routes").get() // from BCITCOMP 1800 Projects 1, @author: Carly Orr
+                .then(function (snap) {
+                    snap.forEach(function (doc) {
+                        var n = parseFloat(doc.data().distance.split(" ")[0]);
+                        setTotalTrips((prev) => prev + 1)
+                        setDistance((prev) => prev + n)
+                    })
                 })
-            })
-        }catch(err){
+        } catch (err) {
             console.log(err);
         }
     }
+
+
 
     const saveChanges = async (e) => {
         e.preventDefault();
         var newName = document.getElementById("name-change").value;
         var newEmail = document.getElementById("email-change").value;
 
-        console.log(file);
-        await handleUpload();
+        // console.log(file);
+        // await handleUpload();
 
-        console.log(url);
-        console.log("all good");
+        // console.log(url);
+        // console.log("all good");
         if (user !== null) {
-            if (userName !== newName && newName.trim() !== "") {
-                db.collection("users").doc(user.uid).update({ name: newName });
-            }
-            if (userEmail !== newEmail) {
-                try {
-                    user.updateEmail(newEmail); // update email in authentication
-                    // db.collection("users").doc(user.uid).update({ email: newEmail }); //update email in db
-                } catch (err) {
-                    setError(err.message);
+            try {
+                if (userName !== newName && newName.trim() !== "") {
+                    db.collection("users").doc(user.uid).update({ name: newName });
                 }
-            }
-            if (url !== "") {
-                db.collection("users").doc(user.uid).update({ avatar: url });
+                if (userEmail !== newEmail) {
+                    await user.updateEmail(newEmail); // update email in authentication
+                    db.collection("users").doc(user.uid).update({ email: newEmail }); //update email in db
+                }
+                if (url !== "") {
+                    db.collection("users").doc(user.uid).update({ avatar: url });
+                }
+                displayMessageBox();
+                setMessage("Profile updated!");
+            } catch (err) {
+                displayErrorBox();
+                setError(err.message);
             }
         }
     };
+
+    function displayMessageBox(){
+        let messagebox = document.getElementById("messagebox");
+        messagebox.style["display"] = "block";
+    }
+
+    function displayErrorBox(){
+        let errorbox = document.getElementById("errorbox");
+        errorbox.style["display"] = "block";
+    }
 
     const usersRef = db.collection('users').doc(user.uid);
     usersRef.get().then((doc) => {
@@ -163,7 +182,8 @@ const Profile = () => {
                         <img src={Edit} id="editbutton" alt="Edit" />
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
-                    <span>{error}</span>
+                    <Alert id="messagebox" variant ="success">{message}</Alert>
+                    <Alert id="errorbox" variant="danger">{error}</Alert>
                     <br />
                     <Button variant="success" type="submit" id="saveEdits">Save Changes</Button>
                 </form>

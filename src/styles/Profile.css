@@ -98,3 +98,18 @@
 /* #uploadbutton{
     display:none;
 } */
+
+#messagebox{
+    margin:auto;
+    margin-top:1em;
+    display:none;
+    max-width: 80%;
+    
+}
+
+#errorbox{
+    margin:auto;
+    margin-top: 1em;
+    display:none;
+    max-width: 80%;
+}
