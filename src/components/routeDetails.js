@@ -6,21 +6,22 @@ import {db} from "firebase_eb"
 
 
 const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
+    let routeDetailsContainer = document.getElementById("route-details-container");
+    let navBar = document.getElementById("navigation-bar");
+    let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+    let searchFormContainer = document.getElementById("search-container");
+    let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
     
     const goBack = () => {
         console.log(transitRouteDetails)
         console.log(drivingRouteDetails)
-        let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "none";
         routeDetailsContainer.className = "search-process-container";
 
-        let navBar = document.getElementById("navbar");
         navBar.className = "navbar";
-
-        let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+        
         transitJourneySavedContainer.className = "search-process-container journey-saved-container";
-
-        let searchFormContainer = document.getElementById("search-container");
+        
         searchFormContainer.style["display"] = "flex";
     }
 
@@ -46,26 +47,21 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
                 })
             }
 
-        let drivingOptionDetails = document.getElementById("route-details-container");
-        drivingOptionDetails.style["display"] = "none";
+        let routeDetailsContainer = document.getElementById("route-details-container");
+        routeDetailsContainer.style["display"] = "none";
 
-        let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
         drivingJourneySavedContainer.style["display"] = "block";
 
         setTimeout(function () {
-            let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-            let searchFormContainer = document.getElementById("search-container");
+            
 
             drivingJourneySavedContainer.style["display"] = "none";
             searchFormContainer.style["display"] = "flex";
 
-            let routeDetailsContainer = document.getElementById("route-details-container");
             routeDetailsContainer.className = "search-process-container";
 
-            let navBar = document.getElementById("navbar");
             navBar.className = "navbar";
 
-            let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
             transitJourneySavedContainer.className = "search-process-container journey-saved-container";
 
         }, 7000);

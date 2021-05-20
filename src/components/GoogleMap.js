@@ -29,14 +29,17 @@ const options = {
     gestureHandling: "greedy"
 }
 
-const routeDetailsContainer = document.getElementById("route-details-container");
-const navBar = document.getElementById("navbar");
-const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-const searchFormContainer = document.getElementById("search-container");
-
 
 function GMap() {
 
+    const routeDetailsContainer = document.getElementById("route-details-container");
+    const navBar = document.getElementById("navigation-bar");
+    const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+    const searchFormContainer = document.getElementById("search-container");
+    const taco1 = document.getElementById("Taco1");
+    const taco2 = document.getElementById("Taco2");
+    const taco3 = document.getElementById("Taco3");
+    const taco4 = document.getElementById("Taco4");
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -56,18 +59,18 @@ function GMap() {
             console.log(transitRouteDetails)
 
             // If no input passed, transitRouteDetails is [Object object]
-            document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
-            document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
-            document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
-            document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            //document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
+            //document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
+            //document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            //document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
-            showEasterEgg();
+            showEasterEgg(routeDetailsContainer, navBar, transitJourneySavedContainer);
         }
         hideSearchForm();
         showRouteDetail();
-    } 
+    }
 
     const transitCallback = (response) => {
         if (response !== null) {
@@ -129,9 +132,9 @@ function GMap() {
         routeDetailsContainer.style["justifyContent"] = "space-around";
     }
 
-    function showEasterEgg() {
+    function showEasterEgg(routeDetailsContainer, navBar, transitJourneySavedContainer) {
         routeDetailsContainer.className = "bcit-search-process-container";
-        navBar.className = "bcit-navbar";
+        navBar.className = "bcit-navigation-bar";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
     }
 
