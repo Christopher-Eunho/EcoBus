@@ -3,8 +3,10 @@ import Caleb from 'images/Caleb.png'
 import Dylan from 'images/Dylan.png'
 import Austin from 'images/Austin.png'
 import Chris from 'images/Chris.jpeg'
+import NavigationBar from '../components/NavigationBar'
 
 const About_Us = () => <main>
+    <NavigationBar/>
     <aside class="aboutus">
         <p>
             A little about Ecobus

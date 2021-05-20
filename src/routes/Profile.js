@@ -153,12 +153,7 @@ const Profile = () => {
     return (
 
         <div className="profileBody">
-            <div id="header">
-                <a href="."><input type="image" src={logo} id="logo" alt="logo" /></a>
-                <Button variant="danger btn-sm" onClick={onLogoutClick} id="logout">Log Out</Button>
-                <hr />
-            </div>
-
+            <NavigationBar/>
             <div className="Profile">
                 <div id="avatar">
 
@@ -241,7 +236,7 @@ const Profile = () => {
                                             <Card.Header>
                                                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
                                                     Route 1
-                                    </Accordion.Toggle>
+                                                </Accordion.Toggle>
                                             </Card.Header>
                                             <Accordion.Collapse eventKey="0">
                                                 <ListGroup variant="flush">
@@ -256,7 +251,7 @@ const Profile = () => {
                                             <Card.Header>
                                                 <Accordion.Toggle as={Button} variant="link" eventKey="1">
                                                     Route 2
-                                        </Accordion.Toggle>
+                                                </Accordion.Toggle>
                                             </Card.Header>
                                             <Accordion.Collapse eventKey="1">
                                                 <ListGroup variant="flush">

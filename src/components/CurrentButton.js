@@ -2,7 +2,7 @@ import React from "react";
 import currentIcon from 'images/current.png'
 import '../styles/current_button.css';
 
-const CurretnButton = ({panTo, setCurrentLocation}) => {
+const CurrentButton = ({panTo, setCurrentLocation}) => {
     return (
         <button
           className="currentButton"
@@ -24,4 +24,4 @@ const CurretnButton = ({panTo, setCurrentLocation}) => {
       );
 }
 
-export default CurretnButton;
+export default CurrentButton;
