@@ -19,7 +19,7 @@ const Profile = () => {
     const [totalDistance, setDistance] = useState(0);
     const [totalEmissionSaved, setEmissions] = useState(0);
     const [message, setMessage] = useState("");
-    const storage = firebase.storage()
+    // const storage = firebase.storage();
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
     
     const displayRouteDetails = () => {
@@ -59,20 +59,20 @@ const Profile = () => {
         setFile(e.target.files[0]);
     }
 
-    function handleUpload() {
-        const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-        uploadTask.on("state_changed", console.log, console.error, () => {
-            storage
-                .ref("images")
-                .child(file.name)
-                .getDownloadURL()
-                .then((url) => {
-                    setFile(null);
-                    setURL(url);
-                    console.log(url)
-                });
-        });
-    }
+    // function handleUpload() {
+    //     const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+    //     uploadTask.on("state_changed", console.log, console.error, () => {
+    //         storage
+    //             .ref("images")
+    //             .child(file.name)
+    //             .getDownloadURL()
+    //             .then((url) => {
+    //                 setFile(null);
+    //                 setURL(url);
+    //                 console.log(url)
+    //             });
+    //     });
+    // }
     /*Image upload end*/
 
     function getUserStats() {
