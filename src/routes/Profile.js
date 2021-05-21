@@ -20,6 +20,9 @@ const Profile = () => {
     const [totalEmissionSaved, setEmissions] = useState(0);
     const [message, setMessage] = useState("");
     const storage = firebase.storage()
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const onLogoutClick = () => {
         authService.signOut();
@@ -105,25 +108,25 @@ const Profile = () => {
         }
     };
 
-    function displayMessageBox(){
+    function displayMessageBox() {
         let messagebox = document.getElementById("messagebox");
         messagebox.style["display"] = "block";
     }
 
-    function displayErrorBox(){
+    function displayErrorBox() {
         let errorbox = document.getElementById("errorbox");
         errorbox.style["display"] = "block";
     }
 
-    function nameTextToForm(){
+    function nameTextToForm() {
         let nameText = document.getElementById("nametext");
         nameText.style["display"] = "none";
 
         let nameForm = document.getElementById("name-change");
         nameForm.style["display"] = "block";
     }
-    
-    function emailTextToForm(){
+
+    function emailTextToForm() {
         let emailText = document.getElementById("emailtext");
         emailText.style["display"] = "none";
 
@@ -148,12 +151,16 @@ const Profile = () => {
         console.log("Error getting document:", error);
     });
 
+    function deleteUserData() {
+
+    }
+
 
 
     return (
 
         <div className="profileBody">
-            <NavigationBar/>
+            <NavigationBar />
             <div className="Profile">
                 <div id="avatar">
 
@@ -200,7 +207,7 @@ const Profile = () => {
                         </button>
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
-                    <Alert id="messagebox" variant ="success">{message}</Alert>
+                    <Alert id="messagebox" variant="success">{message}</Alert>
                     <Alert id="errorbox" variant="danger">{error}</Alert>
                     <br />
                     <Button variant="success" type="submit" id="saveEdits" onClick={saveChanges}>Save Changes</Button>
@@ -267,7 +274,19 @@ const Profile = () => {
                         </Card>
                     </Accordion>
                 </div>
-
+                <div id="clearuserdata">
+                    <Button variant="danger" onClick={handleShow}>Clear all data</Button>
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Delete all user data?</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Note: This cannot be undone.</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>Close</Button>
+                            <Button variant="danger" onClick={handleClose}>Delete my data</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
             </div>
         </div>
     );
