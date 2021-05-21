@@ -85,8 +85,11 @@ const Profile = () => {
     async function saveChanges() {
         var newName = document.getElementById("name-change").value;
         var newEmail = document.getElementById("email-change").value;
+        let newAvatar = "";
 
-        let newAvatar = await handleUpload();
+        if (file!==null){
+        newAvatar = await handleUpload();
+        }
 
         if (user !== null) {
             try {
@@ -99,6 +102,7 @@ const Profile = () => {
                 }
                 if (newAvatar !== "") {
                     db.collection("users").doc(user.uid).update({ avatar: newAvatar });
+                    hideAvatarUpload();
                 }
                 displayMessageBox();
                 setMessage("Profile updated!");
@@ -145,6 +149,11 @@ const Profile = () => {
         avatarBtn.style["display"] = "none";
     }
 
+    function hideAvatarUpload(){
+        let uploadbutton = document.getElementById("uploadbutton");
+        uploadbutton.style["display"] = "none";
+    }
+
     const usersRef = db.collection('users').doc(user.uid);
     usersRef.get().then((doc) => {
         if (doc.exists) {
@@ -168,7 +177,7 @@ const Profile = () => {
             <NavigationBar />
             <div className="Profile">
                 <div id="avatar">
-                    <ReactImageFallback src={userAvatar} initialImage={TransparentImg} fallbackImage="https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=7c48767b-3c49-4c46-98e7-ab627f5ae81d" id="useravatar" alt="Avatar" />
+                    <ReactImageFallback src={userAvatar} initialImage={TransparentImg} fallbackImage="https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=3a9eda40-579e-4e89-b27b-83be349e71bd" id="useravatar" alt="Avatar" />
                     <label for="uploadbutton">
                         <input type="file" accept="image/*" onChange={handleChange} id="uploadbutton"></input>
                         <img id="avataredit" src={Edit} alt="AvatarEdit" />
