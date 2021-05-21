@@ -1,16 +1,16 @@
 import { authService, db } from "firebase_eb";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import logo from "../images/logo.png";
 import { Alert, Accordion, Button, Card, ListGroup } from 'react-bootstrap';
-import { storage } from 'firebase/storage';
+import RouteHistoryCard from '../components/RouteHistoryCard'
+import NavigationBar from '../components/NavigationBar'
 
 const Profile = () => {
     const history = useHistory();
-    const user = firebase.auth().currentUser;
+    const user = authService.currentUser;
     const [userAvatar, setUserAvatar] = useState("");
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
