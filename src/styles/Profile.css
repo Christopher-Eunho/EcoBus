@@ -1,23 +1,12 @@
 .profileBody{
-    background-color: #FFFFCC;
-    height: 85vh;
+    background-color: rgb(248, 255, 208);
+    min-height: 100vh;
+    height: fit-content;
 }
 
 .Profile{
     margin:auto;
     text-align:center;
-}
-
-#logout{
-    float:right;
-    margin-top:3%;
-    margin-right:2%;
-}
-
-#logo {
-    margin-top: 5%;
-    margin-left:2%;
-    max-width: 20%;
 }
 
 #avatar > img{
@@ -26,6 +15,7 @@
 
 #userHistory{
     margin:5vw 5vw 0vw 5vw;
+    padding-bottom: 5vh; /* change to sticky later */ 
 }
 
 #avatar{
@@ -33,7 +23,8 @@
 }
 
 #avataredit{
-    margin-bottom: -50px;
+    margin-left: -10px;
+    margin-bottom: -100px;
 }
 
 #togglebutton{
@@ -50,42 +41,73 @@
     display:flex;
     justify-content: center;
     margin-top:1em;
-    align-self: center;
 }
 
 #emailForm{
     display:flex;
     justify-content: center;
     margin-top:1em;    
-    align-self: center;
-}
-
-#nameForm > img{
-    align-self: center;
-}
-
-#emailForm > img{
-    align-self: center;
 }
 
 #profileHeader{
     margin-right:2vw;
 }
 
-
-#editbutton{
-    margin: 1vw;
-}
-
-
 #toggleHeader{
     background-color: #1A8FDD;
 }
-
-
 
 #toggleButton{
     text-decoration: none;
     color: black;
     font-weight: bold;
+}
+
+#useravatar{
+    width: 128px;
+}
+
+#uploadbutton{
+    display:none;
+}
+
+#messagebox{
+    margin:auto;
+    margin-top:1em;
+    display:none;
+    max-width: 80%;
+    
+}
+
+#errorbox{
+    margin:auto;
+    margin-top: 1em;
+    display:none;
+    max-width: 80%;
+}
+
+#name-change{
+    display:none;
+}
+
+#email-change{
+    display:none;
+}
+
+#nameBtn{
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+
+    align-self: center;
+    margin-left: 1vw;
+    margin-bottom:2vw;
+}
+
+#emailBtn{
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+
+    align-self: center;
+    margin-left: 1vw;
+    margin-bottom: 2vw;
 }

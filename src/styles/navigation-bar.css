@@ -1,0 +1,39 @@
+#navigation-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+#navigation-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#logout {
+    margin-top: 0px;
+}
+
+.navbar {
+    background-color: rgb(248, 255, 200);
+    border-bottom: 1px solid rgb(160, 156, 156);
+}
+
+.navbar a{
+    color: black;
+}
+
+.bcit-navigation-bar {
+    padding: 10px;
+    background-color: rgb(0, 60, 113);
+    border-bottom: 1px solid white;
+}
+
+.bcit-navigation-bar a{
+    color: white;
+}
+
+.bcit-navigation-bar button {
+    background-color: yellow;
+    border-color: yellow;
+    color: black;
+}

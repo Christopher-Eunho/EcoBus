@@ -1,9 +1,9 @@
-import { authService, firebaseInstance } from "firebase_eb";
-import React, { useState } from "react";
-import firebase from "firebase/app";
-import Button from 'react-bootstrap/Button'; // https://react-bootstrap.github.io/
-import Form from 'react-bootstrap/Form';
-import GoogleButton from 'react-google-button'; // https://www.npmjs.com/package/react-google-button
+import { authService, firebaseInstance, db } from "firebase_eb"
+import 'firebase/firestore'
+import React, { useState } from "react"
+import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
+import Form from 'react-bootstrap/Form'
+import GoogleButton from 'react-google-button' // https://www.npmjs.com/package/react-google-button
 import '../styles/auth.css'
 import logo from '../images/logo.png'
 
@@ -31,12 +31,11 @@ const Auth = () => {
                 provider = new firebaseInstance.auth.GoogleAuthProvider();
             }
 
-            const date = await authService.signInWithPopup(provider);
+            const data = await authService.signInWithPopup(provider);
         } catch (error) {
             console.log(error);
         }
     }
-
 
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -48,6 +47,18 @@ const Auth = () => {
                     email,
                     password
                 );
+                
+                // Add user email to firestore start
+                // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
+                var user = authService.currentUser;
+
+                const userRef = db.collection("users").doc(user.uid).set({
+                    name: user.email.split("@")[0], 
+                    email: user["email"],
+                    avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=3a9eda40-579e-4e89-b27b-83be349e71bd'
+                });
+                // Add user email to firestore end
+                
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
             }
@@ -57,9 +68,7 @@ const Auth = () => {
         }
     };
 
-
     const toggleAccount = () => setNewAccount((prev) => !prev);
-
 
     return (
         <div className="center">
@@ -105,17 +114,15 @@ const Auth = () => {
                     </Button>
                     
                     <Button variant="danger" className="welcome-message" id="change-to-sign-in-up" onClick={toggleAccount}> 
-                        I want to {newAccount? "sign in!" : "sign up!"} 
+                        I want to {newAccount ? "sign in!" : "sign up!"} 
                     </Button>
                 </div>
+                <span id="error-message"> {error} </span>
             </Form>
-            
-            <GoogleButton className="center" onClick={() => onSocialClick("google")} />
 
-            <span>{error} </span>
+            <GoogleButton className="center" onClick={() => onSocialClick("google")} />
         </div>
     );
-
 };
 
 export default Auth;

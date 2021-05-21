@@ -37,3 +37,9 @@
     width: 200px;
     height: 40px;
 }
+
+#error-message {
+    color: red;
+    background-color: yellow;
+    margin: auto;
+}
