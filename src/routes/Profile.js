@@ -8,7 +8,6 @@ import { Alert, Accordion, Button, Card, ListGroup } from 'react-bootstrap';
 import RouteHistoryCard from '../components/RouteHistoryCard'
 import NavigationBar from '../components/NavigationBar'
 import { storage } from 'firebase/storage';
-import NavigationBar from '../components/NavigationBar'
 import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
 
@@ -193,8 +192,6 @@ const Profile = () => {
         let uploadbutton = document.getElementById("uploadbutton");
         uploadbutton.style["display"] = "none";
     }
-
-    const usersRef = db.collection('users').doc(user.uid);
     usersRef.get().then((doc) => {
         if (doc.exists) {
 
