@@ -6,6 +6,15 @@ import { db } from "firebase_eb"
 
 
 const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
+
+    const user = authService.currentUser;
+    const usersRef = db.collection('users');
+    
+    // Source: https://upmostly.com/tutorials/how-to-refresh-a-page-or-component-in-react
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     let routeDetailsContainer = document.getElementById("route-details-container");
     let navBar = document.getElementById("navigation-bar");
     let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
