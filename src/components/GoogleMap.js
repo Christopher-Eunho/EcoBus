@@ -1,10 +1,11 @@
-import React, {useEffect, useState, useRef, useCallback} from 'react'
-import { GoogleMap,
-         Marker,
-         useLoadScript,
-         DirectionsService,
-         DirectionsRenderer,
-         } from '@react-google-maps/api';
+import React, { useEffect, useState, useRef, useCallback } from 'react'
+import {
+    GoogleMap,
+    Marker,
+    useLoadScript,
+    DirectionsService,
+    DirectionsRenderer,
+} from '@react-google-maps/api';
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestinationSearch } from './DestinationSearch';
@@ -12,7 +13,7 @@ import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
-import {emissionsProducedKilograms} from 'constants.js'
+import { emissionsProducedKilograms } from 'constants.js'
 const libraries = ["places"];
 
 const mapContainerStyle = {
@@ -27,7 +28,6 @@ const options = {
     zoomControl: true,
     gestureHandling: "greedy"
 }
-
 
 function GMap() {
 
@@ -47,7 +47,7 @@ function GMap() {
     const [destinationName, setDestinationName] = useState("");
     const [transitResponse, setTransitResponse] = useState("");
     const [driveResponse, setDriveResponse] = useState("");
-    const [destinationInUse, setDestinationInUse ] = useState({});
+    const [destinationInUse, setDestinationInUse] = useState({});
     const [originInUse, setOriginInUse] = useState({});
     const [transitRouteDetails, setTransitRouteDetails] = useState({});
     const [drivingRouteDetails, setDrivingRouteDetails] = useState({});
@@ -63,15 +63,14 @@ function GMap() {
             setDestinationInUse(destination);
             setOriginInUse(origin);
             console.log(transitRouteDetails)
-            
-        if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
-            showEasterEgg();
-        }
-        if (destinationName.includes("Taco")||originName.includes("Taco")) {
-            showSecondEasterEgg();
-        }
-        hideSearchForm();
-        showRouteDetailsContainer();
+            if (destinationName.includes("BCIT") || originName.includes("BCIT")) {
+                showEasterEgg();
+            }
+            if (destinationName.includes("Taco")||originName.includes("Taco")) {
+                showSecondEasterEgg();
+            }
+            hideSearchForm();
+            showRouteDetailsContainer();
         } else {
             showLocationError();
         }
@@ -81,37 +80,32 @@ function GMap() {
 
     const transitCallback = async (response) => {
         if (response !== null) {
+            console.log()
             setTransitRouteDetails(response.routes[0].legs[0]);
             displayTransitRouteDetails(response.routes[0].legs[0]);
             console.log("Transit route set");
-            // If no input passed, transitRouteDetails is [Object object]
-            console.log(transitRouteDetails)
-            // document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
-            // document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
-            // document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
-            // document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);            
-          if (response.status === 'OK') {
-            setTransitResponse(response);
-          } else {
-            console.log('response: ', response)
-          }
+            if (response.status === 'OK') {
+                setTransitResponse(response);
+            } else {
+                console.log('response: ', response)
+            }
         }
-      }
-    
+    }
+
 
     const driveCallback = (response) => {
         if (response !== null) {
             setDrivingRouteDetails(response.routes[0].legs[0]);
             displayEmissionsSaved(response.routes[0].legs[0].distance.value)
             console.log("Driving route set");
-          if (response.status === 'OK') {
-            setDriveResponse(response);
-          } else {
-            console.log('response: ', response)
-          }
+            if (response.status === 'OK') {
+                setDriveResponse(response);
+            } else {
+                console.log('response: ', response)
+            }
         }
-      }
-        
+    }
+
     const mapRef = useRef(); // this allows us to retain state w/o re-rendering
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
@@ -123,19 +117,19 @@ function GMap() {
         } else {
             console.log("GeoLocation Not Available");
         }
-        
+
     }, []); // 
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
         libraries
-      });
+    });
 
 
-    const panTo = useCallback(({lat, lng}) => {
-        mapRef.current.panTo({lat, lng});
+    const panTo = useCallback(({ lat, lng }) => {
+        mapRef.current.panTo({ lat, lng });
         mapRef.current.setZoom(14);
-    },[]);
+    }, []);
 
     function hideSearchForm() {
         let searchFormContainer = document.getElementById("search-container");
@@ -150,8 +144,8 @@ function GMap() {
     }
 
     function displayTransitRouteDetails(transitRouteData) {
-            document.getElementById("transit-distance-display").innerHTML = transitRouteData.distance.text;
-            document.getElementById("transit-duration-display").innerHTML = transitRouteData.duration.text;
+        document.getElementById("transit-distance-display").innerHTML = transitRouteData.distance.text;
+        document.getElementById("transit-duration-display").innerHTML = transitRouteData.duration.text;
     }
 
     function displayEmissionsSaved(drivingDistanceMetres) {
@@ -189,17 +183,17 @@ function GMap() {
     if (loadError) return "error";
     if (!isLoaded) return "Loading";
 
-    return(
+    return (
         <>
             <div>
-                <CurrentButton panTo={panTo} setCurrentLocation={setCurrentLocation}/> 
-                <GoogleMap 
-                mapContainerStyle={mapContainerStyle} 
-                zoom={13} 
-                center={currentLocation}
-                options={options}
-                onClick={(event) => {console.log(event)}}
-                onLoad={onMapLoad}
+                <CurrentButton panTo={panTo} setCurrentLocation={setCurrentLocation} />
+                <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    zoom={13}
+                    center={currentLocation}
+                    options={options}
+                    onClick={(event) => { console.log(event) }}
+                    onLoad={onMapLoad}
                 >
                     <DirectionsService
                         options={{ 
@@ -219,7 +213,6 @@ function GMap() {
                     />
 
                     <DirectionsRenderer
-                          
                         options={{ 
                             directions: transitResponse,
                             markerOptions: {
@@ -227,41 +220,42 @@ function GMap() {
                             }
                         }}
                     />   
+                    
                     <Marker
                         position={currentLocation}
                         icon={{
-                        origin: new window.google.maps.Point(0, 0),
-                        anchor: new window.google.maps.Point(15, 15),
-                        scaledSize: new window.google.maps.Size(30, 30),
+                            origin: new window.google.maps.Point(0, 0),
+                            anchor: new window.google.maps.Point(15, 15),
+                            scaledSize: new window.google.maps.Size(30, 30),
                         }}
                     />
                     <Marker
                         position={destination}
                         icon={{
                             path:
-                            "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
-                          fillColor: "rgb(88, 164, 206, 0.7)",
-                          fillOpacity: 1,
-                          strokeWeight: 0,
-                          rotation: 0,
-                          scale: 2,
-                          anchor: new window.google.maps.Point(15, 30),
+                                "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                            fillColor: "rgb(88, 164, 206, 0.7)",
+                            fillOpacity: 1,
+                            strokeWeight: 0,
+                            rotation: 0,
+                            scale: 2,
+                            anchor: new window.google.maps.Point(15, 30),
                         }}
                     />
                     {(
                         (currentLocation.lat != origin.lat && currentLocation.lng != origin.lng) && <Marker
-                        position={origin}
-                        icon={{
-                            path:
-                            "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
-                          fillColor: "rgb(245, 148, 57, 0.7)",
-                          fillOpacity: 1,
-                          strokeWeight: 0,
-                          rotation: 0,
-                          scale: 2,
-                          anchor: new window.google.maps.Point(15, 30),
-                        }}
-                    />
+                            position={origin}
+                            icon={{
+                                path:
+                                    "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                                fillColor: "rgb(245, 148, 57, 0.7)",
+                                fillOpacity: 1,
+                                strokeWeight: 0,
+                                rotation: 0,
+                                scale: 2,
+                                anchor: new window.google.maps.Point(15, 30),
+                            }}
+                        />
                     )}
                 </GoogleMap>
                 <section className={"search-process-container"} id="search-container">
@@ -283,23 +277,20 @@ function GMap() {
                     setIsDestinationValid={setIsDestinationValid}/>
                     
                     <div id="error-search-button">
-                        <span id="locaiton-error">Please enter valid locations</span>
+                        <span id="location-error">Please enter valid locations</span>
                         <button id="submit-search-button" onClick={searchClick}>
                             <img src={Search} alt="Search Button"/>
                         </button>
                     </div>
                     
                 </section>
-                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails}/>
+                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
                 <SavedTransitRoute />
             </div>
         </>
 
     );
 
-   
-
-    
-    };
+};
 
 export default GMap
