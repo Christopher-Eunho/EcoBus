@@ -10,16 +10,8 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
     const user = authService.currentUser;
     const usersRef = db.collection('users').doc(user.uid);
 
-    const goBack = () => {
-        let routeDetailsContainer = document.getElementById("route-details-container");
-        routeDetailsContainer.style["display"] = "none";
-        routeDetailsContainer.className = "search-process-container";
-
-        let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-        transitJourneySavedContainer.className = "search-process-container journey-saved-container";
-
-        let searchFormContainer = document.getElementById("search-container");
-        searchFormContainer.style["display"] = "flex";
+    function refreshPage() {
+        window.location.reload(false);
     }
 
     const saveJourney = () => {
@@ -36,6 +28,8 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
                         distance: transitRouteDetails.distance.text,
                         duration: transitRouteDetails.duration.text,
                         CO2_saved_kg_per_km: emissionsPerKm,
+                    }).then(function(){
+                        refreshPage();
                     })
                 } else {
                     // doc.data() will be undefined in this case
@@ -44,35 +38,12 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
             }).catch((error) => {
                 console.log("Error getting document:", error);
             });
-
         }
-
-        let drivingOptionDetails = document.getElementById("route-details-container");
-        drivingOptionDetails.style["display"] = "none";
-
-        let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-        drivingJourneySavedContainer.style["display"] = "block";
-
-        setTimeout(function () {
-            let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-            let searchFormContainer = document.getElementById("search-container");
-
-            drivingJourneySavedContainer.style["display"] = "none";
-            searchFormContainer.style["display"] = "flex";
-
-            let routeDetailsContainer = document.getElementById("route-details-container");
-            routeDetailsContainer.className = "search-process-container";
-
-            let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-            transitJourneySavedContainer.className = "search-process-container journey-saved-container";
-
-        }, 7000);
-
     }
 
     return (
         <section className={"search-process-container"} id="route-details-container">
-            <button className="back-button" onClick={goBack}>
+            <button className="back-button" onClick={refreshPage}>
                 <img src={BackButton} alt="Back Button" />
             </button>
 
@@ -89,7 +60,7 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
                 </div>
             </div>
 
-            <button className="save-journey-button" onClick={saveJourney}>SAVE THIS JOURNEY</button>
+            <button className="save-journey-button" onClick={saveJourney}>SAVE THIS ROUTE</button>
         </section>
     )
 }
