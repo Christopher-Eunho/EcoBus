@@ -10,6 +10,7 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
     const user = authService.currentUser;
     const usersRef = db.collection('users').doc(user.uid);
 
+    // Source: https://upmostly.com/tutorials/how-to-refresh-a-page-or-component-in-react
     function refreshPage() {
         window.location.reload(false);
     }
