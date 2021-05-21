@@ -28,11 +28,6 @@ const options = {
     gestureHandling: "greedy"
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> Taco-Easter-Egg
 
 function GMap() {
 
