@@ -2,6 +2,7 @@ import BackButton from '../images/back-button.png'
 import Leaf from '../images/leaf.png'
 import 'firebase/firestore'
 import { authService } from "firebase_eb"
+import {emissionsProducedKilograms} from 'constants.js'
 import { db } from "firebase_eb"
 
 
