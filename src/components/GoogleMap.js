@@ -29,11 +29,7 @@ const options = {
     gestureHandling: "greedy"
 }
 
-const routeDetailsContainer = document.getElementById("route-details-container");
-const navBar = document.getElementById("navbar");
-const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-const searchFormContainer = document.getElementById("search-container");
-
+ 
 
 function GMap() {
 
@@ -53,13 +49,8 @@ function GMap() {
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
             setOriginInUse(origin);
-            console.log(transitRouteDetails)
+            
 
-            // If no input passed, transitRouteDetails is [Object object]
-            document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
-            document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
-            document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
-            document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
@@ -69,10 +60,16 @@ function GMap() {
         showRouteDetail();
     } 
 
-    const transitCallback = (response) => {
+    const transitCallback = async (response) => {
         if (response !== null) {
-            setTransitRouteDetails(response.routes[0].legs[0]);
+            await setTransitRouteDetails(response.routes[0].legs[0]);
             console.log("Transit route set");
+            // If no input passed, transitRouteDetails is [Object object]
+            console.log(transitRouteDetails)
+            // document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
+            // document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
+            // document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            // document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);            
           if (response.status === 'OK') {
             setTransitResponse(response);
           } else {
@@ -120,16 +117,23 @@ function GMap() {
     },[]);
 
     function hideSearchForm() {
+        
+    const searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "none";
     }
 
     function showRouteDetail() {
+        const routeDetailsContainer = document.getElementById("route-details-container");
+       
         routeDetailsContainer.style["display"] = "flex";
         routeDetailsContainer.style["flexDirection"] = "column";
         routeDetailsContainer.style["justifyContent"] = "space-around";
     }
 
     function showEasterEgg() {
+        const routeDetailsContainer = document.getElementById("route-details-container");
+        const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+        const navBar = document.getElementById("navbar");
         routeDetailsContainer.className = "bcit-search-process-container";
         navBar.className = "bcit-navbar";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
@@ -153,57 +157,29 @@ function GMap() {
                 onLoad={onMapLoad}
                 >
                     <DirectionsService
-                        // required
                         options={{ 
                             destination: destinationInUse,
                             origin: originInUse,
                             travelMode: "TRANSIT"
                         }}
-                        // required
                         callback={transitCallback}
-                        // optional
-                        onLoad={directionsService => {
-                            console.log('DirectionsService onLoad directionsService: ', directionsService)
-                        }}
-                        // optional
-                        onUnmount={directionsService => {
-                            console.log('DirectionsService onUnmount directionsService: ', directionsService)
-                        }}
                     />
                     <DirectionsService
-                        // required
                         options={{ 
                             destination: destinationInUse,
                             origin: originInUse,
                             travelMode: "DRIVING"
-                        }}
-                        // required
+                        }} 
                         callback={driveCallback}
-                        // optional
-                        onLoad={directionsService => {
-                            console.log('DirectionsService onLoad directionsService: ', directionsService)
-                        }}
-                        // optional
-                        onUnmount={directionsService => {
-                            console.log('DirectionsService onUnmount directionsService: ', directionsService)
-                        }}
                     />
 
                     <DirectionsRenderer
-                          // required
+                          
                         options={{ 
                             directions: transitResponse,
                             markerOptions: {
                                 visible: false
                             }
-                        }}
-                        // optional
-                        onLoad={directionsRenderer => {
-                            console.log('DirectionsRenderer onLoad directionsRenderer: ', directionsRenderer)
-                        }}
-                        // optional
-                        onUnmount={directionsRenderer => {
-                            console.log('DirectionsRenderer onUnmount directionsRenderer: ', directionsRenderer)
                         }}
                     />   
                     <Marker
