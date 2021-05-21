@@ -1,15 +1,13 @@
-import { authService, db } from "firebase_eb";
+import { db } from "firebase_eb";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import logo from "../images/logo.png";
-import { Alert, Accordion, Button, Card, ListGroup } from 'react-bootstrap';
+import { Alert, Accordion, Button, Card, ListGroup, Modal } from 'react-bootstrap';
 import { storage } from 'firebase/storage';
+import NavigationBar from '../components/NavigationBar'
 
 const Profile = () => {
-    const history = useHistory();
     const user = firebase.auth().currentUser;
     const [userAvatar, setUserAvatar] = useState("");
     const [userName, setUserName] = useState("");
@@ -20,11 +18,9 @@ const Profile = () => {
     const [totalEmissionSaved, setEmissions] = useState(0);
     const [message, setMessage] = useState("");
     const storage = firebase.storage()
-
-    const onLogoutClick = () => {
-        authService.signOut();
-        history.push("/");
-    }
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     /* 
     Image upload start
@@ -35,23 +31,28 @@ const Profile = () => {
     const [url, setURL] = useState("");
 
     function handleChange(e) {
+        showUploadButton();
+        hideAvatarEditBtn();
         setFile(e.target.files[0]);
     }
 
     function handleUpload() {
-        const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-        uploadTask.on("state_changed", console.log, console.error, () => {
-            storage
-                .ref("images")
-                .child(file.name)
-                .getDownloadURL()
-                .then((url) => {
-                    setFile(null);
-                    setURL(url);
-                    console.log(url)
-                });
+        return new Promise(resolve => {
+            const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+            uploadTask.on("state_changed", console.log, console.error, () => {
+                storage
+                    .ref("images")
+                    .child(file.name)
+                    .getDownloadURL()
+                    .then((url) => {
+                        setFile(null);
+                        setURL(url);
+                        resolve(url);
+                    });
+            });
         });
     }
+
     /*Image upload end*/
 
     function getUserStats() {
@@ -59,7 +60,7 @@ const Profile = () => {
         setDistance(0);
         setEmissions(0);
         try {
-            db.collection("users").doc(user.uid).collection("routes").get() // from BCITCOMP 1800 Projects 1, @author: Carly Orr
+            db.collection("users").doc(user.uid).collection("routes").get() // from BCIT COMP 1800 Projects 1, @author: Carly Orr
                 .then(function (snap) {
                     snap.forEach(function (doc) {
                         var n = parseFloat(doc.data().distance.split(" ")[0]);
@@ -72,18 +73,12 @@ const Profile = () => {
         }
     }
 
-
-
-    const saveChanges = async (e) => {
-        e.preventDefault();
+    async function saveChanges() {
         var newName = document.getElementById("name-change").value;
         var newEmail = document.getElementById("email-change").value;
 
-        // console.log(file);
-        // await handleUpload();
+        let newAvatar = await handleUpload();
 
-        // console.log(url);
-        // console.log("all good");
         if (user !== null) {
             try {
                 if (userName !== newName && newName.trim() !== "") {
@@ -93,8 +88,8 @@ const Profile = () => {
                     await user.updateEmail(newEmail); // update email in authentication
                     db.collection("users").doc(user.uid).update({ email: newEmail }); //update email in db
                 }
-                if (url !== "") {
-                    db.collection("users").doc(user.uid).update({ avatar: url });
+                if (newAvatar !== "") {
+                    db.collection("users").doc(user.uid).update({ avatar: newAvatar });
                 }
                 displayMessageBox();
                 setMessage("Profile updated!");
@@ -105,25 +100,25 @@ const Profile = () => {
         }
     };
 
-    function displayMessageBox(){
+    function displayMessageBox() {
         let messagebox = document.getElementById("messagebox");
         messagebox.style["display"] = "block";
     }
 
-    function displayErrorBox(){
+    function displayErrorBox() {
         let errorbox = document.getElementById("errorbox");
         errorbox.style["display"] = "block";
     }
 
-    function nameTextToForm(){
+    function nameTextToForm() {
         let nameText = document.getElementById("nametext");
         nameText.style["display"] = "none";
 
         let nameForm = document.getElementById("name-change");
         nameForm.style["display"] = "block";
     }
-    
-    function emailTextToForm(){
+
+    function emailTextToForm() {
         let emailText = document.getElementById("emailtext");
         emailText.style["display"] = "none";
 
@@ -131,6 +126,15 @@ const Profile = () => {
         emailForm.style["display"] = "block";
     }
 
+    function showUploadButton() {
+        let uploadbutton = document.getElementById("uploadbutton");
+        uploadbutton.style["display"] = "inline";
+    }
+
+    function hideAvatarEditBtn() {
+        let avatarBtn = document.getElementById("avataredit");
+        avatarBtn.style["display"] = "none";
+    }
 
     const usersRef = db.collection('users').doc(user.uid);
     usersRef.get().then((doc) => {
@@ -149,36 +153,17 @@ const Profile = () => {
     });
 
 
-
     return (
 
         <div className="profileBody">
-            <NavigationBar/>
+            <NavigationBar />
             <div className="Profile">
                 <div id="avatar">
-
-                    {/* <img src={url} alt="Avatar" onerror="this.style.display='none'" />
-
-                <input type="image" id="avataredit" src={Edit} alt="AvatarEdit" onSubmit={handleUpload} />
-
-
-                <form onSubmit={handleUpload}>
-                <input type="file" onChange={handleChange} />
-                <button disabled={!file}>upload to firebase</button>
-                </form> */}
-
-
-
                     <img src={userAvatar} id="useravatar" alt="Avatar" />
-
                     <label for="uploadbutton">
                         <input type="file" accept="image/*" onChange={handleChange} id="uploadbutton"></input>
                         <img id="avataredit" src={Edit} alt="AvatarEdit" />
                     </label>
-
-
-
-
                 </div>
                 <form>
                     <span id="nameForm">
@@ -200,10 +185,10 @@ const Profile = () => {
                         </button>
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
-                    <Alert id="messagebox" variant ="success">{message}</Alert>
+                    <Alert id="messagebox" variant="success">{message}</Alert>
                     <Alert id="errorbox" variant="danger">{error}</Alert>
                     <br />
-                    <Button variant="success" type="submit" id="saveEdits" onClick={saveChanges}>Save Changes</Button>
+                    <Button variant="success" type="button" id="saveEdits" onClick={saveChanges}>Save Changes</Button>
                 </form>
 
                 <div id="userHistory">
@@ -267,9 +252,8 @@ const Profile = () => {
                         </Card>
                     </Accordion>
                 </div>
-
             </div>
-        </div>
+        </div >
     );
 }
 

@@ -25,26 +25,29 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
     }
 
     const saveJourney = () => {
-        console.log(transitRouteDetails.departure_time.value);
-        if (authService.currentUser != null) {
-            db.collection('users').get()
-                .then((snap) => {
-                    snap.docs.forEach(doc => {
-                        if (doc.data().email === authService.currentUser.email) {
-                            console.log(doc.id);
-                            db.collection("users").doc(doc.id).collection("routes").add({
-                                date_of_trip: transitRouteDetails.departure_time.value,
-                                origin: transitRouteDetails.start_address,
-                                destination: transitRouteDetails.end_address,
-                                distance: transitRouteDetails.distance.text,
-                                duration: transitRouteDetails.duration.text,
-                            })
-                        }
+        const distanceInKilometers = drivingRouteDetails.distance.value / 1000;
+        const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
+        console.log(distanceInKilometers);
+        if (user != null) {
+            usersRef.get().then((doc) => {
+                if (doc.exists) {
+                    db.collection("users").doc(user.uid).collection("routes").add({
+                        date_of_trip: transitRouteDetails.departure_time.value,
+                        origin: transitRouteDetails.start_address,
+                        destination: transitRouteDetails.end_address,
+                        distance: transitRouteDetails.distance.text,
+                        duration: transitRouteDetails.duration.text,
+                        emissions_saved: emissionsPerKm,
                     })
-                }).catch(function (error) {
-                    console.log(error);
-                })
-            }
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+
+        }
 
         let drivingOptionDetails = document.getElementById("route-details-container");
         drivingOptionDetails.style["display"] = "none";

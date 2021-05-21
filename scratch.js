@@ -83,3 +83,25 @@ const Auth = () => {
 };
 
 export default Auth;
+
+
+// const [show, setShow] = useState(false);
+// const handleClose = () => setShow(false);
+// const handleShow = () => setShow(true);
+
+// function deleteUserData(){
+
+// }
+// <div id="clearuserdata">
+// <Button variant="danger" onClick={handleShow}>Clear all data</Button>
+// <Modal show={show} onHide={handleClose}>
+//     <Modal.Header closeButton>
+//         <Modal.Title>Delete all user data?</Modal.Title>
+//     </Modal.Header>
+//     <Modal.Body>Note: This cannot be undone.</Modal.Body>
+//     <Modal.Footer>
+//         <Button variant="secondary" onClick={handleClose}>Close</Button>
+//         <Button variant="danger" onClick={handleClose}>Delete my data</Button>
+//     </Modal.Footer>
+// </Modal>
+// </div>

@@ -15,7 +15,7 @@
 
 #userHistory{
     margin:5vw 5vw 0vw 5vw;
-    padding-bottom: 20vh; /* change to sticky later */ 
+    padding-bottom: 5vh; /* change to sticky later */ 
 }
 
 #avatar{
@@ -48,9 +48,6 @@
     justify-content: center;
     margin-top:1em;    
 }
-
-
-
 
 #profileHeader{
     margin-right:2vw;
