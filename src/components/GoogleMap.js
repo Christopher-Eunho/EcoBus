@@ -158,7 +158,7 @@ function GMap() {
     function showEasterEgg() {
         const routeDetailsContainer = document.getElementById("route-details-container");
         const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-        const navBar = document.getElementById("navbar");
+        const navBar = document.getElementById("navigation-bar");
         routeDetailsContainer.className = "bcit-search-process-container";
         navBar.className = "bcit-navigation-bar";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
