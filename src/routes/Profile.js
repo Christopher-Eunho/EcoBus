@@ -19,29 +19,27 @@ const Profile = () => {
     const [userEmail, setUserEmail] = useState("");
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
     
-    const handleClick = () => {
+    const displayRouteDetails = () => {
         var routeCounter = 1;
         var routes = [];
         // idea for activating function only on first click sourced from: https://stackoverflow.com/questions/31702173/execute-clickfunction-only-first-click
         if (user != null) {
-            if (click == 0) {
-                usersRef.collection("routes").get()
-                    .then(function (snap) {
-                        snap.forEach(function (doc) {
-                            let route = doc.data();
-                                routes.push(
-                                    <RouteHistoryCard 
-                                        eventKey={routeCounter} 
-                                        origin={route.origin} 
-                                        destination={route.destination} 
-                                        distance={route.distance} 
-                                        emissionsSaved={route.emissions_saved}
-                                    />)
-                                routeCounter++;
-                        })
-                        setRouteHistoryArray(routes);
+            usersRef.collection("routes").get()
+                .then(function (snap) {
+                    snap.forEach(function (doc) {
+                        let route = doc.data();
+                            routes.push(
+                                <RouteHistoryCard 
+                                    eventKey={routeCounter} 
+                                    origin={route.origin} 
+                                    destination={route.destination} 
+                                    distance={route.distance} 
+                                    emissionsSaved={route.emissions_saved}
+                                />)
+                            routeCounter++;
                     })
-            }
+                    setRouteHistoryArray(routes);
+                })
         }
     }
 
@@ -205,7 +203,7 @@ const Profile = () => {
 
                         <Card>
                             <Card.Header id="toggleHeader">
-                                <Accordion.Toggle as={Button} onClick={handleClick} variant="link" eventKey="1" id="toggleButton">
+                                <Accordion.Toggle as={Button} onClick={displayRouteDetails} variant="link" eventKey="1" id="toggleButton">
                                     Route History
                                 </Accordion.Toggle>
                             </Card.Header>
