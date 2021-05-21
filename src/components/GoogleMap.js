@@ -7,7 +7,7 @@ import { GoogleMap,
          } from '@react-google-maps/api';
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
-import { DestSearch } from './DestSearch';
+import { DestinationSearch } from './DestinationSearch';
 import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
@@ -51,14 +51,19 @@ function GMap() {
     const [originInUse, setOriginInUse] = useState({});
     const [transitRouteDetails, setTransitRouteDetails] = useState({});
     const [drivingRouteDetails, setDrivingRouteDetails] = useState({});
+    const [isOriginValid, setIsOriginValid] = useState(true);
+    const [isDestinationValid, setIsDestinationValid] = useState(false);
+    const [isOriginCurrent, setIsOriginCurrent] = useState(true);
     
     const searchClick = () => {
-        if (destination !== '' && origin !== '') {
+        console.log(isOriginCurrent)
+        console.log(isOriginValid)
+        console.log(isDestinationValid)
+        if ((isOriginValid || isOriginCurrent) && isDestinationValid) {
             setDestinationInUse(destination);
             setOriginInUse(origin);
             console.log(transitRouteDetails)
-        }
-
+            
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
             showEasterEgg();
         }
@@ -67,7 +72,12 @@ function GMap() {
         }
         hideSearchForm();
         showRouteDetailsContainer();
+        } else {
+            showLocationError();
+        }
     }
+            
+           
 
     const transitCallback = async (response) => {
         if (response !== null) {
@@ -169,6 +179,10 @@ function GMap() {
         taco3.className = "falling-taco3";
         taco4.className = "falling-taco4";
     }
+    const showLocationError = () => {
+        const errorMessage = document.getElementById("locaiton-error");
+        errorMessage.style.color = "red";
+    }
 
     
 
@@ -252,11 +266,29 @@ function GMap() {
                 </GoogleMap>
                 <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
-                    <OrginSearch panTo={panTo} setOrigin={setOrigin} setOriginName={setOriginName}/>                
-                    <DestSearch panTo={panTo} setDestination={setDestination} setDestinationName={setDestinationName}/>
-                    <button id="submit-search-button" onClick={searchClick}>
-                        <img src={Search} alt="Search Button"/>
-                    </button>
+                    
+                    <OrginSearch 
+                    panTo={panTo} 
+                    setOrigin={setOrigin} 
+                    setOriginName={setOriginName} 
+                    setIsOriginCurrent={setIsOriginCurrent} 
+                    setIsOriginValid={setIsOriginValid}
+                    setCurrentLocation={setCurrentLocation}/>                
+                    
+                    <DestinationSearch 
+                    panTo={panTo} 
+                    setDestination={setDestination} 
+                    setDestinationName={setDestinationName} 
+                    setCurrentLocation={setCurrentLocation} 
+                    setIsDestinationValid={setIsDestinationValid}/>
+                    
+                    <div id="error-search-button">
+                        <span id="locaiton-error">Please enter valid locations</span>
+                        <button id="submit-search-button" onClick={searchClick}>
+                            <img src={Search} alt="Search Button"/>
+                        </button>
+                    </div>
+                    
                 </section>
                 <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails}/>
                 <SavedTransitRoute />

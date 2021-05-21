@@ -7,6 +7,8 @@ import Edit from "../images/editbutton.png";
 import { Alert, Accordion, Button, Card, ListGroup } from 'react-bootstrap';
 import RouteHistoryCard from '../components/RouteHistoryCard'
 import NavigationBar from '../components/NavigationBar'
+import { storage } from 'firebase/storage';
+
 
 const Profile = () => {
     const history = useHistory();

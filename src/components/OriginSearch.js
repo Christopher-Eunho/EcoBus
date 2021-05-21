@@ -13,7 +13,20 @@ import {
 } from "@reach/combobox";
 
 //https://www.npmjs.com/package/use-places-autocomplete        
-export function OrginSearch({ panTo, setOrigin, setOriginName }) {
+export function OrginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurrent, setIsOriginValid, setCurrentLocation }) {
+
+    useEffect(() => {        
+        setValue("Current Location", false);
+        
+    },[]);
+    
+
+    const onChange = (e) => {
+        setValue(e.target.value);
+        setIsOriginCurrent(false);
+        setIsOriginValid(false);
+    };
+
     const {
         ready,
         value,
@@ -26,30 +39,28 @@ export function OrginSearch({ panTo, setOrigin, setOriginName }) {
             radius: searchRadius,
             },
         });
-
-
-
     
     const orginOnSelect = async (address) => {
-            
-            setValue(address, false);
+            setIsOriginValid(true);
             clearSuggestions();
-
-            try {
-                const results = await getGeocode({ address });
-                const { lat, lng } = await getLatLng(results[0]);
-                setOrigin({lat, lng});
-                setOriginName(value);
-                panTo({ lat, lng });
-            } catch (error) {
-                console.log("error");
-            }
+            setValue(address, false);
+            if(address === "Current Location"){
+                setCurrentAsOrgin();
+            }else{
+                try {
+                    
+                    const results = await getGeocode({ address });
+                    const { lat, lng } = await getLatLng(results[0]);
+                    setOrigin({lat, lng});
+                    setOriginName(value);
+                    panTo({ lat, lng });
+                } catch (error) {
+                    console.log("error");
+                }
+        }
         };
 
 
-    useEffect(() => {        
-        setValue("Current Location", false);
-    },[]);    
 
     return (
         <>
@@ -57,7 +68,7 @@ export function OrginSearch({ panTo, setOrigin, setOriginName }) {
             <Combobox onSelect={orginOnSelect}
             >
                 <ComboboxInput id="route-origin" value={value}
-                    onChange={(e) => {setValue(e.target.value);}}
+                    onChange={onChange}
                     disabled={!ready}
                     placeholder="Origin" />
                 <ComboboxPopover>
@@ -65,6 +76,8 @@ export function OrginSearch({ panTo, setOrigin, setOriginName }) {
                         {status === "OK" && data.map(({ id, description }) => (
                             <ComboboxOption key={id} value={description} />
                         ))}
+                        {status === "OK" && <ComboboxOption value={"Current Location"} />}
+                        
                     </ComboboxList>
                 </ComboboxPopover>
             </Combobox>
@@ -73,5 +86,13 @@ export function OrginSearch({ panTo, setOrigin, setOriginName }) {
     );
 
     
+
+    function setCurrentAsOrgin() {
+            navigator.geolocation.getCurrentPosition(async function (position) {
+                await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+                await setOrigin({ lat: position.coords.latitude, lng: position.coords.longitude });
+                panTo({ lat: position.coords.latitude, lng: position.coords.longitude });
+            });
+    }
     }
 
