@@ -18,9 +18,32 @@ const Profile = () => {
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
-    let click = 0;
-
-    // const storage = firebase.storage()
+    
+    const handleClick = () => {
+        var routeCounter = 1;
+        var routes = [];
+        // idea for activating function only on first click sourced from: https://stackoverflow.com/questions/31702173/execute-clickfunction-only-first-click
+        if (user != null) {
+            if (click == 0) {
+                usersRef.collection("routes").get()
+                    .then(function (snap) {
+                        snap.forEach(function (doc) {
+                            let route = doc.data();
+                                routes.push(
+                                    <RouteHistoryCard 
+                                        eventKey={routeCounter} 
+                                        origin={route.origin} 
+                                        destination={route.destination} 
+                                        distance={route.distance} 
+                                        emissionsSaved={route.emissions_saved}
+                                    />)
+                                routeCounter++;
+                        })
+                        setRouteHistoryArray(routes);
+                    })
+            }
+        }
+    }
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
 
@@ -116,28 +139,6 @@ const Profile = () => {
         console.log("Error getting document:", error);
     });
 
-    function addNewRouteHistoryCard() {
-        var routeCounter = 1;
-        // idea for activating function only on first click source: https://stackoverflow.com/questions/31702173/execute-clickfunction-only-first-click
-        if (user != null) {
-            if (click == 0) {
-                usersRef.collection("routes").get()
-                    .then(function (snap) {
-                        snap.forEach(function (doc) {
-                            let route = doc.data();
-                                console.log(route.origin);
-                                routeHistoryArray.push(<RouteHistoryCard eventKey={routeCounter} origin={route.origin} destination={route.destination} 
-                                                        distance={route.distance} emissionsSaved={route.emissions_saved}/>)
-                                routeCounter++;
-                                console.log(routeCounter);
-                                console.log(click);
-                        })
-                    })
-            }
-            click++;
-        }
-    }
-
     return (
 
         <div className="profileBody">
@@ -204,7 +205,7 @@ const Profile = () => {
 
                         <Card>
                             <Card.Header id="toggleHeader">
-                                <Accordion.Toggle as={Button} onClick={addNewRouteHistoryCard} variant="link" eventKey="1" id="toggleButton">
+                                <Accordion.Toggle as={Button} onClick={handleClick} variant="link" eventKey="1" id="toggleButton">
                                     Route History
                                 </Accordion.Toggle>
                             </Card.Header>
