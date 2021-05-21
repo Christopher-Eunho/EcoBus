@@ -145,6 +145,7 @@ function GMap() {
 
     function showSecondEasterEgg() {
         music.currentTime = 0;
+        music.volume = .5;
         music.play();
         taco1.className = "falling-taco1";
         taco2.className = "falling-taco2";
