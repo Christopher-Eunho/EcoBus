@@ -1,16 +1,16 @@
 import { authService, db } from "firebase_eb";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import logo from "../images/logo.png";
 import { Alert, Accordion, Button, Card, ListGroup } from 'react-bootstrap';
-import { storage } from 'firebase/storage';
+import RouteHistoryCard from '../components/RouteHistoryCard'
+import NavigationBar from '../components/NavigationBar'
 
 const Profile = () => {
     const history = useHistory();
-    const user = firebase.auth().currentUser;
+    const user = authService.currentUser;
     const [userAvatar, setUserAvatar] = useState("");
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
@@ -19,11 +19,31 @@ const Profile = () => {
     const [totalDistance, setDistance] = useState(0);
     const [totalEmissionSaved, setEmissions] = useState(0);
     const [message, setMessage] = useState("");
-    const storage = firebase.storage()
-
-    const onLogoutClick = () => {
-        authService.signOut();
-        history.push("/");
+    // const storage = firebase.storage();
+    const [routeHistoryArray, setRouteHistoryArray] = useState([]);
+    
+    const displayRouteDetails = () => {
+        var routeCounter = 1;
+        var routes = [];
+        // idea for activating function only on first click sourced from: https://stackoverflow.com/questions/31702173/execute-clickfunction-only-first-click
+        if (user != null) {
+            usersRef.collection("routes").get()
+                .then(function (snap) {
+                    snap.forEach(function (doc) {
+                        let route = doc.data();
+                            routes.push(
+                                <RouteHistoryCard 
+                                    eventKey={routeCounter} 
+                                    origin={route.origin} 
+                                    destination={route.destination} 
+                                    distance={route.distance} 
+                                    emissionsSaved={route.emissions_saved}
+                                />)
+                            routeCounter++;
+                    })
+                    setRouteHistoryArray(routes);
+                })
+        }
     }
 
     /* 
@@ -34,24 +54,25 @@ const Profile = () => {
     const [file, setFile] = useState(null);
     const [url, setURL] = useState("");
 
+
     function handleChange(e) {
         setFile(e.target.files[0]);
     }
 
-    function handleUpload() {
-        const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-        uploadTask.on("state_changed", console.log, console.error, () => {
-            storage
-                .ref("images")
-                .child(file.name)
-                .getDownloadURL()
-                .then((url) => {
-                    setFile(null);
-                    setURL(url);
-                    console.log(url)
-                });
-        });
-    }
+    // function handleUpload() {
+    //     const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+    //     uploadTask.on("state_changed", console.log, console.error, () => {
+    //         storage
+    //             .ref("images")
+    //             .child(file.name)
+    //             .getDownloadURL()
+    //             .then((url) => {
+    //                 setFile(null);
+    //                 setURL(url);
+    //                 console.log(url)
+    //             });
+    //     });
+    // }
     /*Image upload end*/
 
     function getUserStats() {
@@ -71,8 +92,6 @@ const Profile = () => {
             console.log(err);
         }
     }
-
-
 
     const saveChanges = async (e) => {
         e.preventDefault();
@@ -132,7 +151,9 @@ const Profile = () => {
     }
 
 
+
     const usersRef = db.collection('users').doc(user.uid);
+
     usersRef.get().then((doc) => {
         if (doc.exists) {
 
@@ -148,12 +169,10 @@ const Profile = () => {
         console.log("Error getting document:", error);
     });
 
-
-
     return (
 
         <div className="profileBody">
-            <NavigationBar/>
+            <NavigationBar />
             <div className="Profile">
                 <div id="avatar">
 
@@ -225,49 +244,20 @@ const Profile = () => {
 
                         <Card>
                             <Card.Header id="toggleHeader">
-                                <Accordion.Toggle as={Button} variant="link" eventKey="1" id="toggleButton">
+                                <Accordion.Toggle as={Button} onClick={displayRouteDetails} variant="link" eventKey="1" id="toggleButton">
                                     Route History
                                 </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="1">
                                 <ListGroup variant="flush">
                                     <Accordion>
-                                        <Card>
-                                            <Card.Header>
-                                                <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                    Route 1
-                                                </Accordion.Toggle>
-                                            </Card.Header>
-                                            <Accordion.Collapse eventKey="0">
-                                                <ListGroup variant="flush">
-                                                    <ListGroup.Item variant="secondary">Starting location: UBC</ListGroup.Item>
-                                                    <ListGroup.Item variant="secondary">Ending location: Metrotown</ListGroup.Item>
-                                                    <ListGroup.Item variant="secondary">Total emissions saved: 7.5kg of CO2</ListGroup.Item>
-                                                </ListGroup>
-                                            </Accordion.Collapse>
-                                        </Card>
-
-                                        <Card>
-                                            <Card.Header>
-                                                <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                    Route 2
-                                                </Accordion.Toggle>
-                                            </Card.Header>
-                                            <Accordion.Collapse eventKey="1">
-                                                <ListGroup variant="flush">
-                                                    <ListGroup.Item variant="secondary">Starting location: BCIT Downtown</ListGroup.Item>
-                                                    <ListGroup.Item variant="secondary">Ending location: BCIT Burnaby</ListGroup.Item>
-                                                    <ListGroup.Item variant="secondary">Total emissions saved: 6kg of CO2</ListGroup.Item>
-                                                </ListGroup>
-                                            </Accordion.Collapse>
-                                        </Card>
+                                        {routeHistoryArray}
                                     </Accordion>
                                 </ListGroup>
                             </Accordion.Collapse>
                         </Card>
                     </Accordion>
                 </div>
-
             </div>
         </div>
     );

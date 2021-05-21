@@ -3,6 +3,8 @@
 }
 
 .main-viewport {
+  overflow: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -95,64 +97,6 @@
   background-color: bl;
 }
 
-/* For the BCIT navbar*/
-.bcit-navbar {
-  border: 1px solid black;
-  background-color: rgba(255, 255, 255, 1);
-  width: 100%;
-  height: 15vh;
-  bottom: 0;
-  float: left;
-  display: flex;
-  justify-content: space-between;
-}
-
-.bcit-navbar a {
-  margin: auto 0;
-}
-
-.bcit-navbar a:nth-child(1) button {
-  height: 42px;
-  width: 42px;
-  border-radius: 15px;
-  border: none;
-  background-color: rgb(0, 0, 0, 0);
-  margin-left: 3%;
-  float: left;
-}
-
-.bcit-navbar a:nth-child(1) button img {
-  margin-left: -5px;
-}
-
-.bcit-navbar a:nth-child(3) button {
-  height: 42px;
-  width: 42px;
-  border-radius: 15px;
-  border: none;
-  background-color: rgb(0, 0, 0, 0);
-  margin-right: 0%;
-  float: right;
-}
-
-.bcit-navbar a:nth-child(3) button img {
-  margin-left: -5px;
-}
-
-.bcit-navbar a:nth-child(2) button {
-  height: 60px;
-  width: 170px;
-  border-radius: 15px;
-  border: none;
-  background-color: rgb(0, 0, 0, 0);
-  margin-right: 10px;
-}
-
-.bcit-navbar a:nth-child(2) button img {
-  margin-left: -5px;
-  margin-top: 0px;
-}
-
 /* For route details box */
 #route-details-container {
   height: 25vh;
@@ -238,4 +182,81 @@
   .bcit-navbar a:nth-child(2) button {
     width:50vw;
   }
+}
+
+/*Off-screen Tacos*/
+.taco1 {
+  position: absolute;
+  width: 10vw;
+  top: -10vw;
+}
+.taco2 {
+  position: absolute;
+  width: 10vw;
+  top: -10vw;
+}
+.taco3 {
+  position: absolute;
+  width: 10vw;
+  top: -10vw;
+}
+.taco4 {
+  position: absolute;
+  width: 10vw;
+  top: -10vw;
+}
+
+/*Falling Tacos*/
+@keyframes falling{
+  from {
+    top: -25vh;
+    transform: rotate(0deg);
+  }
+  to {
+    top: 150vh;
+    transform: rotate(720deg);
+  }
+}
+
+.falling-taco1 {
+  z-index: 10;
+  position: absolute;
+  width: 20vh;
+  animation-name: falling;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.falling-taco2 {
+  z-index: 10;
+  position: absolute;
+  width: 20vh;
+  top: -10vh;
+  left: 25vw;
+  animation-name: falling;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.falling-taco3 {
+  z-index: 10;
+  position: absolute;
+  width: 20vh;
+  top: -5vw;
+  left: 50vw;
+  animation-name: falling;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.falling-taco4 {
+  z-index: 10;
+  position: absolute;
+  width: 20vh;
+  top: -15vw;
+  left: 75vw;
+  animation-name: falling;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }

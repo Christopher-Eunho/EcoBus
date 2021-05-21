@@ -6,21 +6,24 @@ import {db} from "firebase_eb"
 
 
 const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
+    let routeDetailsContainer = document.getElementById("route-details-container");
+    let navBar = document.getElementById("navigation-bar");
+    let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+    let searchFormContainer = document.getElementById("search-container");
+    let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+    let taco1 = document.getElementById("taco1");
+    let taco2 = document.getElementById("taco2");
+    let taco3 = document.getElementById("taco3");
+    let taco4 = document.getElementById("taco4");
+    let music = document.getElementById("music");
     
     const goBack = () => {
         console.log(transitRouteDetails)
         console.log(drivingRouteDetails)
-        let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "none";
-        routeDetailsContainer.className = "search-process-container";
-
-        let navBar = document.getElementById("navbar");
-        navBar.className = "navbar";
-
-        let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-        transitJourneySavedContainer.className = "search-process-container journey-saved-container";
-
-        let searchFormContainer = document.getElementById("search-container");
+        
+        resetValuesToDefault();
+        
         searchFormContainer.style["display"] = "flex";
     }
 
@@ -46,30 +49,32 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
                 })
             }
 
-        let drivingOptionDetails = document.getElementById("route-details-container");
-        drivingOptionDetails.style["display"] = "none";
+        let routeDetailsContainer = document.getElementById("route-details-container");
+        routeDetailsContainer.style["display"] = "none";
 
-        let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
         drivingJourneySavedContainer.style["display"] = "block";
 
         setTimeout(function () {
-            let drivingJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-            let searchFormContainer = document.getElementById("search-container");
+            
 
             drivingJourneySavedContainer.style["display"] = "none";
             searchFormContainer.style["display"] = "flex";
 
-            let routeDetailsContainer = document.getElementById("route-details-container");
-            routeDetailsContainer.className = "search-process-container";
-
-            let navBar = document.getElementById("navbar");
-            navBar.className = "navbar";
-
-            let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-            transitJourneySavedContainer.className = "search-process-container journey-saved-container";
+            resetValuesToDefault();
 
         }, 7000);
 
+    }
+
+    const resetValuesToDefault = () => {
+        routeDetailsContainer.className = "search-process-container";
+        navBar.className = "navbar";        
+        transitJourneySavedContainer.className = "search-process-container journey-saved-container";
+        taco1.className = "taco1";
+        taco2.className = "taco2";
+        taco3.className = "taco3";
+        taco4.className = "taco4";
+        music.pause();
     }
 
     return (
@@ -80,13 +85,13 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
 
             <div id="emissions-saved-message-container">
                 <img src={Leaf} alt="Leaf" id="leaf-icon" />
-                <h5 id="emissions-saved-message"><span id="emissions-saved-big-message">N/A</span> KG of CO2 saved</h5>
+                <h5 id="emissions-saved-message"><span id="emissions-saved-big-message">N/A</span> KG of C02 saved</h5>
 
                 <div id="transit-route-information">
                     <ul>
                         <li>Distance: <span id="transit-distance-display">N/A</span> </li>
                         <li>Duration: <span id="transit-duration-display">N/A</span> </li>
-                        <li>Emissions saved: <span id="emissions-saved-display">N/A</span>KG of CO2</li>
+                        <li>Emissions saved: <span id="emissions-saved-display">N/A</span>KG of C02</li>
                     </ul>
                 </div>
             </div>

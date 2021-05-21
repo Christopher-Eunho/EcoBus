@@ -12,8 +12,7 @@ import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
-import {emissionsProducedKilograms} from '../constants'
-
+import {emissionsProducedKilograms} from 'constants.js'
 const libraries = ["places"];
 
 const mapContainerStyle = {
@@ -29,10 +28,18 @@ const options = {
     gestureHandling: "greedy"
 }
 
- 
 
 function GMap() {
 
+    const routeDetailsContainer = document.getElementById("route-details-container");
+    const navBar = document.getElementById("navigation-bar");
+    const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+    const searchFormContainer = document.getElementById("search-container");
+    const taco1 = document.getElementById("taco1");
+    const taco2 = document.getElementById("taco2");
+    const taco3 = document.getElementById("taco3");
+    const taco4 = document.getElementById("taco4");
+    const music = document.getElementById("music");
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -49,26 +56,23 @@ function GMap() {
         if (destination !== '' && origin !== '') {
             setDestinationInUse(destination);
             setOriginInUse(origin);
-            
-
-            // If no input passed, transitRouteDetails is [Object object]
-            document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
-            document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
-            let distanceInKilometers = drivingRouteDetails.distance.value/1000;
-            document.getElementById("emissions-saved-big-message").innerHTML = Math.round(distanceInKilometers * emissionsProducedKilograms);
-            document.getElementById("emissions-saved-display").innerHTML = Math.round(distanceInKilometers * emissionsProducedKilograms);
+            console.log(transitRouteDetails)
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
             showEasterEgg();
         }
+        if (destinationName.includes("Taco")||originName.includes("Taco")) {
+            showSecondEasterEgg();
+        }
         hideSearchForm();
-        showRouteDetail();
-    } 
+        showRouteDetailsContainer();
+    }
 
     const transitCallback = async (response) => {
         if (response !== null) {
-            await setTransitRouteDetails(response.routes[0].legs[0]);
+            setTransitRouteDetails(response.routes[0].legs[0]);
+            displayTransitRouteDetails(response.routes[0].legs[0]);
             console.log("Transit route set");
             // If no input passed, transitRouteDetails is [Object object]
             console.log(transitRouteDetails)
@@ -88,6 +92,7 @@ function GMap() {
     const driveCallback = (response) => {
         if (response !== null) {
             setDrivingRouteDetails(response.routes[0].legs[0]);
+            displayEmissionsSaved(response.routes[0].legs[0].distance.value)
             console.log("Driving route set");
           if (response.status === 'OK') {
             setDriveResponse(response);
@@ -123,17 +128,27 @@ function GMap() {
     },[]);
 
     function hideSearchForm() {
-        
-    const searchFormContainer = document.getElementById("search-container");
+        let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "none";
     }
 
-    function showRouteDetail() {
-        const routeDetailsContainer = document.getElementById("route-details-container");
-       
+    function showRouteDetailsContainer() {
+        let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "flex";
         routeDetailsContainer.style["flexDirection"] = "column";
         routeDetailsContainer.style["justifyContent"] = "space-around";
+    }
+
+    function displayTransitRouteDetails(transitRouteData) {
+            document.getElementById("transit-distance-display").innerHTML = transitRouteData.distance.text;
+            document.getElementById("transit-duration-display").innerHTML = transitRouteData.duration.text;
+    }
+
+    function displayEmissionsSaved(drivingDistanceMetres) {
+        const distanceInKilometers = drivingDistanceMetres / 1000;
+        const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
+        document.getElementById("emissions-saved-big-message").innerHTML = emissionsPerKm;
+        document.getElementById("emissions-saved-display").innerHTML = emissionsPerKm;
     }
 
     function showEasterEgg() {
@@ -141,8 +156,18 @@ function GMap() {
         const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
         const navBar = document.getElementById("navbar");
         routeDetailsContainer.className = "bcit-search-process-container";
-        navBar.className = "bcit-navbar";
+        navBar.className = "bcit-navigation-bar";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+    }
+
+    function showSecondEasterEgg() {
+        music.currentTime = 0;
+        music.volume = .5;
+        music.play();
+        taco1.className = "falling-taco1";
+        taco2.className = "falling-taco2";
+        taco3.className = "falling-taco3";
+        taco4.className = "falling-taco4";
     }
 
     
@@ -233,7 +258,7 @@ function GMap() {
                         <img src={Search} alt="Search Button"/>
                     </button>
                 </section>
-                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
+                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails}/>
                 <SavedTransitRoute />
             </div>
         </>
