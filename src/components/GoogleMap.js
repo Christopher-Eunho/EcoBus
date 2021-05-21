@@ -12,6 +12,7 @@ import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
+import {emissionsProducedKilograms} from 'constants.js'
 
 const libraries = ["places"];
 
@@ -50,36 +51,19 @@ function GMap() {
             setDestinationInUse(destination);
             setOriginInUse(origin);
             console.log(transitRouteDetails)
-
-            // If no input passed, transitRouteDetails is [Object object]
-            // setTimeout(function() {
-            //     document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
-            //     document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
-            //     document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
-            //     document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
-            // }, 3000);
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
             showEasterEgg();
         }
         hideSearchForm();
-        showRouteDetail();
+        showRouteDetailsContainer();
     } 
-
-    // async function f2() {
-    //     var x = await transitCallback();
-    //     console.log(x);
-    // }
 
     const transitCallback = (response) => {
         if (response !== null) {
-            setTransitRouteDetails(response.routes[0].legs[0])
-            // .then(function(reponse) {
-            //     console.log(response)
-            // }).catch((error) => {
-            //     console.log(error)
-            // })
+            setTransitRouteDetails(response.routes[0].legs[0]);
+            displayTransitRouteDetails(response.routes[0].legs[0]);
             console.log("Transit route set");
           if (response.status === 'OK') {
             setTransitResponse(response);
@@ -93,7 +77,7 @@ function GMap() {
     const driveCallback = (response) => {
         if (response !== null) {
             setDrivingRouteDetails(response.routes[0].legs[0]);
-            console.log(response.routes[0].legs[0])
+            displayEmissionsSaved(response.routes[0].legs[0].distance.value)
             console.log("Driving route set");
           if (response.status === 'OK') {
             setDriveResponse(response);
@@ -133,11 +117,23 @@ function GMap() {
         searchFormContainer.style["display"] = "none";
     }
 
-    function showRouteDetail() {
+    function showRouteDetailsContainer() {
         let routeDetailsContainer = document.getElementById("route-details-container");
         routeDetailsContainer.style["display"] = "flex";
         routeDetailsContainer.style["flexDirection"] = "column";
         routeDetailsContainer.style["justifyContent"] = "space-around";
+    }
+
+    function displayTransitRouteDetails(transitRouteData) {
+            document.getElementById("transit-distance-display").innerHTML = transitRouteData.distance.text;
+            document.getElementById("transit-duration-display").innerHTML = transitRouteData.duration.text;
+    }
+
+    function displayEmissionsSaved(drivingDistanceMetres) {
+        const distanceInKilometers = drivingDistanceMetres / 1000;
+        const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
+        document.getElementById("emissions-saved-big-message").innerHTML = emissionsPerKm;
+        document.getElementById("emissions-saved-display").innerHTML = emissionsPerKm;
     }
 
     function showEasterEgg() {
@@ -146,8 +142,6 @@ function GMap() {
         routeDetailsContainer.className = "bcit-search-process-container";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
     }
-
-    
 
     if (loadError) return "error";
     if (!isLoaded) return "Loading";

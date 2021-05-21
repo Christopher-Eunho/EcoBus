@@ -14,7 +14,7 @@ const Profile = () => {
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
 
     const history = useHistory();
-    const user = firebase.auth().currentUser;
+    const user = authService.currentUser;
     // const [toggle, setToggle] = useState(false);
     // const [name, changeName] = useState("");
     const [userAvatar, setUserAvatar] = useState("");
@@ -30,12 +30,6 @@ const Profile = () => {
     const totalTrips = 0;
     const totalDistance = 0;
     const totalEmissionSaved = 0;
-
-
-    const onLogoutClick = () => {
-        authService.signOut();
-        history.push("/");
-    }
 
 
     // const onEdit =  async (event) => {
