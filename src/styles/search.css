@@ -2,6 +2,9 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+
+
 .main-viewport {
   display: flex;
   flex-direction: column;
@@ -43,6 +46,18 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+}
+
+#error-search-button {
+  display: flex;
+  flex-direction: row;
+  margin-left: 3%;
+}
+
+#locaiton-error {
+  flex-grow: 9;
+  color: rgb(248, 255, 208);
+  
 }
 
 #search-container p {
@@ -109,6 +124,11 @@
 
 .bcit-navbar a {
   margin: auto 0;
+}
+
+
+#setCurrentOrgin {
+  color :rgb(0, 60, 113)
 }
 
 .bcit-navbar a:nth-child(1) button {

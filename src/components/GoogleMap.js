@@ -7,7 +7,7 @@ import { GoogleMap,
          } from '@react-google-maps/api';
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
-import { DestSearch } from './DestSearch';
+import { DestinationSearch } from './DestinationSearch';
 import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
@@ -44,26 +44,33 @@ function GMap() {
     const [originInUse, setOriginInUse] = useState({});
     const [transitRouteDetails, setTransitRouteDetails] = useState({});
     const [drivingRouteDetails, setDrivingRouteDetails] = useState({});
+    const [isOriginValid, setIsOriginValid] = useState(true);
+    const [isDestinationValid, setIsDestinationValid] = useState(false);
+    const [isOriginCurrent, setIsOriginCurrent] = useState(true);
     
     const searchClick = () => {
-        if (destination !== '' && origin !== '') {
+        console.log(isOriginCurrent)
+        console.log(isOriginValid)
+        console.log(isDestinationValid)
+        if ((isOriginValid || isOriginCurrent) && isDestinationValid) {
             setDestinationInUse(destination);
             setOriginInUse(origin);
             
-
-            // If no input passed, transitRouteDetails is [Object object]
-            document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
-            document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
-            let distanceInKilometers = drivingRouteDetails.distance.value/1000;
-            document.getElementById("emissions-saved-big-message").innerHTML = Math.round(distanceInKilometers * emissionsProducedKilograms);
-            document.getElementById("emissions-saved-display").innerHTML = Math.round(distanceInKilometers * emissionsProducedKilograms);
+            // // If no input passed, transitRouteDetails is [Object object]
+            // document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
+            // document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
+            // let distanceInKilometers = drivingRouteDetails.distance.value/1000;
+            // document.getElementById("emissions-saved-big-message").innerHTML = Math.round(distanceInKilometers * emissionsProducedKilograms);
+            // document.getElementById("emissions-saved-display").innerHTML = Math.round(distanceInKilometers * emissionsProducedKilograms);
+            if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
+                showEasterEgg();
+                hideSearchForm();
+                showRouteDetail();
+            }
+        } else {
+            showLocationError();
         }
-
-        if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
-            showEasterEgg();
-        }
-        hideSearchForm();
-        showRouteDetail();
+        
     } 
 
     const transitCallback = async (response) => {
@@ -143,6 +150,11 @@ function GMap() {
         routeDetailsContainer.className = "bcit-search-process-container";
         navBar.className = "bcit-navbar";
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+    }
+
+    const showLocationError = () => {
+        const errorMessage = document.getElementById("locaiton-error");
+        errorMessage.style.color = "red";
     }
 
     
@@ -227,11 +239,29 @@ function GMap() {
                 </GoogleMap>
                 <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
-                    <OrginSearch panTo={panTo} setOrigin={setOrigin} setOriginName={setOriginName}/>                
-                    <DestSearch panTo={panTo} setDestination={setDestination} setDestinationName={setDestinationName}/>
-                    <button id="submit-search-button" onClick={searchClick}>
-                        <img src={Search} alt="Search Button"/>
-                    </button>
+                    
+                    <OrginSearch 
+                    panTo={panTo} 
+                    setOrigin={setOrigin} 
+                    setOriginName={setOriginName} 
+                    setIsOriginCurrent={setIsOriginCurrent} 
+                    setIsOriginValid={setIsOriginValid}
+                    setCurrentLocation={setCurrentLocation}/>                
+                    
+                    <DestinationSearch 
+                    panTo={panTo} 
+                    setDestination={setDestination} 
+                    setDestinationName={setDestinationName} 
+                    setCurrentLocation={setCurrentLocation} 
+                    setIsDestinationValid={setIsDestinationValid}/>
+                    
+                    <div id="error-search-button">
+                        <span id="locaiton-error">Please enter valid locations</span>
+                        <button id="submit-search-button" onClick={searchClick}>
+                            <img src={Search} alt="Search Button"/>
+                        </button>
+                    </div>
+                    
                 </section>
                 <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
                 <SavedTransitRoute />
