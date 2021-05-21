@@ -15,6 +15,9 @@ const RouteHistoryCard = (props) => {
                     <ListGroup.Item variant="secondary">Ending location: {props.destination}</ListGroup.Item>
                     <ListGroup.Item variant="secondary">Total distance: {props.distance}</ListGroup.Item>
                     <ListGroup.Item variant="secondary">Total emissions saved: {props.emissionsSaved}kg of CO2</ListGroup.Item>
+                    <ListGroup.Item variant="secondary">
+                        <Button variant="danger">Delete Route</Button>
+                    </ListGroup.Item>
                 </ListGroup>
             </Accordion.Collapse>
         </Card>

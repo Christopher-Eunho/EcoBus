@@ -18,7 +18,7 @@ const Profile = () => {
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
-
+    let click = 0;
 
     // const storage = firebase.storage()
 
@@ -117,19 +117,24 @@ const Profile = () => {
     });
 
     function addNewRouteHistoryCard() {
-        var routeCounter = 0;
-        try {
-            usersRef.collection("routes").get()
-                .then(function (snap) {
-                    snap.forEach(function (doc) {
-                        let route = doc.data();
-                        console.log(route.origin);
-                        routeCounter++;
-                        routeHistoryArray.push(<RouteHistoryCard eventKey={routeCounter} origin={route.origin} destination={route.destination} distance={route.distance} emissionsSaved={route.emissions_saved}/>)
+        var routeCounter = 1;
+        // idea for activating function only on first click source: https://stackoverflow.com/questions/31702173/execute-clickfunction-only-first-click
+        if (user != null) {
+            if (click == 0) {
+                usersRef.collection("routes").get()
+                    .then(function (snap) {
+                        snap.forEach(function (doc) {
+                            let route = doc.data();
+                                console.log(route.origin);
+                                routeHistoryArray.push(<RouteHistoryCard eventKey={routeCounter} origin={route.origin} destination={route.destination} 
+                                                        distance={route.distance} emissionsSaved={route.emissions_saved}/>)
+                                routeCounter++;
+                                console.log(routeCounter);
+                                console.log(click);
+                        })
                     })
-                })
-        } catch (err) {
-            console.log(err);
+            }
+            click++;
         }
     }
 
@@ -206,20 +211,6 @@ const Profile = () => {
                             <Accordion.Collapse eventKey="1">
                                 <ListGroup variant="flush">
                                     <Accordion>
-                                        <Card>
-                                            <Card.Header>
-                                                <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                    Route 1
-                                                </Accordion.Toggle>
-                                            </Card.Header>
-                                            <Accordion.Collapse eventKey="0">
-                                                <ListGroup variant="flush">
-                                                    <ListGroup.Item variant="secondary">Starting location: UBC</ListGroup.Item>
-                                                    <ListGroup.Item variant="secondary">Ending location: Metrotown</ListGroup.Item>
-                                                    <ListGroup.Item variant="secondary">Total emissions saved: 7.5kg of CO2</ListGroup.Item>
-                                                </ListGroup>
-                                            </Accordion.Collapse>
-                                        </Card>
                                         {routeHistoryArray}
                                     </Accordion>
                                 </ListGroup>
