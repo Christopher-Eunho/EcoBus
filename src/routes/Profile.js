@@ -10,9 +10,6 @@ import NavigationBar from '../components/NavigationBar'
 import RouteHistoryCard from '../components/RouteHistoryCard'
 
 const Profile = () => {
-
-    const [routeHistoryArray, setRouteHistoryArray] = useState([]);
-
     const history = useHistory();
     const user = authService.currentUser;
     // const [toggle, setToggle] = useState(false);
@@ -20,6 +17,7 @@ const Profile = () => {
     const [userAvatar, setUserAvatar] = useState("");
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
+    const [routeHistoryArray, setRouteHistoryArray] = useState([]);
 
 
     // const storage = firebase.storage()
@@ -120,17 +118,14 @@ const Profile = () => {
 
     function addNewRouteHistoryCard() {
         var routeCounter = 0;
-
         try {
-            usersRef.collection("routes").get() // from BCITCOMP 1800 Projects 1, @author: Carly Orr
+            usersRef.collection("routes").get()
                 .then(function (snap) {
                     snap.forEach(function (doc) {
                         let route = doc.data();
                         console.log(route.origin);
                         routeCounter++;
-                        routeHistoryArray.push(<RouteHistoryCard eventKey={routeCounter} origin={route.origin} destination={route.destination} distance={route.distance} />)
-                        console.log(routeCounter);
-                        console.log(routeHistoryArray)
+                        routeHistoryArray.push(<RouteHistoryCard eventKey={routeCounter} origin={route.origin} destination={route.destination} distance={route.distance} emissionsSaved={route.emissions_saved}/>)
                     })
                 })
         } catch (err) {
@@ -204,7 +199,7 @@ const Profile = () => {
 
                         <Card>
                             <Card.Header id="toggleHeader">
-                                <Accordion.Toggle as={Button} variant="link" eventKey="1" id="toggleButton">
+                                <Accordion.Toggle as={Button} onClick={addNewRouteHistoryCard} variant="link" eventKey="1" id="toggleButton">
                                     Route History
                                 </Accordion.Toggle>
                             </Card.Header>
@@ -225,7 +220,6 @@ const Profile = () => {
                                                 </ListGroup>
                                             </Accordion.Collapse>
                                         </Card>
-
                                         {routeHistoryArray}
                                     </Accordion>
                                 </ListGroup>
@@ -233,7 +227,6 @@ const Profile = () => {
                         </Card>
                     </Accordion>
                 </div>
-                <button onClick={addNewRouteHistoryCard}>Update</button>
             </div>
         </div>
     );
