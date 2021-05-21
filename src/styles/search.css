@@ -36,7 +36,7 @@
 }
 
 .search-process-container {
-  background-color: rgba(248, 254, 212, 0.7);
+  background-color: rgb(248, 255, 208);
   width: 100%;
   height: fit-content;
   border: 1px solid black;
@@ -93,64 +93,6 @@
   height: 60vh;
   width: 100%;
   background-color: bl;
-}
-
-/* For the .navbar */
-.navbar {
-  border: 1px solid black;
-  background-color: rgba(228, 245, 255, 1);
-  width: 100%;
-  height: 15vh;
-  bottom: 0;
-  float: left;
-  display: flex;
-  justify-content: space-between;
-}
-
-.navbar a {
-  margin: auto 0;
-}
-
-.navbar a:nth-child(1) button {
-  height: 42px;
-  width: 42px;
-  border-radius: 15px;
-  border: none;
-  background-color: rgb(0, 0, 0, 0);
-  margin-left: 3%;
-  float: left;
-}
-
-.navbar a:nth-child(1) button img {
-  margin-left: -5px;
-}
-
-.navbar a:nth-child(3) button {
-  height: 42px;
-  width: 42px;
-  border-radius: 15px;
-  border: none;
-  background-color: rgb(0, 0, 0, 0);
-  margin-right: 0%;
-  float: right;
-}
-
-.navbar a:nth-child(3) button img {
-  margin-left: -5px;
-}
-
-.navbar a:nth-child(2) button {
-  height: 60px;
-  width: 170px;
-  border-radius: 15px;
-  border: none;
-  background-color: rgb(0, 0, 0, 0);
-  margin-right: 10px;
-}
-
-.navbar a:nth-child(2) button img {
-  margin-left: -5px;
-  margin-top: 0px;
 }
 
 /* For the BCIT navbar*/

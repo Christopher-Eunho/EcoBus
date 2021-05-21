@@ -12,7 +12,7 @@ import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
-import {emissionsProducedGrams} from '../constants'
+import {emissionsProducedKilograms} from '../constants'
 
 const libraries = ["places"];
 
@@ -51,6 +51,12 @@ function GMap() {
             setOriginInUse(origin);
             
 
+            // If no input passed, transitRouteDetails is [Object object]
+            document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
+            document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
+            let distanceInKilometers = drivingRouteDetails.distance.value/1000;
+            document.getElementById("emissions-saved-big-message").innerHTML = Math.round(distanceInKilometers * emissionsProducedKilograms);
+            document.getElementById("emissions-saved-display").innerHTML = Math.round(distanceInKilometers * emissionsProducedKilograms);
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
