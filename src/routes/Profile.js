@@ -21,7 +21,8 @@ const Profile = () => {
     const [message, setMessage] = useState("");
     // const storage = firebase.storage();
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
-    
+    const usersRef = db.collection('users').doc(user.uid);
+
     const displayRouteDetails = () => {
         var routeCounter = 1;
         var routes = [];
@@ -158,10 +159,6 @@ const Profile = () => {
         let emailForm = document.getElementById("email-change");
         emailForm.style["display"] = "block";
     }
-
-
-
-    const usersRef = db.collection('users').doc(user.uid);
 
     usersRef.get().then((doc) => {
         if (doc.exists) {
