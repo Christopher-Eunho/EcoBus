@@ -5,6 +5,13 @@ import Profile from "routes/Profile";
 import About_Us from "routes/About_Us";
 import Search from "routes/Search";
 
+
+{/* <Route exact path="/" component={Auth} />
+<Route exact path="/profile" component={Profile} />
+<Route exact path="/about_us" component={About_Us} />
+<Route path="/search" component={Search} />
+<Route path="*" component={About_Us} /> */}
+
 const AppRouter = ({isLoggedIn}) => {
     return (
         <Router>
@@ -31,6 +38,5 @@ const AppRouter = ({isLoggedIn}) => {
             {isLoggedIn}
         </Router>
     );
-
 };
 export default AppRouter;

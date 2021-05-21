@@ -77,7 +77,7 @@ const Profile = () => {
     
     function sumArray(array) {
         var sum = 0;
-        for(var i=0; i< array.length; i++) {
+        for(var i=0; i < array.length; i++) {
             sum += parseFloat(array[i]);
         }
         return sum;

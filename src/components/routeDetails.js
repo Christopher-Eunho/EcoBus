@@ -8,7 +8,7 @@ import {emissionsProducedKilograms} from 'constants.js'
 const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
 
     const user = authService.currentUser;
-    const usersRef = db.collection('users').doc(user.uid);
+    
 
     // Source: https://upmostly.com/tutorials/how-to-refresh-a-page-or-component-in-react
     function refreshPage() {
@@ -20,6 +20,7 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
         const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
         console.log(distanceInKilometers);
         if (user != null) {
+            const usersRef = db.collection('users').doc(user.uid);
             usersRef.get().then((doc) => {
                 if (doc.exists) {
                     db.collection("users").doc(user.uid).collection("routes").add({
