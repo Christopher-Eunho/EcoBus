@@ -23,12 +23,12 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
             usersRef.get().then((doc) => {
                 if (doc.exists) {
                     db.collection("users").doc(user.uid).collection("routes").add({
-                        date_of_trip: transitRouteDetails.departure_time.value,
+                        departure_time: transitRouteDetails.departure_time.value,
                         origin: transitRouteDetails.start_address,
                         destination: transitRouteDetails.end_address,
                         distance: transitRouteDetails.distance.text,
                         duration: transitRouteDetails.duration.text,
-                        CO2_saved_kg_per_km: emissionsPerKm,
+                        emissions_saved: emissionsPerKm,
                     }).then(function(){
                         refreshPage();
                     })
