@@ -53,7 +53,9 @@ const Auth = () => {
                 var user = authService.currentUser;
 
                 const userRef = db.collection("users").doc(user.uid).set({
-                    email: email
+                    name: user.email.split("@")[0], 
+                    email: user["email"],
+                    avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=7c48767b-3c49-4c46-98e7-ab627f5ae81d'
                 });
                 // Add user email to firestore end
                 

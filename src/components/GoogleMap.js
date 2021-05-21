@@ -13,7 +13,6 @@ import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 import {emissionsProducedKilograms} from 'constants.js'
-
 const libraries = ["places"];
 
 const mapContainerStyle = {

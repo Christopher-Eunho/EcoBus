@@ -1,22 +1,25 @@
 import { authService, db } from "firebase_eb";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import NavigationBar from '../components/NavigationBar'
-import RouteHistoryCard from '../components/RouteHistoryCard'
+import logo from "../images/logo.png";
+import { Alert, Accordion, Button, Card, ListGroup } from 'react-bootstrap';
+import { storage } from 'firebase/storage';
 
 const Profile = () => {
     const history = useHistory();
-    const user = authService.currentUser;
-    // const [toggle, setToggle] = useState(false);
-    // const [name, changeName] = useState("");
+    const user = firebase.auth().currentUser;
     const [userAvatar, setUserAvatar] = useState("");
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
+    const [error, setError] = useState("");
+    const [totalTrips, setTotalTrips] = useState(0);
+    const [totalDistance, setDistance] = useState(0);
+    const [totalEmissionSaved, setEmissions] = useState(0);
+    const [message, setMessage] = useState("");
+    const storage = firebase.storage()
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
     
     const displayRouteDetails = () => {
@@ -43,81 +46,110 @@ const Profile = () => {
         }
     }
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm(); //taken from https://react-hook-form.com/get-started 
-
-
-    const totalTrips = 0;
-    const totalDistance = 0;
-    const totalEmissionSaved = 0;
-
-
-    // const onEdit =  async (event) => {
-
-    //      await firebase.User.updateEmail(email)
-    // }
-
-
     /* 
     Image upload start
-    I found this code on : https://dev.to/itnext/how-to-do-image-upload-with-firebase-in-react-cpj
+    I found this code on : https://dev.to/samuelkarani/comment/14079
     @authors: Tallan Groberg, Samuel Karani
     */
     const [file, setFile] = useState(null);
-    // const [url, setURL] = useState("");
+    const [url, setURL] = useState("");
 
 
     function handleChange(e) {
         setFile(e.target.files[0]);
     }
 
-    // function handleUpload(e) {
-    //     e.preventDefault();
-    //     const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-    //     uploadTask.on("state_changed", console.log, console.error, () => {
-    //     storage
-    //         .ref("images")
-    //         .child(file.name)
-    //         .getDownloadURL()
-    //         .then((url) => {
-    //         setFile(null);
-    //         setURL(url);
-    //         });
-
-    //     });
-    // }
-
-    // return (
-    //     <div>
-    //     <form onSubmit={handleUpload}>
-    //         <input type="file" onChange={handleChange} />
-    //         <button disabled={!file}>upload to firebase</button>
-    //     </form>
-    //     <img src={url} alt="" />
-    //     </div>
-    // );
-
+    function handleUpload() {
+        const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+        uploadTask.on("state_changed", console.log, console.error, () => {
+            storage
+                .ref("images")
+                .child(file.name)
+                .getDownloadURL()
+                .then((url) => {
+                    setFile(null);
+                    setURL(url);
+                    console.log(url)
+                });
+        });
+    }
     /*Image upload end*/
 
+    function getUserStats() {
+        setTotalTrips(0);
+        setDistance(0);
+        setEmissions(0);
+        try {
+            db.collection("users").doc(user.uid).collection("routes").get() // from BCITCOMP 1800 Projects 1, @author: Carly Orr
+                .then(function (snap) {
+                    snap.forEach(function (doc) {
+                        var n = parseFloat(doc.data().distance.split(" ")[0]);
+                        setTotalTrips((prev) => prev + 1)
+                        setDistance((prev) => prev + n)
+                    })
+                })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-    const saveChanges = () => {
-        var newEmail = document.getElementById("email-change");
+    const saveChanges = async (e) => {
+        e.preventDefault();
+        var newName = document.getElementById("name-change").value;
+        var newEmail = document.getElementById("email-change").value;
 
-        if (user != null) {
-            var email, uid;
-            email = user.email;
-            uid = user.uid;
-            user.updateEmail(newEmail.value).then(function () {
-                // Update successful.
-            }).catch(function (error) {
-                console.log(error);
-            });
+        // console.log(file);
+        // await handleUpload();
+
+        // console.log(url);
+        // console.log("all good");
+        if (user !== null) {
+            try {
+                if (userName !== newName && newName.trim() !== "") {
+                    db.collection("users").doc(user.uid).update({ name: newName });
+                }
+                if (userEmail !== newEmail) {
+                    await user.updateEmail(newEmail); // update email in authentication
+                    db.collection("users").doc(user.uid).update({ email: newEmail }); //update email in db
+                }
+                if (url !== "") {
+                    db.collection("users").doc(user.uid).update({ avatar: url });
+                }
+                displayMessageBox();
+                setMessage("Profile updated!");
+            } catch (err) {
+                displayErrorBox();
+                setError(err.message);
+            }
         }
     };
 
+    function displayMessageBox(){
+        let messagebox = document.getElementById("messagebox");
+        messagebox.style["display"] = "block";
+    }
 
-    const onSubmit = (data) => {
-        console.log(data)
-    };
+    function displayErrorBox(){
+        let errorbox = document.getElementById("errorbox");
+        errorbox.style["display"] = "block";
+    }
+
+    function nameTextToForm(){
+        let nameText = document.getElementById("nametext");
+        nameText.style["display"] = "none";
+
+        let nameForm = document.getElementById("name-change");
+        nameForm.style["display"] = "block";
+    }
+    
+    function emailTextToForm(){
+        let emailText = document.getElementById("emailtext");
+        emailText.style["display"] = "none";
+
+        let emailForm = document.getElementById("email-change");
+        emailForm.style["display"] = "block";
+    }
+
 
 
     const usersRef = db.collection('users').doc(user.uid);
@@ -157,8 +189,9 @@ const Profile = () => {
 
 
                     <img src={userAvatar} id="useravatar" alt="Avatar" />
+
                     <label for="uploadbutton">
-                        <input type="file" onClick={handleChange} id="uploadbutton"></input>
+                        <input type="file" accept="image/*" onChange={handleChange} id="uploadbutton"></input>
                         <img id="avataredit" src={Edit} alt="AvatarEdit" />
                     </label>
 
@@ -166,20 +199,28 @@ const Profile = () => {
 
 
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form>
                     <span id="nameForm">
                         <h4 id="profileHeader">Name:</h4>
-                        <input id="FirstName" type="text" placeholder="Name" name="name" defaultValue={userName} {...register("name")} />
-                        <img src={Edit} id="editbutton" alt="Edit" />
+                        <h4 id="nametext">{userName}</h4>
+                        <input id="name-change" type="text" placeholder="Name" name="name" defaultValue={userName} />
+                        <button id="nameBtn" type="button" onClick={nameTextToForm}>
+                            <img src={Edit}></img>
+                        </button>
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
 
                     <span id="emailForm">
                         <h4 id="profileHeader">Email:</h4>
-                        <input type="email" placeholder="Email" name="email" id="email-change" defaultValue={userEmail} {...register("email")} />
-                        <img src={Edit} id="editbutton" alt="Edit" />
+                        <h4 id="emailtext">{userEmail}</h4>
+                        <input type="email" placeholder="Email" name="email" id="email-change" defaultValue={userEmail} />
+                        <button id="emailBtn" type="button" onClick={emailTextToForm}>
+                            <img src={Edit}></img>
+                        </button>
                         {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
+                    <Alert id="messagebox" variant ="success">{message}</Alert>
+                    <Alert id="errorbox" variant="danger">{error}</Alert>
                     <br />
                     <Button variant="success" type="submit" id="saveEdits" onClick={saveChanges}>Save Changes</Button>
                 </form>
@@ -188,14 +229,14 @@ const Profile = () => {
                     <Accordion>
                         <Card>
                             <Card.Header id="toggleHeader">
-                                <Accordion.Toggle as={Button} variant="link" eventKey="0" id="toggleButton" >
+                                <Accordion.Toggle as={Button} onClick={getUserStats} variant="link" eventKey="0" id="toggleButton" >
                                     User Statistics
                                 </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="0">
                                 <ListGroup variant="flush">
                                     <ListGroup.Item variant="secondary">Total Trips: {totalTrips}</ListGroup.Item>
-                                    <ListGroup.Item variant="secondary">Total Distance Travelled: {totalDistance}</ListGroup.Item>
+                                    <ListGroup.Item variant="secondary">Total Distance Travelled: {totalDistance} km</ListGroup.Item>
                                     <ListGroup.Item variant="secondary">Total Emissions Saved: {totalEmissionSaved}</ListGroup.Item>
                                 </ListGroup>
                             </Accordion.Collapse>

@@ -78,13 +78,13 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
 
             <div id="emissions-saved-message-container">
                 <img src={Leaf} alt="Leaf" id="leaf-icon" />
-                <h5 id="emissions-saved-message"><span id="emissions-saved-big-message">N/A</span> KG of C02 saved</h5>
+                <h5 id="emissions-saved-message"><span id="emissions-saved-big-message">N/A</span> KG of CO2 saved</h5>
 
                 <div id="transit-route-information">
                     <ul>
                         <li>Distance: <span id="transit-distance-display">N/A</span> </li>
                         <li>Duration: <span id="transit-duration-display">N/A</span> </li>
-                        <li>Emissions saved: <span id="emissions-saved-display">N/A</span> KG of C02</li>
+                        <li>Emissions saved: <span id="emissions-saved-display">N/A</span>KG of CO2</li>
                     </ul>
                 </div>
             </div>
