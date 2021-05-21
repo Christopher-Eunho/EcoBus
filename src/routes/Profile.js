@@ -74,19 +74,28 @@ const Profile = () => {
     //     });
     // }
     /*Image upload end*/
+    
+    function sumArray(array) {
+        var sum = 0;
+        for(var i=0; i< array.length; i++) {
+            sum += parseFloat(array[i]);
+        }
+        return sum;
+    }
 
     function getUserStats() {
-        setTotalTrips(0);
-        setDistance(0);
-        setEmissions(0);
+        var totalDistance = [];
+        var totalEmissionsSaved = [];
         try {
             db.collection("users").doc(user.uid).collection("routes").get() // from BCITCOMP 1800 Projects 1, @author: Carly Orr
                 .then(function (snap) {
                     snap.forEach(function (doc) {
-                        var n = parseFloat(doc.data().distance.split(" ")[0]);
-                        setTotalTrips((prev) => prev + 1)
-                        setDistance((prev) => prev + n)
+                        totalDistance.push(parseFloat(doc.data().distance.split(" ")[0]));
+                        totalEmissionsSaved.push(parseFloat(doc.data().emissions_saved));
                     })
+                    setTotalTrips(totalDistance.length);
+                    setDistance(sumArray(totalDistance).toFixed(2));
+                    setEmissions(sumArray(totalEmissionsSaved).toFixed(2));
                 })
         } catch (err) {
             console.log(err);
@@ -237,7 +246,7 @@ const Profile = () => {
                                 <ListGroup variant="flush">
                                     <ListGroup.Item variant="secondary">Total Trips: {totalTrips}</ListGroup.Item>
                                     <ListGroup.Item variant="secondary">Total Distance Travelled: {totalDistance} km</ListGroup.Item>
-                                    <ListGroup.Item variant="secondary">Total Emissions Saved: {totalEmissionSaved}</ListGroup.Item>
+                                    <ListGroup.Item variant="secondary">Total Emissions Saved: {totalEmissionSaved} CO2</ListGroup.Item>
                                 </ListGroup>
                             </Accordion.Collapse>
                         </Card>

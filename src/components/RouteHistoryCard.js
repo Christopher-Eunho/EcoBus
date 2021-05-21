@@ -2,6 +2,10 @@ import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
 
 
 const RouteHistoryCard = (props) => {
+    function deleteRoute() {
+        
+    }
+    
     return (
         <Card>
             <Card.Header>
@@ -16,7 +20,7 @@ const RouteHistoryCard = (props) => {
                     <ListGroup.Item variant="secondary">Total distance: {props.distance}</ListGroup.Item>
                     <ListGroup.Item variant="secondary">Total emissions saved: {props.emissionsSaved}kg of CO2</ListGroup.Item>
                     <ListGroup.Item variant="secondary">
-                        <Button variant="danger">Delete Route</Button>
+                        <Button variant="danger" onClick={deleteRoute}>Delete Route</Button>
                     </ListGroup.Item>
                 </ListGroup>
             </Accordion.Collapse>
