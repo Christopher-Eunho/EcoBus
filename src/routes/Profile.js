@@ -4,13 +4,12 @@ import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import { Alert, Accordion, Button, Card, ListGroup } from 'react-bootstrap';
-import RouteHistoryCard from '../components/RouteHistoryCard'
+import { Alert, Accordion, Button, Card, ListGroup, Modal,  } from 'react-bootstrap';
 import NavigationBar from '../components/NavigationBar'
 import { storage } from 'firebase/storage';
 import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
-
+import RouteHistoryCard from '../components/RouteHistoryCard'
 
 
 const Profile = () => {
@@ -207,6 +206,23 @@ const Profile = () => {
         console.log("Error getting document:", error);
     });
 
+    /* delete firestore collection start
+    Taken from: https://stackoverflow.com/questions/62090827/how-to-delete-all-the-documents-in-a-firestore-collection-database
+    @author: Doug Stevenson
+    */
+    function deleteUserData() {
+        db.collection('users').doc(user.uid).collection('routes').get().then(querySnapshot => {
+            querySnapshot.docs.forEach(snapshot => {
+                snapshot.ref.delete()
+                .then(()=>{
+                alert("Data deleted!")
+                window.location.reload()})
+            })
+        })
+
+    }
+    /*delete firestore collection end*/
+
     return (
 
         <div className="profileBody">
@@ -277,6 +293,19 @@ const Profile = () => {
                             </Accordion.Collapse>
                         </Card>
                     </Accordion>
+                </div>
+                <div id="clearuserdata">
+                    <Button variant="danger" onClick={handleShow}>Clear all data</Button>
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Delete all user data?</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Note: This cannot be undone.</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>Close</Button>
+                            <Button variant="danger" onClick={deleteUserData}>Delete my data</Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             </div>
         </div >

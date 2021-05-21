@@ -174,7 +174,7 @@ function GMap() {
         taco4.className = "falling-taco4";
     }
     const showLocationError = () => {
-        const errorMessage = document.getElementById("locaiton-error");
+        const errorMessage = document.getElementById("location-error");
         errorMessage.style.color = "red";
     }
 
