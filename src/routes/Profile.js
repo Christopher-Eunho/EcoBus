@@ -6,6 +6,9 @@ import Edit from "../images/editbutton.png";
 import { Alert, Accordion, Button, Card, ListGroup, Modal } from 'react-bootstrap';
 import { storage } from 'firebase/storage';
 import NavigationBar from '../components/NavigationBar'
+import ReactImageFallback from "react-image-fallback";
+import Fallback_Image from "../images/fallback_image.png";
+
 
 const Profile = () => {
     const user = firebase.auth().currentUser;
@@ -159,8 +162,8 @@ const Profile = () => {
     });
 
 
-    function validateFile(){
-
+    const addDefaultSrc = (ev) => {
+        ev.target.src = 'some default image url'
     }
 
     return (
@@ -169,10 +172,7 @@ const Profile = () => {
             <NavigationBar />
             <div className="Profile">
                 <div id="avatar">
-                    <img src={userAvatar} 
-                    onError="this.onerror=null; this.src='https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=7c48767b-3c49-4c46-98e7-ab627f5ae81d';" id="useravatar" alt="Avatar" />
-                    {/*onError code taken from https://medium.com/@webcore1/react-fallback-for-broken-images-strategy-a8dfa9c1be1e*/}
-            
+                    <ReactImageFallback src={userAvatar} fallbackImage={Fallback_Image} id="useravatar" alt="Avatar" />
                     <label for="uploadbutton">
                         <input type="file" accept="image/*" onChange={handleChange} id="uploadbutton"></input>
                         <img id="avataredit" src={Edit} alt="AvatarEdit" />
