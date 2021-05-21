@@ -12,7 +12,13 @@ import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
+<<<<<<< HEAD
 import {emissionsProducedKilograms} from 'constants.js'
+=======
+import RainingTacos from 'sounds/01 Raining Tacos.mp3'
+import {emissionsProducedGrams} from '../constants'
+
+>>>>>>> Taco-Easter-Egg
 const libraries = ["places"];
 
 const mapContainerStyle = {
@@ -28,11 +34,23 @@ const options = {
     gestureHandling: "greedy"
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> Taco-Easter-Egg
 
 function GMap() {
 
+    const routeDetailsContainer = document.getElementById("route-details-container");
+    const navBar = document.getElementById("navigation-bar");
+    const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+    const searchFormContainer = document.getElementById("search-container");
+    const taco1 = document.getElementById("taco1");
+    const taco2 = document.getElementById("taco2");
+    const taco3 = document.getElementById("taco3");
+    const taco4 = document.getElementById("taco4");
+    const music = document.getElementById("music");
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -50,14 +68,31 @@ function GMap() {
             setDestinationInUse(destination);
             setOriginInUse(origin);
             console.log(transitRouteDetails)
+<<<<<<< HEAD
+=======
+
+            // If no input passed, transitRouteDetails is [Object object]
+            //document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
+            //document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
+            //document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            //document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+>>>>>>> Taco-Easter-Egg
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
             showEasterEgg();
         }
+        if (destinationName.includes("Taco")||originName.includes("Taco")) {
+            showSecondEasterEgg();
+        }
         hideSearchForm();
+<<<<<<< HEAD
         showRouteDetailsContainer();
     } 
+=======
+        showRouteDetail();
+    }
+>>>>>>> Taco-Easter-Egg
 
     const transitCallback = (response) => {
         if (response !== null) {
@@ -139,9 +174,28 @@ function GMap() {
         let routeDetailsContainer = document.getElementById("route-details-container");
         let transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
         routeDetailsContainer.className = "bcit-search-process-container";
+<<<<<<< HEAD
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
     }
 
+=======
+        navBar.className = "bcit-navigation-bar";
+        transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+    }
+
+    function showSecondEasterEgg() {
+        music.currentTime = 0;
+        music.volume = .5;
+        music.play();
+        taco1.className = "falling-taco1";
+        taco2.className = "falling-taco2";
+        taco3.className = "falling-taco3";
+        taco4.className = "falling-taco4";
+    }
+
+    
+
+>>>>>>> Taco-Easter-Egg
     if (loadError) return "error";
     if (!isLoaded) return "Loading";
 
