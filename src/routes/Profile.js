@@ -33,7 +33,13 @@ const Profile = () => {
     function handleChange(e) {
         showUploadButton();
         hideAvatarEditBtn();
-        setFile(e.target.files[0]);
+        let imageFile = e.target.files[0];
+        if (!imageFile.name.match(/\.(jpg|jpeg|png|gif|apng|avif|svg|webp|bmp|ico|tiff)$/)){ // regex format taken from https://www.cluemediator.com/validate-image-content-in-reactjs
+            alert("This is not a valid image file!");
+            window.location.reload();
+        }else{
+            setFile(imageFile);
+        }
     }
 
     function handleUpload() {
@@ -153,13 +159,20 @@ const Profile = () => {
     });
 
 
+    function validateFile(){
+
+    }
+
     return (
 
         <div className="profileBody">
             <NavigationBar />
             <div className="Profile">
                 <div id="avatar">
-                    <img src={userAvatar} id="useravatar" alt="Avatar" />
+                    <img src={userAvatar} 
+                    onError="this.onerror=null; this.src='https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=7c48767b-3c49-4c46-98e7-ab627f5ae81d';" id="useravatar" alt="Avatar" />
+                    {/*onError code taken from https://medium.com/@webcore1/react-fallback-for-broken-images-strategy-a8dfa9c1be1e*/}
+            
                     <label for="uploadbutton">
                         <input type="file" accept="image/*" onChange={handleChange} id="uploadbutton"></input>
                         <img id="avataredit" src={Edit} alt="AvatarEdit" />
