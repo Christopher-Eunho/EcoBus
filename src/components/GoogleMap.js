@@ -12,7 +12,6 @@ import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
-import {emissionsProducedGrams} from '../constants'
 
 const libraries = ["places"];
 
@@ -53,10 +52,12 @@ function GMap() {
             console.log(transitRouteDetails)
 
             // If no input passed, transitRouteDetails is [Object object]
-            // document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
-            // document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
-            // document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
-            // document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            // setTimeout(function() {
+            //     document.getElementById("transit-distance-display").innerHTML = transitRouteDetails.distance.text;
+            //     document.getElementById("transit-duration-display").innerHTML = transitRouteDetails.duration.text;
+            //     document.getElementById("emissions-saved-big-message").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            //     document.getElementById("emissions-saved-display").innerHTML = Math.round((drivingRouteDetails.distance.value) * emissionsProducedGrams);
+            // }, 3000);
         }
 
         if (destinationName.includes("BCIT")||originName.includes("BCIT")) {
@@ -66,9 +67,19 @@ function GMap() {
         showRouteDetail();
     } 
 
+    // async function f2() {
+    //     var x = await transitCallback();
+    //     console.log(x);
+    // }
+
     const transitCallback = (response) => {
         if (response !== null) {
-            setTransitRouteDetails(response.routes[0].legs[0]);
+            setTransitRouteDetails(response.routes[0].legs[0])
+            // .then(function(reponse) {
+            //     console.log(response)
+            // }).catch((error) => {
+            //     console.log(error)
+            // })
             console.log("Transit route set");
           if (response.status === 'OK') {
             setTransitResponse(response);
@@ -82,6 +93,7 @@ function GMap() {
     const driveCallback = (response) => {
         if (response !== null) {
             setDrivingRouteDetails(response.routes[0].legs[0]);
+            console.log(response.routes[0].legs[0])
             console.log("Driving route set");
           if (response.status === 'OK') {
             setDriveResponse(response);
@@ -251,7 +263,7 @@ function GMap() {
                         <img src={Search} alt="Search Button"/>
                     </button>
                 </section>
-                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
+                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails}/>
                 <SavedTransitRoute />
             </div>
         </>

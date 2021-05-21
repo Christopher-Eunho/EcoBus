@@ -30,7 +30,7 @@ WireFrames:
 ├── .firebase => contains data cache for hosting
 ├── public => contains files shared across components
 ├── src => contains web app components, styles, and images
-├── .env
+├── .env => stores security keys and prevents them from being pushed to GitHub
 ├── .firebaserc
 ├── .gitignore
 ├── firebase.json

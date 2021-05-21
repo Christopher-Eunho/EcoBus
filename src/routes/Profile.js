@@ -232,7 +232,7 @@ const Profile = () => {
                                             </Accordion.Collapse>
                                         </Card>
 
-                                        {/* {routeHistoryArray} */}
+                                        {routeHistoryArray}
                                     </Accordion>
                                 </ListGroup>
                             </Accordion.Collapse>
