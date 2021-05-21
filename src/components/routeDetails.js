@@ -15,6 +15,7 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
     let taco2 = document.getElementById("taco2");
     let taco3 = document.getElementById("taco3");
     let taco4 = document.getElementById("taco4");
+    let music = document.getElementById("music");
     
     const goBack = () => {
         console.log(transitRouteDetails)
@@ -73,6 +74,7 @@ const RouteDetails = ( {transitRouteDetails, drivingRouteDetails} ) => {
         taco2.className = "taco2";
         taco3.className = "taco3";
         taco4.className = "taco4";
+        music.pause();
     }
 
     return (

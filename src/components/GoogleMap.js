@@ -12,6 +12,7 @@ import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
+import RainingTacos from 'sounds/01 Raining Tacos.mp3'
 import {emissionsProducedGrams} from '../constants'
 
 const libraries = ["places"];
@@ -40,6 +41,7 @@ function GMap() {
     const taco2 = document.getElementById("taco2");
     const taco3 = document.getElementById("taco3");
     const taco4 = document.getElementById("taco4");
+    const music = document.getElementById("music");
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -142,6 +144,8 @@ function GMap() {
     }
 
     function showSecondEasterEgg() {
+        music.currentTime = 0;
+        music.play();
         taco1.className = "falling-taco1";
         taco2.className = "falling-taco2";
         taco3.className = "falling-taco3";
