@@ -1,12 +1,13 @@
-import BackButton from '../images/back-button.png'
-import Leaf from '../images/leaf.png'
-import 'firebase/firestore'
-import { db, authService } from "firebase_eb"
-import {emissionsProducedKilograms} from 'constants.js'
-
+import BackButton from '../images/back-button.png';
+import Leaf from '../images/leaf.png';
+import 'firebase/firestore';
+import { db, authService } from "firebase_eb";
+import {emissionsProducedKilograms} from 'constants.js';
+import { useHistory } from "react-router";
 
 const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
 
+    const history = useHistory();
     const user = authService.currentUser;
     const usersRef = db.collection('users');
 
@@ -18,7 +19,6 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
     const saveJourney = () => {
         const distanceInKilometers = drivingRouteDetails.distance.value / 1000;
         const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
-        console.log(distanceInKilometers);
         if (user != null) {
             usersRef.doc(user.uid).get().then((doc) => {
                 if (doc.exists) {
@@ -29,7 +29,7 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
                         distance: transitRouteDetails.distance.text,
                         duration: transitRouteDetails.duration.text,
                         emissions_saved: emissionsPerKm,
-                    }).then(function(){
+                    }).then(function() {
                         refreshPage();
                     })
                 } else {
@@ -39,6 +39,19 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
             }).catch((error) => {
                 console.log("Error getting document:", error);
             });
+        } else {
+            history.push("/" + 
+            transitRouteDetails.departure_time.value + 
+            "&" + 
+            transitRouteDetails.start_address + 
+            "&" + 
+            transitRouteDetails.end_address + 
+            "&" + 
+            transitRouteDetails.distance.text + 
+            "&" + 
+            transitRouteDetails.duration.text + 
+            "&" + 
+            emissionsPerKm);
         }
     }
 

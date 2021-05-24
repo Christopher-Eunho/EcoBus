@@ -18,6 +18,7 @@ const AppRouter = ( { isLoggedIn } ) => {
                 ) : (
                     <Switch>
                         <Route exact path="/about-us" component={About_Us} />
+                        <Route exact path="/map" component={Search} />
                         <Route component={Auth} />
                     </Switch>
                 )}
