@@ -12,30 +12,22 @@ import Search from "routes/Search";
 <Route path="/search" component={Search} />
 <Route path="*" component={About_Us} /> */}
 
-const AppRouter = ({isLoggedIn}) => {
+const AppRouter = ( { isLoggedIn } ) => {
     return (
         <Router>
-            
-            <Switch>
                 {isLoggedIn ? (
-                    <>
-                        <Route exact path="/">
-                            <Search />
-                        </Route>
-                        <Route exact path="/profile">
-                            <Profile />
-                        </Route>
-                        <Route exact path="/about_us">
-                            <About_Us />
-                        </Route>
-                    </>
+                    <Switch>
+                        <Route exact path="/" component={Search} />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/about-us" component={About_Us} />
+                    </Switch>
                 ) : (
-                    <Route path="/">
-                        <Auth />
-                    </Route>
+                    <Switch>
+                        <Route exact path="/about-us" component={About_Us} />
+                        <Route component={Auth} />
+                    </Switch>
                 )}
-            </Switch>
-            {isLoggedIn}
+            { isLoggedIn }
         </Router>
     );
 };

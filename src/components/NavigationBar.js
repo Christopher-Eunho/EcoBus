@@ -20,7 +20,7 @@ const NavigationBar = () => {
                 <div id="navigation-links">
                     <Nav.Link>
                         <Link to="/">
-                            Search
+                            Map
                             </Link>
                     </Nav.Link>
                     <Nav.Link>
@@ -29,13 +29,13 @@ const NavigationBar = () => {
                             </Link>
                     </Nav.Link>
                     <Nav.Link>
-                        <Link to="/about_us">
+                        <Link to="/about-us">
                             About Us
                             </Link>
                     </Nav.Link>
                 </div>
                 <Button variant="danger btn-sm" onClick={onLogoutClick} id="logout">Log Out</Button>
-        </Navbar>
+            </Navbar>
         </>
     )
 }
