@@ -10,10 +10,10 @@ const AppRouter = ( { isLoggedIn } ) => {
         <Router>
                 { isLoggedIn ? (
                     <Switch>
-                        <Route exact path="/" component={Search} />
+                        <Route exact path="/map" component={Search} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/about-us" component={About_Us} />
-                        <Route component={() => (<div> <p>404 Page Not Found</p> <a href="/">Click here to return to the map. </a> </div>)} />
+                        <Route component={() => (<div> <p>404 Page Not Found</p> <a href="#/map">Click here to return to the map.</a> </div>)} />
                     </Switch>
                 ) : (
                     <Switch>
