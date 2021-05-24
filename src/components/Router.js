@@ -5,21 +5,15 @@ import Profile from "routes/Profile";
 import About_Us from "routes/About_Us";
 import Search from "routes/Search";
 
-
-{/* <Route exact path="/" component={Auth} />
-<Route exact path="/profile" component={Profile} />
-<Route exact path="/about_us" component={About_Us} />
-<Route path="/search" component={Search} />
-<Route path="*" component={About_Us} /> */}
-
 const AppRouter = ( { isLoggedIn } ) => {
     return (
         <Router>
-                {isLoggedIn ? (
+                { isLoggedIn ? (
                     <Switch>
                         <Route exact path="/" component={Search} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/about-us" component={About_Us} />
+                        <Route component={() => (<div> <p>404 Page Not Found</p> <a href="/">Click here to return to the map. </a> </div>)} />
                     </Switch>
                 ) : (
                     <Switch>
