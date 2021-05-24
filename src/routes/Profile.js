@@ -10,6 +10,7 @@ import { storage } from 'firebase/storage';
 import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
 import RouteHistoryCard from '../components/RouteHistoryCard'
+import RouteHistoryEmptyCard from '../components/RouteHistoryEmptyCard'
 
 
 const Profile = () => {
@@ -287,7 +288,11 @@ const Profile = () => {
                             <Accordion.Collapse eventKey="1">
                                 <ListGroup variant="flush">
                                     <Accordion>
-                                        {routeHistoryArray}
+                                        { routeHistoryArray.length > 0 ? (
+                                            routeHistoryArray
+                                        ) : (
+                                            <RouteHistoryEmptyCard />
+                                        )}
                                     </Accordion>
                                 </ListGroup>
                             </Accordion.Collapse>
@@ -295,7 +300,7 @@ const Profile = () => {
                     </Accordion>
                 </div>
                 <div id="clearuserdata">
-                    <Button variant="danger" onClick={handleShow}>Clear all data</Button>
+                    <Button variant="danger" id="clear-all-data-button" onClick={handleShow}>Clear all data</Button>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title>Delete all user data?</Modal.Title>

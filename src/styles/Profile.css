@@ -111,3 +111,11 @@
     margin-left: 1vw;
     margin-bottom: 2vw;
 }
+
+#add-route-button {
+    margin-top: 10px;
+}
+
+#clear-all-data-button {
+    margin-bottom: 50px;
+}

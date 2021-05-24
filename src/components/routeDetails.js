@@ -29,7 +29,7 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
                         distance: transitRouteDetails.distance.text,
                         duration: transitRouteDetails.duration.text,
                         emissions_saved: emissionsPerKm,
-                    }).then(function() {
+                    }).then(function(){
                         refreshPage();
                     })
                 } else {
