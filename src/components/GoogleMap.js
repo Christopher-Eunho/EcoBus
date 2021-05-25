@@ -153,6 +153,7 @@ function GMap() {
         const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
         document.getElementById("emissions-saved-big-message").innerHTML = emissionsPerKm;
         document.getElementById("emissions-saved-display").innerHTML = emissionsPerKm;
+        document.getElementById("saved-route-message-emissions-saved").innerHTML = emissionsPerKm;
     }
 
     function showEasterEgg() {
