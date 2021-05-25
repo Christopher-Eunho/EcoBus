@@ -31,9 +31,13 @@ const Auth = () => {
         try {
             if (event === "google") {
                 provider = new firebaseInstance.auth.GoogleAuthProvider();
-                history.push("/map");
             }
-            const data = await authService.signInWithPopup(provider);
+            authService.signInWithPopup(provider)
+            .then(() => {
+                history.push("/map");
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            })
         } catch (error) {
             console.log(error);
         }
