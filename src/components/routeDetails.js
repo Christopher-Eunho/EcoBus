@@ -16,6 +16,14 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
         window.location.reload(false);
     }
 
+    function showSavedRouteMessage() {
+        let savedRouteMessage = document.getElementById("transit-journey-saved-container");
+        let routeDetails = document.getElementById("route-details-container");
+
+        routeDetails.style.display = "none";
+        savedRouteMessage.style.display = "block";
+    }
+
     const saveJourney = () => {
         const distanceInKilometers = drivingRouteDetails.distance.value / 1000;
         const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
@@ -30,7 +38,8 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
                         duration: transitRouteDetails.duration.text,
                         emissions_saved: emissionsPerKm,
                     }).then(function() {
-                        refreshPage();
+                        // refreshPage();
+                        showSavedRouteMessage();
                     })
                 } else {
                     // doc.data() will be undefined in this case
