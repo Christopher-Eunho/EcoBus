@@ -17,7 +17,7 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
     }
 
     function showSavedRouteMessage() {
-        let savedRouteMessage = document.getElementById("transit-journey-saved-container");
+        let savedRouteMessage = document.getElementById("route-saved-message-container");
         let routeDetails = document.getElementById("route-details-container");
 
         routeDetails.style.display = "none";
@@ -38,7 +38,6 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
                         duration: transitRouteDetails.duration.text,
                         emissions_saved: emissionsPerKm,
                     }).then(function() {
-                        // refreshPage();
                         showSavedRouteMessage();
                     })
                 } else {
