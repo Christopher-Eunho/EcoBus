@@ -1,12 +1,10 @@
 import { authService, db } from "firebase_eb";
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import { Alert, Accordion, Button, Card, ListGroup, Modal,  } from 'react-bootstrap';
+import { Alert, Accordion, Button, Card, ListGroup, Modal, } from 'react-bootstrap';
 import NavigationBar from '../components/NavigationBar'
-import { storage } from 'firebase/storage';
 import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
 import RouteHistoryCard from '../components/RouteHistoryCard'
@@ -29,6 +27,8 @@ const Profile = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [file, setFile] = useState(null);
+
 
     const displayRouteDetails = () => {
         var routeCounter = 1;
@@ -39,15 +39,15 @@ const Profile = () => {
                 .then(function (snap) {
                     snap.forEach(function (doc) {
                         let route = doc.data();
-                            routes.push(
-                                <RouteHistoryCard 
-                                    eventKey={routeCounter} 
-                                    origin={route.origin} 
-                                    destination={route.destination} 
-                                    distance={route.distance} 
-                                    emissionsSaved={route.emissions_saved}
-                                />)
-                            routeCounter++;
+                        routes.push(
+                            <RouteHistoryCard
+                                eventKey={routeCounter}
+                                origin={route.origin}
+                                destination={route.destination}
+                                distance={route.distance}
+                                emissionsSaved={route.emissions_saved}
+                            />)
+                        routeCounter++;
                     })
                     setRouteHistoryArray(routes);
                 })
@@ -59,23 +59,19 @@ const Profile = () => {
     I found this code on : https://dev.to/samuelkarani/comment/14079
     @authors: Tallan Groberg, Samuel Karani
     */
-    const [file, setFile] = useState(null);
-    const [url, setURL] = useState("");
-
-
     function handleChange(e) {
         showUploadButton();
         hideAvatarEditBtn();
         let imageFile = e.target.files[0];
-        if (!imageFile.name.match(/\.(jpg|jpeg|png|gif|apng|avif|svg|webp|bmp|ico|tiff)$/)){ // regex format taken from https://www.cluemediator.com/validate-image-content-in-reactjs
+        if (!imageFile.name.match(/\.(jpg|jpeg|png|gif|apng|avif|svg|webp|bmp|ico|tiff)$/)) { // regex format taken from https://www.cluemediator.com/validate-image-content-in-reactjs
             alert("This is not a valid image file!");
             window.location.reload();
-        }else{
+        } else {
             setFile(imageFile);
         }
     }
 
-    function handleUpload() {
+    function handleUpload() { //uploads avatar to firestore db then generates link
         return new Promise(resolve => {
             const uploadTask = storage.ref(`/images/${file.name}`).put(file);
             uploadTask.on("state_changed", console.log, console.error, () => {
@@ -85,18 +81,16 @@ const Profile = () => {
                     .getDownloadURL()
                     .then((url) => {
                         setFile(null);
-                        setURL(url);
                         resolve(url);
                     });
             });
         });
     }
-
     /*Image upload end*/
-    
+
     function sumArray(array) {
         var sum = 0;
-        for(var i=0; i < array.length; i++) {
+        for (var i = 0; i < array.length; i++) {
             sum += parseFloat(array[i]);
         }
         return sum;
@@ -106,7 +100,7 @@ const Profile = () => {
         var totalDistance = [];
         var totalEmissionsSaved = [];
         try {
-            db.collection("users").doc(user.uid).collection("routes").get() // from BCIT COMP 1800 Projects 1, @author: Carly Orr
+            db.collection("users").doc(user.uid).collection("routes").get() // abstracted from BCIT COMP 1800 Projects 1, @author: Carly Orr
                 .then(function (snap) {
                     snap.forEach(function (doc) {
                         totalDistance.push(parseFloat(doc.data().distance.split(" ")[0]));
@@ -122,24 +116,24 @@ const Profile = () => {
     }
 
     async function saveChanges() {
-        var newName = document.getElementById("name-change").value;
-        var newEmail = document.getElementById("email-change").value;
+        var newName = document.getElementById("name-change").value; // get name from forms
+        var newEmail = document.getElementById("email-change").value; // get email from forms
         let newAvatar = "";
 
-        if (file!==null){
-        newAvatar = await handleUpload();
+        if (file !== null) {
+            newAvatar = await handleUpload(); // wait for avatar to be uploaded before continuing
         }
 
-        if (user !== null) {
+        if (user !== null) { // check if user is logged in
             try {
-                if (userName !== newName && newName.trim() !== "") {
+                if (userName !== newName && newName.trim() !== "") { // check if name is empty and if its the same one as before 
                     db.collection("users").doc(user.uid).update({ name: newName });
                 }
                 if (userEmail !== newEmail) {
                     await user.updateEmail(newEmail); // update email in authentication
                     db.collection("users").doc(user.uid).update({ email: newEmail }); //update email in db
                 }
-                if (newAvatar !== "") {
+                if (newAvatar !== "") { // check if an avatar is uploaded
                     db.collection("users").doc(user.uid).update({ avatar: newAvatar });
                     hideAvatarUpload();
                 }
@@ -188,24 +182,27 @@ const Profile = () => {
         avatarBtn.style["display"] = "none";
     }
 
-    function hideAvatarUpload(){
+    function hideAvatarUpload() {
         let uploadbutton = document.getElementById("uploadbutton");
         uploadbutton.style["display"] = "none";
     }
-    usersRef.get().then((doc) => {
-        if (doc.exists) {
 
-            setUserEmail(doc.data().email);
-            setUserName(doc.data().name);
-            setUserAvatar(doc.data().avatar);
+    function setUserValues() {
+        usersRef.get().then((doc) => {  // abstracted from https://cloud.google.com/firestore/docs/query-data/get-data
+            if (doc.exists) {
+                setUserEmail(doc.data().email);
+                setUserName(doc.data().name);
+                setUserAvatar(doc.data().avatar);
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+    }
 
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
+    setUserValues();
 
     /* delete firestore collection start
     Taken from: https://stackoverflow.com/questions/62090827/how-to-delete-all-the-documents-in-a-firestore-collection-database
@@ -215,9 +212,10 @@ const Profile = () => {
         db.collection('users').doc(user.uid).collection('routes').get().then(querySnapshot => {
             querySnapshot.docs.forEach(snapshot => {
                 snapshot.ref.delete()
-                .then(()=>{
-                alert("Data deleted!")
-                window.location.reload()})
+                    .then(() => {
+                        alert("Data deleted!")
+                        window.location.reload()
+                    })
             })
         })
 
@@ -242,9 +240,9 @@ const Profile = () => {
                         <h4 id="nametext">{userName}</h4>
                         <input id="name-change" type="text" placeholder="Name" name="name" defaultValue={userName} />
                         <button id="nameBtn" type="button" onClick={nameTextToForm}>
-                            <img src={Edit}></img>
+                            <img src={Edit} alt="edit_button"></img>
                         </button>
-                        {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
+
                     </span>
 
                     <span id="emailForm">
@@ -252,9 +250,8 @@ const Profile = () => {
                         <h4 id="emailtext">{userEmail}</h4>
                         <input type="email" placeholder="Email" name="email" id="email-change" defaultValue={userEmail} />
                         <button id="emailBtn" type="button" onClick={emailTextToForm}>
-                            <img src={Edit}></img>
+                            <img src={Edit} alt="edit_button"></img>
                         </button>
-                        {/* <input type="image" id="editbutton" src={Edit} alt="Edit" /> */}
                     </span>
                     <Alert id="messagebox" variant="success">{message}</Alert>
                     <Alert id="errorbox" variant="danger">{error}</Alert>
@@ -288,7 +285,7 @@ const Profile = () => {
                             <Accordion.Collapse eventKey="1">
                                 <ListGroup variant="flush">
                                     <Accordion>
-                                        { routeHistoryArray.length > 0 ? (
+                                        {routeHistoryArray.length > 0 ? (
                                             routeHistoryArray
                                         ) : (
                                             <RouteHistoryEmptyCard />
