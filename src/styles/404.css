@@ -1,0 +1,15 @@
+#NotFoundAside {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    background-color: lightpink;
+    border-color: red;
+    border-width: 1px;
+    border-style: solid;
+    padding: 10px;
+    margin: auto;
+    height: fit-content;
+    width: 80%;
+    border-radius: 5px;
+    text-align: center;
+}

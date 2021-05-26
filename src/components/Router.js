@@ -4,6 +4,7 @@ import Auth from "routes/Auth";
 import Profile from "routes/Profile";
 import About_Us from "routes/About_Us";
 import Search from "routes/Search";
+import Not_Found from "routes/404";
 
 const AppRouter = ( { isLoggedIn } ) => {
     return (
@@ -14,7 +15,7 @@ const AppRouter = ( { isLoggedIn } ) => {
                         <Route exact path="/map" component={Search} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/about-us" component={About_Us} />
-                        <Route component={() => (<div> <p>404 Page Not Found</p> <a href="#/map">Click here to return to the map.</a> </div>)} />
+                        <Route component={Not_Found} />
                     </Switch>
                 ) : (
                     <Switch>
