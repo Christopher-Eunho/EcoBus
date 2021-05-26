@@ -43,3 +43,12 @@
     background-color: yellow;
     margin: auto;
 }
+
+#login-navbar{
+    float:right;
+    margin:1em;
+}
+
+#map-nav{
+    margin-right:1em;
+}

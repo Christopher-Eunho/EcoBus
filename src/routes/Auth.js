@@ -78,10 +78,11 @@ const Auth = () => {
 
     return (
         <div className="center">
-            <a href=".">
-                <img src={logo} className="logo" alt="Logo"/>
-            </a>
-            
+            <a href="."><img src={logo} className="logo" alt="Logo"/></a>
+            <span id="login-navbar">
+                <a href="/#/map" id="map-nav">Map</a>
+                <a href="/#/about-us/">About us</a>
+            </span>
             <hr/>
             
             <h2 className="welcome-message">Welcome! <br />Please {newAccount? "Sign Up for" : "Sign In to"} EcoBus.</h2>  
