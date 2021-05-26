@@ -1,22 +1,23 @@
-import { FacebookShareButton, FacebookIcon, WorkplaceShareButton, WorkplaceIcon } from "react-share";
-import { Button } from 'react-bootstrap';
+import { FacebookShareButton, FacebookIcon, RedditShareButton, RedditIcon } from "react-share";
 
 const FacebookSharing = (props) => {
     return (
         <div id="social-media-share-buttons-container">
-            <FacebookShareButton 
+            <FacebookShareButton
                 id="facebook-share-button"
                 url="https://ecobus-189e8.web.app/#/"
-                quote={"I saved " + props.emissionsSaved + "kg of CO2 by taking public transportation. See how much emissions you can save with EcoBus!"}>
-                <FacebookIcon size={40}></FacebookIcon>
+                quote={"I saved " + props.emissionsSaved + "kg of CO2 by taking public transportation. See how much emissions you can save with EcoBus!"}
+            >
+                <FacebookIcon size={50}></FacebookIcon>
             </FacebookShareButton>
 
-            <WorkplaceShareButton
+            <RedditShareButton
                 id="workplace-share-button"
-                url="https://ecobus-189e8.web.app/#/"
-                quote={"I saved " + props.emissionsSaved + "kg of CO2 by taking public transportation. See how much emissions you can save with EcoBus!"}>
-                <WorkplaceIcon size={40}></WorkplaceIcon>
-            </WorkplaceShareButton>
+                title="EcoBus"
+                url={"I saved " + props.emissionsSaved + "kg of CO2 by taking public transportation. See how much emissions you can save with EcoBus! https://ecobus-189e8.web.app/#/"}
+            >
+                <RedditIcon size={50}></RedditIcon>
+            </RedditShareButton>
         </div>
     )
 }

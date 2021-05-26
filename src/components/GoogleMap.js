@@ -290,7 +290,7 @@ function GMap() {
                     
                 </section>
                 <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
-                <SavedTransitRoute transitRouteDetails={transitRouteDetails} drivingRouteDetails={emissionsSaved} />
+                <SavedTransitRoute emissionsSaved={emissionsSaved} />
             </div>
         </>
 
