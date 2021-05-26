@@ -33,11 +33,11 @@ const Auth = () => {
                 provider = new firebaseInstance.auth.GoogleAuthProvider();
             }
             authService.signInWithPopup(provider)
-            .then(() => {
-                history.push("/map");
-            }).catch((error) => {
-                console.error("Error removing document: ", error);
-            })
+                .then(() => {
+                    history.push("/map");
+                }).catch((error) => {
+                    console.error(error);
+                })
         } catch (error) {
             console.log(error);
         }
@@ -52,13 +52,14 @@ const Auth = () => {
                     email,
                     password
                 );
-                
-                // Add user email to firestore start
-                // Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
+                /* Add user email to firestore start
+                Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
+                @author: jason ewins
+                */
                 var user = authService.currentUser;
 
-                const userRef = db.collection("users").doc(user.uid).set({
-                    name: user.email.split("@")[0], 
+                db.collection("users").doc(user.uid).set({
+                    name: user.email.split("@")[0],
                     email: user["email"],
                     avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=3a9eda40-579e-4e89-b27b-83be349e71bd'
                 });
@@ -78,17 +79,17 @@ const Auth = () => {
 
     return (
         <div className="center">
-            <a href="."><img src={logo} className="logo" alt="Logo"/></a>
+            <a href="."><img src={logo} className="logo" alt="Logo" /></a>
             <span id="login-navbar">
                 <a href="/#/map" id="map-nav">Map</a>
                 <a href="/#/about-us/">About us</a>
             </span>
-            <hr/>
-            
-            <h2 className="welcome-message">Welcome! <br />Please {newAccount? "Sign Up for" : "Sign In to"} EcoBus.</h2>  
-            
+            <hr />
+
+            <h2 className="welcome-message">Welcome! <br />Please {newAccount ? "Sign Up for" : "Sign In to"} EcoBus.</h2>
+
             <Form onSubmit={onSubmit} className="login-form">
-                  
+
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -114,13 +115,13 @@ const Auth = () => {
                         onChange={onChange}
                         required />
                 </Form.Group>
-                
+
                 <div className="authentication-button-container">
-                    <Button type="submit" id="sign-in-up-button"> 
-                        {newAccount ? "Sign Up" : "Sign In"} 
+                    <Button type="submit" id="sign-in-up-button">
+                        {newAccount ? "Sign Up" : "Sign In"}
                     </Button>
-                    
-                    <Button variant="danger" className="welcome-message" id="change-to-sign-in-up" onClick={toggleAccount}> 
+
+                    <Button variant="danger" className="welcome-message" id="change-to-sign-in-up" onClick={toggleAccount}>
                         I want to {newAccount ? "sign in!" : "sign up!"}
                     </Button>
                 </div>
