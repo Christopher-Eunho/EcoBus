@@ -69,8 +69,7 @@ function GMap() {
             if (destinationName.includes("Taco")||originName.includes("Taco")) {
                 showSecondEasterEgg();
             }
-            hideSearchForm();
-            showRouteDetailsContainer();
+            
         } else {
             showLocationError();
         }
@@ -80,12 +79,16 @@ function GMap() {
 
     const transitCallback = async (response) => {
         if (response !== null) {
-            console.log()
-            setTransitRouteDetails(response.routes[0].legs[0]);
-            displayTransitRouteDetails(response.routes[0].legs[0]);
-            console.log("Transit route set");
+            console.log(response)
             if (response.status === 'OK') {
+                setTransitRouteDetails(response.routes[0].legs[0]);
+                displayTransitRouteDetails(response.routes[0].legs[0]);
+                console.log("Transit route set");
                 setTransitResponse(response);
+                hideSearchForm();
+                showRouteDetailsContainer();
+            } else if (response.status === "ZERO_RESULTS") {
+                showNoResultError();
             } else {
                 console.log('response: ', response)
             }
@@ -95,11 +98,13 @@ function GMap() {
 
     const driveCallback = (response) => {
         if (response !== null) {
-            setDrivingRouteDetails(response.routes[0].legs[0]);
-            displayEmissionsSaved(response.routes[0].legs[0].distance.value)
-            console.log("Driving route set");
             if (response.status === 'OK') {
+                setDrivingRouteDetails(response.routes[0].legs[0]);
+                displayEmissionsSaved(response.routes[0].legs[0].distance.value)
+                console.log("Driving route set");
                 setDriveResponse(response);
+            } else if (response.status === "ZERO_RESULTS") {
+                
             } else {
                 console.log('response: ', response)
             }
@@ -175,8 +180,17 @@ function GMap() {
         taco4.className = "falling-taco4";
     }
     const showLocationError = () => {
+        document.getElementById("no-result-error").style["display"] = "none"
         const errorMessage = document.getElementById("location-error");
         errorMessage.style.color = "red";
+        errorMessage.style["display"] = "block";
+    }
+
+    const showNoResultError = () => {
+        document.getElementById("location-error").style["display"] = "none";
+        const errorMessage = document.getElementById("no-result-error");
+        errorMessage.style.color = "red";
+        errorMessage.style["display"] = "block";
     }
 
     
@@ -279,6 +293,7 @@ function GMap() {
                     
                     <div id="error-search-button">
                         <span id="location-error">Please enter valid locations</span>
+                        <span id="no-result-error">Sorry, we can't find a route between the two locations. Please enter other locations.</span>
                         <button id="submit-search-button" onClick={searchClick}>
                             <img src={Search} alt="Search Button"/>
                         </button>
