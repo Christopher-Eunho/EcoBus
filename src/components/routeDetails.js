@@ -25,6 +25,7 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
     }
 
     const saveJourney = () => {
+        console.log(drivingRouteDetails);
         const distanceInKilometers = drivingRouteDetails.distance.value / 1000;
         const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
         if (user != null) {
