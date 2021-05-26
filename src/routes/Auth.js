@@ -1,5 +1,4 @@
 import { authService, firebaseInstance, db } from "firebase_eb"
-import 'firebase/firestore'
 import React, { useState } from "react"
 import { useHistory } from "react-router"
 import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
