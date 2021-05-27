@@ -2,31 +2,51 @@ import BackButton from '../images/back-button.png';
 import Leaf from '../images/leaf.png';
 import 'firebase/firestore';
 import { db, authService } from "firebase_eb";
-import {emissionsProducedKilograms} from 'constants.js';
+import {emissionsProducedKgPerKm, metresToKm} from 'constants.js';
 import { useHistory } from "react-router";
+import { useEffect } from 'react';
 
-const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
+const RouteDetails = ({ 
+    transitRouteDetails,
+    drivingRouteDetails,
+    setIsTravelDetailsOn,
+    setIsRouteDetailsOn,
+    setIsSearchFormOn,
+    setIsSavedTransitRouteOn,
+    setEmissionSaved
+    }) => {
+        const history = useHistory();
+        const user = authService.currentUser;
+        const usersRef = db.collection('users');
 
-    const history = useHistory();
-    const user = authService.currentUser;
-    const usersRef = db.collection('users');
+        const isLoaded = () => transitRouteDetails.distance;
 
-    // Source: https://upmostly.com/tutorials/how-to-refresh-a-page-or-component-in-react
-    function refreshPage() {
-        window.location.reload(false);
+        if(transitRouteDetails.distance){
+            var totalDistance = transitRouteDetails.distance.text;
+            var totalDuration = transitRouteDetails.duration.text;
+            var {distance : {value : drivingDistanceMetres }} = drivingRouteDetails;
+            var drivingDistanceKm = drivingDistanceMetres * metresToKm;    
+            var emissionsProduced = (drivingDistanceKm * emissionsProducedKgPerKm).toFixed(2);
+            setEmissionSaved(emissionsProduced);
+            }
+    
+
+        
+    
+    function backToSearch() {       
+        setIsRouteDetailsOn(false);
+        setIsSearchFormOn(true);
     }
 
-    function showSavedRouteMessage() {
-        let savedRouteMessage = document.getElementById("route-saved-message-container");
-        let routeDetails = document.getElementById("route-details-container");
-
-        routeDetails.style.display = "none";
-        savedRouteMessage.style.display = "block";
+    const showTravelDetails = () => {
+        setIsRouteDetailsOn(false);
+        setIsTravelDetailsOn(true);
     }
+
+
 
     const saveJourney = () => {
-        const distanceInKilometers = drivingRouteDetails.distance.value / 1000;
-        const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
+        console.log("clicked");
         if (user != null) {
             usersRef.doc(user.uid).get().then((doc) => {
                 if (doc.exists) {
@@ -36,9 +56,10 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
                         destination: transitRouteDetails.end_address,
                         distance: transitRouteDetails.distance.text,
                         duration: transitRouteDetails.duration.text,
-                        emissions_saved: emissionsPerKm,
+                        emissions_saved: emissionsProduced,
                     }).then(function() {
-                        showSavedRouteMessage();
+                        setIsRouteDetailsOn(false);
+                        setIsSavedTransitRouteOn(true);
                     })
                 } else {
                     // doc.data() will be undefined in this case
@@ -59,30 +80,30 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
             "&" + 
             transitRouteDetails.duration.text + 
             "&" + 
-            emissionsPerKm);
+            emissionsProduced);
         }
     }
 
     return (
         <section className={"search-process-container"} id="route-details-container">
-            <button className="back-button" onClick={refreshPage}>
+            <button className="back-button" onClick={backToSearch}>
                 <img src={BackButton} alt="Back Button" />
             </button>
-
             <div id="emissions-saved-message-container">
                 <img src={Leaf} alt="Leaf" id="leaf-icon" />
-                <h5 id="emissions-saved-message"><span id="emissions-saved-big-message">N/A</span> KG of CO2 saved</h5>
-
+                <h5 id="emissions-saved-message"><span id="emissions-saved-big-message">{isLoaded && emissionsProduced}</span> KG of CO2 saved</h5>
                 <div id="transit-route-information">
                     <ul>
-                        <li>Distance: <span id="transit-distance-display">N/A</span> </li>
-                        <li>Duration: <span id="transit-duration-display">N/A</span> </li>
-                        <li>Emissions saved: <span id="emissions-saved-display">N/A</span>KG of CO2</li>
+                        <li>Distance: <span id="transit-distance-display">{isLoaded && totalDistance}</span> </li>
+                        <li>Duration: <span id="transit-duration-display">{isLoaded && totalDuration}</span> </li>
+                        <li>Emissions saved: <span id="emissions-saved-display">{isLoaded && emissionsProduced}</span>KG of CO2</li>
                     </ul>
                 </div>
             </div>
-
-            <button className="save-journey-button" onClick={saveJourney}>SAVE THIS ROUTE</button>
+            <div id="route-details-buttons">
+                <button className="save-journey-button" onClick={saveJourney}>SAVE ROUTE</button>
+                <button className="save-journey-button" onClick={showTravelDetails}>TRAVEL DETAILS</button>
+            </div>
         </section>
     )
 }
