@@ -68,7 +68,9 @@ export function OrginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurren
                 <ComboboxInput id="route-origin" value={value}
                     onChange={onChange}
                     disabled={!ready}
-                    placeholder="Origin" />
+                    placeholder="Origin"
+                    autocomplete={false}
+                    />
                 <ComboboxPopover>
                     <ComboboxList>
                         {status === "OK" && data.map(({ id, description }) => (

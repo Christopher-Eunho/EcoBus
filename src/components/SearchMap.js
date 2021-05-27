@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 import {
     GoogleMap,
     Marker,
@@ -11,7 +11,8 @@ import { OrginSearch } from './OriginSearch';
 import { DestinationSearch } from './DestinationSearch';
 import CurrentButton from './CurrentButton'
 import RouteDetails from './RouteDetails'
-import SavedTransitRoute from '../components/SavedTransitRoute'
+import TravelDetails from './TravelDetails'
+import SavedTransitRoute from './SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 import { emissionsProducedKilograms } from 'constants.js'
 const libraries = ["places"];
@@ -29,7 +30,7 @@ const options = {
     gestureHandling: "greedy"
 }
 
-function GMap() {
+function SearchMap() {
 
     const routeDetailsContainer = document.getElementById("route-details-container");
     const navBar = document.getElementById("navigation-bar");
@@ -54,22 +55,29 @@ function GMap() {
     const [isOriginValid, setIsOriginValid] = useState(true);
     const [isDestinationValid, setIsDestinationValid] = useState(false);
     const [isOriginCurrent, setIsOriginCurrent] = useState(true);
-    
-    const searchClick = () => {
-        console.log(isOriginCurrent)
-        console.log(isOriginValid)
-        console.log(isDestinationValid)
+    const [isTravelDetailsOn, setIsTravelDetailsOn] = useState(false);
+    const [isRouteDetailsOn, setIsRouteDetailsOn] = useState(false);
+    const [isSavedTransitRouteOn, setIsSavedTransitRouteOn] = useState(false);
+    const [isSearchFormOn, setIsSearchFormOn] = useState(true);
+    const [emissionSaved, setEmissionSaved] = useState(null);
+
+
+    const searchClick = async () => {
         if ((isOriginValid || isOriginCurrent) && isDestinationValid) {
-            setDestinationInUse(destination);
-            setOriginInUse(origin);
-            console.log(transitRouteDetails)
+            await setDestinationInUse(destination);
+            await setOriginInUse(origin);
+            hideSearchForm();
+            showRouteDetailsContainer();
             if (destinationName.includes("BCIT") || originName.includes("BCIT")) {
+                console.log("chris");
                 showEasterEgg();
+                console.log("hi ");
+
             }
             if (destinationName.includes("Taco")||originName.includes("Taco")) {
                 showSecondEasterEgg();
             }
-            
+                
         } else {
             showLocationError();
         }
@@ -79,14 +87,9 @@ function GMap() {
 
     const transitCallback = async (response) => {
         if (response !== null) {
-            console.log(response)
             if (response.status === 'OK') {
-                setTransitRouteDetails(response.routes[0].legs[0]);
-                displayTransitRouteDetails(response.routes[0].legs[0]);
-                console.log("Transit route set");
-                setTransitResponse(response);
-                hideSearchForm();
-                showRouteDetailsContainer();
+                await setTransitRouteDetails(response.routes[0].legs[0]);
+                await setTransitResponse(response);
             } else if (response.status === "ZERO_RESULTS") {
                 showNoResultError();
             } else {
@@ -100,14 +103,8 @@ function GMap() {
         if (response !== null) {
             if (response.status === 'OK') {
                 setDrivingRouteDetails(response.routes[0].legs[0]);
-                displayEmissionsSaved(response.routes[0].legs[0].distance.value)
-                console.log("Driving route set");
                 setDriveResponse(response);
-            } else if (response.status === "ZERO_RESULTS") {
-                
-            } else {
-                console.log('response: ', response)
-            }
+            } 
         }
     }
 
@@ -136,48 +133,40 @@ function GMap() {
         mapRef.current.setZoom(14);
     }, []);
 
-    function hideSearchForm() {
-        let searchFormContainer = document.getElementById("search-container");
-        searchFormContainer.style["display"] = "none";
+    const hideSearchForm = () => {
+        setIsSearchFormOn(false);
+    };
+
+    const showSearchForm = () => {
+        setIsSearchFormOn(true);
     }
 
-    function showRouteDetailsContainer() {
-        let routeDetailsContainer = document.getElementById("route-details-container");
-        routeDetailsContainer.style["display"] = "flex";
-        routeDetailsContainer.style["flexDirection"] = "column";
-        routeDetailsContainer.style["justifyContent"] = "space-around";
+    async function showRouteDetailsContainer() {
+        await setIsRouteDetailsOn(true);
+        
     }
 
-    function displayTransitRouteDetails(transitRouteData) {
-        document.getElementById("transit-distance-display").innerHTML = transitRouteData.distance.text;
-        document.getElementById("transit-duration-display").innerHTML = transitRouteData.duration.text;
-    }
-
-    function displayEmissionsSaved(drivingDistanceMetres) {
-        const distanceInKilometers = drivingDistanceMetres / 1000;
-        const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
-        document.getElementById("emissions-saved-big-message").innerHTML = emissionsPerKm;
-        document.getElementById("emissions-saved-display").innerHTML = emissionsPerKm;
-        document.getElementById("saved-route-message-emissions-saved").innerHTML = emissionsPerKm;
-    }
 
     function showEasterEgg() {
-        const routeDetailsContainer = document.getElementById("route-details-container");
-        const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-        const navBar = document.getElementById("navbar");
+        
+            const routeDetailsContainer = document.getElementById("route-details-container");
+        // const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+        const navBar = document.getElementById("navigation-bar");
         routeDetailsContainer.className = "bcit-search-process-container";
         navBar.className = "bcit-navigation-bar";
-        transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+        // transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+        
+        
     }
 
     function showSecondEasterEgg() {
-        music.currentTime = 0;
-        music.volume = .5;
-        music.play();
-        taco1.className = "falling-taco1";
-        taco2.className = "falling-taco2";
-        taco3.className = "falling-taco3";
-        taco4.className = "falling-taco4";
+            music.currentTime = 0;
+            music.volume = .5;
+            music.play();
+            taco1.className = "falling-taco1";
+            taco2.className = "falling-taco2";
+            taco3.className = "falling-taco3";
+            taco4.className = "falling-taco4";
     }
     const showLocationError = () => {
         document.getElementById("no-result-error").style["display"] = "none"
@@ -187,10 +176,15 @@ function GMap() {
     }
 
     const showNoResultError = () => {
+        setIsSearchFormOn(true);
+        setIsRouteDetailsOn(false);
+        
+        if(isSearchFormOn){ 
         document.getElementById("location-error").style["display"] = "none";
         const errorMessage = document.getElementById("no-result-error");
         errorMessage.style.color = "red";
         errorMessage.style["display"] = "block";
+        }
     }
 
     
@@ -273,6 +267,7 @@ function GMap() {
                         />
                     )}
                 </GoogleMap>
+                {isSearchFormOn &&
                 <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
                     
@@ -300,8 +295,30 @@ function GMap() {
                     </div>
                     
                 </section>
-                <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
-                <SavedTransitRoute />
+                }
+                {isRouteDetailsOn &&
+                    <RouteDetails 
+                    transitRouteDetails={transitRouteDetails} 
+                    drivingRouteDetails={drivingRouteDetails}
+                    setIsRouteDetailsOn={setIsRouteDetailsOn}
+                    setIsTravelDetailsOn={setIsTravelDetailsOn} 
+                    setIsSearchFormOn={setIsSearchFormOn}
+                    setIsSavedTransitRouteOn={setIsSavedTransitRouteOn}
+                    setEmissionSaved={setEmissionSaved}
+                />}
+                {isSavedTransitRouteOn &&
+                    <SavedTransitRoute
+                    emissionSaved={emissionSaved} 
+                    setIsSearchFormOn={setIsSearchFormOn}
+                    setIsSavedTransitRouteOn={setIsSavedTransitRouteOn}
+                />}
+                
+                {isTravelDetailsOn && 
+                    <TravelDetails
+                    transitRouteDetails={transitRouteDetails} 
+                    setIsTravelDetailsOn={setIsTravelDetailsOn}
+                    setIsRouteDetailsOn={setIsRouteDetailsOn} 
+                />}
             </div>
         </>
 
@@ -309,4 +326,4 @@ function GMap() {
 
 };
 
-export default GMap
+export default SearchMap
