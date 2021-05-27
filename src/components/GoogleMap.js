@@ -72,8 +72,6 @@ function GMap() {
             if (destinationName.includes("Taco")||originName.includes("Taco")) {
                 showSecondEasterEgg();
             }
-            hideSearchForm();
-            showRouteDetailsContainer();
         } else {
             showLocationError();
         }
@@ -87,6 +85,8 @@ function GMap() {
             setTransitRouteDetails(response.routes[0].legs[0]);
             displayTransitRouteDetails(response.routes[0].legs[0]);
             console.log("Transit route set");
+            hideSearchForm();
+            showRouteDetailsContainer();
             if (response.status === 'OK') {
                 setTransitResponse(response);
             } else {
