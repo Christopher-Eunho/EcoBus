@@ -95,7 +95,7 @@ const RouteDetails = ({
         }
     }
 
-    function resetAll() {
+    function resetAll() { //Resets Easter Eggs back to default values, if applicable
         navBar.className="navbar";
         routeDetailsContainer.className = "search-process-container";
         taco1.className = "taco1";
