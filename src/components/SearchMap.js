@@ -148,8 +148,7 @@ function SearchMap() {
 
 
     function showEasterEgg() {
-        
-            const routeDetailsContainer = document.getElementById("route-details-container");
+        const routeDetailsContainer = document.getElementById("route-details-container");
         // const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
         const navBar = document.getElementById("navigation-bar");
         routeDetailsContainer.className = "bcit-search-process-container";
