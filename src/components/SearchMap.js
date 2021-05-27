@@ -148,20 +148,12 @@ function SearchMap() {
 
 
     function showEasterEgg() {
-<<<<<<< HEAD:src/components/GoogleMap.js
         const routeDetailsContainer = document.getElementById("route-details-container");
-        const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-=======
-        
-            const routeDetailsContainer = document.getElementById("route-details-container");
         // const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
->>>>>>> dev:src/components/SearchMap.js
         const navBar = document.getElementById("navigation-bar");
         routeDetailsContainer.className = "bcit-search-process-container";
         navBar.className = "bcit-navigation-bar";
         // transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
-        
-        
     }
 
     function showSecondEasterEgg() {
