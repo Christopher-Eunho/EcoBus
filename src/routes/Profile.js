@@ -8,7 +8,8 @@ import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
 import RouteHistoryCard from '../components/RouteHistoryCard'
 import RouteHistoryEmptyCard from '../components/RouteHistoryEmptyCard'
-
+import { storage } from 'firebase/storage';
+import firebase from "firebase/app";
 
 const Profile = () => {
     const user = authService.currentUser;
@@ -26,6 +27,7 @@ const Profile = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [file, setFile] = useState(null);
+    const storage = firebase.storage()
 
 
     const displayRouteDetails = () => {
@@ -83,9 +85,9 @@ const Profile = () => {
          * Upload image to firestore database then generates a link to the image.
          */
         return new Promise(resolve => {
-            const uploadTask = db.ref(`/images/${file.name}`).put(file);
+            const uploadTask = storage.ref(`/images/${file.name}`).put(file);
             uploadTask.on("state_changed", console.log, console.error, () => {
-                db
+                storage
                     .ref("images")
                     .child(file.name)
                     .getDownloadURL()
