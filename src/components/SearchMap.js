@@ -14,7 +14,7 @@ import RouteDetails from './RouteDetails'
 import TravelDetails from './TravelDetails'
 import SavedTransitRoute from './SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
-import { emissionsProducedKilograms } from 'constants.js'
+import { defaultZoomLevel } from 'constants.js'
 const libraries = ["places"];
 
 const mapContainerStyle = {
@@ -32,10 +32,6 @@ const options = {
 
 function SearchMap() {
 
-    const routeDetailsContainer = document.getElementById("route-details-container");
-    const navBar = document.getElementById("navigation-bar");
-    const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-    const searchFormContainer = document.getElementById("search-container");
     const taco1 = document.getElementById("taco1");
     const taco2 = document.getElementById("taco2");
     const taco3 = document.getElementById("taco3");
@@ -47,7 +43,6 @@ function SearchMap() {
     const [originName, setOriginName] = useState("");
     const [destinationName, setDestinationName] = useState("");
     const [transitResponse, setTransitResponse] = useState("");
-    const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse] = useState({});
     const [originInUse, setOriginInUse] = useState({});
     const [transitRouteDetails, setTransitRouteDetails] = useState({});
@@ -69,9 +64,7 @@ function SearchMap() {
             hideSearchForm();
             showRouteDetailsContainer();
             if (destinationName.includes("BCIT") || originName.includes("BCIT")) {
-                console.log("chris");
                 showEasterEgg();
-                console.log("hi ");
 
             }
             if (destinationName.includes("Taco")||originName.includes("Taco")) {
@@ -103,7 +96,6 @@ function SearchMap() {
         if (response !== null) {
             if (response.status === 'OK') {
                 setDrivingRouteDetails(response.routes[0].legs[0]);
-                setDriveResponse(response);
             } 
         }
     }
@@ -120,7 +112,7 @@ function SearchMap() {
             console.log("GeoLocation Not Available");
         }
 
-    }, []); // 
+    }, []);
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
@@ -130,16 +122,12 @@ function SearchMap() {
 
     const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
-        mapRef.current.setZoom(14);
+        mapRef.current.setZoom(defaultZoomLevel);
     }, []);
 
     const hideSearchForm = () => {
         setIsSearchFormOn(false);
     };
-
-    const showSearchForm = () => {
-        setIsSearchFormOn(true);
-    }
 
     async function showRouteDetailsContainer() {
         await setIsRouteDetailsOn(true);
@@ -149,7 +137,7 @@ function SearchMap() {
 
     function showEasterEgg() {
         
-            const routeDetailsContainer = document.getElementById("route-details-container");
+        const routeDetailsContainer = document.getElementById("route-details-container");
         // const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
         const navBar = document.getElementById("navigation-bar");
         routeDetailsContainer.className = "bcit-search-process-container";
@@ -198,7 +186,7 @@ function SearchMap() {
                 <CurrentButton panTo={panTo} setCurrentLocation={setCurrentLocation} />
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
-                    zoom={13}
+                    zoom={defaultZoomLevel}
                     center={currentLocation}
                     options={options}
                     onClick={(event) => { console.log(event) }}
