@@ -19,6 +19,8 @@
     "react-image-fallback": "^8.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-share": "^4.4.0",
+    "semantic-ui-react": "^2.0.3",
     "use-places-autocomplete": "^1.9.1",
     "use-sound": "^3.0.1",
     "web-vitals": "^1.1.2"

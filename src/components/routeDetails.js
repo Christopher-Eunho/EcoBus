@@ -87,4 +87,3 @@ const RouteDetails = ({ transitRouteDetails, drivingRouteDetails }) => {
     )
 }
 
-export default RouteDetails;
