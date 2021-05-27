@@ -20,11 +20,15 @@ const TravelDetails = ({ setIsTravelDetailsOn,
 
     return (
         <section className={"search-process-container"} id="travel-details-container">
-            <button className="back-button" onClick={backToRouteDetails}>
-                <img src={BackButton} alt="Back Button" />
-            </button>
-            <h3>Travel Details</h3>
-            <ul>{listTravelDetails}</ul>
+            <div id="travel-details-header">
+                <button className="back-button" id="travel-details-back-button" onClick={backToRouteDetails}>
+                    <img src={BackButton} alt="Back Button" />
+                </button>
+                <div id="travel-details-title">
+                    <h3 >Travel Details</h3>
+                </div>
+            </div>
+            <ol>{listTravelDetails}</ol>
             
         </section>
     )
