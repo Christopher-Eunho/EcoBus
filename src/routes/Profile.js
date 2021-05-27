@@ -270,16 +270,24 @@ const Profile = () => {
     */
     function deleteUserData() {
         /**
-     * Delete all routes from current users history in firestore.  
-     */
-        db.collection('users').doc(user.uid).collection('routes').get().then(querySnapshot => {
-            querySnapshot.docs.forEach(snapshot => {
-                snapshot.ref.delete().then(() => {
-                    alert("Data deleted!")
-                    window.location.reload()
-                })
+         * Delete all routes from current users history in firestore.  
+         */
+        db.collection('users').doc(user.uid).collection('routes').get()
+            .then(querySnapshot => {
+                if (querySnapshot.docs.length != 0) {
+                    querySnapshot.docs.forEach(snapshot => {
+                        snapshot.ref.delete()
+                            .then(() => {
+                                alert("Data deleted!")
+                                window.location.reload()
+                            })
+                    })
+                } else {
+                    alert("No data to delete!");
+                    window.location.reload();
+                }
             })
-        })
+
     }
     /*delete firestore collection end*/
 
