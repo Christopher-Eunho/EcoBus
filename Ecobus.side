@@ -1,665 +1,27 @@
 {
-  "id": "46a3050a-d180-4afd-8ebd-6e1a41671d9d",
+  "id": "863f8b00-f13e-49e9-8ccd-9c0da8e03f7a",
   "version": "2.0",
-  "name": "Ecobus",
-  "url": "https://ecobus-189e8.web.app/map",
+  "name": "EcoBusChris",
+  "url": "https://ecobus-189e8.web.app/#/map/",
   "tests": [{
-    "id": "7758a997-7d23-45d9-a436-be7552376588",
-    "name": "31. Visible Log In button - Positive",
+    "id": "27926368-d200-4271-a8c8-bc737d013b30",
+    "name": "Test 9",
     "commands": [{
-      "id": "736ba1fb-e35c-4633-8f15-e1e887140356",
-      "comment": "Must not be signed in",
-      "command": "open",
-      "target": "https://ecobus-189e8.web.app/#/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "2f748114-7f85-47fa-bd33-1fbeb9d7a76c",
-      "comment": "Must not be signed in",
-      "command": "click",
-      "target": "linkText=About us",
-      "targets": [
-        ["linkText=About us", "linkText"],
-        ["css=a:nth-child(2)", "css:finder"],
-        ["xpath=//a[contains(text(),'About us')]", "xpath:link"],
-        ["xpath=//span[@id='login-navbar']/a[2]", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '/#/about-us/')]", "xpath:href"],
-        ["xpath=//a[2]", "xpath:position"],
-        ["xpath=//a[contains(.,'About us')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "9bcf7f70-63fc-4b78-abfd-d1ca63128491",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=login",
-      "targets": [
-        ["id=login", "id"],
-        ["linkText=Log in", "linkText"],
-        ["css=#login", "css:finder"],
-        ["xpath=//a[contains(text(),'Log in')]", "xpath:link"],
-        ["xpath=//a[@id='login']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/a", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '.')]", "xpath:href"],
-        ["xpath=//nav/a", "xpath:position"],
-        ["xpath=//a[contains(.,'Log in')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "465f9145-a3f4-46f3-b529-9d803652caf4",
-      "comment": "",
-      "command": "click",
-      "target": "id=login",
-      "targets": [
-        ["id=login", "id"],
-        ["linkText=Log in", "linkText"],
-        ["css=#login", "css:finder"],
-        ["xpath=//a[contains(text(),'Log in')]", "xpath:link"],
-        ["xpath=//a[@id='login']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/a", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '.')]", "xpath:href"],
-        ["xpath=//nav/a", "xpath:position"],
-        ["xpath=//a[contains(.,'Log in')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "2bafc7d6-f92c-4898-92f6-6044f9a47060",
-      "comment": "",
-      "command": "click",
-      "target": "id=map-nav",
-      "targets": [
-        ["id=map-nav", "id"],
-        ["linkText=Map", "linkText"],
-        ["css=#map-nav", "css:finder"],
-        ["xpath=//a[contains(text(),'Map')]", "xpath:link"],
-        ["xpath=//a[@id='map-nav']", "xpath:attributes"],
-        ["xpath=//span[@id='login-navbar']/a", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '/#/map')]", "xpath:href"],
-        ["xpath=//span/a", "xpath:position"],
-        ["xpath=//a[contains(.,'Map')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "bff43d98-fcfb-43e3-b1a6-37e8ef3dc75e",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=login",
-      "targets": [
-        ["id=login", "id"],
-        ["linkText=Log in", "linkText"],
-        ["css=#login", "css:finder"],
-        ["xpath=//a[contains(text(),'Log in')]", "xpath:link"],
-        ["xpath=//a[@id='login']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/a", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '.')]", "xpath:href"],
-        ["xpath=//nav/a", "xpath:position"],
-        ["xpath=//a[contains(.,'Log in')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }]
-  }, {
-    "id": "e80bafb7-7d0b-41e6-a28f-9c41ba01d08b",
-    "name": "2. Sign Up with Invalid Email - Negative",
-    "commands": [{
-      "id": "202ab264-5d73-4d77-8cb5-338e4ed12f18",
-      "comment": "Must not be signed in",
-      "command": "open",
-      "target": "/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "36bb921c-d50a-43ea-92ab-293235d1ef28",
-      "comment": "Must not be signed in",
-      "command": "click",
-      "target": "id=formBasicEmail",
-      "targets": [
-        ["id=formBasicEmail", "id"],
-        ["name=email", "name"],
-        ["css=#formBasicEmail", "css:finder"],
-        ["xpath=//input[@id='formBasicEmail']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "ad6ec96e-e5d4-4a83-abb7-70f4123b6ce2",
-      "comment": "",
-      "command": "type",
-      "target": "id=formBasicEmail",
-      "targets": [
-        ["id=formBasicEmail", "id"],
-        ["name=email", "name"],
-        ["css=#formBasicEmail", "css:finder"],
-        ["xpath=//input[@id='formBasicEmail']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "bob@fakeemail"
-    }, {
-      "id": "e3032b43-789a-4a2e-8cde-5972d64dbedd",
-      "comment": "",
-      "command": "type",
-      "target": "id=formBasicPassword",
-      "targets": [
-        ["id=formBasicPassword", "id"],
-        ["name=password", "name"],
-        ["css=#formBasicPassword", "css:finder"],
-        ["xpath=//input[@id='formBasicPassword']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[2]/input", "xpath:idRelative"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": "password"
-    }, {
-      "id": "d66e004d-a4b2-4fb9-a024-95535a961c97",
-      "comment": "",
-      "command": "click",
-      "target": "id=change-to-sign-in-up",
-      "targets": [
-        ["id=change-to-sign-in-up", "id"],
-        ["css=#change-to-sign-in-up", "css:finder"],
-        ["xpath=//button[@id='change-to-sign-in-up']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[3]/button[2]", "xpath:idRelative"],
-        ["xpath=//button[2]", "xpath:position"],
-        ["xpath=//button[contains(.,'I want to sign up!')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "ce049bf0-6a28-43f6-b25f-fd945155bf93",
-      "comment": "",
-      "command": "click",
-      "target": "id=sign-in-up-button",
-      "targets": [
-        ["id=sign-in-up-button", "id"],
-        ["css=#sign-in-up-button", "css:finder"],
-        ["xpath=//button[@id='sign-in-up-button']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[3]/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Sign Up')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "c8d8e186-2f50-4f18-a18b-77464b424134",
-      "comment": "",
-      "command": "waitForText",
-      "target": "id=error-message",
-      "targets": [],
-      "value": "The email address is badly formatted."
-    }, {
-      "id": "0f222556-462c-4f8c-9696-2900a108cf99",
-      "comment": "",
-      "command": "assertText",
-      "target": "id=error-message",
-      "targets": [
-        ["id=error-message", "id"],
-        ["css=#error-message", "css:finder"],
-        ["xpath=//span[@id='error-message']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/span", "xpath:idRelative"],
-        ["xpath=//span", "xpath:position"],
-        ["xpath=//span[contains(.,'The email address is badly formatted.')]", "xpath:innerText"]
-      ],
-      "value": "The email address is badly formatted."
-    }]
-  }, {
-    "id": "9b954c63-2a84-40db-98f3-5ea3094e1471",
-    "name": "3. Register with existing email - Negative",
-    "commands": [{
-      "id": "1f9de2b3-c4bf-4a81-972d-4a17286202b8",
-      "comment": "Must not be signed in",
-      "command": "open",
-      "target": "/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "2071c71d-5e4b-4b4d-ac56-2b0d152cdfe8",
-      "comment": "Must not be signed in",
-      "command": "click",
-      "target": "id=formBasicEmail",
-      "targets": [
-        ["id=formBasicEmail", "id"],
-        ["name=email", "name"],
-        ["css=#formBasicEmail", "css:finder"],
-        ["xpath=//input[@id='formBasicEmail']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "be68788e-8291-4fa0-bb6a-9aa64a6aabee",
-      "comment": "",
-      "command": "type",
-      "target": "id=formBasicEmail",
-      "targets": [
-        ["id=formBasicEmail", "id"],
-        ["name=email", "name"],
-        ["css=#formBasicEmail", "css:finder"],
-        ["xpath=//input[@id='formBasicEmail']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "test@test.com"
-    }, {
-      "id": "3860bfac-1e91-4f11-9dfa-b9a76d9e19a3",
-      "comment": "",
-      "command": "click",
-      "target": "id=formBasicPassword",
-      "targets": [
-        ["id=formBasicPassword", "id"],
-        ["name=password", "name"],
-        ["css=#formBasicPassword", "css:finder"],
-        ["xpath=//input[@id='formBasicPassword']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[2]/input", "xpath:idRelative"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "4411407e-309c-4d65-b2b1-d86f820df931",
-      "comment": "",
-      "command": "type",
-      "target": "id=formBasicPassword",
-      "targets": [
-        ["id=formBasicPassword", "id"],
-        ["name=password", "name"],
-        ["css=#formBasicPassword", "css:finder"],
-        ["xpath=//input[@id='formBasicPassword']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[2]/input", "xpath:idRelative"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": "password"
-    }, {
-      "id": "b5cf82f8-d771-4b3a-878c-a8f2f124b017",
-      "comment": "",
-      "command": "click",
-      "target": "id=change-to-sign-in-up",
-      "targets": [
-        ["id=change-to-sign-in-up", "id"],
-        ["css=#change-to-sign-in-up", "css:finder"],
-        ["xpath=//button[@id='change-to-sign-in-up']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[3]/button[2]", "xpath:idRelative"],
-        ["xpath=//button[2]", "xpath:position"],
-        ["xpath=//button[contains(.,'I want to sign up!')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "5643e2aa-1b6b-4373-b691-1579ee51244c",
-      "comment": "",
-      "command": "click",
-      "target": "id=sign-in-up-button",
-      "targets": [
-        ["id=sign-in-up-button", "id"],
-        ["css=#sign-in-up-button", "css:finder"],
-        ["xpath=//button[@id='sign-in-up-button']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[3]/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Sign Up')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "fc67d8da-cc7c-4b7c-9efe-48be51721f67",
-      "comment": "",
-      "command": "waitForText",
-      "target": "id=error-message",
-      "targets": [
-        ["id=error-message", "id"],
-        ["css=#error-message", "css:finder"],
-        ["xpath=//span[@id='error-message']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/span", "xpath:idRelative"],
-        ["xpath=//span", "xpath:position"],
-        ["xpath=//span[contains(.,'The email address is already in use by another account.')]", "xpath:innerText"]
-      ],
-      "value": "The email address is already in use by another account."
-    }, {
-      "id": "c9ac9dc1-ecf9-45aa-9bab-8577ba823947",
-      "comment": "",
-      "command": "assertText",
-      "target": "id=error-message",
-      "targets": [
-        ["id=error-message", "id"],
-        ["css=#error-message", "css:finder"],
-        ["xpath=//span[@id='error-message']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/span", "xpath:idRelative"],
-        ["xpath=//span", "xpath:position"],
-        ["xpath=//span[contains(.,'The email address is already in use by another account.')]", "xpath:innerText"]
-      ],
-      "value": "The email address is already in use by another account."
-    }]
-  }, {
-    "id": "eea213dc-a4de-434e-9b96-2ef3bb435597",
-    "name": "4. Less than 6 chars password - Negative",
-    "commands": [{
-      "id": "785e6bd5-6ea8-479b-a371-7e816e886ad9",
-      "comment": "Must not be signed in",
-      "command": "open",
-      "target": "/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "f71f0b74-52e9-4376-b393-28bf1e596452",
-      "comment": "Must not be signed in",
-      "command": "click",
-      "target": "id=formBasicEmail",
-      "targets": [
-        ["id=formBasicEmail", "id"],
-        ["name=email", "name"],
-        ["css=#formBasicEmail", "css:finder"],
-        ["xpath=//input[@id='formBasicEmail']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "fdba41ef-ea91-4d79-aca5-23eb8417935c",
-      "comment": "",
-      "command": "type",
-      "target": "id=formBasicEmail",
-      "targets": [
-        ["id=formBasicEmail", "id"],
-        ["name=email", "name"],
-        ["css=#formBasicEmail", "css:finder"],
-        ["xpath=//input[@id='formBasicEmail']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "testemail@testemail.com"
-    }, {
-      "id": "585254ad-5107-49b5-92d9-a0ffa660ffbb",
-      "comment": "",
-      "command": "click",
-      "target": "id=change-to-sign-in-up",
-      "targets": [
-        ["id=change-to-sign-in-up", "id"],
-        ["css=#change-to-sign-in-up", "css:finder"],
-        ["xpath=//button[@id='change-to-sign-in-up']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[3]/button[2]", "xpath:idRelative"],
-        ["xpath=//button[2]", "xpath:position"],
-        ["xpath=//button[contains(.,'I want to sign up!')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "f3f01233-35f8-4689-821e-50f091c33d9c",
-      "comment": "",
-      "command": "click",
-      "target": "id=formBasicPassword",
-      "targets": [
-        ["id=formBasicPassword", "id"],
-        ["name=password", "name"],
-        ["css=#formBasicPassword", "css:finder"],
-        ["xpath=//input[@id='formBasicPassword']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[2]/input", "xpath:idRelative"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "7d771e26-4452-4186-9c29-2eeebda3404d",
-      "comment": "",
-      "command": "type",
-      "target": "id=formBasicPassword",
-      "targets": [
-        ["id=formBasicPassword", "id"],
-        ["name=password", "name"],
-        ["css=#formBasicPassword", "css:finder"],
-        ["xpath=//input[@id='formBasicPassword']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[2]/input", "xpath:idRelative"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": "pass"
-    }, {
-      "id": "be0ff343-679c-49c1-9981-296db102dfc2",
-      "comment": "",
-      "command": "click",
-      "target": "id=sign-in-up-button",
-      "targets": [
-        ["id=sign-in-up-button", "id"],
-        ["css=#sign-in-up-button", "css:finder"],
-        ["xpath=//button[@id='sign-in-up-button']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[3]/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Sign Up')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "10fcafce-78b5-4623-8395-e3d19b7ef52f",
-      "comment": "",
-      "command": "assertText",
-      "target": "id=error-message",
-      "targets": [
-        ["id=error-message", "id"],
-        ["css=#error-message", "css:finder"],
-        ["xpath=//span[@id='error-message']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/span", "xpath:idRelative"],
-        ["xpath=//span", "xpath:position"],
-        ["xpath=//span[contains(.,'Password should be at least 6 characters')]", "xpath:innerText"]
-      ],
-      "value": "Password should be at least 6 characters"
-    }]
-  }, {
-    "id": "f8f14339-8c63-4aec-83ab-60e9736a76c7",
-    "name": "5. Google Sign In - Positive",
-    "commands": [{
-      "id": "e3133d7c-2c82-40a7-b341-c5a50727b891",
-      "comment": "Must not be signed in",
-      "command": "open",
-      "target": "https://ecobus-189e8.web.app/#/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "822219d9-7e0d-4763-9d1a-fc51308c160f",
-      "comment": "Must not be signed in",
-      "command": "click",
-      "target": "css=svg",
-      "targets": [
-        ["css=svg", "css:finder"]
-      ],
-      "value": "",
-      "opensWindow": true,
-      "windowHandleName": "win2832",
-      "windowTimeout": 2000
-    }, {
-      "id": "37f9c26f-4664-4f9d-9f5c-19c2f23a9ebd",
-      "comment": "",
-      "command": "storeWindowHandle",
-      "target": "root",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "d793dcd3-4551-44d4-b406-d9affdbf0068",
-      "comment": "",
-      "command": "selectWindow",
-      "target": "handle=${win2832}",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "a2208c9e-1d3c-4f48-be23-6141805d3552",
-      "comment": "",
-      "command": "selectWindow",
-      "target": "handle=${root}",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "a692e1cc-6b75-430c-9963-6a47ea057f2d",
-      "comment": "",
-      "command": "click",
-      "target": "css=.nav-link:nth-child(2) > a",
-      "targets": [
-        ["css=.nav-link:nth-child(2) > a", "css:finder"],
-        ["xpath=//a[contains(text(),'Profile')]", "xpath:link"],
-        ["xpath=//div[@id='navigation-links']/a[2]/a", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '#/profile')]", "xpath:href"],
-        ["xpath=//a[2]/a", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "8e88abff-d9b2-4a56-b61d-1939d6b755a8",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=useravatar",
-      "targets": [
-        ["id=useravatar", "id"],
-        ["css=#useravatar", "css:finder"],
-        ["xpath=//img[@alt='Avatar']", "xpath:img"],
-        ["xpath=//img[@id='useravatar']", "xpath:attributes"],
-        ["xpath=//div[@id='avatar']/img", "xpath:idRelative"],
-        ["xpath=//img", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "de0d7820-fd89-4ded-b025-a63ad899f696",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=nametext",
-      "targets": [
-        ["id=nametext", "id"],
-        ["css=#nametext", "css:finder"],
-        ["xpath=//h4[@id='nametext']", "xpath:attributes"],
-        ["xpath=//span[@id='nameForm']/h4[2]", "xpath:idRelative"],
-        ["xpath=//h4[2]", "xpath:position"],
-        ["xpath=//h4[contains(.,'test')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "453a7c51-5dc0-4c61-8722-305ea2738970",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=emailtext",
-      "targets": [
-        ["id=emailtext", "id"],
-        ["css=#emailtext", "css:finder"],
-        ["xpath=//h4[@id='emailtext']", "xpath:attributes"],
-        ["xpath=//span[@id='emailForm']/h4[2]", "xpath:idRelative"],
-        ["xpath=//span[2]/h4[2]", "xpath:position"],
-        ["xpath=//h4[contains(.,'austinh323@gmail.com')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "d94c000b-6fc1-481c-8724-efd346823521",
-      "comment": "",
-      "command": "click",
-      "target": "id=logout",
-      "targets": [
-        ["id=logout", "id"],
-        ["css=#logout", "css:finder"],
-        ["xpath=//button[@id='logout']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Log Out')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }]
-  }, {
-    "id": "e782a711-faa4-4af8-b323-6d582c6b4509",
-    "name": "6. Log out - Positive",
-    "commands": [{
-      "id": "7416fc0f-2a5c-4abb-b6e7-ca311d24e035",
-      "comment": "Must be signed in",
-      "command": "open",
-      "target": "/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "40439779-0de7-4ac7-86b1-0fae2c12fa48",
-      "comment": "Must be signed in",
-      "command": "click",
-      "target": "id=logout",
-      "targets": [
-        ["id=logout", "id"],
-        ["css=#logout", "css:finder"],
-        ["xpath=//button[@id='logout']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Log Out')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "5d96d349-1c6e-4e08-a9bc-c06727361a36",
-      "comment": "",
-      "command": "waitForText",
-      "target": "css=.welcome-message:nth-child(4)",
-      "targets": [],
-      "value": "Welcome!\\nPlease Sign In to EcoBus."
-    }, {
-      "id": "3d49e11d-dc45-4284-9983-98e8302f40cb",
-      "comment": "",
-      "command": "assertText",
-      "target": "css=.welcome-message:nth-child(4)",
-      "targets": [
-        ["css=.welcome-message:nth-child(4)", "css:finder"],
-        ["xpath=//div[@id='root']/div/h2", "xpath:idRelative"],
-        ["xpath=//h2", "xpath:position"]
-      ],
-      "value": "Welcome!\\nPlease Sign In to EcoBus."
-    }, {
-      "id": "8e5f0f5e-1f52-423b-8fc7-8ab39c512d82",
-      "comment": "",
-      "command": "waitForElementPresent",
-      "target": "id=sign-in-up-button",
-      "targets": [],
-      "value": "30000"
-    }, {
-      "id": "1ad39254-9521-435e-941d-3a5387f7afa6",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=sign-in-up-button",
-      "targets": [
-        ["id=sign-in-up-button", "id"],
-        ["css=#sign-in-up-button", "css:finder"],
-        ["xpath=//button[@id='sign-in-up-button']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[3]/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }]
-  }, {
-    "id": "61a9eb16-765e-4199-ba8c-cda5dd73adf7",
-    "name": "40. BCIT Easter Egg - Positive",
-    "commands": [{
-      "id": "40f2ce20-8d82-4852-92da-8889588b3c87",
+      "id": "a359abf7-5bc2-4a67-9151-f92f032c1bda",
       "comment": "",
       "command": "open",
-      "target": "https://ecobus-189e8.web.app/#/map",
+      "target": "https://ecobus-189e8.web.app/#/map/",
       "targets": [],
       "value": ""
     }, {
-      "id": "985d9bb0-088a-4fe6-bef8-0054557ba5ab",
+      "id": "d6aa489a-50f4-4102-9fca-c78e4713b3ad",
       "comment": "",
-      "command": "click",
-      "target": "id=route-origin",
-      "targets": [
-        ["id=route-origin", "id"],
-        ["css=#route-origin", "css:finder"],
-        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
-        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "command": "setWindowSize",
+      "target": "1280x680",
+      "targets": [],
       "value": ""
     }, {
-      "id": "66bddee6-6398-4046-981c-fdaca9c15970",
-      "comment": "",
-      "command": "type",
-      "target": "id=route-origin",
-      "targets": [
-        ["id=route-origin", "id"],
-        ["css=#route-origin", "css:finder"],
-        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
-        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "BCIT"
-    }, {
-      "id": "8ba09d35-cdde-4f6d-80b2-aeedeb51e521",
-      "comment": "",
-      "command": "click",
-      "target": "id=-120555183",
-      "targets": [
-        ["id=-120555183", "id"],
-        ["css=#\\-120555183", "css:finder"],
-        ["xpath=//li[@id='-120555183']", "xpath:attributes"],
-        ["xpath=//ul[@id='listbox--1']/li", "xpath:idRelative"],
-        ["xpath=//reach-portal/div/ul/li", "xpath:position"],
-        ["xpath=//li[contains(.,'BCIT, Willingdon Avenue, Burnaby, BC, Canada')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "f71d83fd-8205-490e-a3bd-42d17d18e3ef",
+      "id": "a86f21b7-3b39-43e6-af1d-1944015b8f46",
       "comment": "",
       "command": "click",
       "target": "id=route-destination",
@@ -672,7 +34,7 @@
       ],
       "value": ""
     }, {
-      "id": "6d6c9e7b-2d2a-4240-a681-c0047ad0f708",
+      "id": "f3ca87b2-ae54-4374-a83f-47797a4f01ae",
       "comment": "",
       "command": "type",
       "target": "id=route-destination",
@@ -683,150 +45,23 @@
         ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
         ["xpath=//div[2]/div/input", "xpath:position"]
       ],
-      "value": "Science"
+      "value": "Downtown, Vancouver, BC, Canada"
     }, {
-      "id": "71961b93-81c9-472b-ad6e-a0b1503b110f",
+      "id": "d8460c27-3f0d-4b2f-a81f-b2a08efbb0b8",
       "comment": "",
       "command": "click",
-      "target": "css=#\\31 017721542 > span:nth-child(2)",
+      "target": "id=1928323596",
       "targets": [
-        ["css=#\\31 017721542 > span:nth-child(2)", "css:finder"],
-        ["xpath=//li[@id='1017721542']/span[2]", "xpath:idRelative"],
-        ["xpath=//span[2]", "xpath:position"],
-        ["xpath=//span[contains(.,' World, Quebec Street, Vancouver, BC, Canada')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "c95a58b1-14a1-4652-8960-04b28dbbb634",
-      "comment": "",
-      "command": "click",
-      "target": "css=#submit-search-button > img",
-      "targets": [
-        ["css=#submit-search-button > img", "css:finder"],
-        ["xpath=//img[@alt='Search Button']", "xpath:img"],
-        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
-        ["xpath=//div[3]/button/img", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "04ef344f-7530-42f1-bb5c-fbfd92dac697",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "css=#navigation-bar",
-      "targets": [
-        ["id=navigation-bar", "id"],
-        ["css=#navigation-bar", "css:finder"],
-        ["xpath=//nav[@id='navigation-bar']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/nav", "xpath:idRelative"],
-        ["xpath=//nav", "xpath:position"]
-      ],
-      "value": "background-color: rgb(0, 60, 113)"
-    }, {
-      "id": "fc672607-84b4-4ed8-9983-555937eca2eb",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "css=#route-details-container",
-      "targets": [
-        ["id=route-details-container", "id"],
-        ["css=#route-details-container", "css:finder"],
-        ["xpath=//section[@id='route-details-container']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/div/section[2]", "xpath:idRelative"],
-        ["xpath=//section[2]", "xpath:position"]
-      ],
-      "value": "background-color: rgb(0, 60, 113)"
-    }]
-  }, {
-    "id": "86b7f73f-2358-4861-8942-444ae79d93f5",
-    "name": "41. Taco Easter Egg - Positive",
-    "commands": [{
-      "id": "3c58682c-9433-4203-b3ee-f98ad46ba65a",
-      "comment": "",
-      "command": "open",
-      "target": "https://ecobus-189e8.web.app/#/map",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "9243f8b2-901f-43fa-bac8-fd1e643d0f98",
-      "comment": "",
-      "command": "click",
-      "target": "id=route-origin",
-      "targets": [
-        ["id=route-origin", "id"],
-        ["css=#route-origin", "css:finder"],
-        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
-        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "24cf2621-a67a-4b56-aae3-1a032839d419",
-      "comment": "",
-      "command": "type",
-      "target": "id=route-origin",
-      "targets": [
-        ["id=route-origin", "id"],
-        ["css=#route-origin", "css:finder"],
-        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
-        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "Taco"
-    }, {
-      "id": "97bf4efb-a6ee-4d28-aa38-bb0bdd047412",
-      "comment": "",
-      "command": "click",
-      "target": "id=-67504919",
-      "targets": [
-        ["id=-67504919", "id"],
-        ["css=#\\-67504919", "css:finder"],
-        ["xpath=//li[@id='-67504919']", "xpath:attributes"],
-        ["xpath=//ul[@id='listbox--1']/li[2]", "xpath:idRelative"],
-        ["xpath=//reach-portal/div/ul/li[2]", "xpath:position"],
-        ["xpath=//li[contains(.,'Tacofino - Kitsilano, West 4th Avenue, Vancouver, BC, Canada')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "e1a31d0b-6d08-4816-a65d-6e2076a07db5",
-      "comment": "",
-      "command": "click",
-      "target": "id=route-destination",
-      "targets": [
-        ["id=route-destination", "id"],
-        ["css=#route-destination", "css:finder"],
-        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
-        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
-        ["xpath=//div[2]/div/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "0a3e8a15-f1ba-43d6-b6bf-9b4569f68e1b",
-      "comment": "",
-      "command": "type",
-      "target": "id=route-destination",
-      "targets": [
-        ["id=route-destination", "id"],
-        ["css=#route-destination", "css:finder"],
-        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
-        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
-        ["xpath=//div[2]/div/input", "xpath:position"]
-      ],
-      "value": "UBC"
-    }, {
-      "id": "dd0a62f0-ea3e-4f31-bb9a-05fd55e6326f",
-      "comment": "",
-      "command": "click",
-      "target": "id=288811722",
-      "targets": [
-        ["id=288811722", "id"],
-        ["css=#\\32 88811722", "css:finder"],
-        ["xpath=//li[@id='288811722']", "xpath:attributes"],
+        ["id=1928323596", "id"],
+        ["css=#\\31 928323596", "css:finder"],
+        ["xpath=//li[@id='1928323596']", "xpath:attributes"],
         ["xpath=//ul[@id='listbox--2']/li", "xpath:idRelative"],
         ["xpath=//reach-portal[2]/div/ul/li", "xpath:position"],
-        ["xpath=//li[contains(.,'UBC, Vancouver, BC, Canada')]", "xpath:innerText"]
+        ["xpath=//li[contains(.,'Downtown, Vancouver, BC, Canada')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
-      "id": "8b9b2056-ea9d-41d2-9a05-ea98e3d8dcd9",
+      "id": "6aef4833-55b9-4721-8979-a563ce3a85b7",
       "comment": "",
       "command": "click",
       "target": "css=#submit-search-button > img",
@@ -838,270 +73,1106 @@
       ],
       "value": ""
     }, {
-      "id": "019aeb83-af24-47db-aaa9-6e40958c9f8e",
+      "id": "94822453-6266-42a6-a204-f514c196bc9d",
       "comment": "",
-      "command": "verifyElementPresent",
-      "target": "id=taco1",
+      "command": "assertElementNotPresent",
+      "target": "id=search-container",
       "targets": [],
       "value": ""
     }, {
-      "id": "cb83e63f-e250-4ec8-95c6-e03815ad2878",
+      "id": "357ef248-5af9-47dd-9988-3e6be026ea6d",
       "comment": "",
-      "command": "verifyElementPresent",
-      "target": "id=taco2",
+      "command": "assertElementPresent",
+      "target": "id=transit-distance-display",
       "targets": [],
       "value": ""
     }, {
-      "id": "7e73ae66-85fd-477b-a10d-337d24db0de4",
+      "id": "7ebea2d8-43a6-4649-9204-7371018dc382",
       "comment": "",
-      "command": "verifyElementPresent",
-      "target": "id=taco3",
+      "command": "assertElementPresent",
+      "target": "id=transit-duration-display",
       "targets": [],
       "value": ""
     }, {
-      "id": "e827db14-1336-46e1-ae2c-7c04418bcd89",
+      "id": "dec11d63-df3a-44b8-bcc3-36b0ed291c1e",
       "comment": "",
-      "command": "verifyElementPresent",
-      "target": "id=taco4",
+      "command": "assertElementPresent",
+      "target": "id=emissions-saved-display",
       "targets": [],
       "value": ""
     }, {
-      "id": "74efad7d-0389-4219-b139-71dcd5ca57e0",
+      "id": "2b42bbf5-7bf0-423e-b955-9cb6fb3d1ce2",
       "comment": "",
-      "command": "verifyElementPresent",
-      "target": "id=music",
+      "command": "assertElementPresent",
+      "target": "id=route-details-container",
       "targets": [],
       "value": ""
     }]
   }, {
-    "id": "91354890-e752-4b58-99a7-306bc5db851a",
-    "name": "1. Log In with Invalid Credentials - Negative",
+    "id": "373660f2-2b5b-49f8-8d09-33a00c8532d9",
+    "name": "Test 10",
     "commands": [{
-      "id": "a66e1821-6a46-472f-9257-9e22e0784b46",
-      "comment": "Must not be signed in",
+      "id": "160b67aa-3b1d-4f64-bdc2-67daf69ac9e4",
+      "comment": "",
       "command": "open",
-      "target": "https://ecobus-189e8.web.app/#/",
+      "target": "https://ecobus-189e8.web.app/#/map/",
       "targets": [],
       "value": ""
     }, {
-      "id": "e38a0eaf-fe05-414e-b5cf-e6753a26571d",
-      "comment": "Must not be signed in",
-      "command": "click",
-      "target": "id=formBasicEmail",
-      "targets": [
-        ["id=formBasicEmail", "id"],
-        ["name=email", "name"],
-        ["css=#formBasicEmail", "css:finder"],
-        ["xpath=//input[@id='formBasicEmail']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "e2824c2a-fc25-4963-9a51-858eb1a76539",
+      "id": "c21d2ca3-a924-459a-9596-4fcd91fe9ec1",
       "comment": "",
-      "command": "type",
-      "target": "id=formBasicEmail",
-      "targets": [
-        ["id=formBasicEmail", "id"],
-        ["name=email", "name"],
-        ["css=#formBasicEmail", "css:finder"],
-        ["xpath=//input[@id='formBasicEmail']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "test@test.com"
-    }, {
-      "id": "5aff67e7-c49c-4621-9432-fc94d2b63aba",
-      "comment": "",
-      "command": "type",
-      "target": "id=formBasicPassword",
-      "targets": [
-        ["id=formBasicPassword", "id"],
-        ["name=password", "name"],
-        ["css=#formBasicPassword", "css:finder"],
-        ["xpath=//input[@id='formBasicPassword']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[2]/input", "xpath:idRelative"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": "fakepassword23"
-    }, {
-      "id": "7e8eeac1-03ef-4519-8e0d-06f83da28933",
-      "comment": "",
-      "command": "click",
-      "target": "id=sign-in-up-button",
-      "targets": [
-        ["id=sign-in-up-button", "id"],
-        ["css=#sign-in-up-button", "css:finder"],
-        ["xpath=//button[@id='sign-in-up-button']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/div[3]/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "2e8a9241-e746-4ff9-8a44-8bc7b2a764b6",
-      "comment": "",
-      "command": "waitForText",
-      "target": "id=error-message",
+      "command": "setWindowSize",
+      "target": "1280x680",
       "targets": [],
-      "value": "The password is invalid or the user does not have a password."
+      "value": ""
     }, {
-      "id": "d331027f-e06e-4cab-997d-fa6cd2a7e111",
+      "id": "73a2f59e-ae4e-48ed-a8b6-345eceac4ab3",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-origin",
+      "targets": [
+        ["id=route-origin", "id"],
+        ["css=#route-origin", "css:finder"],
+        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "ridgeway"
+    }, {
+      "id": "9566ebf7-9d56-4032-bc93-30849fddad83",
+      "comment": "",
+      "command": "click",
+      "target": "id=-844222789",
+      "targets": [
+        ["id=-844222789", "id"],
+        ["css=#\\-844222789", "css:finder"],
+        ["xpath=//li[@id='-844222789']", "xpath:attributes"],
+        ["xpath=//ul[@id='listbox--1']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Ridgeway Elementary, 8th Street East, North Vancouver, BC, Canada')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "564afa3d-b1c7-445d-b038-363e76b13956",
+      "comment": "",
+      "command": "click",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5147929b-18ab-4290-b4c4-ea4d1894022b",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "North vancouver city"
+    }, {
+      "id": "da630e24-ca99-49c9-b408-f25df5ee249b",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 52472522 > span:nth-child(7)",
+      "targets": [
+        ["css=#\\35 52472522 > span:nth-child(7)", "css:finder"],
+        ["xpath=//li[@id='552472522']/span[7]", "xpath:idRelative"],
+        ["xpath=//span[7]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9b6821b5-5a94-4e70-87ad-4904561cb003",
+      "comment": "",
+      "command": "pause",
+      "target": "300",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fa8fb566-2a2e-48e8-8572-b99eb50a9059",
+      "comment": "",
+      "command": "click",
+      "target": "css=#submit-search-button > img",
+      "targets": [
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6c4311f8-c496-4682-bd24-cceb7304a920",
+      "comment": "",
+      "command": "click",
+      "target": "css=.save-journey-button:nth-child(2)",
+      "targets": [
+        ["css=.save-journey-button:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='route-details-buttons']/button[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'TRAVEL DETAILS')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3714e6fa-64f5-4084-afc2-84263368da45",
       "comment": "",
       "command": "assertText",
-      "target": "id=error-message",
-      "targets": [
-        ["id=error-message", "id"],
-        ["css=#error-message", "css:finder"],
-        ["xpath=//span[@id='error-message']", "xpath:attributes"],
-        ["xpath=//div[@id='root']/div/form/span", "xpath:idRelative"],
-        ["xpath=//form/span", "xpath:position"],
-        ["xpath=//span[contains(.,'The password is invalid or the user does not have a password.')]", "xpath:innerText"]
-      ],
-      "value": "The password is invalid or the user does not have a password."
+      "target": "css=h3",
+      "targets": [],
+      "value": "Travel Details"
+    }, {
+      "id": "d6fd3b7c-f01e-4d3a-9241-3600b804f18e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=travel-details-container",
+      "targets": [],
+      "value": ""
     }]
   }, {
-    "id": "9b339532-3948-42c9-8cb5-35265039c7ec",
-    "name": "32. Visible Log Out Button - Positive",
+    "id": "c3110b35-b752-4ffc-a24e-58222a4ad224",
+    "name": "Test 11",
     "commands": [{
-      "id": "f3e7e057-c0ff-4689-8d96-12ecdcedb799",
-      "comment": "Must be signed in",
+      "id": "7b4d0bb8-1eb6-45f2-9f7b-fb8d7c9f692c",
+      "comment": "",
       "command": "open",
-      "target": "https://ecobus-189e8.web.app/#/",
+      "target": "https://ecobus-189e8.web.app/#/map/",
       "targets": [],
       "value": ""
     }, {
-      "id": "28319c5e-d6b7-4dde-9068-86446c21905c",
-      "comment": "Must be signed in",
-      "command": "waitForElementVisible",
-      "target": "id=logout",
-      "targets": [],
-      "value": "30000"
-    }, {
-      "id": "5e3e03b5-c70b-4b87-88a2-6527ca5c332c",
+      "id": "084dfc70-3c56-45f1-bc88-699cd155cba9",
       "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=logout",
-      "targets": [
-        ["id=logout", "id"],
-        ["css=#logout", "css:finder"],
-        ["xpath=//button[@id='logout']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Log Out')]", "xpath:innerText"]
-      ],
+      "command": "setWindowSize",
+      "target": "1502x815",
+      "targets": [],
       "value": ""
     }, {
-      "id": "f621e9bb-88eb-43f2-bc80-ebdf99301041",
+      "id": "86109172-7ac0-446c-ab56-fc4dd3feb48a",
       "comment": "",
       "command": "click",
-      "target": "css=.nav-link:nth-child(2) > a",
+      "target": "id=route-destination",
       "targets": [
-        ["css=.nav-link:nth-child(2) > a", "css:finder"],
-        ["xpath=//a[contains(text(),'Profile')]", "xpath:link"],
-        ["xpath=//div[@id='navigation-links']/a[2]/a", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '#/profile')]", "xpath:href"],
-        ["xpath=//a[2]/a", "xpath:position"]
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "1c93ed9f-1000-469e-90b6-980944903192",
+      "id": "bd440847-745a-437e-949b-49ffb5d8be7f",
       "comment": "",
-      "command": "waitForElementVisible",
-      "target": "id=logout",
+      "command": "type",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Microsoft Vancouver"
+    }, {
+      "id": "ff442e82-e2de-475d-a5af-dd627c93b621",
+      "comment": "",
+      "command": "pause",
+      "target": "300",
       "targets": [],
-      "value": "30000"
-    }, {
-      "id": "9a0413b9-b5f7-46e7-a805-2daf67a6c39e",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=logout",
-      "targets": [
-        ["id=logout", "id"],
-        ["css=#logout", "css:finder"],
-        ["xpath=//button[@id='logout']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Log Out')]", "xpath:innerText"]
-      ],
       "value": ""
     }, {
-      "id": "7f2193da-84f5-49a9-99b1-15f20195c98c",
+      "id": "8977cbf2-c290-4d51-85b5-abc15bbbdfac",
       "comment": "",
       "command": "click",
-      "target": "css=.nav-link:nth-child(3) > a",
+      "target": "css=#\\-1960165216 > span:nth-child(5)",
       "targets": [
-        ["css=.nav-link:nth-child(3) > a", "css:finder"],
-        ["xpath=//a[contains(text(),'About Us')]", "xpath:link"],
-        ["xpath=//div[@id='navigation-links']/a[3]/a", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '#/about-us')]", "xpath:href"],
-        ["xpath=//a[3]/a", "xpath:position"]
+        ["css=#\\-1960165216 > span:nth-child(5)", "css:finder"],
+        ["xpath=//li[@id='-1960165216']/span[5]", "xpath:idRelative"],
+        ["xpath=//span[5]", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "707dfccf-6db7-4584-9fe2-1ff497e282c0",
-      "comment": "",
-      "command": "waitForElementVisible",
-      "target": "id=logout",
-      "targets": [],
-      "value": "30000"
-    }, {
-      "id": "0e6ad593-efb3-4451-9794-7cec616110b2",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=logout",
-      "targets": [
-        ["id=logout", "id"],
-        ["css=#logout", "css:finder"],
-        ["xpath=//button[@id='logout']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Log Out')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "f5a69a88-5f09-47db-b57d-4a990ebbef9e",
+      "id": "a0f73d0d-f15f-46b2-aa01-1f867da5ec02",
       "comment": "",
       "command": "click",
-      "target": "id=logout",
+      "target": "css=#submit-search-button > img",
       "targets": [
-        ["id=logout", "id"],
-        ["css=#logout", "css:finder"],
-        ["xpath=//button[@id='logout']", "xpath:attributes"],
-        ["xpath=//nav[@id='navigation-bar']/button", "xpath:idRelative"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Log Out')]", "xpath:innerText"]
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "bfeefcd8-b190-4faa-882c-0b870d589a5a",
+      "id": "b3f251f4-7fb2-4a27-913a-fb49ed45becf",
       "comment": "",
-      "command": "waitForText",
-      "target": "css=.welcome-message:nth-child(4)",
+      "command": "pause",
+      "target": "300",
       "targets": [],
-      "value": "Welcome!\\nPlease Sign In to EcoBus."
+      "value": ""
     }, {
-      "id": "83da3255-47ce-43d3-937c-2eb015d83c7e",
+      "id": "5cca2c1a-fe68-4e21-b904-53ed2b0ed262",
+      "comment": "",
+      "command": "click",
+      "target": "css=.save-journey-button:nth-child(2)",
+      "targets": [
+        ["css=.save-journey-button:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='route-details-buttons']/button[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'TRAVEL DETAILS')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5ed7df9b-dc9d-4bf1-a075-64362fbfec70",
       "comment": "",
       "command": "assertText",
-      "target": "css=.welcome-message:nth-child(4)",
+      "target": "css=h3",
+      "targets": [],
+      "value": "Travel Details"
+    }]
+  }, {
+    "id": "d06572bc-dc1b-42ac-bcbc-90628402b1e9",
+    "name": "Test 12",
+    "commands": [{
+      "id": "b5e89658-ec08-427e-a2e2-5e9dbc66ad4f",
+      "comment": "",
+      "command": "open",
+      "target": "https://ecobus-189e8.web.app/#/map/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fc904275-7c2b-4923-90e4-ce11e339ec60",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1280x680",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1b81fe71-5113-462d-8ec3-d65c55313333",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
       "targets": [
-        ["css=.welcome-message:nth-child(4)", "css:finder"],
-        ["xpath=//div[@id='root']/div/h2", "xpath:idRelative"],
-        ["xpath=//h2", "xpath:position"]
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
       ],
-      "value": "Welcome!\\nPlease Sign In to EcoBus."
+      "value": ""
+    }, {
+      "id": "c45f46c9-e664-4911-9c59-c85c8a92af55",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-origin",
+      "targets": [
+        ["id=route-origin", "id"],
+        ["css=#route-origin", "css:finder"],
+        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "downtown, Vancouver"
+    }, {
+      "id": "5da828aa-6865-4de0-a5a7-545fa874118a",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\-1332021169 > span:nth-child(5)",
+      "targets": [
+        ["css=#\\-1332021169 > span:nth-child(5)", "css:finder"],
+        ["xpath=//li[@id='-1332021169']/span[5]", "xpath:idRelative"],
+        ["xpath=//span[5]", "xpath:position"],
+        ["xpath=//span[contains(.,', BC, Canada')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8a9c7189-b6e3-4e87-bc76-61808ed4fbc8",
+      "comment": "",
+      "command": "click",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8df7b4d-a315-4aa7-b9fb-038f5d913866",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "curr"
+    }, {
+      "id": "a2facf63-d027-47ba-b2d0-719e971e8161",
+      "comment": "",
+      "command": "click",
+      "target": "id=-1746173252",
+      "targets": [
+        ["id=-1746173252", "id"],
+        ["css=#\\-1746173252", "css:finder"],
+        ["xpath=//li[@id='-1746173252']", "xpath:attributes"],
+        ["xpath=//ul[@id='listbox--2']/li[6]", "xpath:idRelative"],
+        ["xpath=//li[6]", "xpath:position"],
+        ["xpath=//li[contains(.,'Current Location')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "49b513ee-7536-4f39-b41d-e2151ec162e6",
+      "comment": "",
+      "command": "pause",
+      "target": "300",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1aa131fc-0b25-484f-acd7-9b390f7f3d2b",
+      "comment": "",
+      "command": "click",
+      "target": "css=#submit-search-button > img",
+      "targets": [
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9e4836e-add8-4a7f-bb0d-927a7fce68e1",
+      "comment": "",
+      "command": "pause",
+      "target": "300",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a1139582-6f16-47b3-ab97-eb18f0bdb07a",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=route-details-container",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "74b86597-2668-4a1c-a821-0a4f43986e7f",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "id=search-container",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "40e13773-5cd9-4f22-b57b-a020576ab4e7",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=transit-distance-display",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "46f1703f-9f79-4a3b-901e-7072ba3e1034",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=transit-duration-display",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a5a08177-6277-4549-a9ce-389fee94da98",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=emissions-saved-display",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "f3dea490-6141-4d60-bd13-3babc3c3a7de",
+    "name": "Test 13",
+    "commands": [{
+      "id": "8e65fbaf-d9a6-4cc4-a2cb-ee31771bc865",
+      "comment": "",
+      "command": "open",
+      "target": "https://ecobus-189e8.web.app/#/map/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "21d61831-0690-47ae-b2a6-80a4bdee3795",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1502x815",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "333a5457-7fed-41a4-b189-eb72930fbead",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "32df789a-d478-4c13-9a35-a77763dc0a6a",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-origin",
+      "targets": [
+        ["id=route-origin", "id"],
+        ["css=#route-origin", "css:finder"],
+        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": " 5300 No. 3 Rd, Richmond,  BC V6X 2X9"
+    }, {
+      "id": "d5b41340-a7ca-4313-933c-732a9361038b",
+      "comment": "",
+      "command": "click",
+      "target": "id=874417502",
+      "targets": [
+        ["id=874417502", "id"],
+        ["css=#\\38 74417502", "css:finder"],
+        ["xpath=//li[@id='874417502']", "xpath:attributes"],
+        ["xpath=//ul[@id='listbox--1']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'5300 No. 3 Rd, Richmond, BC V6X 2X9, Canada')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "71830c13-34c6-423d-935a-5a377fe44209",
+      "comment": "",
+      "command": "click",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1b4cedaa-7eda-468d-8f0a-aebe3a0d3c3c",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "453 W 12th Ave, Vancouver,  BC V5Y 1V4"
+    }, {
+      "id": "6fd0f80e-9096-4b28-9e8e-eff605e7dad5",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\31 015781933 > span:nth-child(16)",
+      "targets": [
+        ["css=#\\31 015781933 > span:nth-child(16)", "css:finder"],
+        ["xpath=//li[@id='1015781933']/span[16]", "xpath:idRelative"],
+        ["xpath=//span[16]", "xpath:position"],
+        ["xpath=//span[contains(.,', Canada')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "471081ea-d4c1-4544-b0f3-92081d1f9bf8",
+      "comment": "",
+      "command": "pause",
+      "target": "300",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b758e6f8-1557-4c2a-acd1-9ca879953986",
+      "comment": "",
+      "command": "click",
+      "target": "css=#submit-search-button > img",
+      "targets": [
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cdbd3376-ebcf-4ec4-87fd-60d536817437",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=transit-distance-display",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c89f9c42-d45d-432d-89e7-6bf29d997949",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=transit-duration-display",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2509389e-da08-4eff-8a9f-c59833eba65d",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=emissions-saved-display",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "a2e5c94c-a151-4b01-aeed-0b35b6066a07",
+    "name": "Test 14",
+    "commands": [{
+      "id": "b8d22b1d-c957-412b-9473-fcd6df3695d1",
+      "comment": "",
+      "command": "open",
+      "target": "https://ecobus-189e8.web.app/#/map/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "151062ca-efba-4280-b887-ac3afc31a88a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1502x815",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bae8db2b-6e55-4361-97e5-0dbbc33ff7a0",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5246a77a-ef88-4aba-8e4f-2ee16d9594d1",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-origin",
+      "targets": [
+        ["id=route-origin", "id"],
+        ["css=#route-origin", "css:finder"],
+        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ed096e7b-298c-4360-adfe-c435863bb7f0",
+      "comment": "",
+      "command": "click",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ffed6a54-055e-4239-a5c6-fd97c02a92fd",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "453 W 12th Ave, Vancouver,  BC V5Y 1V4"
+    }, {
+      "id": "6e21f9a2-77f7-42ea-a6a6-e3ba8b6a5bea",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\31 015781933 > span:nth-child(15)",
+      "targets": [
+        ["css=#\\31 015781933 > span:nth-child(15)", "css:finder"],
+        ["xpath=//li[@id='1015781933']/span[15]", "xpath:idRelative"],
+        ["xpath=//span[15]", "xpath:position"],
+        ["xpath=//span[contains(.,'1V4')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dc92874c-e2d2-488d-b9d0-d16c1a81bace",
+      "comment": "",
+      "command": "click",
+      "target": "css=#submit-search-button > img",
+      "targets": [
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bf419bd0-f963-4944-b2b9-7fa3032ee1bc",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=location-error",
+      "targets": [],
+      "value": "Please enter valid locations"
+    }, {
+      "id": "b3e58f79-45cf-402d-8d6e-faa9bcfa99c7",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "id=route-details-container",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "e27db8b2-819c-495f-b358-54c195338d45",
+    "name": "Test 15",
+    "commands": [{
+      "id": "83f2f1e3-0f9b-44ff-a327-32288aaad6a0",
+      "comment": "",
+      "command": "open",
+      "target": "https://ecobus-189e8.web.app/#/map/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "489b2d55-8b84-453d-aaf9-fce99743a46c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1502x815",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0b4e58c2-24ad-4134-a213-b0df14c3d1bc",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ed247d2-bc58-4dba-ad30-7b53b4b741a1",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "25c62238-7990-420d-b0ce-be9f392e3b9d",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-origin",
+      "targets": [
+        ["id=route-origin", "id"],
+        ["css=#route-origin", "css:finder"],
+        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "5300 No. 3 Rd, Richmond,  BC V6X 2X9"
+    }, {
+      "id": "b1019cc2-30bb-4075-bc50-03beacce0606",
+      "comment": "",
+      "command": "click",
+      "target": "css=span:nth-child(15)",
+      "targets": [
+        ["css=span:nth-child(15)", "css:finder"],
+        ["xpath=//li[@id='874417502']/span[15]", "xpath:idRelative"],
+        ["xpath=//span[15]", "xpath:position"],
+        ["xpath=//span[contains(.,'2X9')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2572be04-ffc4-4163-b5b0-299c6dbd9b60",
+      "comment": "",
+      "command": "pause",
+      "target": "300",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "22653182-21fe-47d5-8aeb-67913418ad26",
+      "comment": "",
+      "command": "click",
+      "target": "css=#submit-search-button > img",
+      "targets": [
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a7a157eb-e8e2-4224-b53c-21e42dfe5ae3",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=location-error",
+      "targets": [],
+      "value": "Please enter valid locations"
+    }, {
+      "id": "a86d6ac0-5816-4dbe-aa35-2a653775804f",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "id=route-details-container",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "9bec3adf-ce27-4499-bea0-2cde187ff032",
+    "name": "Test 16",
+    "commands": [{
+      "id": "3606a61a-608c-4cca-8d69-b6bdaad6e468",
+      "comment": "",
+      "command": "open",
+      "target": "https://ecobus-189e8.web.app/#/map/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2ad1558c-7591-4af6-affa-5dd1539a1e1d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1502x815",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7fe2e94f-bf4d-4a73-9bba-9490c55f0748",
+      "comment": "",
+      "command": "click",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6eedc487-d2c7-430d-8701-76f14e57b0de",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "453 W 12th Ave, Vancouver,  BC V5Y 1V4"
+    }, {
+      "id": "91160b47-9d95-40e5-b8ce-8481099ea917",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\31 015781933 > span:nth-child(16)",
+      "targets": [
+        ["css=#\\31 015781933 > span:nth-child(16)", "css:finder"],
+        ["xpath=//li[@id='1015781933']/span[16]", "xpath:idRelative"],
+        ["xpath=//span[16]", "xpath:position"],
+        ["xpath=//span[contains(.,', Canada')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5ff91726-5faa-4108-8f02-097fa0889d0c",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "17c8de7e-55ac-4782-b889-54093fb41127",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-origin",
+      "targets": [
+        ["id=route-origin", "id"],
+        ["css=#route-origin", "css:finder"],
+        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Hello :)"
+    }, {
+      "id": "86b599ee-9dda-4b5f-836e-5632af0e72fa",
+      "comment": "",
+      "command": "click",
+      "target": "css=#submit-search-button > img",
+      "targets": [
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef92a9c8-0d49-4765-967b-f934ca854ebe",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=location-error",
+      "targets": [],
+      "value": "Please enter valid locations"
+    }, {
+      "id": "6b2a2e04-e34a-4e28-ad5d-e3c89b8f139a",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "id=route-details-container",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "23f10a04-6d4a-49a1-9124-7f84a5054a2c",
+    "name": "Test 17",
+    "commands": [{
+      "id": "ab854f10-cf5a-4382-a6d0-696a90f4697f",
+      "comment": "",
+      "command": "open",
+      "target": "https://ecobus-189e8.web.app/#/map/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c63c024a-6f81-4ddf-896b-802b520c8037",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1502x815",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "391a82e1-6cd2-4669-9e7d-4e1a1125de67",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9ba88d5b-3f94-48e9-8ce9-166ff62dfdbd",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-origin",
+      "targets": [
+        ["id=route-origin", "id"],
+        ["css=#route-origin", "css:finder"],
+        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "5300 No. 3 Rd, Richmond,  BC V6X 2X9"
+    }, {
+      "id": "93455b50-0cfe-49b2-8f6e-621144b38538",
+      "comment": "",
+      "command": "click",
+      "target": "css=span:nth-child(13)",
+      "targets": [
+        ["css=span:nth-child(13)", "css:finder"],
+        ["xpath=//li[@id='874417502']/span[13]", "xpath:idRelative"],
+        ["xpath=//span[13]", "xpath:position"],
+        ["xpath=//span[contains(.,'V6X')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fe0d01c6-bca1-4586-9001-dc0d8f1c584c",
+      "comment": "",
+      "command": "click",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29804bf2-92dc-479c-9b33-cbbc95027c98",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Hello :)"
+    }, {
+      "id": "6b0f2156-dcf6-46d9-a849-e8a0d4379575",
+      "comment": "",
+      "command": "click",
+      "target": "css=#submit-search-button > img",
+      "targets": [
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a825c33e-2a70-4300-9764-98d42ab4add2",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=location-error",
+      "targets": [],
+      "value": "Please enter valid locations"
+    }, {
+      "id": "f0a80bef-0111-4f4d-bd69-af3883c7af9a",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "id=route-details-container",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "136b3b77-50b2-4541-9faa-222db07e7a91",
+    "name": "Test 18",
+    "commands": [{
+      "id": "52e5c0f3-5208-4177-b8ee-830e6690e524",
+      "comment": "",
+      "command": "open",
+      "target": "https://ecobus-189e8.web.app/#/map/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f94fbb26-9e97-4d9e-acc7-4edbebc265c0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1502x815",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5e8e6c75-bad4-4e70-a19f-789fb4e96eba",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "80fa6c15-6757-4f25-b27b-0ab35452d372",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ca437850-536a-4b5f-a251-4c99be78ea6b",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-origin",
+      "targets": [
+        ["id=route-origin", "id"],
+        ["css=#route-origin", "css:finder"],
+        ["xpath=//input[@id='route-origin']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Paris, France"
+    }, {
+      "id": "53336d37-c08c-4786-9252-9581feabb048",
+      "comment": "",
+      "command": "click",
+      "target": "id=-2091310822",
+      "targets": [
+        ["id=-2091310822", "id"],
+        ["css=#\\-2091310822", "css:finder"],
+        ["xpath=//li[@id='-2091310822']", "xpath:attributes"],
+        ["xpath=//ul[@id='listbox--1']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Paris, France')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d30fce4b-bdca-4fcc-8e61-e11eca2cf746",
+      "comment": "",
+      "command": "click",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "abf8dfb2-571d-4646-b95a-a73bf7193743",
+      "comment": "",
+      "command": "type",
+      "target": "id=route-destination",
+      "targets": [
+        ["id=route-destination", "id"],
+        ["css=#route-destination", "css:finder"],
+        ["xpath=//input[@id='route-destination']", "xpath:attributes"],
+        ["xpath=//section[@id='search-container']/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "cu"
+    }, {
+      "id": "9deee1a0-157c-4e8f-a28f-f451fe5a76d9",
+      "comment": "",
+      "command": "click",
+      "target": "id=-1746173252",
+      "targets": [
+        ["id=-1746173252", "id"],
+        ["css=#\\-1746173252", "css:finder"],
+        ["xpath=//li[@id='-1746173252']", "xpath:attributes"],
+        ["xpath=//ul[@id='listbox--2']/li[6]", "xpath:idRelative"],
+        ["xpath=//li[6]", "xpath:position"],
+        ["xpath=//li[contains(.,'Current Location')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1c485b8f-1880-4e1b-99c9-9113fd50645b",
+      "comment": "",
+      "command": "click",
+      "target": "css=#submit-search-button > img",
+      "targets": [
+        ["css=#submit-search-button > img", "css:finder"],
+        ["xpath=//img[@alt='Search Button']", "xpath:img"],
+        ["xpath=//button[@id='submit-search-button']/img", "xpath:idRelative"],
+        ["xpath=//div[3]/button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1b489929-e4d7-4021-b5da-86b765eea82f",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=no-result-error",
+      "targets": [],
+      "value": "Sorry, we can't find a route between the two locations. Please enter other locations."
+    }, {
+      "id": "343d2756-c637-48c8-b986-7132d784b85f",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "id=route-details-container",
+      "targets": [],
+      "value": ""
     }]
   }],
   "suites": [{
-    "id": "7b9b2c42-79cb-4fd0-900a-c9c65326f282",
+    "id": "39532efd-3b14-4961-8dbc-cc12b70c188e",
     "name": "Default Suite",
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["7758a997-7d23-45d9-a436-be7552376588"]
+    "tests": ["27926368-d200-4271-a8c8-bc737d013b30"]
   }],
-  "urls": ["https://ecobus-189e8.web.app/", "https://ecobus-189e8.web.app/map"],
+  "urls": ["https://ecobus-189e8.web.app/", "http://localhost:3000/#/", "https://ecobus-189e8.web.app/#/", "https://ecobus-189e8.web.app/#/map/"],
   "plugins": []
 }
