@@ -65,6 +65,7 @@
 
 #useravatar{
     width: 128px;
+    height: 128px;
 }
 
 #uploadbutton{
@@ -110,4 +111,12 @@
     align-self: center;
     margin-left: 1vw;
     margin-bottom: 2vw;
+}
+
+#add-route-button {
+    margin-top: 10px;
+}
+
+#clear-all-data-button {
+    margin-bottom: 50px;
 }

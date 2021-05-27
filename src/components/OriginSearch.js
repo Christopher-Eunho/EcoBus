@@ -14,10 +14,8 @@ import {
 
 //https://www.npmjs.com/package/use-places-autocomplete        
 export function OrginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurrent, setIsOriginValid, setCurrentLocation }) {
-
     useEffect(() => {        
         setValue("Current Location", false);
-        
     },[]);
     
 
@@ -77,7 +75,6 @@ export function OrginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurren
                             <ComboboxOption key={id} value={description} />
                         ))}
                         {status === "OK" && <ComboboxOption value={"Current Location"} />}
-                        
                     </ComboboxList>
                 </ComboboxPopover>
             </Combobox>

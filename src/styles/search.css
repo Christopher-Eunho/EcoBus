@@ -229,18 +229,36 @@
 }
 
 /* Saved transit route prompt */
-.journey-saved-container {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.journey-saved-container p:nth-child(1) {
-  margin-top: 30px;
-}
-
-#transit-journey-saved-container {
+#route-saved-message-container {
   display: none;
+  text-align: center;
+  height: 25vh;
+}
+
+#route-saved-message-container p:first-child {
+  margin-top: 20px;
+}
+
+#saved-route-message-emissions-saved {
+  font-weight: bold;
+}
+
+#route-saved-message-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+#facebook-share-button {
+  margin-right: 10px;
+}
+
+#accept-button {
+  background-color: rgba(154, 251, 30, 1);
+  border: none;
+  border-radius: 5px;
+  width: 50px;
+  height: 50px;
 }
 
 @media (max-width: 300px) {

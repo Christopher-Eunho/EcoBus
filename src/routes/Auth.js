@@ -1,6 +1,7 @@
 import { authService, firebaseInstance, db } from "firebase_eb"
 import 'firebase/firestore'
 import React, { useState } from "react"
+import { useHistory } from "react-router"
 import Button from 'react-bootstrap/Button' // https://react-bootstrap.github.io/
 import Form from 'react-bootstrap/Form'
 import GoogleButton from 'react-google-button' // https://www.npmjs.com/package/react-google-button
@@ -12,6 +13,7 @@ const Auth = () => {
     const [password, setPassword] = useState("");
     const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
+    const history = useHistory();
 
     const onChange = (event) => {
         const {
@@ -30,8 +32,12 @@ const Auth = () => {
             if (event === "google") {
                 provider = new firebaseInstance.auth.GoogleAuthProvider();
             }
-
-            const data = await authService.signInWithPopup(provider);
+            authService.signInWithPopup(provider)
+            .then(() => {
+                history.push("/map");
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            })
         } catch (error) {
             console.log(error);
         }
@@ -39,7 +45,6 @@ const Auth = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-
         try {
             let data;
             if (newAccount) {
@@ -58,9 +63,10 @@ const Auth = () => {
                     avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=3a9eda40-579e-4e89-b27b-83be349e71bd'
                 });
                 // Add user email to firestore end
-                
+                history.push("/map");
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
+                history.push("/map");
             }
             console.log(data);
         } catch (error) {
@@ -114,7 +120,7 @@ const Auth = () => {
                     </Button>
                     
                     <Button variant="danger" className="welcome-message" id="change-to-sign-in-up" onClick={toggleAccount}> 
-                        I want to {newAccount ? "sign in!" : "sign up!"} 
+                        I want to {newAccount ? "sign in!" : "sign up!"}
                     </Button>
                 </div>
                 <span id="error-message"> {error} </span>

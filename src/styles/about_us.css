@@ -1,18 +1,17 @@
 body {
     background-color: rgb(230, 245, 255);
 }
+
 main {
     width: 100%;
     background-color: rgb(255, 255, 240);
-    border-style: solid;
-    border-width: 1px;
-    border-color: grey;
-    border-radius: 5px;
 }
+
 main section {
     border-bottom: solid 1px darkgray;
     margin: 10px;
 }
+
 main aside {
     background: url("../images/Ecobus About Us banner.png");
     background-size: cover;
@@ -26,24 +25,30 @@ main aside {
     color: rgb(0, 126, 0);
     -webkit-text-stroke: 0.1vw black;
 }
+
 main aside p {
     margin: auto;
 }
+
 main section {
     min-height: 250px;
 }
+
 main section h {
     font-size: xx-large;
     font-weight: bolder;
 }
+
 main section img {
     float: left;
     height: 100%;
     margin-right: 10px;
 }
+
 main section a {
     color:black;
 }
+
 .PhotoID {
     width: 150px;
 }

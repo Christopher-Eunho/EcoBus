@@ -5,9 +5,9 @@ import { Link } from "react-router-dom"
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import '../styles/navigation-bar.css'
 
-const NavigationBar = () => {
-    
+const NavigationBar = () => {    
     const history = useHistory();
+    
     const onLogoutClick = () => {
         authService.signOut();
         history.push("/");
@@ -19,8 +19,8 @@ const NavigationBar = () => {
                 {/* <input type="image" src={Logo} id="logo" alt="logo" /> */}
                 <div id="navigation-links">
                     <Nav.Link>
-                        <Link to="/">
-                            Search
+                        <Link to="/map">
+                            Map
                             </Link>
                     </Nav.Link>
                     <Nav.Link>
@@ -29,13 +29,13 @@ const NavigationBar = () => {
                             </Link>
                     </Nav.Link>
                     <Nav.Link>
-                        <Link to="/about_us">
+                        <Link to="/about-us">
                             About Us
                             </Link>
                     </Nav.Link>
                 </div>
                 <Button variant="danger btn-sm" onClick={onLogoutClick} id="logout">Log Out</Button>
-        </Navbar>
+            </Navbar>
         </>
     )
 }

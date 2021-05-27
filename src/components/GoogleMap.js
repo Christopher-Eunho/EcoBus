@@ -35,11 +35,13 @@ function GMap() {
     const navBar = document.getElementById("navigation-bar");
     const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
     const searchFormContainer = document.getElementById("search-container");
+    
     const taco1 = document.getElementById("taco1");
     const taco2 = document.getElementById("taco2");
     const taco3 = document.getElementById("taco3");
     const taco4 = document.getElementById("taco4");
     const music = document.getElementById("music");
+    
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -54,6 +56,7 @@ function GMap() {
     const [isOriginValid, setIsOriginValid] = useState(true);
     const [isDestinationValid, setIsDestinationValid] = useState(false);
     const [isOriginCurrent, setIsOriginCurrent] = useState(true);
+    const [emissionsSaved, setEmissionsSaved] = useState(42);
     
     const searchClick = () => {
         console.log(isOriginCurrent)
@@ -69,8 +72,6 @@ function GMap() {
             if (destinationName.includes("Taco")||originName.includes("Taco")) {
                 showSecondEasterEgg();
             }
-            hideSearchForm();
-            showRouteDetailsContainer();
         } else {
             showLocationError();
         }
@@ -84,6 +85,8 @@ function GMap() {
             setTransitRouteDetails(response.routes[0].legs[0]);
             displayTransitRouteDetails(response.routes[0].legs[0]);
             console.log("Transit route set");
+            hideSearchForm();
+            showRouteDetailsContainer();
             if (response.status === 'OK') {
                 setTransitResponse(response);
             } else {
@@ -153,6 +156,8 @@ function GMap() {
         const emissionsPerKm = (distanceInKilometers * emissionsProducedKilograms).toFixed(2);
         document.getElementById("emissions-saved-big-message").innerHTML = emissionsPerKm;
         document.getElementById("emissions-saved-display").innerHTML = emissionsPerKm;
+        document.getElementById("saved-route-message-emissions-saved").innerHTML = emissionsPerKm;
+        setEmissionsSaved(emissionsPerKm);
     }
 
     function showEasterEgg() {
@@ -285,7 +290,7 @@ function GMap() {
                     
                 </section>
                 <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
-                <SavedTransitRoute />
+                <SavedTransitRoute emissionsSaved={emissionsSaved} />
             </div>
         </>
 
