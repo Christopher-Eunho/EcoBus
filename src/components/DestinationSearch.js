@@ -66,7 +66,10 @@ export function DestinationSearch(
     return (
         <div className="DestSearch">
             <Combobox onSelect={destinationOnSelect}>
-                <ComboboxInput id="route-destination" value={value}
+                <ComboboxInput 
+                    id="route-destination" 
+                    value={value}
+                    autocomplete={false}
                     onChange={onChange}
                     disabled={!ready}
                     placeholder="Destination" />
