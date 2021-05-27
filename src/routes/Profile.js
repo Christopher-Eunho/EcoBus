@@ -1,11 +1,7 @@
 import { authService, db } from "firebase_eb";
 import React, { useState } from "react";
-<<<<<<< HEAD
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
-import 'firebase/storage';
-=======
->>>>>>> dev
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
 import { Alert, Accordion, Button, Card, ListGroup, Modal,  } from 'react-bootstrap';
@@ -28,10 +24,6 @@ const Profile = () => {
     const [message, setMessage] = useState("");
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
     const usersRef = db.collection('users').doc(user.uid);
-<<<<<<< HEAD
-    const storage = firebase.storage();
-=======
->>>>>>> dev
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
