@@ -1,12 +1,10 @@
 import { authService, db } from "firebase_eb";
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
 import { Alert, Accordion, Button, Card, ListGroup, Modal, } from 'react-bootstrap';
 import NavigationBar from '../components/NavigationBar'
-import { storage } from 'firebase/storage';
 import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
 import RouteHistoryCard from '../components/RouteHistoryCard'
