@@ -208,7 +208,7 @@
   display: block;
 }
 #route-details-buttons {
-  max-width: 70%;
+  min-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -217,11 +217,12 @@
 
 .save-journey-button {
   border: none;
+  width: 40%;
   border-radius: 5px;
   padding: 8px;
   background-color: rgba(154, 251, 30, 1);
   
-  min-width: 50%;
+  
   margin-bottom: 10px;
 }
 
@@ -245,7 +246,7 @@
 
 /* Saved transit route prompt */
 #route-saved-message-container {
-  display: none;
+  display: flex;
   text-align: center;
   height: 25vh;
 }

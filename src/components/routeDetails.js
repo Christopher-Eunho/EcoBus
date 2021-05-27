@@ -11,7 +11,9 @@ const RouteDetails = ({
     drivingRouteDetails,
     setIsTravelDetailsOn,
     setIsRouteDetailsOn,
-    setIsSearchFormOn
+    setIsSearchFormOn,
+    setIsSavedTransitRouteOn,
+    setEmissionSaved
     }) => {
         const history = useHistory();
         const user = authService.currentUser;
@@ -23,9 +25,9 @@ const RouteDetails = ({
             var totalDistance = transitRouteDetails.distance.text;
             var totalDuration = transitRouteDetails.duration.text;
             var {distance : {value : drivingDistanceMetres }} = drivingRouteDetails;
-            console.log(drivingDistanceMetres);
             var drivingDistanceKm = drivingDistanceMetres * metresToKm;    
             var emissionsProduced = (drivingDistanceKm * emissionsProducedKgPerKm).toFixed(2);
+            setEmissionSaved(emissionsProduced);
             }
     
 
@@ -37,22 +39,14 @@ const RouteDetails = ({
     }
 
     const showTravelDetails = () => {
-        console.log("chris show travel details");
         setIsRouteDetailsOn(false);
         setIsTravelDetailsOn(true);
     }
 
-    function showSavedRouteMessage() {
-        let savedRouteMessage = document.getElementById("route-saved-message-container");
-        let routeDetails = document.getElementById("route-details-container");
 
-        routeDetails.style.display = "none";
-        savedRouteMessage.style.display = "block";
-    }
 
     const saveJourney = () => {
-        const distanceInKilometers = drivingRouteDetails.distance.value * metresToKm;
-        const emissionsPerKm = (distanceInKilometers * emissionsProducedKgPerKm).toFixed(2);
+        console.log("clicked");
         if (user != null) {
             usersRef.doc(user.uid).get().then((doc) => {
                 if (doc.exists) {
@@ -62,9 +56,10 @@ const RouteDetails = ({
                         destination: transitRouteDetails.end_address,
                         distance: transitRouteDetails.distance.text,
                         duration: transitRouteDetails.duration.text,
-                        emissions_saved: emissionsPerKm,
+                        emissions_saved: emissionsProduced,
                     }).then(function() {
-                        showSavedRouteMessage();
+                        setIsRouteDetailsOn(false);
+                        setIsSavedTransitRouteOn(true);
                     })
                 } else {
                     // doc.data() will be undefined in this case
@@ -85,7 +80,7 @@ const RouteDetails = ({
             "&" + 
             transitRouteDetails.duration.text + 
             "&" + 
-            emissionsPerKm);
+            emissionsProduced);
         }
     }
 
@@ -96,7 +91,7 @@ const RouteDetails = ({
             </button>
             <div id="emissions-saved-message-container">
                 <img src={Leaf} alt="Leaf" id="leaf-icon" />
-                <h5 id="emissions-saved-message"><span id="emissions-saved-big-message">N/A</span> KG of CO2 saved</h5>
+                <h5 id="emissions-saved-message"><span id="emissions-saved-big-message">{isLoaded && emissionsProduced}</span> KG of CO2 saved</h5>
                 <div id="transit-route-information">
                     <ul>
                         <li>Distance: <span id="transit-distance-display">{isLoaded && totalDistance}</span> </li>
@@ -106,8 +101,8 @@ const RouteDetails = ({
                 </div>
             </div>
             <div id="route-details-buttons">
-                <button className="save-journey-button" onClick={saveJourney}>SAVE THIS ROUTE</button>
-                <button className="save-journey-button" onClick={showTravelDetails}>Travel Details</button>
+                <button className="save-journey-button" onClick={saveJourney}>SAVE ROUTE</button>
+                <button className="save-journey-button" onClick={showTravelDetails}>TRAVEL DETAILS</button>
             </div>
         </section>
     )
