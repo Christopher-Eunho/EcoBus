@@ -1,12 +1,10 @@
 import { authService, db } from "firebase_eb";
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import { Alert, Accordion, Button, Card, ListGroup, Modal,  } from 'react-bootstrap';
+import { Alert, Accordion, Button, Card, ListGroup, Modal, } from 'react-bootstrap';
 import NavigationBar from '../components/NavigationBar'
-import { storage } from 'firebase/storage';
 import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
 import RouteHistoryCard from '../components/RouteHistoryCard'
@@ -39,15 +37,15 @@ const Profile = () => {
                 .then(function (snap) {
                     snap.forEach(function (doc) {
                         let route = doc.data();
-                            routes.push(
-                                <RouteHistoryCard 
-                                    eventKey={routeCounter} 
-                                    origin={route.origin} 
-                                    destination={route.destination} 
-                                    distance={route.distance} 
-                                    emissionsSaved={route.emissions_saved}
-                                />)
-                            routeCounter++;
+                        routes.push(
+                            <RouteHistoryCard
+                                eventKey={routeCounter}
+                                origin={route.origin}
+                                destination={route.destination}
+                                distance={route.distance}
+                                emissionsSaved={route.emissions_saved}
+                            />)
+                        routeCounter++;
                     })
                     setRouteHistoryArray(routes);
                 })
@@ -67,10 +65,10 @@ const Profile = () => {
         showUploadButton();
         hideAvatarEditBtn();
         let imageFile = e.target.files[0];
-        if (!imageFile.name.match(/\.(jpg|jpeg|png|gif|apng|avif|svg|webp|bmp|ico|tiff)$/)){ // regex format taken from https://www.cluemediator.com/validate-image-content-in-reactjs
+        if (!imageFile.name.match(/\.(jpg|jpeg|png|gif|apng|avif|svg|webp|bmp|ico|tiff)$/)) { // regex format taken from https://www.cluemediator.com/validate-image-content-in-reactjs
             alert("This is not a valid image file!");
             window.location.reload();
-        }else{
+        } else {
             setFile(imageFile);
         }
     }
@@ -93,10 +91,10 @@ const Profile = () => {
     }
 
     /*Image upload end*/
-    
+
     function sumArray(array) {
         var sum = 0;
-        for(var i=0; i < array.length; i++) {
+        for (var i = 0; i < array.length; i++) {
             sum += parseFloat(array[i]);
         }
         return sum;
@@ -126,8 +124,8 @@ const Profile = () => {
         var newEmail = document.getElementById("email-change").value;
         let newAvatar = "";
 
-        if (file!==null){
-        newAvatar = await handleUpload();
+        if (file !== null) {
+            newAvatar = await handleUpload();
         }
 
         if (user !== null) {
@@ -188,7 +186,7 @@ const Profile = () => {
         avatarBtn.style["display"] = "none";
     }
 
-    function hideAvatarUpload(){
+    function hideAvatarUpload() {
         let uploadbutton = document.getElementById("uploadbutton");
         uploadbutton.style["display"] = "none";
     }
@@ -212,14 +210,21 @@ const Profile = () => {
     @author: Doug Stevenson
     */
     function deleteUserData() {
-        db.collection('users').doc(user.uid).collection('routes').get().then(querySnapshot => {
-            querySnapshot.docs.forEach(snapshot => {
-                snapshot.ref.delete()
-                .then(()=>{
-                alert("Data deleted!")
-                window.location.reload()})
+        db.collection('users').doc(user.uid).collection('routes').get()
+            .then(querySnapshot => {
+                if (querySnapshot.docs.length != 0) {
+                    querySnapshot.docs.forEach(snapshot => {
+                        snapshot.ref.delete()
+                            .then(() => {
+                                alert("Data deleted!")
+                                window.location.reload()
+                            })
+                    })
+                } else {
+                    alert("No data to delete!");
+                    window.location.reload();
+                }
             })
-        })
 
     }
     /*delete firestore collection end*/
@@ -288,7 +293,7 @@ const Profile = () => {
                             <Accordion.Collapse eventKey="1">
                                 <ListGroup variant="flush">
                                     <Accordion>
-                                        { routeHistoryArray.length > 0 ? (
+                                        {routeHistoryArray.length > 0 ? (
                                             routeHistoryArray
                                         ) : (
                                             <RouteHistoryEmptyCard />
