@@ -10,7 +10,7 @@ import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestinationSearch } from './DestinationSearch';
 import CurrentButton from './CurrentButton'
-import RouteDetails from './RouteDetails'
+import RouteDetails from './routeDetails'
 import TravelDetails from './TravelDetails'
 import SavedTransitRoute from './SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
