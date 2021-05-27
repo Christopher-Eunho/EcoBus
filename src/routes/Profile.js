@@ -1,6 +1,5 @@
 import { authService, db } from "firebase_eb";
 import React, { useState } from "react";
-import firebase from "firebase/app";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
 import { Alert, Accordion, Button, Card, ListGroup, Modal, } from 'react-bootstrap';
@@ -23,7 +22,6 @@ const Profile = () => {
     const [message, setMessage] = useState("");
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
     const usersRef = db.collection('users').doc(user.uid);
-    const storage = firebase.storage()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -85,9 +83,9 @@ const Profile = () => {
          * Upload image to firestore database then generates a link to the image.
          */
         return new Promise(resolve => {
-            const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+            const uploadTask = db.ref(`/images/${file.name}`).put(file);
             uploadTask.on("state_changed", console.log, console.error, () => {
-                storage
+                db
                     .ref("images")
                     .child(file.name)
                     .getDownloadURL()
@@ -272,18 +270,16 @@ const Profile = () => {
     */
     function deleteUserData() {
         /**
-         * Delete all routes from current users history in firestore.  
-         */
+     * Delete all routes from current users history in firestore.  
+     */
         db.collection('users').doc(user.uid).collection('routes').get().then(querySnapshot => {
             querySnapshot.docs.forEach(snapshot => {
-                snapshot.ref.delete()
-                    .then(() => {
-                        alert("Data deleted!")
-                        window.location.reload()
-                    })
+                snapshot.ref.delete().then(() => {
+                    alert("Data deleted!")
+                    window.location.reload()
+                })
             })
         })
-
     }
     /*delete firestore collection end*/
 

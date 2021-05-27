@@ -11,6 +11,7 @@
 
 #logout {
     margin-top: 0px;
+    display: inline;
 }
 
 .navbar {
@@ -36,4 +37,9 @@
     background-color: yellow;
     border-color: yellow;
     color: black;
+}
+
+#login{
+    margin-top: 0px;
+    color: white;
 }
