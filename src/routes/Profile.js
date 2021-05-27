@@ -1,9 +1,11 @@
 import { authService, db } from "firebase_eb";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import firebase from "firebase/app";
+import 'firebase/storage';
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
-import { Alert, Accordion, Button, Card, ListGroup, Modal, } from 'react-bootstrap';
+import { Alert, Accordion, Button, Card, ListGroup, Modal,  } from 'react-bootstrap';
 import NavigationBar from '../components/NavigationBar'
 import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
@@ -23,7 +25,7 @@ const Profile = () => {
     const [message, setMessage] = useState("");
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
     const usersRef = db.collection('users').doc(user.uid);
-    const storage = firebase.storage()
+    const storage = firebase.storage();
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
