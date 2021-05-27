@@ -31,6 +31,12 @@ const Profile = () => {
 
 
     const displayRouteDetails = () => {
+        /**
+         * Grab stored user routes from firestore database then stores it in a card.
+         * 
+         * Loops through the current users routes from firestore and stores the route number, origin, distance, distance and emission saved.
+         * The saved data is then pushed and displayed onto a card as a child of a Bootstrap accordion parent. 
+         */
         var routeCounter = 1;
         var routes = [];
         // idea for activating function only on first click sourced from: https://stackoverflow.com/questions/31702173/execute-clickfunction-only-first-click
@@ -54,12 +60,15 @@ const Profile = () => {
         }
     }
 
-    /* 
-    Image upload start
-    I found this code on : https://dev.to/samuelkarani/comment/14079
-    @authors: Tallan Groberg, Samuel Karani
+    /**
+    * Image upload start
+    * I found this code on : https://dev.to/samuelkarani/comment/14079
+    * @authors: Tallan Groberg, Samuel Karani
     */
     function handleChange(e) {
+        /**
+         * Check if file being uploaded is in a valid image format.
+         */
         showUploadButton();
         hideAvatarEditBtn();
         let imageFile = e.target.files[0];
@@ -71,7 +80,10 @@ const Profile = () => {
         }
     }
 
-    function handleUpload() { //uploads avatar to firestore db then generates link
+    function handleUpload() {
+        /**
+         * Upload image to firestore database then generates a link to the image.
+         */
         return new Promise(resolve => {
             const uploadTask = storage.ref(`/images/${file.name}`).put(file);
             uploadTask.on("state_changed", console.log, console.error, () => {
@@ -89,6 +101,11 @@ const Profile = () => {
     /*Image upload end*/
 
     function sumArray(array) {
+        /**
+         * Sum all the numbers in an array then converts it into a float.
+         * 
+         * param array: must be an array containing only numbers
+         */
         var sum = 0;
         for (var i = 0; i < array.length; i++) {
             sum += parseFloat(array[i]);
@@ -97,13 +114,19 @@ const Profile = () => {
     }
 
     function getUserStats() {
+        /**
+         * Grab user route data from firestore.
+         * 
+         * Retrieves distance and emissions for each trip from user's routes in firestore then adds them together.
+         * Total trip, distance and emissions states are then changed from the added number.
+         */
         var totalDistance = [];
         var totalEmissionsSaved = [];
         try {
             db.collection("users").doc(user.uid).collection("routes").get() // abstracted from BCIT COMP 1800 Projects 1, @author: Carly Orr
                 .then(function (snap) {
                     snap.forEach(function (doc) {
-                        totalDistance.push(parseFloat(doc.data().distance.split(" ")[0]));
+                        totalDistance.push(parseFloat(doc.data().distance.split(" ")[0])); // convert string from "xx km" format into a float
                         totalEmissionsSaved.push(parseFloat(doc.data().emissions_saved));
                     })
                     setTotalTrips(totalDistance.length);
@@ -116,6 +139,14 @@ const Profile = () => {
     }
 
     async function saveChanges() {
+        /**
+         * Save user edited data into database.
+         * 
+         * Check if user has uploaded a file and if any changes were made to the name and email form.
+         * Changes that were made are then updated to the database and will display a message if successful.
+         * 
+         * If an error occurs, it will display an error message.
+         */
         var newName = document.getElementById("name-change").value; // get name from forms
         var newEmail = document.getElementById("email-change").value; // get email from forms
         let newAvatar = "";
@@ -147,16 +178,27 @@ const Profile = () => {
     };
 
     function displayMessageBox() {
+        /**
+         * Show message box by changing the css property "display" to block.
+         */
         let messagebox = document.getElementById("messagebox");
         messagebox.style["display"] = "block";
     }
 
     function displayErrorBox() {
+        /**
+         * Show error box by changing the css property "display" to block.
+         */
         let errorbox = document.getElementById("errorbox");
         errorbox.style["display"] = "block";
     }
 
     function nameTextToForm() {
+        /**
+         * Hide name text by changing the css property "display" to none.
+         * 
+         * Show name form by changing the css property "display" to block.
+         */
         let nameText = document.getElementById("nametext");
         nameText.style["display"] = "none";
 
@@ -165,6 +207,11 @@ const Profile = () => {
     }
 
     function emailTextToForm() {
+        /**
+         * Hide email text by changing the css property "display" to none.
+         * 
+         * Show email form by changing the css property "display" to block.
+         */
         let emailText = document.getElementById("emailtext");
         emailText.style["display"] = "none";
 
@@ -173,21 +220,36 @@ const Profile = () => {
     }
 
     function showUploadButton() {
+        /**
+         * Show upload button by changing the css property "display" to inline.
+         */
         let uploadbutton = document.getElementById("uploadbutton");
         uploadbutton.style["display"] = "inline";
     }
 
     function hideAvatarEditBtn() {
+        /**
+         * Hide avatar edit button by changing the css property "display" to none.
+         */
         let avatarBtn = document.getElementById("avataredit");
         avatarBtn.style["display"] = "none";
     }
 
     function hideAvatarUpload() {
+        /**
+         * Hide upload button by changing the css property "display" to none.
+         */
         let uploadbutton = document.getElementById("uploadbutton");
         uploadbutton.style["display"] = "none";
     }
 
     function setUserValues() {
+        /**
+         * Populate user's name, email and avatar from firestore database.
+         * 
+         * Retrieve current user's id then queries into the database and retrieves name, email and avatar values from the database.
+         * The retrieved values will then be set as the new states for userEmail, userName and userAvatar.
+         */
         usersRef.get().then((doc) => {  // abstracted from https://cloud.google.com/firestore/docs/query-data/get-data
             if (doc.exists) {
                 setUserEmail(doc.data().email);
@@ -204,11 +266,14 @@ const Profile = () => {
 
     setUserValues();
 
-    /* delete firestore collection start
-    Taken from: https://stackoverflow.com/questions/62090827/how-to-delete-all-the-documents-in-a-firestore-collection-database
-    @author: Doug Stevenson
+    /** delete firestore collection start
+    * Taken from: https://stackoverflow.com/questions/62090827/how-to-delete-all-the-documents-in-a-firestore-collection-database
+    * @author: Doug Stevenson
     */
     function deleteUserData() {
+        /**
+         * Delete all routes from current users history in firestore.  
+         */
         db.collection('users').doc(user.uid).collection('routes').get().then(querySnapshot => {
             querySnapshot.docs.forEach(snapshot => {
                 snapshot.ref.delete()

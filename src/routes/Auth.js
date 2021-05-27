@@ -15,6 +15,9 @@ const Auth = () => {
     const history = useHistory();
 
     const onChange = (event) => {
+        /**
+         * Handle user input for forms. 
+         */
         const {
             target: { name, value }
         } = event;
@@ -26,6 +29,9 @@ const Auth = () => {
     };
 
     const onSocialClick = async (event) => {
+        /**
+         * Sign user in with Google through firebase
+         */
         let provider;
         try {
             if (event === "google") {
@@ -43,6 +49,18 @@ const Auth = () => {
     }
 
     const onSubmit = async (event) => {
+        /**
+         * Sign user in or signs them up for new account.
+         * ...
+         * Check if user pressed the sign up button which will then trigger newAccount to set to True.
+         * If user is signing up, it will also write a name, email and default avatar url to a firebase collection
+         * which will be used for the profile page.
+         * 
+         * Otherwise, if user is logging in, it will validate them through firebase authentication.
+         * 
+         * If an error occurs in the authentication process, it will display on the page.
+         * 
+         */
         event.preventDefault();
         try {
             let data;
@@ -51,7 +69,8 @@ const Auth = () => {
                     email,
                     password
                 );
-                /* Add user email to firestore start
+                /* 
+                Add user email to firestore start
                 Source: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
                 @author: jason ewins
                 */
@@ -62,7 +81,9 @@ const Auth = () => {
                     email: user["email"],
                     avatar: 'https://firebasestorage.googleapis.com/v0/b/ecobus-189e8.appspot.com/o/images%2Fleaf.png?alt=media&token=3a9eda40-579e-4e89-b27b-83be349e71bd'
                 });
-                // Add user email to firestore end
+                /* 
+                Add user email to firestore end 
+                */
                 history.push("/map");
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
