@@ -24,7 +24,6 @@ const RouteDetails = ({
         const history = useHistory();
         const user = authService.currentUser;
         const usersRef = db.collection('users');
-        const routeDetailsContainer = document.getElementById("route-details-container");
         const navBar = document.getElementById("navigation-bar");
         
         /* Falling tacos for easter egg */
@@ -113,6 +112,7 @@ const RouteDetails = ({
     }
 
     function resetAll() { //Resets Easter Eggs back to default values, if applicable
+        const routeDetailsContainer = document.getElementById("route-details-container");
         navBar.className="navbar";
         routeDetailsContainer.className = "search-process-container";
         taco1.className = "taco1";
