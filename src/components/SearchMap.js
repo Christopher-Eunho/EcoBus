@@ -135,15 +135,6 @@ function SearchMap() {
     }
 
 
-<<<<<<< HEAD
-    function showEasterEgg() {
-        const routeDetailsContainer = document.getElementById("route-details-container");
-        // const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-        const navBar = document.getElementById("navigation-bar");
-        routeDetailsContainer.className = "bcit-search-process-container";
-        navBar.className = "bcit-navigation-bar";
-        // transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
-=======
     function showEasterEgg() { //Changes colours of the website to match that of the BCIT website
         const routeDetailsContainer = document.getElementById("route-details-container");
         const navBar = document.getElementById("navigation-bar");
@@ -151,7 +142,6 @@ function SearchMap() {
         navBar.className = "bcit-navigation-bar";
         
         
->>>>>>> dev
     }
 
     function showSecondEasterEgg() { //Causes 4 PNGs of Tacos to rain from the sky, as well as plays music
