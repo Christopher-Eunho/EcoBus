@@ -52,9 +52,9 @@ function SearchMap() {
      */
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
+    const [originInUse, setOriginInUse] = useState({});
     const [destination, setDestination] = useState({});
     const [destinationInUse, setDestinationInUse] = useState({});
-    const [originInUse, setOriginInUse] = useState({});
     const [isOriginValid, setIsOriginValid] = useState(true);
     const [isDestinationValid, setIsDestinationValid] = useState(false);
     
@@ -231,6 +231,7 @@ function SearchMap() {
         }
     }
 
+
     
     /**
      * Render messages depending on loading status of Google Map.
@@ -352,12 +353,16 @@ function SearchMap() {
                     setIsSearchFormOn={setIsSearchFormOn}
                     setIsSavedTransitRouteOn={setIsSavedTransitRouteOn}
                     setEmissionSaved={setEmissionSaved}
+                    setIsDestinationValid={setIsDestinationValid}
+                    setIsOriginValid={setIsOriginValid}
                 />}
                 {isSavedTransitRouteOn &&
                     <SavedTransitRoute
                     emissionSaved={emissionSaved} 
                     setIsSearchFormOn={setIsSearchFormOn}
                     setIsSavedTransitRouteOn={setIsSavedTransitRouteOn}
+                    setIsDestinationValid={setIsDestinationValid}
+                    setIsOriginValid={setIsOriginValid}
                 />}
                 
                 {isTravelDetailsOn && 

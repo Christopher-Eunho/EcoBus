@@ -17,12 +17,13 @@ const RouteDetails = ({
     setIsRouteDetailsOn,
     setIsSearchFormOn,
     setIsSavedTransitRouteOn,
-    setEmissionSaved
+    setEmissionSaved,
+    setIsOriginValid,
+    setIsDestinationValid
     }) => {
         const history = useHistory();
         const user = authService.currentUser;
         const usersRef = db.collection('users');
-        const routeDetailsContainer = document.getElementById("route-details-container");
         const navBar = document.getElementById("navigation-bar");
         
         /* Falling tacos for easter egg */
@@ -34,20 +35,26 @@ const RouteDetails = ({
 
         /* Checks whether route data is loaded. */
         const isLoaded = () => transitRouteDetails.distance;
-
-        if (transitRouteDetails.distance) {
-            var totalDistance = transitRouteDetails.distance.text;
-            var totalDuration = transitRouteDetails.duration.text;
-            var {distance : {value : drivingDistanceMetres }} = drivingRouteDetails;
-            var drivingDistanceKm = drivingDistanceMetres * metresToKm;    
-            var emissionsProduced = (drivingDistanceKm * emissionsProducedKgPerKm).toFixed(2);
-            setEmissionSaved(emissionsProduced);
-            }
+        try {
+            if (transitRouteDetails.distance) {
+                var totalDistance = transitRouteDetails.distance.text;
+                var totalDuration = transitRouteDetails.duration.text;
+                var {distance : {value : drivingDistanceMetres }} = drivingRouteDetails;
+                var drivingDistanceKm = drivingDistanceMetres * metresToKm;    
+                var emissionsProduced = (drivingDistanceKm * emissionsProducedKgPerKm).toFixed(2);
+                setEmissionSaved(emissionsProduced);
+                }
+        } catch (error) {
+            console.log(error);
+        }
+        
     
 
         
     /* Hide route details container and render route search container */
     function backToSearch() {
+        setIsDestinationValid(false);
+        setIsOriginValid(false);
         setIsRouteDetailsOn(false);
         setIsSearchFormOn(true);
         resetAll();
@@ -109,6 +116,7 @@ const RouteDetails = ({
     }
 
     function resetAll() { //Resets Easter Eggs back to default values, if applicable
+        const routeDetailsContainer = document.getElementById("route-details-container");
         navBar.className="navbar";
         routeDetailsContainer.className = "search-process-container";
         taco1.className = "taco1";
