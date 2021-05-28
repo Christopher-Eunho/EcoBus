@@ -3,6 +3,11 @@ import SearchMap from '../components/SearchMap'
 import Tco from 'components/Taco'
 import '../styles/search.css'
 
+
+/**
+ * 
+ * Renders the navigation bar and the search map of the app. Also renders Taco for easter egg.
+ */
 function Search() {
   
   return (

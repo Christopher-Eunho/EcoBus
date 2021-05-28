@@ -6,6 +6,10 @@ import About_Us from "routes/About_Us";
 import Search from "routes/Search";
 import Not_Found from "routes/404";
 
+/**
+ * Route users according to URLs according to their login status. 
+ */
+
 const AppRouter = ( { isLoggedIn } ) => {
     return (
         <Router>
@@ -24,7 +28,6 @@ const AppRouter = ( { isLoggedIn } ) => {
                         <Route component={Auth} />
                     </Switch>
                 )}
-            { isLoggedIn }
         </Router>
     );
 };

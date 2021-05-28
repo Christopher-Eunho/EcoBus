@@ -123,7 +123,7 @@ It has the following subfolders and files:
 |   |   └── search.css =>
 |   ├── constants.js
 |   ├── firebase_eb.js
-|   ├── index.js
-|   └── reportWebVitals.js
+|   └── index.js
+|    
 └── 
 ```
