@@ -13,7 +13,6 @@ Users can search for a route, and the application will generate route info and t
 are saved by taking public transportation along this route instead of driving. Users can save routes to their database, and track how 
 many emissions they have saved across all of their trips.
 
-Technologies used for this project:
 ## Languages
 * HTML, CSS
 * JavaScript
