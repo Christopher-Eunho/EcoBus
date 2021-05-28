@@ -166,7 +166,7 @@ function SearchMap() {
 
     const hideSearchForm = () => setIsSearchFormOn(false);
 
-    async const showRouteDetailsContainer = () => await setIsRouteDetailsOn(true);
+    const showRouteDetailsContainer = async () => await setIsRouteDetailsOn(true);
 
 
     /**
