@@ -1,3 +1,8 @@
+/**
+ * Handle origin input of the saerch map
+ * Take user's input and suggest auto-completed places 
+ */
+
 import React, { useEffect } from 'react';
 import { latVancouver, lngVancouver, searchRadius } from "../constants";
 import usePlacesAutocomplete, {
@@ -14,15 +19,11 @@ import {
 } from "@reach/combobox";
 
 
-/**
- * Handle origin input of the saerch map
- * Take user's input and suggest auto-completed places 
- */
-export function OrginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurrent, setIsOriginValid, setCurrentLocation }) {
+export function OriginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurrent, setIsOriginValid, setCurrentLocation }) {
     /**
      * Set default input value as 'Current Location'
      */
-    useEffect(() => {        
+    useEffect(() => {
         setValue("Current Location", false);
     },[]);
     
@@ -81,7 +82,7 @@ export function OrginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurren
 
     return (
         <>
-        <div className="orginSearch">
+        <div className="originSearch">
             <Combobox onSelect={orginOnSelect}
             >
                 <ComboboxInput id="route-origin" value={value}

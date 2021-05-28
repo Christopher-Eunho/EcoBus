@@ -7,7 +7,7 @@ import {
     DirectionsRenderer,
 } from '@react-google-maps/api';
 import "@reach/combobox/styles.css";
-import { OrginSearch } from './OriginSearch';
+import { OriginSearch } from './OriginSearch';
 import { DestinationSearch } from './DestinationSearch';
 import CurrentButton from './CurrentButton';
 import RouteDetails from './RouteDetails';
@@ -312,7 +312,7 @@ function SearchMap() {
                 <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
                     
-                    <OrginSearch 
+                    <OriginSearch 
                     panTo={panTo} 
                     setOrigin={setOrigin} 
                     setOriginName={setOriginName} 
