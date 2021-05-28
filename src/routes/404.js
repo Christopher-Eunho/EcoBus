@@ -1,8 +1,10 @@
+/** 
+ * Renders navigation bar and Page not Found page if the user navigates outside of the boundaries of the website. 
+ */
+
 import React, { useState } from "react";
 import NavigationBar from '../components/NavigationBar';
 import 'styles/404.css';
-
-/* A page that is discovered if the user navigates outside of the boundaries of the website */
 
 const Not_Found = () => {
     return (

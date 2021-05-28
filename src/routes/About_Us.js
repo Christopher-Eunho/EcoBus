@@ -1,11 +1,14 @@
+/** 
+ * A page describing the developers of this page.
+ * Contains links to each developer's GitHub.
+ */
+
 import '../styles/about_us.css';
 import Caleb from 'images/Caleb.png';
 import Dylan from 'images/Dylan.png';
 import Austin from 'images/Austin.png';
 import Chris from 'images/Chris.jpeg';
 import NavigationBar from '../components/NavigationBar';
-
-/* A page describing the developers of this page */
 
 const About_Us = () => <main>
     <NavigationBar/>
