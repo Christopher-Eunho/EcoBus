@@ -294,11 +294,11 @@ const Profile = () => {
                 if (querySnapshot.docs.length != 0) {
                     querySnapshot.docs.forEach(snapshot => {
                         snapshot.ref.delete()
-                            .then(() => {
-                                alert("Data deleted!")
-                                window.location.reload()
-                            })
                     })
+                alert("All routes deleted!");
+                setShow(false);
+                getUserStats();
+                displayRouteDetails();
                 } else {
                     alert("No data to delete!");
                     window.location.reload();
