@@ -169,7 +169,8 @@ const Profile = () => {
                     hideAvatarUpload();
                 }
                 displayMessageBox();
-                setMessage("Profile updated!");
+                setMessage(`Profile updating... \n Page will refresh in 3 seconds...`);
+                setTimeout(function(){window.location.reload()}, 3000);
             } catch (err) {
                 displayErrorBox();
                 setError(err.message);
