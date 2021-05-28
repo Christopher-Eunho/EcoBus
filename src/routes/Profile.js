@@ -11,7 +11,6 @@ import TransparentImg from "../images/initialavatarimg.png";
 import RouteHistoryCard from '../components/RouteHistoryCard'
 import RouteHistoryEmptyCard from '../components/RouteHistoryEmptyCard'
 import { storage } from 'firebase/storage';
-import firebase from "firebase/app";
 
 const Profile = () => {
     const user = authService.currentUser;
