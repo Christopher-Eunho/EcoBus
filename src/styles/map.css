@@ -218,8 +218,6 @@
   border-radius: 5px;
   padding: 8px;
   background-color: rgba(154, 251, 30, 1);
-  
-  
   margin-bottom: 10px;
 }
 
@@ -249,7 +247,6 @@
 }
 
 /* Travel details */
-
 #travel-details-back-button {
   margin-left: 5px;
   z-index: 10;
