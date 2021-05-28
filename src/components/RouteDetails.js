@@ -1,10 +1,14 @@
+/**
+ * Container display details about the searched-for route.
+ * Displays total distance, duration, and emissions saved by route.
+ */
+
 import BackButton from '../images/back-button.png';
 import Leaf from '../images/leaf.png';
 import 'firebase/firestore';
 import { db, authService } from "firebase_eb";
 import {emissionsProducedKgPerKm, metresToKm} from 'constants.js';
 import { useHistory } from "react-router";
-import { useEffect } from 'react';
 
 const RouteDetails = ({ 
     transitRouteDetails,
@@ -20,17 +24,18 @@ const RouteDetails = ({
         const usersRef = db.collection('users');
         const routeDetailsContainer = document.getElementById("route-details-container");
         const navBar = document.getElementById("navigation-bar");
-        const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-        const searchFormContainer = document.getElementById("search-container");
+        
+        /* Falling tacos for easter egg */
         const taco1 = document.getElementById("taco1");
         const taco2 = document.getElementById("taco2");
         const taco3 = document.getElementById("taco3");
         const taco4 = document.getElementById("taco4");
         const music = document.getElementById("music");
 
+        /* Checks whether route data is loaded. */
         const isLoaded = () => transitRouteDetails.distance;
 
-        if(transitRouteDetails.distance){
+        if (transitRouteDetails.distance) {
             var totalDistance = transitRouteDetails.distance.text;
             var totalDuration = transitRouteDetails.duration.text;
             var {distance : {value : drivingDistanceMetres }} = drivingRouteDetails;
@@ -41,22 +46,25 @@ const RouteDetails = ({
     
 
         
-    
-    function backToSearch() {       
+    /* Hide route details container and render route search container */
+    function backToSearch() {
         setIsRouteDetailsOn(false);
         setIsSearchFormOn(true);
         resetAll();
     }
 
+    /* Hide route details container and render travel details container */    
     const showTravelDetails = () => {
         setIsRouteDetailsOn(false);
         setIsTravelDetailsOn(true);
     }
 
-
-
     const saveJourney = () => {
-        console.log("clicked");
+        /**
+         * Create a new route document in current user's collection in database.
+         * Route document fields include departure time, origin, destination, total distance, total duration, 
+         * and total emissions of route.
+         */
         if (user != null) {
             usersRef.doc(user.uid).get().then((doc) => {
                 if (doc.exists) {
@@ -80,6 +88,11 @@ const RouteDetails = ({
                 console.log("Error getting document:", error);
             });
         } else {
+            /**
+             * Feature in progress: if non-logged-in user tries to save a route, they are redirected to the login page.
+             * Insert data about route user tried to save into the URL.
+             * Plans are to parse URL and immediately create new route document in user's collection after they sign up.
+             */
             history.push("/" + 
             transitRouteDetails.departure_time.value + 
             "&" + 

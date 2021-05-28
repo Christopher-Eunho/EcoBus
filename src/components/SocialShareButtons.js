@@ -1,4 +1,10 @@
+/**
+ * Social media share buttons for Facebook and Reddit.
+ * Default message includes how many emissions were saved by the current route.
+ */
+
 import { FacebookShareButton, FacebookIcon, RedditShareButton, RedditIcon } from "react-share";
+/* From https://www.npmjs.com/package/react-share */
 
 const FacebookSharing = (props) => {
     return (

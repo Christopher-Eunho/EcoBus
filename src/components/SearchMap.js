@@ -1,4 +1,8 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+/**
+ * Map of Vancouver as provided by Google Maps.
+ */
+
+import React, { useState, useRef, useCallback } from 'react';
 import {
     GoogleMap,
     Marker,
@@ -7,23 +11,26 @@ import {
     DirectionsRenderer,
 } from '@react-google-maps/api';
 import "@reach/combobox/styles.css";
-import { OrginSearch } from './OriginSearch';
+import { OriginSearch } from './OriginSearch';
 import { DestinationSearch } from './DestinationSearch';
-import CurrentButton from './CurrentButton'
-import RouteDetails from './RouteDetails'
-import TravelDetails from './TravelDetails'
-import SavedTransitRoute from './SavedTransitRoute'
-import Search from '../images/magnifying-glass.png'
-import { defaultZoomLevel } from 'constants.js'
-const libraries = ["places"];
+import CurrentButton from './CurrentButton';
+import RouteDetails from './RouteDetails';
+import TravelDetails from './TravelDetails';
+import SavedTransitRoute from './SavedTransitRoute';
+import Search from '../images/magnifying-glass.png';
+import { defaultZoomLevel } from 'constants.js';
 
+/**
+ * Options for Google Map API request
+ */
+const libraries = ["places"];
 const mapContainerStyle = {
     width: '100vw',
     height: '80vh'
 };
 
 
-//refer to https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+/** https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions */ 
 const options = {
     disableDefaultUI: true,
     zoomControl: true,
@@ -31,32 +38,51 @@ const options = {
 }
 
 function SearchMap() {
-
+    /**
+     * DOM elements for the taco easter egg
+     */
     const taco1 = document.getElementById("taco1");
     const taco2 = document.getElementById("taco2");
     const taco3 = document.getElementById("taco3");
     const taco4 = document.getElementById("taco4");
     const music = document.getElementById("music");
+    
+    /**
+     * States used in map and search
+     */
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
+    const [destinationInUse, setDestinationInUse] = useState({});
+    const [originInUse, setOriginInUse] = useState({});
+    const [isOriginValid, setIsOriginValid] = useState(true);
+    const [isDestinationValid, setIsDestinationValid] = useState(false);
+    
+    /**
+     * States to store search result
+     */
     const [originName, setOriginName] = useState("");
     const [destinationName, setDestinationName] = useState("");
     const [transitResponse, setTransitResponse] = useState("");
-    const [destinationInUse, setDestinationInUse] = useState({});
-    const [originInUse, setOriginInUse] = useState({});
     const [transitRouteDetails, setTransitRouteDetails] = useState({});
     const [drivingRouteDetails, setDrivingRouteDetails] = useState({});
-    const [isOriginValid, setIsOriginValid] = useState(true);
-    const [isDestinationValid, setIsDestinationValid] = useState(false);
+    const [emissionSaved, setEmissionSaved] = useState(null);
+    
+    /**
+     * States to render or hide components
+     */
+
     const [isOriginCurrent, setIsOriginCurrent] = useState(true);
     const [isTravelDetailsOn, setIsTravelDetailsOn] = useState(false);
     const [isRouteDetailsOn, setIsRouteDetailsOn] = useState(false);
     const [isSavedTransitRouteOn, setIsSavedTransitRouteOn] = useState(false);
     const [isSearchFormOn, setIsSearchFormOn] = useState(true);
-    const [emissionSaved, setEmissionSaved] = useState(null);
+    
 
-
+    /**
+     * When route search button is clicked, validate input and show results corresponding to the inputs.
+     * When inputs have "BCIT" or "Taco" in the string, activate easter egg.
+     */
     const searchClick = async () => {
         if ((isOriginValid || isOriginCurrent) && isDestinationValid) {
             await setDestinationInUse(destination);
@@ -65,19 +91,20 @@ function SearchMap() {
             showRouteDetailsContainer();
             if (destinationName.includes("BCIT") || originName.includes("BCIT")) {
                 showEasterEgg();
-
             }
             if (destinationName.includes("Taco")||originName.includes("Taco")) {
                 showSecondEasterEgg();
-            }
-                
+            }            
         } else {
             showLocationError();
         }
     }
             
            
-
+    /**
+     * Handle response from the DirectionsService with TRANSIT option.
+     * @param {*} response : A response from the request to Google Maps Direction Service
+     */
     const transitCallback = async (response) => {
         if (response !== null) {
             if (response.status === 'OK') {
@@ -91,7 +118,10 @@ function SearchMap() {
         }
     }
 
-
+    /**
+     * Handle response from the DirectionsService with DRIVING option.
+     * @param {*} response : A response from the request to Google Maps Direction Serviece
+     */
     const driveCallback = (response) => {
         if (response !== null) {
             if (response.status === 'OK') {
@@ -100,7 +130,14 @@ function SearchMap() {
         }
     }
 
-    const mapRef = useRef(); // this allows us to retain state w/o re-rendering
+    /**
+     * A reference to save Google Maps API's map instance.
+     */
+    const mapRef = useRef();
+
+    /**
+     * When Google map is loaded, save Google Maps API's map instance and set current location as an origin.
+     */
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
         if ("geolocation" in navigator) {
@@ -114,28 +151,32 @@ function SearchMap() {
 
     }, []);
 
+    /**
+     * Load Google Map.
+     */
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
         libraries
     });
 
 
+    /**
+     * Pan the map to the input coordinate.
+     */
     const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
         mapRef.current.setZoom(defaultZoomLevel);
     }, []);
 
-    const hideSearchForm = () => {
-        setIsSearchFormOn(false);
-    };
+    const hideSearchForm = () => setIsSearchFormOn(false);
 
-    async function showRouteDetailsContainer() {
-        await setIsRouteDetailsOn(true);
-        
-    }
+    const showRouteDetailsContainer = async () => await setIsRouteDetailsOn(true);
 
 
-    function showEasterEgg() { //Changes colours of the website to match that of the BCIT website
+    /**
+     * Change colours of the website to match that of the BCIT website.
+     */
+    function showEasterEgg() {
         const routeDetailsContainer = document.getElementById("route-details-container");
         const navBar = document.getElementById("navigation-bar");
         routeDetailsContainer.className = "bcit-search-process-container";
@@ -144,7 +185,10 @@ function SearchMap() {
         
     }
 
-    function showSecondEasterEgg() { //Causes 4 PNGs of Tacos to rain from the sky, as well as plays music
+    /**
+     * Cause 4 PNGs of Tacos to rain from the sky, as well as play music.
+     */
+    function showSecondEasterEgg() {
             music.currentTime = 0;
             music.volume = .25;
             music.play();
@@ -153,8 +197,10 @@ function SearchMap() {
             taco3.className = "falling-taco3";
             taco4.className = "falling-taco4";
     }
-
-    function resetAll() { //Resets Easter Eggs back to default values, if applicable
+    /**
+     * Reset Easter Eggs back to default values, if applicable.
+     */
+    function resetAll() {
         const navBar = document.getElementById("navigation-bar");
         navBar.className="navbar";
         taco1.className = "taco1";
@@ -175,7 +221,8 @@ function SearchMap() {
         setIsSearchFormOn(true);
         setIsRouteDetailsOn(false);
         
-        if(isSearchFormOn){ 
+        /* Remove location error if there is one */
+        if (isSearchFormOn) { 
         document.getElementById("location-error").style["display"] = "none";
         const errorMessage = document.getElementById("no-result-error");
         errorMessage.style.color = "red";
@@ -185,7 +232,9 @@ function SearchMap() {
     }
 
     
-
+    /**
+     * Render messages depending on loading status of Google Map.
+     */
     if (loadError) return "error";
     if (!isLoaded) return "Loading";
 
@@ -235,6 +284,7 @@ function SearchMap() {
                             scaledSize: new window.google.maps.Size(30, 30),
                         }}
                     />
+                    
                     <Marker
                         position={destination}
                         icon={{
@@ -268,7 +318,7 @@ function SearchMap() {
                 <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
                     
-                    <OrginSearch 
+                    <OriginSearch 
                     panTo={panTo} 
                     setOrigin={setOrigin} 
                     setOriginName={setOriginName} 

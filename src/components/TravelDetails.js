@@ -1,19 +1,25 @@
+/** 
+ * Render details of the steps user must take to navigate the selected route. 
+ */
+
 import BackButton from '../images/back-button.png';
-import Leaf from '../images/leaf.png';
 import 'firebase/firestore';
-import { db, authService } from "firebase_eb";
-import {emissionsProducedKilograms} from 'constants.js';
-import { useHistory } from "react-router";
 
 const TravelDetails = ({ setIsTravelDetailsOn, 
     transitRouteDetails,
     setIsRouteDetailsOn }) => {
     const travelSteps = transitRouteDetails.steps;
-    
+    /**
+     * Hide travel detail and display route details.
+     */
     const backToRouteDetails = () => {
         setIsTravelDetailsOn(false);
         setIsRouteDetailsOn(true);
     }
+
+    /**
+     * List <li> elements of steps that user needs to take from a search result.
+     */
     const listTravelDetails = travelSteps.map((step) =>{
         return <li>{step.instructions}</li>
     })

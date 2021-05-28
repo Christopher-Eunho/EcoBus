@@ -2,9 +2,6 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
-
 .main-viewport {
   overflow: hidden;
   position: relative;
@@ -13,7 +10,7 @@
   justify-content: space-between;
 }
 
-/* For the search bar */
+/* BCIT search bar */
 .bcit-search-process-container {
   background-color: rgb(0, 60, 113);
   width: 100%;
@@ -40,6 +37,7 @@
   background-color: yellow;
 }
 
+/* search container */
 .search-process-container {
   background-color: rgb(248, 255, 208);
   width: 100%;
@@ -134,7 +132,7 @@
 }
 
 
-#setCurrentOrgin {
+#setCurrentOrigin {
   color :rgb(0, 60, 113)
 }
 
@@ -199,18 +197,6 @@
   margin-left: 20px;
 }
 
-
-#travel-details-back-button{
-  margin-left: 5px;
-  z-index: 10;
-}
-
-#travel-details-header{
-  margin-top: 5px;
-  display: flex;
-  flex-direction: row;
-}
-
 #route-details-container button img {
   margin-left: -15px;
 }
@@ -233,8 +219,6 @@
   border-radius: 5px;
   padding: 8px;
   background-color: rgba(154, 251, 30, 1);
-  
-  
   margin-bottom: 10px;
 }
 
@@ -262,15 +246,29 @@
   text-align: center;
   height: 25vh;
 }
+
+/* Travel details */
+#travel-details-back-button {
+  margin-left: 5px;
+  z-index: 10;
+}
+
+#travel-details-header {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
 #travel-details-container {
   color: grey(154, 251, 30, 1);
   background: rgb(248, 255, 208);
-  text-shadow: #9C9C9C 1px 1px 0px;
 }
 
 #travel-details-title {
   margin : auto;
 }
+
+/* Route saved container and message */
 #route-saved-message-container p:first-child {
   margin-top: 20px;
 }
@@ -297,6 +295,7 @@
   height: 50px;
 }
 
+/* Media query for navbar */
 @media (max-width: 300px) {
 
   .navbar a:nth-child(2) button img {

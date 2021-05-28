@@ -12,6 +12,7 @@ main section {
     margin: 10px;
 }
 
+/*About Us banner */
 main aside {
     background: url("../images/Ecobus About Us banner.png");
     background-size: cover;
@@ -39,14 +40,15 @@ main section h {
     font-weight: bolder;
 }
 
+main section a {
+    color:black;
+}
+
+/* Developer photos */
 main section img {
     float: left;
     height: 100%;
     margin-right: 10px;
-}
-
-main section a {
-    color:black;
 }
 
 .PhotoID {
