@@ -5,6 +5,8 @@ import Austin from 'images/Austin.png';
 import Chris from 'images/Chris.jpeg';
 import NavigationBar from '../components/NavigationBar';
 
+/* A page describing the developers of this page */
+
 const About_Us = () => <main>
     <NavigationBar/>
     <aside class="aboutus">
