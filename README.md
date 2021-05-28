@@ -10,20 +10,60 @@ Name/Student Number:
 ## General Info
 This is a browser based web application to incentivize users to take public transporation by visualizing the emissions saved.
 
-## Technologies
 Technologies used for this project:
+## Languages
 * HTML, CSS
 * JavaScript
+* ReactJS
+
+## Packages and Libraries
+* Google Maps API
 * Bootstrap
-* Firebase
-* React
-* Google Maps
+* @react-google-maps/api
+* @reach/combobox
+* use-places-autocomplete
+
+## Database
+* Firebase (Authentication, Firestore, and Firestorage)
+
+## IDEs
+* Visual Studio Code
+* Selenium IDE (For Tests)
+
+## Required API keys 
+* Firebase(https://firebase.google.com/docs/projects/api-keys)
+* Google Maps API 
+  (https://developers.google.com/maps/documentation/javascript/get-api-key)
+* API Key Format (in .env file):
+    REACT_APP_API_KEY=Enter your API Key
+    REACT_APP_AUTH_DOMAIN=Enter your API Key
+    REACT_APP_PROJECT_ID=Enter your API Key
+    REACT_APP_STORAGE_BUCKET=Enter your API Key
+    REACT_APP_MESSAGING_ID=Enter your API Key
+    REACT_APP_APP_ID=Enter your API Key
+    REACT_APP_MEASUREMENT_ID=Enter your API Key
+    REACT_APP_GOOGLE_MAP_API_KEY=Enter your API Key
+
+## Order of Installation
+1. Download the source code from our Github repository (Repository link in ## Links)
+2. Prepare API Keys as stated at ## Required API keys
+3. "$npm i" to install dependencies
+4. Done! Now you can run the app with a command "$npm start"
+
+
+## Tests
+* We tested our application using Selenium IDE
+* .side file of the test is included in the source code
+* Test Document : 
+  https://docs.google.com/spreadsheets/d/1KLFmkxojnELfK5Ahl80JxKnkMzZU1sQhIgZLhw44OIA/edit#gid=394496370
+
+
 
 ## Links:
-Hosted site: 
-GitHub:
-Trello: 
-WireFrames:
+Hosted site: https://ecobus-189e8.web.app/#/
+GitHub: https://github.com/fijiman24/COMP-2800-Team-DTC-05-EcoBus
+Trello: https://trello.com/b/VqxXnXQP/comp-2800
+WireFrames: 
 
 ```
  Top level of project folder: 
