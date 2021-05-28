@@ -132,7 +132,7 @@ function SearchMap() {
     const mapRef = useRef();
 
     /**
-     * When Google map is loaded, save Google Maps API's map instance and set current location as an orgin.
+     * When Google map is loaded, save Google Maps API's map instance and set current location as an origin.
      */
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;

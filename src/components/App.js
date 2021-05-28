@@ -4,8 +4,8 @@ import {authService} from "firebase_eb";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 /**
- * Check weather user is logged in and renders router after finishing the checking.
-*/
+ * Check whether user is logged in and renders router after finishing the checking.
+ */
 function App() {
     
     const [init, setInit] = useState(false);

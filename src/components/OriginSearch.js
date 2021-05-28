@@ -1,3 +1,8 @@
+/**
+ * Handle origin input of the search map
+ * Take user's input and suggest auto-completed places 
+ */
+
 import React, { useEffect } from 'react';
 import { latVancouver, lngVancouver, searchRadius } from "../constants";
 import usePlacesAutocomplete, {
@@ -22,7 +27,7 @@ export function OriginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurre
     /**
      * Set default input value as 'Current Location'
      */
-    useEffect(() => {        
+    useEffect(() => {
         setValue("Current Location", false);
     },[]);
     
@@ -60,7 +65,7 @@ export function OriginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurre
             clearSuggestions();
             setValue(address, false);
             if(address === "Current Location"){
-                setCurrentAsOrgin();
+                setCurrentAsOrigin();
             }else{
                 try {
                     /**
@@ -79,21 +84,20 @@ export function OriginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurre
     /**
      * Set current location as a input parameter of the search
      */
-    const setCurrentAsOrgin = () => {
+    const setCurrentAsOrigin = () => {
         navigator.geolocation.getCurrentPosition(async function (position) {
             await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
             await setOrigin({ lat: position.coords.latitude, lng: position.coords.longitude });
             panTo({ lat: position.coords.latitude, lng: position.coords.longitude });
         });
-}
+    }   
 
 
 
     return (
         <>
         <div className="originSearch">
-            <Combobox onSelect={originOnSelect}
-            >
+            <Combobox onSelect={originOnSelect}>
                 <ComboboxInput id="route-origin" value={value}
                     onChange={onChange}
                     disabled={!ready}
@@ -112,9 +116,5 @@ export function OriginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurre
         </div>
         </>
     );
-
-    
-
-    
-    }
+}
 

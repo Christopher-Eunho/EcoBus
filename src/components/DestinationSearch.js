@@ -1,3 +1,8 @@
+/**
+ * Button in top left corner of map
+ * Pans map to user's current location
+ */
+
 import React from 'react';
 import { latVancouver, lngVancouver, searchRadius } from "../constants";
 import usePlacesAutocomplete, {
