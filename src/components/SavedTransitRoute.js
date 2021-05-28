@@ -1,3 +1,10 @@
+/**
+ * Container which displays a message after user saves a new route.
+ * Display the emissions saved by taking the newly saved route.
+ * Contains social share buttons for Facebook and Reddit.
+ * Contains an accept button which rerenders the search container.
+ */
+
 import Checkmark from '../images/checkmark.png';
 import SocialShareButtons from './SocialShareButtons';
 

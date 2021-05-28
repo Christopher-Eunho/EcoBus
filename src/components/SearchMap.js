@@ -1,3 +1,7 @@
+/**
+ * Map of Vancouver as provided by Google Maps.
+ */
+
 import React, { useState, useRef, useCallback } from 'react';
 import {
     GoogleMap,

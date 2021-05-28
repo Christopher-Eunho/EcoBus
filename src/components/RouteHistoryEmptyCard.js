@@ -2,10 +2,12 @@ import { Button, Card, ListGroup } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 
 const RouteHistoryEmptyCard = () => {
-    
     const history = useHistory();
     
     function addRoute() {
+        /**
+         * Redirect user to map.
+         */
         history.push("/map");
     }
 
