@@ -6,8 +6,8 @@ import { Alert, Accordion, Button, Card, ListGroup, Modal, } from 'react-bootstr
 import NavigationBar from '../components/NavigationBar'
 import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
-import RouteHistoryCard from '../components/RouteHistoryCard'
-import RouteHistoryEmptyCard from '../components/RouteHistoryEmptyCard'
+import RouteHistoryCard from '../components/RouteHistoryCard';
+import RouteHistoryEmptyCard from '../components/RouteHistoryEmptyCard';
 import { storage } from 'firebase/storage';
 import firebase from "firebase/app";
 

@@ -4,7 +4,6 @@ import 'firebase/firestore';
 import { db, authService } from "firebase_eb";
 import {emissionsProducedKgPerKm, metresToKm} from 'constants.js';
 import { useHistory } from "react-router";
-import { useEffect } from 'react';
 
 const RouteDetails = ({ 
     transitRouteDetails,

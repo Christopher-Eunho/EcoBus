@@ -1,6 +1,6 @@
 import React from 'react';
-import Taco from 'images/Taco.png'
-import RainingTacos from '../sounds/01 Raining Tacos.mp3'
+import Taco from 'images/Taco.png';
+import RainingTacos from '../sounds/01 Raining Tacos.mp3';
 
 function Rain_Tacos() {
 /*Code for audio from https://coderrocketfuel.com/article/how-to-play-a-mp3-sound-file-in-react-js*/

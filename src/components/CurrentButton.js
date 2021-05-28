@@ -1,5 +1,10 @@
+/**
+ * Button in top left corner of map.
+ * Pans map to user's current location.
+ */
+
 import React from "react";
-import currentIcon from 'images/current.png'
+import currentIcon from 'images/current.png';
 import '../styles/current_button.css';
 
 const CurrentButton = ({panTo, setCurrentLocation}) => {
