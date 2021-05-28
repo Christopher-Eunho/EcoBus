@@ -12,11 +12,15 @@ import SocialShareButtons from './SocialShareButtons';
 const SavedTransitRoute = ( {
     emissionSaved,
     setIsSearchFormOn,
-    setIsSavedTransitRouteOn
+    setIsSavedTransitRouteOn,
+    setIsOriginValid,
+    setIsDestinationValid
     } ) => {
     
     /* Hide saved route container and render route search container */
     function goToSearch() {
+        setIsDestinationValid(false);
+        setIsOriginValid(false);
         setIsSearchFormOn(true);
         setIsSavedTransitRouteOn(false);
     }

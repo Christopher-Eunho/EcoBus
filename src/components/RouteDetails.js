@@ -17,7 +17,9 @@ const RouteDetails = ({
     setIsRouteDetailsOn,
     setIsSearchFormOn,
     setIsSavedTransitRouteOn,
-    setEmissionSaved
+    setEmissionSaved,
+    setIsOriginValid,
+    setIsDestinationValid
     }) => {
         const history = useHistory();
         const user = authService.currentUser;
@@ -47,6 +49,8 @@ const RouteDetails = ({
         
     /* Hide route details container and render route search container */
     function backToSearch() {
+        setIsDestinationValid(false);
+        setIsOriginValid(false);
         setIsRouteDetailsOn(false);
         setIsSearchFormOn(true);
         resetAll();
