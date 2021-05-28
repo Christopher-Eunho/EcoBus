@@ -35,15 +35,19 @@ const RouteDetails = ({
 
         /* Checks whether route data is loaded. */
         const isLoaded = () => transitRouteDetails.distance;
-
-        if (transitRouteDetails.distance) {
-            var totalDistance = transitRouteDetails.distance.text;
-            var totalDuration = transitRouteDetails.duration.text;
-            var {distance : {value : drivingDistanceMetres }} = drivingRouteDetails;
-            var drivingDistanceKm = drivingDistanceMetres * metresToKm;    
-            var emissionsProduced = (drivingDistanceKm * emissionsProducedKgPerKm).toFixed(2);
-            setEmissionSaved(emissionsProduced);
-            }
+        try {
+            if (transitRouteDetails.distance) {
+                var totalDistance = transitRouteDetails.distance.text;
+                var totalDuration = transitRouteDetails.duration.text;
+                var {distance : {value : drivingDistanceMetres }} = drivingRouteDetails;
+                var drivingDistanceKm = drivingDistanceMetres * metresToKm;    
+                var emissionsProduced = (drivingDistanceKm * emissionsProducedKgPerKm).toFixed(2);
+                setEmissionSaved(emissionsProduced);
+                }
+        } catch (error) {
+            console.log(error);
+        }
+        
     
 
         
