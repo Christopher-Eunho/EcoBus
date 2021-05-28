@@ -25,15 +25,17 @@ const RouteDetails = ({
         const routeDetailsContainer = document.getElementById("route-details-container");
         const navBar = document.getElementById("navigation-bar");
         
+        /* Falling tacos for easter egg */
         const taco1 = document.getElementById("taco1");
         const taco2 = document.getElementById("taco2");
         const taco3 = document.getElementById("taco3");
         const taco4 = document.getElementById("taco4");
         const music = document.getElementById("music");
 
+        /* Checks whether route data is loaded. */
         const isLoaded = () => transitRouteDetails.distance;
 
-        if(transitRouteDetails.distance){
+        if (transitRouteDetails.distance) {
             var totalDistance = transitRouteDetails.distance.text;
             var totalDuration = transitRouteDetails.duration.text;
             var {distance : {value : drivingDistanceMetres }} = drivingRouteDetails;
@@ -44,27 +46,25 @@ const RouteDetails = ({
     
 
         
-    
+    /* Hide route details container and render route search container */
     function backToSearch() {
         setIsRouteDetailsOn(false);
         setIsSearchFormOn(true);
         resetAll();
     }
 
+    /* Hide route details container and render travel details container */    
     const showTravelDetails = () => {
         setIsRouteDetailsOn(false);
         setIsTravelDetailsOn(true);
     }
 
-
-
     const saveJourney = () => {
         /**
          * Create a new route document in current user's collection in database.
          * Route document fields include departure time, origin, destination, total distance, total duration, 
-         * and total emissions saved by route.
+         * and total emissions of route.
          */
-        console.log("clicked");
         if (user != null) {
             usersRef.doc(user.uid).get().then((doc) => {
                 if (doc.exists) {

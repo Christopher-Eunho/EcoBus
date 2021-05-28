@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { storage } from 'firebase/storage';
 
 /* Firebase configuration, values taken from .env file */
 var firebaseConfig = {
@@ -22,3 +23,6 @@ export const authService = firebase.auth();
 
 /* Firestore, firebase database */
 export const db = firebase.firestore();
+
+/* Database for handling of image uploads */
+export const imageStorage = firebase.storage();

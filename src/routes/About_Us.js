@@ -1,5 +1,5 @@
 /** 
- * A page describing the developers of this page.
+ * A page describing the developers of this web app.
  * Contains links to each developer's GitHub.
  */
 

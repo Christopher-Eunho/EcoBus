@@ -1,6 +1,6 @@
 /**
- * Button in top left corner of map.
- * Pans map to user's current location.
+ * Handle destination input of the search map.
+ * Take user's input and suggest auto-completed places.
  */
 
 import React from 'react';
@@ -19,12 +19,6 @@ import {
 } from "@reach/combobox";
 /** https://www.npmjs.com/package/@reach/combobox */ 
 
-
-
-/**
- * Handle destination input of the search map.
- * Take user's input and suggest auto-completed places.
- */
 export function DestinationSearch({
     panTo,
     setDestination,
@@ -116,7 +110,4 @@ export function DestinationSearch({
             </Combobox>
         </div>
     );
-
-    
-    
 }

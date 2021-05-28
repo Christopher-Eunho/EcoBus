@@ -103,7 +103,7 @@ function SearchMap() {
            
     /**
      * Handle response from the DirectionsService with TRANSIT option.
-     * @param {*} response : A response from the request to Google Maps Direction Serviece
+     * @param {*} response : A response from the request to Google Maps Direction Service
      */
     const transitCallback = async (response) => {
         if (response !== null) {
@@ -131,7 +131,7 @@ function SearchMap() {
     }
 
     /**
-     * A reference to save Google Maps API's map instance
+     * A reference to save Google Maps API's map instance.
      */
     const mapRef = useRef();
 
@@ -152,7 +152,7 @@ function SearchMap() {
     }, []);
 
     /**
-     * Load Google Map 
+     * Load Google Map.
      */
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
@@ -186,7 +186,7 @@ function SearchMap() {
     }
 
     /**
-     * Cause 4 PNGs of Tacos to rain from the sky, as well as plays music.
+     * Cause 4 PNGs of Tacos to rain from the sky, as well as play music.
      */
     function showSecondEasterEgg() {
             music.currentTime = 0;
@@ -221,7 +221,8 @@ function SearchMap() {
         setIsSearchFormOn(true);
         setIsRouteDetailsOn(false);
         
-        if(isSearchFormOn){ 
+        /* Remove location error if there is one */
+        if (isSearchFormOn) { 
         document.getElementById("location-error").style["display"] = "none";
         const errorMessage = document.getElementById("no-result-error");
         errorMessage.style.color = "red";
@@ -283,6 +284,7 @@ function SearchMap() {
                             scaledSize: new window.google.maps.Size(30, 30),
                         }}
                     />
+                    
                     <Marker
                         position={destination}
                         icon={{

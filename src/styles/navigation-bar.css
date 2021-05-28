@@ -9,11 +9,6 @@
     justify-content: space-between;
 }
 
-#logout {
-    margin-top: 0px;
-    display: inline;
-}
-
 .navbar {
     background-color: rgb(248, 255, 200);
     border-bottom: 1px solid rgb(160, 156, 156);
@@ -23,6 +18,7 @@
     color: black;
 }
 
+/* BCIT easter egg navbar */
 .bcit-navigation-bar {
     padding: 10px;
     background-color: rgb(0, 60, 113);
@@ -42,4 +38,9 @@
 #login{
     margin-top: 0px;
     color: white;
+}
+
+#logout {
+    margin-top: 0px;
+    display: inline;
 }

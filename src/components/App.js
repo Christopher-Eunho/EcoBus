@@ -1,5 +1,5 @@
 /**
- * Check whether user is logged in and renders router after finishing the checking.
+ * Check login status of user and render router.
  */
 
 import AppRouter from "components/Router";

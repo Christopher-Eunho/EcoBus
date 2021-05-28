@@ -1,4 +1,13 @@
-import { authService, db } from "firebase_eb";
+/**
+ * Grab stored user routes from firestore database then stores it in a card.
+ * 
+ * Loops through the current users routes from firestore and stores the route number, origin, distance, distance and emission saved.
+ * The saved data is then pushed and displayed onto a card as a child of a Bootstrap accordion parent. 
+ * 
+ * Include buttons which allow user to delete data from their collection.
+ */
+
+import { authService, db, imageStorage } from "firebase_eb";
 import React, { useState } from "react";
 import "../styles/Profile.css";
 import Edit from "../images/editbutton.png";
@@ -8,35 +17,40 @@ import ReactImageFallback from "react-image-fallback";
 import TransparentImg from "../images/initialavatarimg.png";
 import RouteHistoryCard from '../components/RouteHistoryCard';
 import RouteHistoryEmptyCard from '../components/RouteHistoryEmptyCard';
-import { storage } from 'firebase/storage';
-import firebase from "firebase/app";
 
 const Profile = () => {
+    /* Firebase */
     const user = authService.currentUser;
+    const usersRef = db.collection('users').doc(user.uid);
+
+    /* Use states for user information */
     const [userAvatar, setUserAvatar] = useState("");
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
+    
+    /* Error message displayed when entering invalid information */
     const [error, setError] = useState("");
-    const [totalTrips, setTotalTrips] = useState(0);
-    const [totalDistance, setDistance] = useState(0);
-    const [totalEmissionSaved, setEmissions] = useState(0);
+    
+    /* User lifetime statistics */
+    const [totalTrips, setTotalTrips] = useState([]);
+    const [totalDistance, setDistance] = useState([]);
+    const [totalEmissionSaved, setEmissions] = useState([]);
+    
+    /* Message when user successfully updates profile information */
     const [message, setMessage] = useState("");
+    
+    /* Contains route history cards */
     const [routeHistoryArray, setRouteHistoryArray] = useState([]);
-    const usersRef = db.collection('users').doc(user.uid);
+    
+    /* Handling the visibility of the clear all user data confirmation prompt */
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [file, setFile] = useState(null);
-    const storage = firebase.storage()
 
+    /* Use state for image file */
+    const [file, setFile] = useState(null);
 
     const displayRouteDetails = () => {
-        /**
-         * Grab stored user routes from firestore database then stores it in a card.
-         * 
-         * Loops through the current users routes from firestore and stores the route number, origin, distance, distance and emission saved.
-         * The saved data is then pushed and displayed onto a card as a child of a Bootstrap accordion parent. 
-         */
         var routeCounter = 1;
         var routes = [];
         // idea for activating function only on first click sourced from: https://stackoverflow.com/questions/31702173/execute-clickfunction-only-first-click
@@ -85,9 +99,9 @@ const Profile = () => {
          * Upload image to firestore database then generates a link to the image.
          */
         return new Promise(resolve => {
-            const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+            const uploadTask = imageStorage.ref(`/images/${file.name}`).put(file);
             uploadTask.on("state_changed", console.log, console.error, () => {
-                storage
+                imageStorage
                     .ref("images")
                     .child(file.name)
                     .getDownloadURL()
@@ -100,12 +114,12 @@ const Profile = () => {
     }
     /*Image upload end*/
 
+    /**
+     * Sums all numbers in an array.
+     * @param {*} array : an array containing any real numbers
+     * @returns : the sum of all numbers in array
+     */
     function sumArray(array) {
-        /**
-         * Sum all the numbers in an array then converts it into a float.
-         * 
-         * param array: must be an array containing only numbers
-         */
         var sum = 0;
         for (var i = 0; i < array.length; i++) {
             sum += parseFloat(array[i]);

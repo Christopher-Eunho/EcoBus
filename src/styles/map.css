@@ -10,7 +10,7 @@
   justify-content: space-between;
 }
 
-/* For the search bar */
+/* BCIT search bar */
 .bcit-search-process-container {
   background-color: rgb(0, 60, 113);
   width: 100%;
@@ -37,6 +37,7 @@
   background-color: yellow;
 }
 
+/* search container */
 .search-process-container {
   background-color: rgb(248, 255, 208);
   width: 100%;
@@ -266,6 +267,8 @@
 #travel-details-title {
   margin : auto;
 }
+
+/* Route saved container and message */
 #route-saved-message-container p:first-child {
   margin-top: 20px;
 }
@@ -292,6 +295,7 @@
   height: 50px;
 }
 
+/* Media query for navbar */
 @media (max-width: 300px) {
 
   .navbar a:nth-child(2) button img {

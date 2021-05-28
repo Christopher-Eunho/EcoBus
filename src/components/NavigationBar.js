@@ -17,8 +17,8 @@ const NavigationBar = () => {
 
     const onLogoutClick = () => {
         /**
-         * Function for logout button
-         * Logs user out of application and redirects them to login page
+         * Function for logout button.
+         * Logs user out of application and redirects them to login page.
          */
         authService.signOut();
         history.push("/");

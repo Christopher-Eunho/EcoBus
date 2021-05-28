@@ -1,28 +1,28 @@
-.profileBody{
+.profileBody {
     background-color: rgb(248, 255, 208);
     min-height: 100vh;
     height: fit-content;
 }
 
-.Profile{
+.Profile {
     margin:auto;
     text-align:center;
 }
 
-#avatar > img{
+#avatar > img {
     border-radius: 50%;
 }
 
-#userHistory{
+#userHistory {
     margin:5vw 5vw 0vw 5vw;
     padding-bottom: 5vh;
 }
 
-#avatar{
+#avatar {
     margin: 5vw;
 }
 
-#avataredit{
+#avataredit {
     margin-left: -10px;
     margin-bottom: -100px;
 }

@@ -1,9 +1,10 @@
+/** 
+ * Render details of the steps user must take to navigate the selected route. 
+ */
+
 import BackButton from '../images/back-button.png';
 import 'firebase/firestore';
 
-/** 
- * Render details of the steps that user needs to take a travel. 
-*/
 const TravelDetails = ({ setIsTravelDetailsOn, 
     transitRouteDetails,
     setIsRouteDetailsOn }) => {

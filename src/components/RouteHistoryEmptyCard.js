@@ -1,3 +1,8 @@
+/**
+ * Display message telling user that they have no saved routes in their collection.
+ * Display "Add Route" button which redirects user to map when clicked.
+ */
+
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 
