@@ -1,3 +1,8 @@
+/**
+ * Container display details about the searched-for route.
+ * Displays total distance, duration, and emissions saved by route.
+ */
+
 import BackButton from '../images/back-button.png';
 import Leaf from '../images/leaf.png';
 import 'firebase/firestore';
@@ -19,8 +24,7 @@ const RouteDetails = ({
         const usersRef = db.collection('users');
         const routeDetailsContainer = document.getElementById("route-details-container");
         const navBar = document.getElementById("navigation-bar");
-        const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-        const searchFormContainer = document.getElementById("search-container");
+        
         const taco1 = document.getElementById("taco1");
         const taco2 = document.getElementById("taco2");
         const taco3 = document.getElementById("taco3");
@@ -41,7 +45,7 @@ const RouteDetails = ({
 
         
     
-    function backToSearch() {       
+    function backToSearch() {
         setIsRouteDetailsOn(false);
         setIsSearchFormOn(true);
         resetAll();
@@ -55,6 +59,11 @@ const RouteDetails = ({
 
 
     const saveJourney = () => {
+        /**
+         * Create a new route document in current user's collection in database.
+         * Route document fields include departure time, origin, destination, total distance, total duration, 
+         * and total emissions saved by route.
+         */
         console.log("clicked");
         if (user != null) {
             usersRef.doc(user.uid).get().then((doc) => {
@@ -79,6 +88,11 @@ const RouteDetails = ({
                 console.log("Error getting document:", error);
             });
         } else {
+            /**
+             * Feature in progress: if non-logged-in user tries to save a route, they are redirected to the login page.
+             * Insert data about route user tried to save into the URL.
+             * Plans are to parse URL and immediately create new route document in user's collection after they sign up.
+             */
             history.push("/" + 
             transitRouteDetails.departure_time.value + 
             "&" + 

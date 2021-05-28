@@ -1,7 +1,7 @@
 /**
- * Navigation bar for web app
- * Fixed to the top of every page
- * Contains links to Map, Profile, and About Us
+ * Navigation bar for web app.
+ * Fixed to the top of every page.
+ * Contains links to Map, Profile, and About Us.
  */
 
 import { authService } from "firebase_eb";

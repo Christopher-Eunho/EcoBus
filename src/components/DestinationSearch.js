@@ -1,6 +1,6 @@
 /**
- * Button in top left corner of map
- * Pans map to user's current location
+ * Button in top left corner of map.
+ * Pans map to user's current location.
  */
 
 import React from 'react';

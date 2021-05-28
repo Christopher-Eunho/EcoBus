@@ -1,11 +1,12 @@
+/**
+ * Check whether user is logged in and renders router after finishing the checking.
+ */
+
 import AppRouter from "components/Router";
 import React, {useEffect, useState} from "react";
 import {authService} from "firebase_eb";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-/**
- * Check whether user is logged in and renders router after finishing the checking.
- */
 function App() {
     
     const [init, setInit] = useState(false);

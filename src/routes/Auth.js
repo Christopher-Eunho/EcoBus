@@ -1,3 +1,8 @@
+/**
+ * Render sign in/sign up page.
+ * Includes Google login.
+ */
+
 import { authService, firebaseInstance, db } from "firebase_eb";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
