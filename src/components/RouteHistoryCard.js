@@ -1,18 +1,26 @@
+/**
+ * Route history card.
+ * Contains information about route's origin, destination, total distance, and total emissions saved.
+ * Will be inserted in Route History accordian after user saves a new route.
+ */
+
 import { Accordion, Button, Card, ListGroup } from 'react-bootstrap';
 import { db, authService } from "firebase_eb";
 
 const RouteHistoryCard = (props) => {
     const user = authService.currentUser;
-    const usersRef = db.collection('users');
+    const userRoutes = db.collection('users').doc(user.uid).collection("routes");
 
     function refreshPage() {
         window.location.reload(false);
     }
 
     function deleteRoute() {
+        /**
+         * Delete route from current user's collection in database, then reload page to display this change.
+         */
         if (user != null) {
-            var userDoc = usersRef.doc(user.uid)
-            userDoc.collection("routes").get()
+            userRoutes.get()
                 .then(function(snap) {
                     snap.forEach(function (doc) {
                         var data = doc.data();
@@ -20,7 +28,7 @@ const RouteHistoryCard = (props) => {
                             data.destination === props.destination && 
                             data.distance === props.distance && 
                             data.emissions_saved === props.emissionsSaved) {
-                                var route = userDoc.collection("routes").doc(doc.id);
+                                var route = userRoutes.doc(doc.id);
                                 route.delete()
                                 .then(() => {
                                     refreshPage();

@@ -1,6 +1,6 @@
 /**
- * Handle origin input of the search map
- * Take user's input and suggest auto-completed places 
+ * Handle origin input of the search map.
+ * Take user's input and suggest auto-completed places.
  */
 
 import React, { useEffect } from 'react';
