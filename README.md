@@ -18,11 +18,13 @@ Technologies used for this project:
 
 ## Packages and Libraries
 * Google Maps API
-* Bootstrap
+* react-bootstrap
 * @react-google-maps/api
 * @reach/combobox
 * use-places-autocomplete
 * react-share
+* react-google-button
+* react-image-fallback
 
 ## Database
 * Firebase (Authentication, Firestore, and Firestorage)
@@ -97,29 +99,51 @@ It has the following subfolders and files:
 ├── src
 |   ├── components => functionally atomic components of web pages
 |   |   ├── App.js =>
-|   |   ├── DestSearch.js => search bar for target destination
+|   |   ├── CurrentButton.js => 
+|   |   ├── DestinationSearch.js => search bar for target destination
 |   |   ├── GoogleMap.js => display map and route
-|   |   ├── Nav.js => navbar
+|   |   ├── NavigationBar.js => navbar
 |   |   ├── OriginSearch.js => search bar for origin location
 |   |   ├── RouteDetails.js => display route details
+|   |   ├── RouteHistoryCard.js =>
+|   |   ├── RouteHistoryEmptyCard.js =>
 |   |   ├── Router.js => route user to different pages depending on url
+|   |   ├── SavedTransitRoute.js => 
+|   |   ├── SearchMap.js => 
+|   |   ├── SocialShareButton.js =>
+|   |   ├── Taco.js => for easter egg
 |   |   └── SavedTransitRoute.js => display message when user saves route
 |   ├── images
+|   |   ├── Austin.png
 |   |   ├── back-button.png
+|   |   ├── Caleb.png
+|   |   ├── current.png
+|   |   ├── Dylan.png
 |   |   ├── Ecobus About Us banner.png
+|   |   ├── editbutton.png
+|   |   ├── initalavatarimg.png
+|   |   ├── leaf.png
 |   |   ├── logo.png
 |   |   ├── magnifying-glass.png
 |   |   ├── navbar-logo.png
+|   |   ├── Taco.png
+|   |   ├── toggle.png
 |   |   └── user-profile.png
 |   ├── routes => views for web pages
+|   |   ├── 404.js => view for 404 page
 |   |   ├── Abous_Us.js => view for about us page
 |   |   ├── Auth.js => view for login page 
 |   |   ├── Profile.js => view for user profile profile page
 |   |   └── Search.js => view for search page
+|   ├── sounds => files for sounds 
+|   |   └── 01 Raining Tacos.mp3 => sound for easter egg
 |   ├── styles => css for components and routes
+|   |   ├── 404.css => styles for 404 page
 |   |   ├── about_us.css => styles for about us page
 |   |   ├── auth.css => styles for login page
-|   |   ├── index.css
+|   |   ├── current_button.css =>
+|   |   ├── index.css =>
+|   |   ├── navigation-bar.css =>
 |   |   ├── profile.css => styles for user profile page
 |   |   └── search.css =>
 |   ├── constants.js
