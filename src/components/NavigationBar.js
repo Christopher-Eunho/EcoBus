@@ -5,10 +5,10 @@ import { Link } from "react-router-dom"
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import '../styles/navigation-bar.css'
 
-const NavigationBar = () => {    
+const NavigationBar = () => {
     const history = useHistory();
     const user = authService.currentUser;
-    
+
     const onLogoutClick = () => {
         authService.signOut();
         history.push("/");
@@ -24,7 +24,7 @@ const NavigationBar = () => {
     //         loginBtn.style["display"] = "block";
     //     }
     // }
-    
+
     // displayLoginButton();
 
     return (
@@ -48,10 +48,10 @@ const NavigationBar = () => {
                             </Link>
                     </Nav.Link>
                 </div>
-                {user ? 
-                (<Button variant="danger btn-sm" onClick={onLogoutClick} id="logout">Log Out</Button>) : 
-                (<Button variant="success btn-sm" href="." id="login">Log in</Button>)}
-                               
+                {user ?
+                    (<Button variant="danger btn-sm" onClick={onLogoutClick} id="logout">Log Out</Button>) :
+                    (<Button variant="success btn-sm" href="." id="login">Log in</Button>)}
+
             </Navbar>
         </>
     )

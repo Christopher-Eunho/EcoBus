@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import NavigationBar from '../components/NavigationBar'
-import 'styles/404.css'
+import NavigationBar from '../components/NavigationBar';
+import 'styles/404.css';
 
 const Not_Found = () => {
     return (

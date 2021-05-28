@@ -1,9 +1,6 @@
 import BackButton from '../images/back-button.png';
-import Leaf from '../images/leaf.png';
 import 'firebase/firestore';
-import { db, authService } from "firebase_eb";
-import {emissionsProducedKilograms} from 'constants.js';
-import { useHistory } from "react-router";
+
 
 const TravelDetails = ({ setIsTravelDetailsOn, 
     transitRouteDetails,

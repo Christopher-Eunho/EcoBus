@@ -1,7 +1,7 @@
-# COMP-2800
+## COMP-2800
 CST COMP 2800 5-week projects course
 
-Name/Student Number:
+## Name/Student Number:
 * Austin He A00882336
 * Eunho (Chris) Jung A01240744
 * Dylan Punter A01180637
@@ -47,41 +47,41 @@ Technologies used for this project:
     REACT_APP_MEASUREMENT_ID=Enter your API Key
     REACT_APP_GOOGLE_MAP_API_KEY=Enter your API Key
 
-## Order of Installation
-1. Download the source code from our Github repository (Repository link in ## Links)
-2. Prepare API Keys as stated at ## Required API keys
-3. "$npm i" to install dependencies
-4. Done! Now you can run the app with a command "$npm start"
-
-
 ## Tests
 * We tested our application using Selenium IDE
-* .side file of the test is included in the source code
-* Test Document : 
+* DTC05-tests.side file is included in the root directory
+* Test Planning Document : 
   https://docs.google.com/spreadsheets/d/1KLFmkxojnELfK5Ahl80JxKnkMzZU1sQhIgZLhw44OIA/edit#gid=394496370
-
-
 
 ## Links:
 Hosted site: https://ecobus-189e8.web.app/#/
 GitHub: https://github.com/fijiman24/COMP-2800-Team-DTC-05-EcoBus
 Trello: https://trello.com/b/VqxXnXQP/comp-2800
-WireFrames: 
+
+## Order of Installation
+1. Copy source code from our Github repository
+2. Open Visual Studio Code
+3. Open a new terminal
+4. Type "git clone [repository url]" to clone the repository to your device
+5. Type "$npm i" to install application dependencies
+6. Prepare API Keys as stated in ## Required API keys
+7. Done! Now you can run the app with a command "$npm start"
 
 ```
  Top level of project folder: 
-├── .firebase => contains data cache for hosting
+├── .firebase => contains firebase cache for hosting
 ├── public => contains files shared across components
 ├── src => contains web app components, styles, and images
-├── .env => stores security keys and prevents them from being pushed to GitHub
+├── .env => stores security keys
 ├── .firebaserc
 ├── .gitignore
+├── DTC05-tests.side => contains Selenium tests
 ├── firebase.json
 ├── firestore.indexes.json
 ├── firestore.rules
 ├── jsconfig.json
 ├── package-lock.json
-├── package.json => 
+├── package.json
 ├── README.md
 └── storage.rules
 
@@ -90,12 +90,11 @@ It has the following subfolders and files:
 ├── .firebase
 |   └── hosting.YnVpbGQ.cache
 ├── public
-|   ├── favicon-32x32.png
-|   ├── index.html
-|   ├── logo192.png
-|   ├── logo512.png
-|   ├── manifest.json
-|   └── robots.txt
+|   ├── favicon-32x32.png => application favicon
+|   ├── index.html => the only view for this single-page application
+|   ├── logo192.png  => 192px x 192px size application logo
+|   ├── logo512.png => 512px x 512px size application logo
+|   └── manifest.json => application manifest 
 ├── src
 |   ├── components => functionally atomic components of web pages
 |   |   ├── App.js =>

@@ -9,12 +9,12 @@ import {
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestinationSearch } from './DestinationSearch';
-import CurrentButton from './CurrentButton'
-import RouteDetails from './RouteDetails'
-import TravelDetails from './TravelDetails'
-import SavedTransitRoute from './SavedTransitRoute'
-import Search from '../images/magnifying-glass.png'
-import { defaultZoomLevel } from 'constants.js'
+import CurrentButton from './CurrentButton';
+import RouteDetails from './RouteDetails';
+import TravelDetails from './TravelDetails';
+import SavedTransitRoute from './SavedTransitRoute';
+import Search from '../images/magnifying-glass.png';
+import { defaultZoomLevel } from 'constants.js';
 const libraries = ["places"];
 
 const mapContainerStyle = {

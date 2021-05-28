@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback } from 'react';
 import {
     GoogleMap,
     Marker,
@@ -9,11 +9,11 @@ import {
 import "@reach/combobox/styles.css";
 import { OrginSearch } from './OriginSearch';
 import { DestinationSearch } from './DestinationSearch';
-import CurrentButton from './CurrentButton'
-import RouteDetails from './RouteDetails'
-import SavedTransitRoute from '../components/SavedTransitRoute'
-import Search from '../images/magnifying-glass.png'
-import { emissionsProducedKilograms } from 'constants.js'
+import CurrentButton from './CurrentButton';
+import RouteDetails from './RouteDetails';
+import SavedTransitRoute from '../components/SavedTransitRoute';
+import Search from '../images/magnifying-glass.png';
+import { emissionsProducedKilograms } from 'constants.js';
 
 const libraries = ["places"];
 

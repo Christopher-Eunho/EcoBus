@@ -1,7 +1,7 @@
-import NavigationBar from '../components/NavigationBar'
-import SearchMap from '../components/SearchMap'
-import Tco from 'components/Taco'
-import '../styles/search.css'
+import NavigationBar from '../components/NavigationBar';
+import SearchMap from '../components/SearchMap';
+import Tco from 'components/Taco';
+import '../styles/search.css';
 
 function Search() {
   

@@ -1,5 +1,5 @@
 import React from "react";
-import currentIcon from 'images/current.png'
+import currentIcon from 'images/current.png';
 import '../styles/current_button.css';
 
 const CurrentButton = ({panTo, setCurrentLocation}) => {
