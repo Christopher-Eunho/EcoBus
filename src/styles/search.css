@@ -199,6 +199,18 @@
   margin-left: 20px;
 }
 
+
+#travel-details-back-button{
+  margin-left: 5px;
+  z-index: 10;
+}
+
+#travel-details-header{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
 #route-details-container button img {
   margin-left: -15px;
 }
@@ -250,7 +262,15 @@
   text-align: center;
   height: 25vh;
 }
+#travel-details-container {
+  color: grey(154, 251, 30, 1);
+  background: rgb(248, 255, 208);
+  text-shadow: #9C9C9C 1px 1px 0px;
+}
 
+#travel-details-title {
+  margin : auto;
+}
 #route-saved-message-container p:first-child {
   margin-top: 20px;
 }

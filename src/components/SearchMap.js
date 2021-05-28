@@ -14,7 +14,7 @@ import RouteDetails from './RouteDetails'
 import TravelDetails from './TravelDetails'
 import SavedTransitRoute from './SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
-import { emissionsProducedKilograms } from 'constants.js'
+import { defaultZoomLevel } from 'constants.js'
 const libraries = ["places"];
 
 const mapContainerStyle = {
@@ -32,10 +32,6 @@ const options = {
 
 function SearchMap() {
 
-    const routeDetailsContainer = document.getElementById("route-details-container");
-    const navBar = document.getElementById("navigation-bar");
-    const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-    const searchFormContainer = document.getElementById("search-container");
     const taco1 = document.getElementById("taco1");
     const taco2 = document.getElementById("taco2");
     const taco3 = document.getElementById("taco3");
@@ -47,7 +43,6 @@ function SearchMap() {
     const [originName, setOriginName] = useState("");
     const [destinationName, setDestinationName] = useState("");
     const [transitResponse, setTransitResponse] = useState("");
-    const [driveResponse, setDriveResponse] = useState("");
     const [destinationInUse, setDestinationInUse] = useState({});
     const [originInUse, setOriginInUse] = useState({});
     const [transitRouteDetails, setTransitRouteDetails] = useState({});
@@ -69,9 +64,7 @@ function SearchMap() {
             hideSearchForm();
             showRouteDetailsContainer();
             if (destinationName.includes("BCIT") || originName.includes("BCIT")) {
-                console.log("chris");
                 showEasterEgg();
-                console.log("hi ");
 
             }
             if (destinationName.includes("Taco")||originName.includes("Taco")) {
@@ -103,7 +96,6 @@ function SearchMap() {
         if (response !== null) {
             if (response.status === 'OK') {
                 setDrivingRouteDetails(response.routes[0].legs[0]);
-                setDriveResponse(response);
             } 
         }
     }
@@ -120,7 +112,7 @@ function SearchMap() {
             console.log("GeoLocation Not Available");
         }
 
-    }, []); // 
+    }, []);
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
@@ -130,16 +122,12 @@ function SearchMap() {
 
     const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
-        mapRef.current.setZoom(14);
+        mapRef.current.setZoom(defaultZoomLevel);
     }, []);
 
     const hideSearchForm = () => {
         setIsSearchFormOn(false);
     };
-
-    const showSearchForm = () => {
-        setIsSearchFormOn(true);
-    }
 
     async function showRouteDetailsContainer() {
         await setIsRouteDetailsOn(true);
@@ -147,6 +135,7 @@ function SearchMap() {
     }
 
 
+<<<<<<< HEAD
     function showEasterEgg() {
         const routeDetailsContainer = document.getElementById("route-details-container");
         // const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
@@ -154,17 +143,37 @@ function SearchMap() {
         routeDetailsContainer.className = "bcit-search-process-container";
         navBar.className = "bcit-navigation-bar";
         // transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
+=======
+    function showEasterEgg() { //Changes colours of the website to match that of the BCIT website
+        const routeDetailsContainer = document.getElementById("route-details-container");
+        const navBar = document.getElementById("navigation-bar");
+        routeDetailsContainer.className = "bcit-search-process-container";
+        navBar.className = "bcit-navigation-bar";
+        
+        
+>>>>>>> dev
     }
 
-    function showSecondEasterEgg() {
+    function showSecondEasterEgg() { //Causes 4 PNGs of Tacos to rain from the sky, as well as plays music
             music.currentTime = 0;
-            music.volume = .5;
+            music.volume = .25;
             music.play();
             taco1.className = "falling-taco1";
             taco2.className = "falling-taco2";
             taco3.className = "falling-taco3";
             taco4.className = "falling-taco4";
     }
+
+    function resetAll() { //Resets Easter Eggs back to default values, if applicable
+        const navBar = document.getElementById("navigation-bar");
+        navBar.className="navbar";
+        taco1.className = "taco1";
+        taco2.className = "taco2";
+        taco3.className = "taco3";
+        taco4.className = "taco4";
+        music.pause();
+    }
+
     const showLocationError = () => {
         document.getElementById("no-result-error").style["display"] = "none"
         const errorMessage = document.getElementById("location-error");
@@ -181,6 +190,7 @@ function SearchMap() {
         const errorMessage = document.getElementById("no-result-error");
         errorMessage.style.color = "red";
         errorMessage.style["display"] = "block";
+        resetAll();
         }
     }
 
@@ -195,7 +205,7 @@ function SearchMap() {
                 <CurrentButton panTo={panTo} setCurrentLocation={setCurrentLocation} />
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
-                    zoom={13}
+                    zoom={defaultZoomLevel}
                     center={currentLocation}
                     options={options}
                     onClick={(event) => { console.log(event) }}

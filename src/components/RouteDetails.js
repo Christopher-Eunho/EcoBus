@@ -18,6 +18,15 @@ const RouteDetails = ({
         const history = useHistory();
         const user = authService.currentUser;
         const usersRef = db.collection('users');
+        const routeDetailsContainer = document.getElementById("route-details-container");
+        const navBar = document.getElementById("navigation-bar");
+        const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
+        const searchFormContainer = document.getElementById("search-container");
+        const taco1 = document.getElementById("taco1");
+        const taco2 = document.getElementById("taco2");
+        const taco3 = document.getElementById("taco3");
+        const taco4 = document.getElementById("taco4");
+        const music = document.getElementById("music");
 
         const isLoaded = () => transitRouteDetails.distance;
 
@@ -36,6 +45,7 @@ const RouteDetails = ({
     function backToSearch() {       
         setIsRouteDetailsOn(false);
         setIsSearchFormOn(true);
+        resetAll();
     }
 
     const showTravelDetails = () => {
@@ -60,6 +70,7 @@ const RouteDetails = ({
                     }).then(function() {
                         setIsRouteDetailsOn(false);
                         setIsSavedTransitRouteOn(true);
+                        resetAll();
                     })
                 } else {
                     // doc.data() will be undefined in this case
@@ -82,6 +93,16 @@ const RouteDetails = ({
             "&" + 
             emissionsProduced);
         }
+    }
+
+    function resetAll() { //Resets Easter Eggs back to default values, if applicable
+        navBar.className="navbar";
+        routeDetailsContainer.className = "search-process-container";
+        taco1.className = "taco1";
+        taco2.className = "taco2";
+        taco3.className = "taco3";
+        taco4.className = "taco4";
+        music.pause();
     }
 
     return (
