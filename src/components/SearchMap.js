@@ -26,7 +26,7 @@ const mapContainerStyle = {
 };
 
 
-//refer to https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+/** https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions */ 
 const options = {
     disableDefaultUI: true,
     zoomControl: true,
@@ -98,7 +98,7 @@ function SearchMap() {
             
            
     /**
-     * Handle response from the DirectionsService with TRANSIT option
+     * Handle response from the DirectionsService with TRANSIT option.
      * @param {*} response : A response from the request to Google Maps Direction Serviece
      */
     const transitCallback = async (response) => {
@@ -115,7 +115,7 @@ function SearchMap() {
     }
 
     /**
-     * Handle response from the DirectionsService with DRIVING option
+     * Handle response from the DirectionsService with DRIVING option.
      * @param {*} response : A response from the request to Google Maps Direction Serviece
      */
     const driveCallback = (response) => {
@@ -157,7 +157,7 @@ function SearchMap() {
 
 
     /**
-     * Pan the map to the input coordinate
+     * Pan the map to the input coordinate.
      */
     const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
@@ -170,7 +170,7 @@ function SearchMap() {
 
 
     /**
-     * Change colours of the website to match that of the BCIT website
+     * Change colours of the website to match that of the BCIT website.
      */
     function showEasterEgg() {
         const routeDetailsContainer = document.getElementById("route-details-container");
@@ -182,7 +182,7 @@ function SearchMap() {
     }
 
     /**
-     * Cause 4 PNGs of Tacos to rain from the sky, as well as plays music
+     * Cause 4 PNGs of Tacos to rain from the sky, as well as plays music.
      */
     function showSecondEasterEgg() {
             music.currentTime = 0;
@@ -194,7 +194,7 @@ function SearchMap() {
             taco4.className = "falling-taco4";
     }
     /**
-     * Reset Easter Eggs back to default values, if applicable
+     * Reset Easter Eggs back to default values, if applicable.
      */
     function resetAll() {
         const navBar = document.getElementById("navigation-bar");
@@ -228,7 +228,7 @@ function SearchMap() {
 
     
     /**
-     * render messages depending on loading status of Google Map 
+     * Render messages depending on loading status of Google Map.
      */
     if (loadError) return "error";
     if (!isLoaded) return "Loading";

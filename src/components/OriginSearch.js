@@ -8,7 +8,7 @@ import { latVancouver, lngVancouver, searchRadius } from "../constants";
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng
-} from "use-places-autocomplete"; // Reference : https://www.npmjs.com/package/use-places-autocomplete
+} from "use-places-autocomplete"; /** Reference : https://www.npmjs.com/package/use-places-autocomplete */ 
 
 import {
     Combobox,
@@ -17,7 +17,7 @@ import {
     ComboboxList,
     ComboboxOption
 } from "@reach/combobox";
-
+/** https://www.npmjs.com/package/@reach/combobox */
 
 /**
  * Handle origin input of the search map
@@ -80,7 +80,17 @@ export function OriginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurre
                     console.log("error");
                 }
         }
-        };
+    };
+    /**
+     * Set current location as a input parameter of the search
+     */
+    const setCurrentAsOrigin = () => {
+        navigator.geolocation.getCurrentPosition(async function (position) {
+            await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+            await setOrigin({ lat: position.coords.latitude, lng: position.coords.longitude });
+            panTo({ lat: position.coords.latitude, lng: position.coords.longitude });
+        });
+    }   
 
 
 
@@ -106,15 +116,5 @@ export function OriginSearch({ panTo, setOrigin, setOriginName, setIsOriginCurre
         </div>
         </>
     );
-
-    
-
-    function setCurrentAsOrigin() {
-            navigator.geolocation.getCurrentPosition(async function (position) {
-                await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
-                await setOrigin({ lat: position.coords.latitude, lng: position.coords.longitude });
-                panTo({ lat: position.coords.latitude, lng: position.coords.longitude });
-            });
-    }
-    }
+}
 
