@@ -22,6 +22,7 @@ Technologies used for this project:
 * @react-google-maps/api
 * @reach/combobox
 * use-places-autocomplete
+* react-share
 
 ## Database
 * Firebase (Authentication, Firestore, and Firestorage)

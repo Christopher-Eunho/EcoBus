@@ -14,13 +14,13 @@ import RouteDetails from './RouteDetails'
 import SavedTransitRoute from '../components/SavedTransitRoute'
 import Search from '../images/magnifying-glass.png'
 import { emissionsProducedKilograms } from 'constants.js'
+
 const libraries = ["places"];
 
 const mapContainerStyle = {
     width: '100vw',
     height: '80vh'
 };
-
 
 //refer to https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
 const options = {
@@ -30,16 +30,12 @@ const options = {
 }
 
 function GMap() {
-
-    const routeDetailsContainer = document.getElementById("route-details-container");
-    const navBar = document.getElementById("navigation-bar");
-    const transitJourneySavedContainer = document.getElementById("transit-journey-saved-container");
-    const searchFormContainer = document.getElementById("search-container");
     const taco1 = document.getElementById("taco1");
     const taco2 = document.getElementById("taco2");
     const taco3 = document.getElementById("taco3");
     const taco4 = document.getElementById("taco4");
     const music = document.getElementById("music");
+
     const [currentLocation, setCurrentLocation] = useState({});
     const [origin, setOrigin] = useState({});
     const [destination, setDestination] = useState({});
@@ -54,7 +50,7 @@ function GMap() {
     const [isOriginValid, setIsOriginValid] = useState(true);
     const [isDestinationValid, setIsDestinationValid] = useState(false);
     const [isOriginCurrent, setIsOriginCurrent] = useState(true);
-    
+
     const searchClick = () => {
         console.log(isOriginCurrent)
         console.log(isOriginValid)
@@ -66,7 +62,7 @@ function GMap() {
             if (destinationName.includes("BCIT") || originName.includes("BCIT")) {
                 showEasterEgg();
             }
-            if (destinationName.includes("Taco")||originName.includes("Taco")) {
+            if (destinationName.includes("Taco") || originName.includes("Taco")) {
                 showSecondEasterEgg();
             }
             hideSearchForm();
@@ -75,8 +71,8 @@ function GMap() {
             showLocationError();
         }
     }
-            
-           
+
+
 
     const transitCallback = async (response) => {
         if (response !== null) {
@@ -106,7 +102,10 @@ function GMap() {
         }
     }
 
+
     const mapRef = useRef(); // this allows us to retain state w/o re-rendering
+
+
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
         if ("geolocation" in navigator) {
@@ -120,6 +119,7 @@ function GMap() {
 
     }, []); // 
 
+
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
         libraries
@@ -131,10 +131,12 @@ function GMap() {
         mapRef.current.setZoom(14);
     }, []);
 
+
     function hideSearchForm() {
         let searchFormContainer = document.getElementById("search-container");
         searchFormContainer.style["display"] = "none";
     }
+
 
     function showRouteDetailsContainer() {
         let routeDetailsContainer = document.getElementById("route-details-container");
@@ -143,10 +145,12 @@ function GMap() {
         routeDetailsContainer.style["justifyContent"] = "space-around";
     }
 
+
     function displayTransitRouteDetails(transitRouteData) {
         document.getElementById("transit-distance-display").innerHTML = transitRouteData.distance.text;
         document.getElementById("transit-duration-display").innerHTML = transitRouteData.duration.text;
     }
+
 
     function displayEmissionsSaved(drivingDistanceMetres) {
         const distanceInKilometers = drivingDistanceMetres / 1000;
@@ -155,6 +159,7 @@ function GMap() {
         document.getElementById("emissions-saved-display").innerHTML = emissionsPerKm;
         document.getElementById("saved-route-message-emissions-saved").innerHTML = emissionsPerKm;
     }
+
 
     function showEasterEgg() {
         const routeDetailsContainer = document.getElementById("route-details-container");
@@ -165,6 +170,7 @@ function GMap() {
         transitJourneySavedContainer.className = "bcit-search-process-container journey-saved-container";
     }
 
+
     function showSecondEasterEgg() {
         music.currentTime = 0;
         music.volume = .5;
@@ -174,15 +180,18 @@ function GMap() {
         taco3.className = "falling-taco3";
         taco4.className = "falling-taco4";
     }
+
+
     const showLocationError = () => {
         const errorMessage = document.getElementById("location-error");
         errorMessage.style.color = "red";
     }
 
-    
 
+    // Return message if page encounter an error or is loading
     if (loadError) return "error";
     if (!isLoaded) return "Loading";
+
 
     return (
         <>
@@ -197,7 +206,7 @@ function GMap() {
                     onLoad={onMapLoad}
                 >
                     <DirectionsService
-                        options={{ 
+                        options={{
                             destination: destinationInUse,
                             origin: originInUse,
                             travelMode: "TRANSIT"
@@ -205,23 +214,23 @@ function GMap() {
                         callback={transitCallback}
                     />
                     <DirectionsService
-                        options={{ 
+                        options={{
                             destination: destinationInUse,
                             origin: originInUse,
                             travelMode: "DRIVING"
-                        }} 
+                        }}
                         callback={driveCallback}
                     />
 
                     <DirectionsRenderer
-                        options={{ 
+                        options={{
                             directions: transitResponse,
                             markerOptions: {
                                 visible: false
                             }
                         }}
-                    />   
-                    
+                    />
+
                     <Marker
                         position={currentLocation}
                         icon={{
@@ -261,29 +270,29 @@ function GMap() {
                 </GoogleMap>
                 <section className={"search-process-container"} id="search-container">
                     <p>Where would you like to go?</p>
-                    
-                    <OrginSearch 
-                    panTo={panTo} 
-                    setOrigin={setOrigin} 
-                    setOriginName={setOriginName} 
-                    setIsOriginCurrent={setIsOriginCurrent} 
-                    setIsOriginValid={setIsOriginValid}
-                    setCurrentLocation={setCurrentLocation}/>                
-                    
-                    <DestinationSearch 
-                    panTo={panTo} 
-                    setDestination={setDestination} 
-                    setDestinationName={setDestinationName} 
-                    setCurrentLocation={setCurrentLocation} 
-                    setIsDestinationValid={setIsDestinationValid}/>
-                    
+
+                    <OrginSearch
+                        panTo={panTo}
+                        setOrigin={setOrigin}
+                        setOriginName={setOriginName}
+                        setIsOriginCurrent={setIsOriginCurrent}
+                        setIsOriginValid={setIsOriginValid}
+                        setCurrentLocation={setCurrentLocation} />
+
+                    <DestinationSearch
+                        panTo={panTo}
+                        setDestination={setDestination}
+                        setDestinationName={setDestinationName}
+                        setCurrentLocation={setCurrentLocation}
+                        setIsDestinationValid={setIsDestinationValid} />
+
                     <div id="error-search-button">
                         <span id="location-error">Please enter valid locations</span>
                         <button id="submit-search-button" onClick={searchClick}>
-                            <img src={Search} alt="Search Button"/>
+                            <img src={Search} alt="Search Button" />
                         </button>
                     </div>
-                    
+
                 </section>
                 <RouteDetails transitRouteDetails={transitRouteDetails} drivingRouteDetails={drivingRouteDetails} />
                 <SavedTransitRoute />

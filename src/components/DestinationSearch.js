@@ -14,15 +14,14 @@ import {
 // https://www.npmjs.com/package/@reach/combobox
 
 //https://www.npmjs.com/package/use-places-autocomplete        
-export function DestinationSearch(
-    { 
-    panTo, 
-    setDestination, 
+export function DestinationSearch({
+    panTo,
+    setDestination,
     setDestinationName,
-    setIsDestinationValid, 
-    setCurrentLocation 
-}) 
-{
+    setIsDestinationValid,
+    setCurrentLocation
+}) {
+
     const {
         ready,
         value,
@@ -42,32 +41,33 @@ export function DestinationSearch(
         setIsDestinationValid(false);
     };
 
+
     const destinationOnSelect = async (address) => {
         setIsDestinationValid(true);
         setValue(address, false);
         clearSuggestions();
-        if(address === "Current Location"){
+        if (address === "Current Location") {
             setCurrentAsDestination();
         } else {
             try {
                 const results = await getGeocode({ address });
                 const { lat, lng } = await getLatLng(results[0]);
-                setDestination({lat, lng});
+                setDestination({ lat, lng });
                 setDestinationName(value);
                 panTo({ lat, lng });
-                
+
             } catch (error) {
                 console.log("error");
             }
         }
     };
 
-    
+
     return (
         <div className="DestSearch">
             <Combobox onSelect={destinationOnSelect}>
-                <ComboboxInput 
-                    id="route-destination" 
+                <ComboboxInput
+                    id="route-destination"
                     value={value}
                     autocomplete={false}
                     onChange={onChange}
@@ -85,11 +85,12 @@ export function DestinationSearch(
         </div>
     );
 
+    
     function setCurrentAsDestination() {
         navigator.geolocation.getCurrentPosition(async function (position) {
             await setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
             await setDestination({ lat: position.coords.latitude, lng: position.coords.longitude });
             panTo({ lat: position.coords.latitude, lng: position.coords.longitude });
         });
-}
+    }
 }
