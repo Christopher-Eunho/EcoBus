@@ -1,16 +1,24 @@
 import BackButton from '../images/back-button.png';
 import 'firebase/firestore';
 
-
+/** 
+ * Render details of the steps that user needs to take a travel. 
+*/
 const TravelDetails = ({ setIsTravelDetailsOn, 
     transitRouteDetails,
     setIsRouteDetailsOn }) => {
     const travelSteps = transitRouteDetails.steps;
-    
+    /**
+     * Hide travel detail and display route details.
+     */
     const backToRouteDetails = () => {
         setIsTravelDetailsOn(false);
         setIsRouteDetailsOn(true);
     }
+
+    /**
+     * List <li> elements of steps that user needs to take from a search result.
+     */
     const listTravelDetails = travelSteps.map((step) =>{
         return <li>{step.instructions}</li>
     })
