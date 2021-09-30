@@ -1,11 +1,6 @@
-## COMP-2800
-CST COMP 2800 5-week projects course
+## Introduction
+This project was done as a coursework of a 5-week part-time course(COMP2800) I took from BCIT with three other students. The course included 40 hours of official work hours and daily 30-minute scrum for product development with the professor. I was the Product Owner of the project. I concieved the product and its features, and developed the main features of the application and managed overall development process.
 
-## Name/Student Number:
-* Austin He A00882336
-* Eunho (Chris) Jung A01240744
-* Dylan Punter A01180637
-* Caleb Verma A01257874
 
 ## General Info
 This is a browser based web application to incentivize users to take public transporation by visualizing the emissions saved.
