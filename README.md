@@ -1,5 +1,5 @@
 ## Introduction
-This project was done as a coursework of a 5-week part-time course(COMP2800) I took from BCIT with three other students. The course included 40 hours of official work hours and daily 30-minute scrum for product development with the professor. I was the Product Owner of the project. I concieved the product and its features, and developed the main features of the application and managed overall development process.
+This project was done as a coursework of a 5-week part-time course(COMP2800) I took from BCIT with three other students. The course included 40 hours of official work hours and 30-minute daily scrum for product development with the professor. I was the Product Owner of the project. I conceived the ideas of the product, developed the main features of the application, and managed overall development process. Introduction of the application for clients in Power Point: https://docs.google.com/presentation/d/1m6Zw_lBOVI1jQZ394qUZehOf5SDdOKAGuCx2emSIbxc/edit?usp=sharing
 
 
 ## General Info
