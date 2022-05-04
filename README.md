@@ -52,7 +52,7 @@ many emissions they have saved across all of their trips.
 
 ## Links:
 Hosted site: https://ecobus-189e8.web.app/#/
-GitHub: https://github.com/fijiman24/COMP-2800-Team-DTC-05-EcoBus
+GitHub: https://github.com/Christopher-Eunho/EcoBus
 Trello: https://trello.com/b/VqxXnXQP/comp-2800
 
 ## Directory: 
