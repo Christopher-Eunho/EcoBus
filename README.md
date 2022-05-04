@@ -51,9 +51,9 @@ many emissions they have saved across all of their trips.
   https://docs.google.com/spreadsheets/d/1KLFmkxojnELfK5Ahl80JxKnkMzZU1sQhIgZLhw44OIA/edit#gid=394496370
 
 ## Links:
-Hosted site: https://ecobus-189e8.web.app/#/
-GitHub: https://github.com/Christopher-Eunho/EcoBus
-Trello: https://trello.com/b/VqxXnXQP/comp-2800
+* Hosted site: https://ecobus-189e8.web.app/#/
+* GitHub: https://github.com/Christopher-Eunho/EcoBus
+* Trello: https://trello.com/b/VqxXnXQP/comp-2800
 
 ## Directory: 
 ```
